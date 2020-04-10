@@ -1,0 +1,143 @@
+\subsection{問題文}
+\begin{wrapfigure}{r}[0pt]{0.2\linewidth}
+    \centering
+    \begin{tikzpicture}[>=stealth]
+        %%%========================================================================================================================================
+        %%グレースケール画像説明図
+        \newcount\x
+        \x = 0
+        \coordinate (O) at (0, 0);
+        \foreach \s in {0, 1, 2, 3}{%
+            \advance\x\s
+            \foreach \t in {0, 1, 2, 3}{%
+                \advance\x\t
+                \multiply\x10
+                \draw [fill = black!\the\x] ($(O) + (3 * \t / 5, -3 * \s / 5)$) circle [radius = 2mm] {};
+                \ifnum \t < 3{%
+                    \draw ($(O) + (3 * \t / 5, -3 * \s / 5) + (2mm, 0mm)$) -- ++(0:0.6);
+                    \ifnum \s < 3{%
+                        \draw ($(O) + (3 * \t / 5, -3 * \s / 5) + ({sqrt(2) / 10}, -{sqrt(2) / 10})$) -- ++(-45:{sqrt(0.6)});
+                    }\fi%
+                }\fi%
+                \ifnum \t > 0{%
+                    \ifnum \s < 3{%
+                        \draw ($(O) + (3 * \t / 5, -3 * \s / 5) + (-{sqrt(2) / 10}, -{sqrt(2) / 10})$) -- ++(-135:{sqrt(0.6)});
+                    }\fi%
+                }\fi%
+                \ifnum \s < 3{%
+                    \draw ($(O) + (3 * \t / 5, -3 * \s / 5) + (0mm, -2mm)$) -- ++(-90:0.6);
+                }\fi%
+            }
+        }
+        %%%========================================================================================================================================
+        %%明るい部分が存在する画像
+        \coordinate (A1) at ($(O) + (0, -5)$);
+        \draw [fill = black] (A1) rectangle ($(O) + (2, -3)$);
+        \draw [fill = black!20] ($(O) + (0.8, -3.5)$) circle [x radius = 2.5mm, y radius = 3mm, rotate = -30];
+        \draw [fill = white] ($(O) + (0.8, -3.5)$) circle [x radius = 2mm, y radius = 2.5mm, rotate = -30];
+        \draw [fill = black!20] ($(O) + (1.6, -4)$) circle [x radius = 2.5mm, y radius = 3mm, rotate = 60];
+        \draw [fill = white] ($(O) + (1.6, -4)$) circle [x radius = 2mm, y radius = 2.5mm, rotate = 60];
+        \draw [fill = black!20] ($(O) + (0.6, -4.4)$) circle [x radius = 4.5mm, y radius = 5mm, rotate = 60];
+        \draw [fill = white] ($(O) + (0.6, -4.4)$) circle [x radius = 4mm, y radius = 4.5mm, rotate = 60];
+        %%%========================================================================================================================================
+        %%黒い曲線
+        \coordinate (A2) at ($(A1) + (0, -4)$);
+        \draw (A2) rectangle ($(A2) + (2, 2)$);
+        \draw [decorate, decoration = {ticks, transform = {rotate = 30}, segment length = 0.8mm}, black!80] ($(A2) + (0.3, 1.8)$) cos ($(A2) + (1, 1)$);
+        \draw [decorate, decoration = {ticks, segment length = 0.8mm, amplitude = 1.5mm}, black!80] ($(A2) + (0.3, 1.8)$) cos ($(A2) + (1, 1)$);
+        \draw [decorate, decoration = {ticks, transform = {rotate = 30}, segment length = 0.8mm}, black!80] ($(A2) + (1, 1.1)$) sin ($(A2) + (1.8, 0.4)$);
+        \draw [decorate, decoration = {ticks, segment length = 0.8mm}, black!80] ($(A2) + (1, 1)$) sin ($(A2) + (1.8, 0.3)$);
+        \draw [very thick] ($(A2) + (0.3, 1.8)$) cos ($(A2) + (1, 1)$) sin ($(A2) + (1.8, 0.3)$);
+        % \draw [very thick, domain = -0.2: {1.1 * pi}, scale = 0.5] plot(\x, {cos(\x r)});
+        %%%========================================================================================================================================
+        %%分割画像
+        \coordinate (A3) at ($(A2) + (0, -3)$);
+        \draw (A3) rectangle ($(A3) + (2, 2)$);
+        \draw [fill = black] (A3) -- ($(A3) + (0, 0.3)$) .. controls ($(A3) + (0.8, 0.8)$) and ($(A3) + (1.2, 1.2)$) .. ($(A3) + (0.3, 2)$)
+        -- ($(A3) + (2, 2)$) -- ($(A3) + (2, 1.7)$) -- ($(A3) + (1.5, 1.2)$) .. controls ($(A3) + (1.5, 0.7)$) and ($(A3) + (1.5, 0.5)$) .. ($(A3) + (1, 0)$) -- cycle;
+        \draw [gray, fill = gray!30] ($(A3) + (0, 2)$) -- ($(A3) + (0, 1.8)$) .. controls ($(A3) + (0.9, 1.2)$) and ($(A3) + (0.9, 0.9)$) .. ($(A3) + (0, 0.7)$)
+        -- ($(A3) + (0, 0.3)$) .. controls ($(A3) + (0.8, 0.8)$) and ($(A3) + (1.2, 1.2)$) .. ($(A3) + (0.3, 2)$) -- cycle;
+        \draw [gray, fill = gray!30] ($(A3) + (2, 1.7)$) -- ($(A3) + (1.5, 1.2)$) .. controls ($(A3) + (1.5, 0.7)$) and ($(A3) + (1.5, 0.5)$) .. ($(A3) + (1, 0)$) -- ($(A3) + (1.1, 0)$) 
+        -- ($(A3) + (1.3, 0.2)$) -- ($(A3) + (2, 0.3)$) -- cycle;
+    \end{tikzpicture}
+\end{wrapfigure}
+$\mathrm{n\times n}$点（ピクセル）からなる2次元階調グレースケール
+画像について考える。なお、各点は、縦横斜めの近傍点とつながってるものとする。（右図参照）
+各ピクセル$\mathrm{p}$は$\mathrm{Pixel}$という型で表現し、その輝度は$\mathrm{p.brightness}$と表現する。
+画像は、$\mathrm{n\times n}$の$\mathrm{Pixel}$の配列$\mathrm{P}$として与えられる。擬似コード内では、基本的なデータ構造を
+適宜利用してよい。計算量については、$\mathrm{n}$の関数として示せ。
+\begin{enumerate}[(1)]
+    \setlength{\itemsep}{10pt}
+    \item 黒い背景に白い物体がいくつか写っているとする（右図参照）。そのうちの１つの物体の面積を求める方法として、以下のような方法が考えられる。\label{subsec1:prom1}
+    
+    「ある閾値に対して、それよりも明るい点のみを残し、それ以外の点を考慮から外す。残っている点から１つ選び、その点を含む連結領域の大きさ（点の数）を計算する。」
+
+    この計算を再帰呼び出しによって行うアルゴリズムを20行以内の擬似コードで示し、その計算量をO記法を用いて答えよ。
+    \item 以下のような方法で白い背景の画像に写っている黒い曲線を検出することを考える（右図参照）。自己交差はないものとする。\label{subsec1:prom2}
+    
+    「両端の2点（与えられているものとする。）を連結する点列のうち、点列上の点の明るさの合計値が最小になるものを求める。」
+
+    この計算を効率よく行うアルゴリズムを20行以内の擬似コードで示し、その計算量をO記法を用いて答えよ。
+    \item 画像を点列で左右に分割する方法として（右図参照）、以下のような方法が考えられる。\label{subsec1:prom3}
+    
+    「画像の上端と下端を結び、各行につき1点を経由するような連結された点列を考える。そのような点列の内、点の明るさの合計が最小になるような点列を求める。」
+
+    この計算を効率よく行うアルゴリズムを20行以内の擬似コードで示し、その計算量をO記法を用いて答えよ。
+    \item 画像をぼかす方法として、以下のような処理が考えられる。\label{subsec1:prom4}
+    
+    「各内部点（近傍を8つ持つ点）について、その8近傍点の輝度の平均値を計算する。全ての内部点について
+    この平均値を計算した後、すべての内部点の輝度を対応する平均値へと同時変更する。」
+
+    ここで、内部点の元の輝度を並べたベクトルを$\mbox{\boldmath $x$}$、変更後の輝度を1列にベクトルを
+    $\mbox{\boldmath $x'$}$、外部点（画像の中の点の内、内部点以外の点）の輝度を並べたベクトルを$\mbox{\boldmath $b$}$として、
+    $\mbox{\boldmath $x$},\mbox{\boldmath $x'$},\mbox{\boldmath $b$}$の関係を行列を使って表現したい。適切に行列を定義して、
+    $\mbox{\boldmath $x$},\mbox{\boldmath $x'$},\mbox{\boldmath $b$}$の関係式を示せ。
+    \item \eqref{subsec1:prom4}における処理を画像に対して無限回適用すると、画像の輝度$\mbox{\boldmath $x$}$は
+    $\mbox{\boldmath $x$}^{\mathrm{inf}}$に収束する。$\mbox{\boldmath $x$}^{\mathrm{inf}}$を\eqref{subsec1:prom4}で定義した行列
+    を用いて解析的な式で表せ。但し、式には極限は含まないものとする。
+\end{enumerate}
+
+\newpage
+
+\subsection{解答例}
+\begin{enumerate}[(1)]
+    \item 題意を満たす擬似コードは以下のようになる。但し、参照範囲は考慮されているものとする。
+\begin{lstlisting}[frame = sigle, style = customText]
+func: 行数iにおいて明るい点だけを残す関数SearchBright(bool P2[][], int i)
+    for j: from 0 to n - 1
+        if P[i][j].brightnessが閾値より大きい
+            (i, j)点が明るいかどうかを表すP2[i][j]にtrueを代入
+        end if
+    end for
+    return 次の行について再帰呼び出しを行った後の戻り値
+end func
+func: 面積を計算する関数area(final boolean P2[][], int si, int sj) 
+    現在訪れている(i, j)点に関して訪れたかどうかを表すvisitid[i][j]をtrueにする。
+    area ← 1
+    for i: from si - 1 to si + 1
+        for j: from sj - 1 to sj + 1
+            if 現在見ている点が訪れていないかつ明るい点である
+                その点へ訪問し、その戻り値を現在の面積areaに足す。
+            end if
+        end for j
+    end for i
+    面積areaを戻り値として返す。
+end func
+\end{lstlisting}
+    この時の計算量は$\mathrm{O}(n^2)$となる。
+    \item 題意を満たす擬似コードは以下のようになる。但し、参照範囲は考慮されているものとする。
+\begin{lstlisting}[frame = single, style = customText]
+for i: from 両端の始点のx座標 to 両端の終点のx座標
+    for j: from 両端の始点のy座標 to 両端の終点のy座標
+        dp[i][j] ← P[i][j].brightness + min(dp[i - 1][j], dp[i][j - 1], dp[i - 1][j - 1])
+        dproot[i][j] ← dp[i - 1][j], dp[i][j - 1], dp[i - 1][j - 1]の中で一番小さい値を持つ点
+    end for j
+end for i
+while rootが両端の終点から両端の始点になるまで
+    root ←　dproot[root.x][root.y]
+    求めたい点列pにrootを追加
+end while
+\end{lstlisting}
+    この時の計算量は$\mathrm{O}(n^2)$
+    \item 
+\end{enumerate}

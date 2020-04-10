@@ -1,0 +1,436 @@
+\subsection{問題文}
+太陽光発電システムについて考えよう。ソーラーパネルの維持管理のため、以下のような
+適用規則が定められているとする。
+\begin{enumerate}[(i)]
+    \item $n$枚のパネルが一つのグループとして維持管理される。
+    \item パネルはグループ毎に定期的に点検される。
+    \item パネルの状態は各グループ毎に$n$ビットデータとして報告される。
+    ここで各ビットは対応するパネルに不具合があれば1、不具合がなければ0とする。
+\end{enumerate}
+不具合のあるパネルの数、すなわち$n$ビットデータの1の個数$k$を数える"population count"問題を考えよう。
+以下の設問に答えよ。
+\newline
+\newline
+まず、ソフトウェアによる解法を考えよう。ここでは、$0\, <\, n\, \leq\, 32, 0\, \leq\, k\, <\, \log_{2}n$とする。
+四則演算、論理演算、シフト演算、および表引きには1単位時間かかるとする。単純化のため、インデックスの足し算やループで用いる
+比較演算の演算時間はゼロとする。
+\begin{enumerate}[(1)]
+    \item 単純な方式として各ビットの値をチェックし、1の個数の総和を求める方式が考えられる。
+    この方式の擬似コードを書き、その計算時間を答えよ。\label{subsec2:prom1}
+    \item 実際、表引き操作を行うことで上述の方式\eqref{subsec2:prom1}を高速化できる。その計算時間を答えよ。\label{subsec2:prom2}
+    \item 方式\eqref{subsec2:prom1}より高速かつ方式\eqref{subsec2:prom2}よりストレージを必要としない方式の擬似コードを示せ。その計算時間を答えよ。\label{subsec2:prom3}
+    \newline
+    \newline
+    ハードウェアによる解決を考えよう。ここでは、入力はビット列、出力は2進数とする。
+    \item 入力3ビットのpopulation count 論理回路$P_3$の真理値表を書け。$\mathrm{AND,\, OR,\, NOT}$ゲートを用いて$P_3$を設計せよ。\label{subsec2:prom4}
+    \item 入力6ビットのpopulation count 論理回路$P_6$を論理回路$P_3$を利用して作成せよ。必要に応じて、追加で$\mathrm{AND,\, OR,\, NOT}$ゲートを使ってもよい。\label{subsec2:prom5}
+    \item 入力$n$ビットのpopulation count 論理回路$P_n$を考えるとき、$n$が増えると遅延が問題になる。この問題を解決する方法を述べよ。\label{subsec2:prom6}
+\end{enumerate}
+
+\newpage
+
+\subsection{解答例}
+\begin{enumerate}[(1)]
+    \item 題意の擬似コードは以下のようになる。
+\begin{lstlisting}[frame = single, style = customText]
+k ← 0
+for i 0 to n - 1
+    mask ← 1 << i
+    tmp ← データd & mask
+    if tmpが0でない
+        k ← k + 1
+    end if
+end for
+\end{lstlisting}
+    よってこの計算時間は以下のようになる。
+    \begin{align*}
+        3 \times n = n
+    \end{align*}
+    よって、$3n$単位時間かかる。
+    \item 表引きの操作により、シフト演算と論理演算をしなくて済むため、計算時間は$n$単位時間となる。
+    \item 題意の擬似コードは以下のようになる。データをdとする。
+\begin{lstlisting}[frame = single, style = customText]
+//データdを2bit整数16組に分ける
+d ← d - ((d >> 1) & 0x55555555)
+//データdを4bit整数8組に分ける
+d ← (d & 0x33333333) + ((d >> 2) & 0x33333333)
+//データdを8bit整数4組に分ける
+d ← (d + (d >> 4)) & 0x0f0f0f0f
+//データdを16bit整数2組に分ける
+d ← (d + (d >> 8))
+//データdを32bit整数1組に分ける
+d ← (d + (d >> 16))
+\end{lstlisting}
+    この時の計算時間は5単位時間となる
+    \item 入力3ビットのpopulation count 論理回路$P_3$の真理値表は以下のようになる。
+    \begin{figure}[H]
+        \centering
+        \begin{tabular}{ccc}
+            \begin{minipage}{0.3\linewidth}
+                \centering
+                \begin{table}[H]
+                    \caption{論理回路$P_3$の真理値表}
+                    \centering
+                    \begin{tabular}{c|c}
+                        \hline
+                        入力I & 出力X\\
+                        \hline
+                        000 & 00\\
+                        001 & 01\\
+                        011 & 10\\
+                        010 & 01\\
+                        100 & 01\\
+                        101 & 10\\
+                        111 & 11\\
+                        110 & 10\\
+                        \hline
+                    \end{tabular}
+                \end{table}
+            \end{minipage}
+            \begin{minipage}{0.3\linewidth}
+                \centering
+                \begin{Karnaughvuitl}{ab}{c}
+                    \contingut{0,1,1,0,1,0,0,1}
+                    \implicant{1}{1}{blue}
+                    \implicant{2}{2}{blue}
+                    \implicant{4}{4}{blue}
+                    \implicant{7}{7}{blue}
+                \end{Karnaughvuitl}
+                \caption{下位1ビットカルノー図}
+            \end{minipage}
+            \begin{minipage}{0.3\linewidth}
+                \centering
+                \begin{Karnaughvuitl}{ab}{c}
+                    \contingut{0,0,0,1,0,1,1,1}
+                    \implicant{6}{7}{blue}
+                    \implicant{3}{7}{blue}
+                    \implicant[3pt]{7}{5}{blue}
+                \end{Karnaughvuitl}
+                \caption{上位1ビットカルノー図}
+            \end{minipage}
+        \end{tabular}
+    \end{figure}
+    \begin{align*}
+        \mbox{下位ビットの論理式:}\quad
+        a'b'c + a'bc' + abc + ab'c'
+        &= a'(b'c + bc') + a(bc + b'c')\\
+        &= a'(bc + b'c')' + a(bc + b'c')\\
+        \mbox{上位ビットの論理式:}\quad
+        ab + bc + ac 
+        &= a(b + c) + bc\\
+        &= a(b'c')' + bc
+    \end{align*}
+    よってこの時論理回路$P_3$は以下のように設計できる。但し、$F1$は出力の2桁目を表し、$F2$は出力の1桁目を表す。
+    \begin{figure}[H]
+        \centering
+        \begin{tikzpicture}[>=stealth, circuit logic US]
+            %%and gate at 1st stage
+            \draw (0, 0) node [and gate] (and1) {};
+            \draw (and1) + (0, 1) node [and gate] (and2) {};
+            %%and gate at 2nd stage
+            \draw ($(and2.output)!.5!(and1.output)$) + (5, 0) node [and gate] (and5) {};
+            \draw (and5) + (0, -1.5) node [and gate] (and6) {};
+            \draw ($(and6)!2!(and5)$) node [and gate] (and7) {};
+            %%or gate at 1st stage
+            \draw (and5.input 1) + (-3, 0) node [or gate] (or1) {};
+            %%not gate at 1st stage & 2nd stage
+            \draw (and1 -| or1) + (1.3, -0.5) node [not gate] (not5) {}; 
+            \draw (and2 -| or1) + (0, 0.6) node [not gate] (not4) {}; 
+            \draw (and2.input 1) + (-1.5, 0) node [not gate] (not3) {};
+            \draw (and1.input 1) + (-1.5, 0) node [not gate] (not2) {};
+            \draw (and6.input 2 -| or1) node [not gate] (not1) {}; 
+            %%or gate at 2st stage
+            \draw ($(and5.output)!.5!(and6.output)$) + (1, 0) node [or gate] (or3) {};
+            \draw ($(and5.output)!.5!(and7.output)$) + (1, 0) node [or gate] (or4) {};
+            %%%input
+            \coordinate (c) at ($(not3.input) + (-1, 0)$);
+            \coordinate (b) at ($(not2.input) + (-1, 0)$);
+            \coordinate (a) at ($(b)!(not1.input)!(c)$);
+            %%%1段目and回路接続=========================================================================================================
+            %%%b'c'
+            \draw (not3.output) |- (and2.input 1);
+            \draw (not2.output) to ++(0.3,0) |- (and2.input 2);
+            %%%bc
+            \draw (not3.input) + (-0.5, 0) node [branch] {} |- ($(not2) + (1.3, -0.8)$) |- (and1.input 2);
+            \draw (not2.input) + (-0.3, 0) node [branch] {} |- ($(not2) + (1.1, -0.5)$) |- (and1.input 1);
+            %%%========================================================================================================================
+            %%%1段目or回路接続=========================================================================================================
+            %%b'c' + bc
+            \draw (and2.output) to ++(0.8, 0) |- (or1.input 1);
+            \draw (and1.output) to ++(0.8, 0) |- (or1.input 2);
+            %%%=======================================================================================================================
+            %%%2段目not回路接続=========================================================================================================
+            %%(b'c')'
+            \draw (and2.output) + (0.3, 0) node [branch] {} |- (not4.input);
+            %%(b'c' + bc)'
+            \draw (or1.output) + (0.3, 0) node [branch] {} |- (not5.input);
+            %%%=======================================================================================================================
+            %%%2段目and回路接続=========================================================================================================
+            %% a(bc + b'c')
+            \draw (not5.output) to ++(0.3, 0) |- (and6.input 1);
+            \draw (not1.output) to ++(0.3, 0) |- (and6.input 2);
+            %% a'(bc + b'c')'
+            \draw (not1.input) + (-0.3, 0) node [branch] {} |- ($(not1)!0.7!(or1) + (1.3, 0)$) |- (and5.input 2);
+            \draw (or1.output) to ++(0.3, 0) |- (and5.input 1);
+            %% a(b'c')'
+            \draw (not4.output) -| ($(and7.input 2) + (-0.3, 0)$) |- (and7.input 2);
+            \draw (a) + (0.3, 0) node [branch] {} |- (and7.input 1);
+            %%%========================================================================================================================
+            %%%2段目or回路接続=========================================================================================================
+            %%F2
+            \draw (and5.output) to ++(0.3, 0) |- (or3.input 1);
+            \draw (and6.output) to ++(0.3, 0) |- (or3.input 2);
+            %%F1
+            \draw (and7.output) to ++(0.3, 0) |- (or4.input 1);
+            \draw (and1.output) + (0.5, 0) node [branch] {} |- (or4.input 2);
+            %%%========================================================================================================================
+            % inputs
+            \draw (not1.input) -- (a) node [left] {$a$};
+            \draw (not2.input) -- (b) node [left] {$b$};
+            \draw (not3.input) -- (c) node [left] {$c$};
+            % outputs
+            \draw (or4.output) -- ++(0.3,0) node [right] (output1) {$F1$};
+            \draw (or3.output) -- ++(0.3,0) node [right] (output2) {$F2$};
+        \end{tikzpicture}
+        \caption{論理回路$P_3$}
+        \label{circuit:p3}
+    \end{figure}
+    \defineshape[2]{3}{p3}
+    \tikzstyle{p3 gate}=[draw, shape=p3, minimum size=12mm, inner sep=0pt]
+    \item 次に入力6ビットの論理回路$P_6$は2つの論理回路$P_3$の出力を入力とし、それらの和がこの論理回路の出力となるため、
+    2ビットの加算器を追加すればよい。よって、その加算器の真理値表は以下のようになる。
+    \begin{figure}[H]
+        \centering
+        \begin{tabular}{cc}
+            \begin{minipage}{0.4\linewidth}
+                \centering
+                \begin{table}[H]
+                    \caption{下位1ビット加算器真理値表}
+                    \centering
+                    \begin{tabular}{ccc}
+                        \hline
+                        入力I & 出力X1 & 繰り上がりC1\\
+                        \hline
+                        00 & 0 & 0\\
+                        01 & 1 & 0\\
+                        11 & 0 & 1\\
+                        10 & 1 & 0\\
+                        \hline
+                    \end{tabular}
+                \end{table}
+            \end{minipage}
+            \begin{minipage}{0.5\linewidth}
+                \centering
+                \begin{table}[H]
+                    \caption{上位1ビット加算器真理値表}
+                    \centering
+                    \begin{tabular}{cccc}
+                        \hline
+                        入力I & 前の桁からの& 出力X2 & 繰り上がりC2\\
+                         & 繰り上がりC1&  & \\
+                        \hline
+                        00 & 0 & 0 & 0\\
+                        00 & 1 & 1 & 0\\
+                        01 & 0 & 1 & 0\\
+                        01 & 1 & 0 & 1\\
+                        11 & 0 & 0 & 1\\
+                        11 & 1 & 1 & 1\\
+                        10 & 0 & 1 & 0\\
+                        10 & 1 & 0 & 1\\
+                        \hline
+                    \end{tabular}
+                \end{table}
+            \end{minipage}
+        \end{tabular}
+    \end{figure}
+    よってカルノー図は以下のようになる。
+    \begin{figure}[H]
+        \centering
+        \begin{tabular}{cc}
+            \begin{minipage}{0.4\linewidth}
+                \centering
+                \begin{Karnaughdouble}{a}{b}
+                    \contingut{0,1,1,0}
+                    \implicant{1}{1}{blue}
+                    \implicant{2}{2}{blue}
+                \end{Karnaughdouble}
+                \caption{下位1ビット出力xカルノー図}
+            \end{minipage}
+            \begin{minipage}{0.4\linewidth}
+                \centering
+                \begin{Karnaughdouble}{a}{b}
+                    \contingut{0,0,0,1}
+                    \implicant{3}{3}{blue}
+                \end{Karnaughdouble}
+                \caption{下位1ビット繰り上がりC2カルノー図}
+            \end{minipage}
+        \end{tabular}
+    \end{figure}
+    よって、以下のような式になる。
+    \begin{align*}
+        X1 &= ab' + a'b\\
+        C1 &= ab
+    \end{align*}
+    \begin{figure}[H]
+        \centering
+        \begin{tabular}{cc}
+            \begin{minipage}{0.4\linewidth}
+                \centering
+                \begin{Karnaughvuitl}{cd}{C1}
+                    \contingut{0, 1, 1, 0, 1, 0, 0, 1}
+                    \implicant{2}{2}{blue}
+                    \implicant{4}{4}{blue}
+                    \implicant{1}{1}{blue}
+                    \implicant{7}{7}{blue}
+                \end{Karnaughvuitl}
+                \caption{上位1ビット出力xカルノー図}
+            \end{minipage}
+            \begin{minipage}{0.4\linewidth}
+                \centering
+                \begin{Karnaughvuitl}{cd}{C1}
+                    \contingut{0, 0, 0, 1, 0, 1, 1, 1}
+                    \implicant{6}{7}{blue}
+                    \implicant{3}{7}{blue}
+                    \implicant[3pt]{7}{5}{blue}
+                \end{Karnaughvuitl}
+                \caption{上位1ビット繰り上がりC2カルノー図}
+            \end{minipage}
+        \end{tabular}
+    \end{figure}
+    よって、以下のような式になる。
+    \begin{align*}
+        X2 &= c'd'C1 + c'dC1' + cdC1 + cd'C1' = c'(d'C1 + dC1') + c(d'C1' + dC1)\\
+        C2 &= cd + dC1 + cC1 = c(d + C1) + dC1 = c(d'C1')' + dC1
+    \end{align*}
+    ここで、この論理式は論理回路$P_3$と全く同じものであるので、
+    論理回路$P_3$を一つの素子として扱うと、加算器の論理回路は以下のようになる。
+    \begin{figure}[H]
+        \centering
+        \begin{tikzpicture}[>=stealth, circuit logic US]
+            %%and gate at 1st stage
+            \draw (0, 0) node [and gate] (and1) {};
+            \draw (and1) + (0, 1.5) node [and gate] (and2) {};
+            %%not gate at 1st stage
+            \draw (and1.input 1) + (-1.5, 0) node [not gate] (not1) {};
+            \draw (and2.input 1) + (-1.5, 0) node [not gate] (not2) {};
+            %%or gate at 1st stage
+            \draw ($(and1)!.5!(and2)$) + (1.5, 0) node [or gate] (or1) {};
+            %%p3 gate
+            \draw ($(and1)!2!(and2)$) + (1.5, 0) node [p3 gate] (p3) {$P_3$}; 
+            %%and gate at 1st stage
+            \draw ($(not1)!1.55!(not2)$) node [and gate] (and3) {};
+            %%input
+            \coordinate (a) at ($(not1.input) + (-1, 0)$);
+            \coordinate (b) at ($(not2.input) + (-1, 0)$);
+            \coordinate (c) at (p3.input 2 -| a);
+            \coordinate (d) at (p3.input 3 -| a);
+            %%%1段目and回路接続===================================================================================================
+            %%ab'
+            \draw (not2.output) to ++(0.3, 0) |- (and2.input 1);
+            \draw (not1.input) + (-0.2, 0) node [branch] {} |- ($(and2.input 2) + (-0.3, -0.5)$) |- (and2.input 2);
+            %%a'b
+            \draw (not1.output) to ++(0.3, 0) |- (and1.input 1);
+            \draw (not2.input) + (-0.4, 0) node [branch] {} |- ($(and1.input 2) + (-0.3, -0.5)$) |- (and1.input 2);
+            %%ab
+            \draw (a) + (0.2, 0) node [branch] {} |- (and3.input 1);
+            \draw (b) + (0.35, 0) node [branch] {} |- (and3.input 2);
+            %%%==================================================================================================================
+            %%%1段目or回路接続===================================================================================================
+            %%X1
+            \draw (and1.output) to ++(0.3, 0) |- (or1.input 2);
+            \draw (and2.output) to ++(0.3, 0) |- (or1.input 1);
+            %%%==================================================================================================================
+            %%%1段目p3回路接続===================================================================================================
+            \draw ($(and3.output) + (1, 0)$) to ++(0.3, 0) |- (p3.input 1);
+            %%%==================================================================================================================
+            %%inputs
+            \draw (not1.input) -- (a) node [left] {$a$};
+            \draw (not2.input) -- (b) node [left] {$b$};
+            \draw (p3.input 2) -- (c) node [left] {$c$};
+            \draw (p3.input 3) -- (d) node [left] {$d$};
+            % outputs
+            \draw (or1.output) -- ++(0.3,0) node [right] (output1) {$X1$};
+            \draw (p3.output 1) -- ++(0.3,0) node [right] (output2) {$C2$};
+            \draw (p3.output 2) -- ++(0.3,0) node [right] (output3) {$X2$};
+            \draw (and3.output) -- ++(0.3,0) node [right] (output4) {$C1$};
+        \end{tikzpicture}
+        \caption{加算器の論理回路}
+    \end{figure}
+    よって、求める論理回路$P_6$は以下のようになる。但し、$F1, F2, F3$はそれぞれ出力の下1桁目, 2桁目, 3桁目を表す。
+    \begin{figure}[H]
+        \centering
+        \begin{tikzpicture}[>=stealth, circuit logic US]
+            %%and gate at 1st stage
+            \draw (0, 0) node [and gate] (and1) {};
+            \draw (and1) + (0, 1.5) node [and gate] (and2) {};
+            %%not gate at 1st stage
+            \draw (and1.input 1) + (-1.5, 0) node [not gate] (not1) {};
+            \draw (and2.input 1) + (-1.5, 0) node [not gate] (not2) {};
+            %%or gate at 1st stage
+            \draw ($(and1)!.5!(and2)$) + (1.5, 0) node [or gate] (or1) {};
+            %%p3 gate
+            \draw ($(and1)!2!(and2)$) + (1.5, 0) node [p3 gate] (p3) {$P_3$}; 
+            %%and gate at 1st stage
+            \draw ($(not1)!1.55!(not2)$) node [and gate] (and3) {};
+            %%input
+            \coordinate (a) at ($(not1.input) + (-1, 0)$);
+            \coordinate (b) at ($(not2.input) + (-1, 0)$);
+            \coordinate (c) at (p3.input 2 -| a);
+            \coordinate (d) at (p3.input 3 -| a);
+            %%%1段目and回路接続===================================================================================================
+            %%ab'
+            \draw (not2.output) to ++(0.3, 0) |- (and2.input 1);
+            \draw (not1.input) + (-0.2, 0) node [branch] {} |- ($(and2.input 2) + (-0.3, -0.5)$) |- (and2.input 2);
+            %%a'b
+            \draw (not1.output) to ++(0.3, 0) |- (and1.input 1);
+            \draw (not2.input) + (-0.4, 0) node [branch] {} |- ($(and1.input 2) + (-0.3, -0.5)$) |- (and1.input 2);
+            %%ab
+            \draw (a) node [branch] {} |- (and3.input 1);
+            \draw (b) + (0.35, 0) node [branch] {} |- (and3.input 2);
+            %%%==================================================================================================================
+            %%%1段目or回路接続===================================================================================================
+            %%X1
+            \draw (and1.output) to ++(0.3, 0) |- (or1.input 2);
+            \draw (and2.output) to ++(0.3, 0) |- (or1.input 1);
+            %%%==================================================================================================================
+            %%%1段目p3回路接続===================================================================================================
+            \draw (and3.output) to ++(0.3, 0) |- (p3.input 1);
+            %%%==================================================================================================================
+            %%inputs
+            \draw (not1.input) -- (a);
+            \draw (not2.input) -- (b);
+            \draw (p3.input 2) -- (c);
+            \draw (p3.input 3) -- (d);
+            % outputs
+            \draw (or1.output) -- ++(0.3,0) node [right] (output1) {$F1$};
+            \draw (p3.output 1) -- ++(0.3,0) node [right] (output2) {$F3$};
+            \draw (p3.output 2) -- ++(0.3,0) node [right] (output3) {$F2$};
+            %%p3
+            \draw (a) + (-1.5, 0) node [p3 gate] (p31) {$P_3$};
+            \draw (b) + (-1.5, 0) node [p3 gate] (p32) {$P_3$};
+            % \draw (and3.output) -- ++(0.3,0) node [right] (output4) {$C1$};
+            %%%1段目p3回路接続===================================================================================================
+            \draw (p31.output 2) to ++(0.3, 0) -| ($(a) + (-0.3, 0)$) |- (a);
+            \draw (p31.output 1) to ++(0.3, 0) -| ($(c) + (-0.3, 0)$) |- (c);
+            \draw (p32.output 2) to ++(0.3, 0) |- (b);
+            \draw (p32.output 1) to ++(0.3, 0) |- (d);
+            %%%==================================================================================================================
+            %%input
+            \coordinate (a1) at ($(p31.input 1) + (-2, 0)$);
+            \coordinate (a2) at ($(p31.input 2) + (-2, 0)$);
+            \coordinate (a3) at ($(p31.input 3) + (-2, 0)$);
+            \coordinate (a4) at ($(p32.input 1) + (-2, 0)$);
+            \coordinate (a5) at ($(p32.input 2) + (-2, 0)$);
+            \coordinate (a6) at ($(p32.input 3) + (-2, 0)$);
+            %%inputs
+            \draw (p31.input 1) -- (a1) node [left] {$a$};
+            \draw (p31.input 2) -- (a2) node [left] {$b$};
+            \draw (p31.input 3) -- (a3) node [left] {$c$};
+            \draw (p32.input 1) -- (a4) node [left] {$d$};
+            \draw (p32.input 2) -- (a5) node [left] {$e$};
+            \draw (p32.input 3) -- (a6) node [left] {$f$};
+        \end{tikzpicture}
+        \caption{論理回路$P_6$}
+    \end{figure}
+    \item 
+\end{enumerate}

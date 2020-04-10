@@ -1,0 +1,69 @@
+\subsection{問題文}
+以下に示す情報システムに関する8項目から4項目を選択し、各項目を4$\thicksim$8行程度で説明せよ。
+必要に応じて例や図を用いてよい。
+
+\begin{enumerate}[(1)]
+    \item 逆運動学
+    \item 隠れマルコフモデル
+    \item MinMax法
+    \item NP完全問題
+    \item レイトレーシング
+    \item SIMD(Single Instruction Multiple data)
+    \item Call by value(値渡し) and call by reference(参照渡し)
+    \item 公開鍵暗号
+\end{enumerate}
+
+\newpage
+
+\subsection{解答例}
+\begin{enumerate}[(1)]
+    \item ロボットのアームの位置座標からロボットのアームの長さとアームの基準面からの角度を求める
+    もののことである。つまり、以下の図のように位置座標$(x, y)$から$L, \theta$を求める学問のことである。
+    \begin{center}
+        \begin{tikzpicture}[>=stealth]
+            \draw (0, 0) -- (3, 0);
+            \draw (0, 0) -- (0, 3);
+            \coordinate (A) at (3, 0);
+            \coordinate (B) at (0.3, 0);
+            \coordinate (D) at ($(B)!3cm!30:(A)$) node at (D) [above right] {$(x, y)$};
+            \coordinate (C) at ($(B)!0.5!(D)$);
+            \coordinate (E) at ($(B)!.55!(D)!2.5mm!120:(D)$);
+            \draw (E) node [rectangle, minimum height=3cm, minimum width = 0.5cm, rotate = -60, draw] {};
+            \draw (0, 0) circle [radius = 3mm];
+            \draw (A) -- (B)  pic["$\theta$", <->, very thick, angle eccentricity=1.2, angle radius=1cm,draw=orange] {angle=A--B--C};
+            \draw (B).. controls ($(B)!.2!(D)!10pt!90:(D)$) and ($(B)!.8!(D)!10pt!90:(D)$) .. (D) node [midway, sloped, fill=white] {$L$};
+        \end{tikzpicture}
+    \end{center}    
+    \item まずN重マルコフモデルとは前のN個の出力のみに依存する離散確率過程のことを表すモデルである。
+    $N=1$の時は単純マルコフモデルと呼ばれる。つまり、単純マルコフモデルは現在の状態のみで次の状態が確率的に決定されるモデルのことである。
+    但し、単純マルコフモデルは出力が一つしか認められておらず、複雑な出力は表現できないモデルである。そのため、出力を確率的な表現で表すことにより、
+    複数の出力を許すようにしたモデルが隠れマルコフモデルである。
+    \item ゲーム理論で使われるアルゴリズムであり、2人零和ゲームであり、有限の手数で終了することが保証されているのであれば、必ず解くことができる
+    アルゴリズムである。このアルゴリズムは相手の最善手は自分の最悪手であるという考えのもと、自分は最善の手をだし、相手も最善の手を出すと考えた場
+    合に自分の手の場合は最大の評価値を選択し、相手の手の場合は最小の評価値を選択するアルゴリズムである。
+    \begin{center}
+        \begin{tikzpicture}[>=stealth]
+            \draw (0, 0) coordinate (O) rectangle (2, 2) coordinate (A);
+            \draw ($(O -| A)!.5!(O)$) coordinate (B) -- ($(O |- A)!.5!(A)$) coordinate (C);
+            \draw ($(O -| A)!.5!(A)$) coordinate (D) -- ($(O |- A)!.5!(O)$) coordinate (E);
+            \draw (O) node [above right] {$a_{21}$};
+            \draw (A) node [below left] {$b_{12}$};
+            \draw (B) node [above right] {$a_{22}$};
+            \draw (C) node [below left] {$b_{11}$};
+            \draw (D) node [below left] {$b_{22}$};
+            \draw (E) node [above right] {$a_{11}$};
+            \draw ($(B)!.5!(C)$) coordinate (F) node [above right] {$a_{12}$};
+            \draw (F) node [below left] {$b_{21}$};
+            \draw ($(O |- A)!.5!(C)$) coordinate (G) node [above] {$S_1$};
+            \draw ($(A)!.5!(C)$) coordinate (H) node [above] {$S_2$};
+            \draw ($(O |- A)!.5!(E)$) coordinate (I) node [left] {$S_1$};
+            \draw ($(O)!.5!(E)$) coordinate (J) node [left] {$S_2$};
+            \draw ($(I)!.5!(J)$) coordinate (K) node [left = 20] {$P_1$};
+            \draw ($(G)!.5!(H)$) coordinate (L) node [above = 20] {$P_2$};
+        \end{tikzpicture}
+    \end{center}
+    よって、上図のような利得表を考えた場合は、2人零和ゲームであるので$a_{ij} = -b_{ij}$であり、$a_{ij}$の値だけ評価すればよく、自分の
+    その戦略を選んだ際の評価値の最小値を考えることにより、相手の最善手を考え、その最小値の中で最大となるものの戦略を選択すれば自分の最善手を
+    選択することになるので、評価対象$P_1$が取るべき戦略は$S_{\max\limits_{i}\min\limits_{j}a_{ij}}$となるアルゴリズムである。
+    \item 
+\end{enumerate}

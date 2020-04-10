@@ -1,0 +1,384 @@
+\subsection{問題文}
+複素正方行列$X$は$XX^{\ast}=I$を満たすとき、ユニタリ行列であるという。但し、$X^{\ast}$は行列$X$の共役転置行列（もしくは随伴行列）を
+表し、$I$は単位行列とする。また、iは虚数単位とする。以下の問いに答えよ。
+\begin{enumerate}[(1)]
+    \setlength{\itemsep}{10pt}
+    \item $n$を正の整数とし、$A, B$を$n$次ユニタリ行列とする。行列$AB$もユニタリ行列であることを示せ。
+    \item $n$を正の整数とし、$C, D$を$n$次実正方行列とする。行列$F$を$F = C + \imag D$と定義し、行列$G$を
+    \begin{align*}
+        G = \spalignmat{
+            C {-D};
+            D {C}
+        }
+    \end{align*}
+    と定義する。行列$F$がユニタリ行列であることと行列$G$が直交行列であることは同値であることを示せ。
+    \item 次の行列の固有値を求めよ。
+    \begin{align*}
+        \frac{1}{2}\spalignmat{
+            1 1 1 1;
+            1 {\imag} -1 {-\imag};
+            1 -1 1 -1;
+            1 {-\imag} -1 {\imag}
+        }
+    \end{align*}
+    \item $n$を正の整数とし、$n$次正方行列$Q$の$(j, k)$成分$q_{jk}$を
+    \begin{equation*}
+        q_{jk} = \cfrac{1}{\sqrt{n}}\exp \left(\cfrac{2\pi\imag (j - 1)(k - 1)}{n}\right)
+    \end{equation*}
+    とする。行列$Q$はユニタリ行列であることを示せ。
+    \item 行列式が1である2次のユニタリ行列は次の一形式を持つことを示せ。但し、$\theta, \psi$は実数であるとする。
+    \begin{equation*}
+        H = \spalignmat{
+            {\exp(\imag \psi)\cos\theta} {\exp(\imag \psi)\sin\theta};
+            {-\exp(-\imag \psi)\sin\theta} {\exp(-\imag \psi)\cos\theta}
+        }
+    \end{equation*}
+    \item 2次のユニタリ行列の一般形を求めよ
+\end{enumerate}
+
+\newpage
+
+\subsection{解答例}
+\begin{enumerate}[(1)]
+    \setlength{\itemsep}{10pt}
+    \item $A, B$ともにユニタリ行列より以下が成り立つ。
+    \begin{align}
+        \left\{
+            \begin{array}{lcl}
+            AA^{\ast} &=& I\\ 
+            BB^{\ast} &=& I\\ 
+            \end{array}
+        \right.\label{eq:abunitary}
+    \end{align}
+    よって、式\eqref{eq:abunitary}より、以下が成り立つ。
+    \begin{align*}
+        (AB)(AB)^{\ast} & = ABB^{\ast}A^{\ast}\\
+                        & = AIA^{\ast}\\
+                        & = AA^{\ast}\\
+                        & = I
+    \end{align*}
+    よって、行列$AB$についてもユニタリ行列であることが示された。
+    \item 題意は以下のように同値変形できる。
+    \begin{align}
+        \mbox{行列$F$がユニタリ行列であること}&\mbox{と行列$G$が直交行列であることは同値である}\nonumber\\
+        \Longleftrightarrow \mbox{行列$F$がユニタリ行列である} &\Leftrightarrow \mbox{行列$G$が直交行列である} \nonumber\\
+        \Longleftrightarrow FF^{\ast} = I &\Leftrightarrow GG^{\top} = I\label{eq:hodai1_2}
+    \end{align}
+    よって、式\eqref{eq:hodai1_2}が成り立つことを示せばよい。
+
+    まず以下の式\eqref{eq:hodai1_2_1}が成り立つことを示す。
+    \begin{equation}
+        FF^{\ast} = I \Rightarrow GG^{\top} = I \label{eq:hodai1_2_1}
+    \end{equation}
+    題意より、$F = C + \imag D$より、$F^{\ast} = C^{\top} - \imag D^{\top}$であり、
+    式\eqref{eq:hodai1_2_1}の仮定条件$FF^{\ast} = I$から以下が成り立つ。
+    \begin{align*}
+        FF^{\ast} & = \left(C + \imag D\right)\left(C^{\top} - \imag D^{\top}\right)\\
+                & = CC^{\top} + DD^{\top} + \imag \left(DC^{\top} - CD^{\top}\right)\\
+                & = I\\
+        \Longleftrightarrow
+        I & = CC^{\top} + DD^{\top} + \imag \left(DC^{\top} - CD^{\top}\right)\\
+        \Longrightarrow I&\mbox{は実正方行列より} \mbox{\boldmath $0$} = DC^{\top} - CD^{\top}\\
+        \Longrightarrow I & = CC^{\top} + DD^{\top}\\
+        \therefore GG^{\top} & = 
+        \spalignmat{
+            C {-D};
+            D {C}
+        }
+        \spalignmat{
+            {C^{\top}} {D^{\top}};
+            {-D^{\top}} {C^{\top}}
+        }\\
+        & = 
+        \spalignmat{
+            {CC^{\top} + DD^{\top}} {CD^{\top} - DC^{\top}};
+            {DC^{\top} - CD^{\top}} {DD^{\top} + CC^{\top}}
+        }\\
+        & = 
+        \spalignmat{
+            {I} {\mbox{\boldmath $0$}};
+            {\mbox{\boldmath $0$}} {I}
+        }\\
+        & = I
+    \end{align*}
+    よって、式\eqref{eq:hodai1_2_1}が成り立つことは示された。
+
+    次に以下の式\eqref{eq:hodai1_2_2}が成り立つを示す。
+    \begin{equation}
+        GG^{\top} = I \Rightarrow FF^{\ast} = I \label{eq:hodai1_2_2}
+    \end{equation}
+    題意と式\eqref{eq:hodai1_2_2}の仮定条件$GG^{\top} = I$から以下が成り立つ。
+    \begin{align*}
+        GG^{\top} & = 
+        \spalignmat{
+            C {-D};
+            D {C}
+        }
+        \spalignmat{
+            {C^{\top}} {D^{\top}};
+            {-D^{\top}} {C^{\top}}
+        }\\
+        & = 
+        \spalignmat{
+            {CC^{\top} + DD^{\top}} {CD^{\top} - DC^{\top}};
+            {DC^{\top} - CD^{\top}} {DD^{\top} + CC^{\top}}
+        }\\
+        & = I\\
+        \Longleftrightarrow &
+        \begin{cases}
+            \mbox{\boldmath $0$} = CD^{\top} - DC^{\top}\\
+            I = CC^{\top} + DD^{\top}
+        \end{cases}
+    \end{align*}
+    \begin{align*}
+        \therefore FF^{\ast} & = \left(C + \imag D\right)\left(C^{\top} - \imag D^{\top}\right)\\
+            & = CC^{\top} + DD^{\top} + \imag \left(DC^{\top} - CD^{\top}\right)\\
+            & = I + \mbox{\boldmath $0$}\\
+            & = I
+    \end{align*}
+    よって、式\eqref{eq:hodai1_2_2}が成り立つことが示された。
+
+    従って、式\eqref{eq:hodai1_2_1}, \eqref{eq:hodai1_2_2}が成り立つことが示されたので、式\eqref{eq:hodai1_2}
+    が成り立つことが示された。よって、題意は示された。\\[1cm]
+    (中田解)
+    \begin{eqnarray*}
+    行列Fがユニタリ行列である&\Longleftrightarrow&FF^{*}=I\\
+                            &\Longleftrightarrow&(C+{\rm i}D)(C+{\rm i}D)^{*}=I\\
+                            &\Longleftrightarrow&(C+{\rm i}D)(C^{\sf T}-{\rm i}D^{\sf T})=I\\
+                            &\Longleftrightarrow&(CC^{\sf T}+DC^{\sf T})+{\rm i}(DC^{\sf T}+CD^{\sf -T})=I\\
+                            &\Longleftrightarrow&\left\{\begin{array}{l}CC^{\sf T}+DD^{\sf T}=I\\DC^{\sf T}+CD^{\sf T}=\bm{0}\end{array}\right.\\
+                            &\Longleftrightarrow&\begin{pmatrix}CC^{\sf T}+DD^{\sf T}&\bm{0}\\\bm{0}&CC^{\sf T}+DD^{\sf T}\end{pmatrix}=I\\
+                            &\Longleftrightarrow&\begin{pmatrix}C&-D\\D&C\end{pmatrix}\begin{pmatrix}C^{\sf T}&D^{\sf T}\\-D^{\sf T}&C^{\sf T}\end{pmatrix}=I\\
+                            &\Longleftrightarrow&GG^{\sf T}=I
+    \end{eqnarray*}
+    よって, 題意は示された.
+    \item 題意の4次正方行列を$A$とおき、$\mid A \mid$は行列$A$の行列式を表すとすると、
+    固有値$\lambda$は以下を満たす。
+    \begin{equation*}
+        \mid \lambda I - A \mid = 0
+    \end{equation*}
+    よって、この方程式を解くと以下のようになる。
+    \begin{align*}
+        \mid \lambda I - A \mid 
+        & = \left(\frac{1}{2}\right)^{4} \mid 2\lambda I - 2A \mid\\
+        & = \frac{1}{16}
+        \spaligndelims\vert\vert \spalignmat{
+            {2\lambda - 1} -1 -1 -1;
+            -1 {2\lambda - \imag} 1 {\imag};
+            -1 1 {2\lambda - 1} 1;
+            -1 {\imag} 1 {2\lambda - \imag}
+        }\\
+        & = \frac{1}{16}
+        \spaligndelims\vert\vert \spalignmat{
+            0 {(2\lambda - 1)(2\lambda - \imag) - 1} {2\lambda - 2} {\imag(2\lambda - 1) - 1};
+            -1 {2\lambda - \imag} 1 {\imag};
+            0 {1 + \imag - 2\lambda} {2\lambda - 2} {1 - \imag};
+            0 {2\imag - 2\lambda} 0 {2\lambda - 2\imag}
+        }\\
+        & = \frac{1}{16}\times (-1)^{2 + 1}\times (-1)
+        \spaligndelims\vert\vert \spalignmat{
+            {(2\lambda - 1)(2\lambda - \imag) - 1} {2\lambda - 2} {\imag(2\lambda - 1) - 1};
+            {1 + \imag - 2\lambda} {2\lambda - 2} {1 - \imag};
+            {2\imag - 2\lambda} 0 {2\lambda - 2\imag}
+        }\\
+        & = \frac{1}{16}
+        \spaligndelims\vert\vert \spalignmat{
+            {(2\lambda - 1)(2\lambda - \imag) - 1} {2\lambda - 2} {2\lambda(2\lambda - 1) - 2};
+            {1 + \imag - 2\lambda} {2\lambda - 2} {2 - 2\lambda};
+            {2\imag - 2\lambda} 0 0
+        }\\
+        & = \frac{1}{16}\times (-1)^{3 + 1} \times (2\imag - 2\lambda)
+        \spaligndelims\vert\vert \spalignmat{
+            {2\lambda - 2} {2\lambda(2\lambda - 1) - 2};
+            {2\lambda - 2} {2 - 2\lambda}
+        }\\
+        & = \frac{1}{16}(2\imag - 2\lambda)(2\lambda - 2)\left[2 - 2\lambda - \left\{2\lambda(2\lambda - 1) - 2\right\}\right]\\
+        & = \frac{1}{2}(\imag - \lambda)(\lambda - 1)(2 - \lambda - 2\lambda^2 + \lambda)\\
+        & = (\imag - \lambda)(\lambda - 1)(1 - \lambda^2)\\
+        & = (\lambda - \imag)(\lambda - 1)^2(\lambda + 1)\\
+        \therefore\, \lambda & = \pm 1, \imag
+    \end{align*}
+    よって、固有値は$\pm 1 \imag$である。\\[1cm]
+    (中田解)\\
+    この行列を$A$とし, この行列$A$に対する固有値を$\lambda$, 固有ベクトルを$\bm{x}$とおくと
+    \begin{eqnarray*}
+        A\bm{x} = \lambda\bm{x} &\Longleftrightarrow& (\lambda I -A)\bm{x} = \bm{0}\\
+                                &\Longleftrightarrow& {\rm det}|\lambda I-A|=0
+    \end{eqnarray*}
+    が成り立つ. ゆえに求める固有値$\lambda$は
+    \begin{eqnarray*}
+        && \mathrm{det}\left\lvert
+        \begin{pmatrix}
+            \lambda & 0 & 0 & 0\\
+            0 & \lambda & 0 & 0\\
+            0 & 0 & \lambda & 0\\
+            0 & 0 & 0 & \lambda 
+        \end{pmatrix}
+        -\frac{1}{2}
+        \begin{pmatrix}
+            1 & 1 & 1 & 1\\
+            1 & \imag & -1 & -\imag\\
+            1 & -1 & 1 & -1\\
+            1 & -\imag & -1 & \imag
+        \end{pmatrix}
+        \right\rvert = 0\\
+        \Longleftrightarrow\ && \mathrm{det}\left\lvert
+        \frac{1}{2}
+        \begin{pmatrix}
+            2\lambda - 1 & -1 & -1 & -1\\
+            -1 & 2\lambda - \imag & 1 & \imag\\
+            -1 & 1 & 2\lambda - 1 & 1\\
+            -1 & \imag & 1 & 2\lambda - \imag
+        \end{pmatrix}\right\rvert = 0\\
+        \Longleftrightarrow\ && 
+        \begin{vmatrix}
+            2\lambda - 1 & -1 & -1 & -1\\
+            -1 & 2\lambda - \imag & 1 & \imag\\
+            -1 & 1 & 2\lambda - 1 & 1\\
+            -1 & \imag & 1 & 2\lambda - \imag
+        \end{vmatrix} = 0\\
+        \Longleftrightarrow\ && 
+        \begin{vmatrix}
+            0 & -1 + (2\lambda - 1)(2\lambda - \imag) & 2\lambda - 2 & -1 + \imag(2\lambda - 1)\\
+            -1 & 2\lambda - \imag & 1 & \imag\\
+            0 & -2\lambda + \imag + 1 & 2\lambda - 2 & 1 - \imag\\
+            0 & -2\lambda + 2\imag & 0 & 2\lambda - 2\imag
+        \end{vmatrix} = 0\\
+        \Longleftrightarrow\ && 
+        \begin{vmatrix}
+            -1 + (2\lambda - 1)(2\lambda - \imag) & 2\lambda - 2 & -1 + \imag(2\lambda - 1)\\
+            -2\lambda + \imag + 1 & 2\lambda - 2 & 1 - \imag\\
+            -2\lambda + 2\imag & 0 & 2\lambda - 2\imag
+        \end{vmatrix} = 0\\
+        \Longleftrightarrow\ && 
+        \begin{vmatrix}
+            -1 + (2\lambda - 1)(2\lambda - \imag) & 2\lambda - 2 & -2 + 2\lambda(2\lambda - 1)\\
+            -2\lambda + \imag + 1 & 2\lambda - 2 & -2\lambda + 2\\
+            -2\lambda + 2\imag & 0 & 0
+        \end{vmatrix} = 0\\
+        \Longleftrightarrow\ && (-2\lambda + 2\imag)
+        \begin{vmatrix}
+            2\lambda - 2 & -2 + 2\lambda(2\lambda - 1)\\
+            2\lambda - 2& -2\lambda + 2
+        \end{vmatrix} = 0\\
+        \Longleftrightarrow\ && (\lambda - \imag)(\lambda - 1)
+        \begin{vmatrix}
+            1 & -2 + 2\lambda(2\lambda - 1)\\
+            1 & -2\lambda + 2
+        \end{vmatrix} = 0\\
+        \Longleftrightarrow\ && (\lambda - \imag)(\lambda - 1)\bigl\{-2\lambda + 2 + 2 - 2\lambda(2\lambda - 1)\bigr\} = 0\\
+        \Longleftrightarrow\ && (\lambda - \imag)(\lambda - 1)(-4\lambda^{2} + 4) = 0\\
+        \Longleftrightarrow\ && (\lambda - \imag)(\lambda - 1)(\lambda^{2} - 1) = 0\\
+        \Longleftrightarrow\ && (\lambda - \imag)(\lambda - 1)^{2}(\lambda + 1) = 0\\
+        \Longleftrightarrow\ && \lambda = \pm 1,\imag
+    \end{eqnarray*}
+    よって, 固有値は$\pm 1,\ \imag$である.\\
+    \underline{中田別方針}\\
+    問題の行列を$A$とすると
+    \begin{eqnarray*}
+        AA^{\ast}=I
+    \end{eqnarray*}
+    より,$A$はユニタリ行列である. この$A$の固有値を$\lambda$, 固有ベクトルを$\bm{x}$とすると
+    \begin{eqnarray*}
+        A\bm{x}=\lambda \bm{x}
+    \end{eqnarray*}
+    が成り立ち, 複素内積と随伴行列の間に
+    \begin{eqnarray*}
+        \langle \bm{x},A\bm{y}\rangle = \langle A^{\ast}\bm{x},\bm{y}\rangle
+    \end{eqnarray*}
+    の関係があることから
+    \begin{eqnarray*}
+        \langle A\bm{x},A\bm{x}\rangle &=& \langle A^{\ast}A\bm{x},\bm{x}\rangle\\
+                                       &=&\langle \bm{x},\bm{x}\rangle\\
+                                       &=&\|\bm{x}\|^{2}
+    \end{eqnarray*}
+    となり, $A\bm{x}$同士の内積は$\bm{x}$のノルムの2乗に等しくなる.\\
+    一方で, 複素内積の性質で
+    \begin{eqnarray*}
+        \langle \bm{x},\alpha \bm{y}\rangle &=& \alpha \langle \bm{x},\bm{y}\rangle \\
+        \langle \alpha \bm{x},\bm{y}\rangle &=& \alpha^{\ast}\langle \bm{x},\bm{y}\rangle
+    \end{eqnarray*}
+    となるので,
+    \begin{eqnarray*}
+        \langle A\bm{x},A\bm{x}\rangle &=& \langle \lambda \bm{x},\lambda \bm{x}\rangle \\
+                                       &=&\lambda^{\ast}\langle \bm{x},\lambda \bm{x}\rangle\\
+                                       &=& \lambda^{\ast}\lambda \langle \bm{x},\bm{x}\rangle\\
+                                       &=&|\lambda|^{2}\|\bm{x}\|^{2}
+    \end{eqnarray*}
+    したがって,
+    \begin{eqnarray*}
+      \|\bm{x}\|^{2} = |\lambda|^{2}\|\bm{x}\|^{2}
+    \end{eqnarray*}
+    ここで, $\bm{x}\neq \bm{0}$から$\|\bm{x}\|^{2}\neq 0$であるので,
+    \begin{eqnarray*}
+      |\lambda|^{2} = 1\Longleftrightarrow |\lambda| = 1
+    \end{eqnarray*}
+    となる. 4次のユニタリ行列であるので, $\lambda =\pm 1,\pm \imag$が候補に上がる. これから固有ベクトルを求めて一致するかどうかを確認する.
+    \item 題意より複素数$z$に対する共役な複素数を$\overline{z}$と表すとき、
+    $n$次正方行列$Q$の共役転置行列$Q^{\ast}$の$(j, k)$成分$q^{\ast}_{jk}$は以下のようになる。
+    \begin{align}
+        q^{\ast}_{jk} & = \overline{q_{kj}}\nonumber\\
+        & = \cfrac{1}{\sqrt{n}}\exp \left(\cfrac{-2\pi\imag (k - 1)(j - 1)}{n}\right)\label{eq:kyoyaku}
+    \end{align}
+    よって、式\eqref{eq:kyoyaku}から$QQ^{\ast}$の$(j, k)$成分$Q_{jk}$は以下のようになる。
+    \begin{align*}
+        Q_{jk} & = \sum_{l = 1}^{n} \left(q_{jl}\times q^{\ast}_{lk}\right)\\
+               & = \sum_{l = 1}^{n}
+               \left\{
+               \cfrac{1}{\sqrt{n}}\exp \left(\cfrac{2\pi\imag (j - 1)(l - 1)}{n}\right)
+               \times 
+               \cfrac{1}{\sqrt{n}}\exp \left(\cfrac{-2\pi\imag (k - 1)(l - 1)}{n}\right)
+               \right\}\\
+               & = \cfrac{1}{n} \sum_{l = 1}^{n}
+               \exp\left(\cfrac{2\pi\imag (j - 1)(l - 1)}{n} + \cfrac{-2\pi\imag (k - 1)(l - 1)}{n}\right)\\
+               & = \cfrac{1}{n} \sum_{l = 0}^{n - 1}
+               \exp\left(\cfrac{2\pi\imag (j - k)l}{n}\right)\\
+               & = 
+               \begin{cases}
+                \cfrac{1}{n}\sum\limits_{l = 0}^{n - 1}\exp(0) & j = k\\
+                &\\
+                \cfrac{1}{n}\cfrac{\exp\left(\cfrac{2\pi\imag (j - k)n}{n}\right) - \exp(0)}{\exp\left(\cfrac{2\pi\imag (j - k)}{n}\right) - 1}& j \neq k
+               \end{cases}\\
+        \mbox{オイラーの公式から}&j, k\mbox{は整数より}\\
+        Q_{jk} & = 
+        \begin{cases}
+            1 & j = k\\
+            \cfrac{1}{n}\cfrac{\cos\{2\pi(j - k)\} + \imag \sin\{2\pi(j - k)\} - 1}{\exp\left(\cfrac{2\pi\imag (j - k)}{n}\right) - 1} = 0 & j \neq k
+        \end{cases}
+    \end{align*}
+    従って、対角成分のみ1となり、他の成分は全て0となるので、$QQ^{\ast}$は単位行列となる。従って、$Q$はユニタリ行列であることが示された。
+    \item 題意の2次正方行列$H$についてユニタリ行列であることを示す。
+    \begin{align*}
+        HH^{\ast} & = 
+        \spalignmat{
+            {\exp(\imag \psi)\cos\theta} {\exp(\imag \psi)\sin\theta};
+            {-\exp(-\imag \psi)\sin\theta} {\exp(-\imag \psi)\cos\theta}
+        }
+        \spalignmat{
+            {\exp(-\imag \psi)\cos\theta} {-\exp(\imag \psi)\sin\theta};
+            {\exp(-\imag \psi)\sin\theta} {\exp(\imag \psi)\cos\theta}
+        }\\
+        & = 
+        \spalignmat{
+            {\exp(\imag \psi - \imag \psi)(\cos^{2}\theta + \sin^{2}\theta)} 
+            {\exp(2\imag \psi)(-\cos\theta\sin\theta + \sin\theta\cos\theta)};
+            {\exp(-2\imag \psi)(-\sin\theta\cos\theta + \cos\theta\sin\theta)} 
+            {\exp(-\imag \psi + \imag \psi)(\sin^{2}\theta + \cos^{2}\theta)}
+        }\\
+        & = 
+        \spalignmat{
+            {1} {0};
+            {0} {1}
+        }\\
+        & = I
+    \end{align*}
+    よって、行列$H$はユニタリ行列である。また、行列$H$の行列式は以下のようになる。
+    \begin{align*}
+        \mid H \mid & = \exp(\imag \psi)\cos\theta\times\exp(-\imag \psi)\cos\theta - 
+        (-\exp(-\imag \psi)\sin\theta)\times\exp(\imag \psi)\sin\theta\\
+        & = \cos^{2}\theta + \sin^{2}\theta = 1
+    \end{align*}
+    よって、この２次正方行列$H$は行列式が1でユニタリ行列であるので、行列式が1で2次のユニタリ行列の一形式となる
+    ことが示された。
+    \item 解けなかったので後述。
+\end{enumerate}

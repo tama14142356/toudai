@@ -1,0 +1,84 @@
+\renewcommand{\thesection}{自信のない解法or解けたとこまで}
+\renewcommand{\thesubsection}{第\arabic{subsection}問}
+\section{}
+\subsection{}
+\markboth{\thesubsection}{\thesection}
+\begin{itemize}
+    \item[(6)]解法その１\\
+    \setlength{\itemsep}{10pt} 
+    行列式が1で2次のユニタリ行列の一般形$P$は設問(5)より、以下のように表せる。
+    \begin{align*}
+        P = 
+        \spalignmat{
+            {p_{11}\exp(\imag \psi + \alpha_{11})\cos(\theta + \beta_{11})} {p_{12}\exp(\imag \psi + \alpha_{12})\sin(\theta + \beta_{12})};
+            {-p_{21}\exp(-\imag \psi + \alpha_{21})\sin(\theta + \beta_{12})} {p_{22}\exp(-\imag \psi + \alpha_{22})\cos(\theta + \beta_{22})}
+        }
+    \end{align*}
+    よって、この時以下が成り立つ。
+    \begin{align*}
+        &\mid P \mid = 1\\
+        &\Longleftrightarrow p_{11}\exp(\imag \psi + \alpha_{11})\cos(\theta + \beta_{11})\times p_{22}\exp(-\imag \psi + \alpha_{22})\cos(\theta + \beta_{22})\\
+        &-(-p_{21}\exp(-\imag \psi + \alpha_{21})\sin(\theta + \beta_{21}))\times p_{12}\exp(\imag \psi + \alpha_{12})\sin(\theta + \beta_{12}) = 1\\
+        &\Longleftrightarrow p_{11}p_{22}\exp(\alpha_{11} + \alpha_{22})\cos(\theta + \beta_{11})\cos(\theta + \beta_{22})\\
+        &+ p_{21}p_{12}\exp(\alpha_{21} + \alpha_{12})\sin(\theta + \beta_{21}))\sin(\theta + \beta_{12}) = 1
+    \end{align*}
+    \begin{align*}
+        PP^{\ast} = I
+    \end{align*}
+    以下挫折。。。
+    \item[(6)]　解法その２\\
+    行列$A$の$(j, k)$成分が$a_{jk}$の時、$A=\{ a_{jk}\}$と表すとき、行列式が1である2次ユニタリ行列
+    $A = \{ a_{jk}\} = \{ c_{jk} + \imag d_{jk}\}$を考えると以下の条件を行列$A$は満たす。
+    共役転置行列を$A^{\ast} = \{ a^{\ast}_{jk}\} = \{\overline{a_{kj}}\}$とし、それと行列$A$との積を
+    $AA^{\ast} = \{ A_{jk}\}$とおく。
+    \begin{align*}
+        & \begin{cases}
+            AA^{\ast} = I\\
+            \mid A\mid = 1
+        \end{cases}\\
+        \Longleftrightarrow & 
+        \begin{cases}
+            A_{jk} = \sum\limits_{l = 1}^{2} a_{jl}\overline{a_{kl}}
+            = 
+            \begin{cases}
+                0 & j = k\\
+                1 & j \neq k  
+            \end{cases}\\
+            a_{11}a_{22} - a_{12}a_{21} = 1
+        \end{cases}\\
+        \Longleftrightarrow & 
+        \begin{cases}
+            A_{11} = a_{11}\overline{a_{11}} + a_{12}\overline{a_{12}} = 1\\
+            A_{12} = a_{11}\overline{a_{21}} + a_{12}\overline{a_{22}} = 0\\
+            A_{21} = a_{21}\overline{a_{11}} + a_{22}\overline{a_{12}} = 0\\
+            A_{22} = a_{21}\overline{a_{21}} + a_{22}\overline{a_{22}} = 1\\
+            a_{11}a_{22} - a_{12}a_{21} = 1
+        \end{cases}\\
+        \Longleftrightarrow & 
+        \begin{cases}
+            A_{11} = c_{11}^{2} + d_{11}^{2} + c_{12}^{2} + d_{12}^{2} = 1\\
+            A_{12} = (c_{11} + \imag d_{11})(c_{21} - \imag d_{21}) + (c_{12} + \imag d_{12})(c_{22} - \imag d_{22}) = 0\\
+            A_{21} = (c_{21} + \imag d_{21})(c_{11} - \imag d_{11}) + (c_{22} + \imag d_{22})(c_{12} - \imag d_{12}) = 0\\
+            A_{22} = c_{21}^{2} + d_{21}^{2} + c_{22}^{2} + d_{22}^{2} = 1\\
+            (c_{11} + \imag d_{11})(c_{22} + \imag d_{22}) - (c_{12} + \imag d_{12})(c_{21} + \imag d_{21}) = 1
+        \end{cases}\\
+        \Longleftrightarrow & 
+        \begin{cases}
+            A_{11} = c_{11}^{2} + d_{11}^{2} + c_{12}^{2} + d_{12}^{2} = 1\\
+            A_{12} = (c_{11}c_{21} + d_{11}d_{21} + c_{12}c_{22} + d_{12}d_{22}) + \imag (d_{11}c_{21} -  c_{11}d_{21} + d_{12}c_{22} - c_{12}d_{22}) = 0\\
+            A_{21} = (c_{21}c_{11} + d_{21}d_{11} + c_{22}c_{12} + d_{22}d_{12}) + \imag(d_{21}c_{11} - c_{21}d_{11} + d_{22}c_{12} - c_{22}d_{12}) = 0\\
+            A_{22} = c_{21}^{2} + d_{21}^{2} + c_{22}^{2} + d_{22}^{2} = 1\\
+            (c_{11}c_{22} + d_{11}d_{22} - c_{12}c_{21} - d_{12}d_{21}) + \imag (d_{11}c_{22} + c_{11}d_{22} - d_{12}c_{21} - c_{12}d_{21}) = 1
+        \end{cases}
+    \end{align*}
+    よってここで、$\forall k \in \mathbb{Z}$についてオイラーの定理より以下が成り立つ。
+    \begin{align*}
+        \begin{cases}
+            \exp(2\pi\ell\imag) = 1 & \ell = k\\
+            \exp(\pi\ell\imag) = -1 & \ell = 2k + 1\\
+            \exp\left(\frac{\pi\ell}{2}\imag\right)  = \imag & \ell = 4k + 1\\
+            \exp\left(\frac{\pi\ell}{2}\imag\right)  = -\imag & \ell = 4k + 3\\
+        \end{cases}
+    \end{align*}
+    以下挫折。。。
+\end{itemize}
