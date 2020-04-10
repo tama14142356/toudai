@@ -1,0 +1,483 @@
+\subsection{問題文}
+3次元ベクトル$\spalignmat[c]{
+    {x_n};
+    {y_n};
+    {z_n}
+}$は式
+\begin{equation*}
+    \spalignmat[c]{
+        {x_{n + 1}};
+        {y_{n + 1}};
+        {z_{n + 1}}
+    }
+    = 
+    A \spalignmat[c]{
+        {x_n};
+        {y_n};
+        {z_n}
+    }\qquad (n \, = \, 0, 1, 2, \cdots)
+\end{equation*}
+を満たすものとする。但し、$x_0, y_0, z_0, \alpha$は実数とし、
+\begin{equation*}
+    A = \spalignmat[c]{
+        {1 - 2\alpha} {\alpha} {\alpha};
+        {\alpha} {1 - \alpha} {0};
+        {\alpha} {0} {1 - \alpha}
+    }, \qquad 0 < \alpha < \frac{1}{3}
+\end{equation*}
+とする。以下の問いに答えよ。
+\begin{enumerate}[(1)]
+  \item $x_n + y_n + z_n$を$x_0, y_0, z_0$を用いて表せ。
+  \item 行列$A$の固有値$\lambda_1, \lambda_2, \lambda_3$と、それぞれの固有値に対応する固有ベクトル
+        $\mathbold{v}_1, \mathbold{v}_2, \mathbold{v}_3$を求めよ。
+  \item 行列$A$を$\lambda_1, \lambda_2, \lambda_3, \mathbold{v}_1, \mathbold{v}_2, \mathbold{v}_3$を用いて表せ。
+  \item $\spalignmat[c]{
+    {x_n};
+    {y_n};
+    {z_n}
+  }$を$x_0, y_0, z_0, \alpha$を用いて表せ。
+  \item $\lim\limits_{n \to \infty} \spalignmat[c]{
+      {x_n};
+      {y_n};
+      {z_n}
+  }$を求めよ。
+  \item 以下の式
+  \begin{equation*}
+	  f(x_0, y_0, z_0)\, = \, \frac{
+		  (x_n\;y_n\; z_n)
+	  \spalignmat[c]{
+		  {x_{n + 1}};
+		  {y_{n + 1}};
+		  {z_{n + 1}}
+	  }}{(x_n\;y_n\; z_n)\spalignmat[c]{
+		  {x_n};
+		  {y_n};
+		  {z_n}
+	  }}
+  \end{equation*}
+  を$x_0, y_0, z_0$の関数とみなして、$f(x_0, y_0, z_0)$の最大値及び最小値を求めよ。但し、
+  $x_0^{2} + y_0^{2} + z_0^{2}\, \neq \, 0$
+\end{enumerate}
+\newpage
+\subsection{解答}
+\begin{enumerate}[(1)]
+	\item 題意より以下が成り立つ。
+		\begin{align*}
+			\spalignmat[c]{
+				{x_{n + 1}};
+				{y_{n + 1}};
+				{z_{n + 1}}
+			} 
+			& = A
+			\spalignmat[c]{
+				{x_n};
+				{y_n};
+				{z_n}
+			}\\
+			& = \spalignmat[c]{
+				{1 - 2\alpha} {\alpha} {\alpha};
+				{\alpha} {1 - \alpha} {0};
+				{\alpha} {0} {1 - \alpha}
+			}
+			\spalignmat[c]{
+				{x_n};
+				{y_n};
+				{z_n}
+			}\\
+			& = \spalignmat[c]{
+				{(1 - 2\alpha)x_n + \alpha y_n + \alpha z_n};
+				{\alpha x_n + (1 - \alpha)y_n};
+				{\alpha x_n + (1 - \alpha)z_n}
+			}\\
+			\therefore
+			x_{n + 1} + y_{n + 1} + z_{n + 1} 
+			&=  (1 - 2\alpha)x_n + \alpha y_n + \alpha z_n + \alpha x_n + (1 - \alpha)y_n + \alpha x_n + (1 - \alpha)z_n\\
+			&=  x_n + y_n + z_n\\
+			\therefore
+			x_n + y_n + z_n &= x_0 + y_0 + z_0
+		\end{align*}
+	\item まずAの固有値を求める。
+		\begin{align*}
+			\spaligndelims\vert\vert \spalignmat{{\lambda I - A}}
+			& = \spaligndelims\vert\vert \spalignmat{
+			{\lambda - 1 + 2\alpha} {-\alpha} {-\alpha};
+			{-\alpha} {\lambda - 1 + \alpha} {0};
+			{-\alpha} {0} {\lambda - 1 + \alpha};
+			}\\
+			& = \frac{1}{\alpha}\spaligndelims\vert\vert \spalignmat{
+			{(\lambda - 1 + 2\alpha)} {-\alpha} {-\alpha};
+			{-\alpha} {\lambda - 1 + \alpha} {0};
+			{-\alpha^{2} + (\lambda - 1 + 2\alpha)(\lambda - 1 + \alpha)} {-\alpha(\lambda - 1 + \alpha)} {0};
+			}\\
+			& = (-1)^{1 + 3}(-1)\spaligndelims\vert\vert \spalignmat{
+			{-\alpha} {\lambda - 1 + \alpha};
+			{-\alpha^{2} + (\lambda - 1 + 2\alpha)(\lambda - 1 + \alpha)} {-\alpha(\lambda - 1 + \alpha)};
+			}\\
+			& = -\left\{\alpha^{2}(\lambda - 1 + \alpha) - (\lambda - 1 + \alpha)(-\alpha^{2} + (\lambda - 1 + 2\alpha)(\lambda - 1 + \alpha))\right\} \\
+			& = -(\lambda - 1 + \alpha)\left\{\alpha^{2} - (-\alpha^{2} + (\lambda - 1 + 2\alpha)(\lambda - 1 + \alpha))\right\}                       \\
+			& = -(\lambda - 1 + \alpha)\left\{ 2\alpha^{2} - (\lambda - 1)^2 - 2\alpha^2 - 3\alpha(\lambda - 1))\right\}                               \\
+			& = (\lambda - 1 + \alpha)(\lambda - 1)(\lambda - 1 + 3\alpha)
+		\end{align*}
+		よって、$\lambda = \alpha - 1, 1, 1 - 3\alpha$より、$\lambda_1 = - 1 + \alpha, \lambda_2 = 1, \lambda_3 = 1 - 3\alpha$\\
+		従って固有空間$W(\lambda; A) = \{\mathbold{v} | \left(\lambda I - A\right)\mathbold{v} = \mathbold{0}\}$は以下のようになる。
+		\begin{align*}
+			W(\alpha - 1; A)  
+			% & = \left\{\mathbold{v} \left\lvert \spalignmat{
+			% {\alpha} {-\alpha} {-\alpha};
+			% {-\alpha} {0} {0};
+			% {-\alpha} {0} {0}
+			% }\mathbold{v} = \mathbold{0}\right. \right\}\\
+			% & = \left\{\mathbold{v} \left\lvert \spalignmat{
+			% {1} {0} {0};
+			% {0} {-1} {-1};
+			% {0} {0} {0}
+			% }\mathbold{v} = \mathbold{0}\right. \right\}\\
+			& = \left\{\mathbold{v} \left\lvert
+			\mathbold{v} =\spalignmat{
+			{0};
+			{s};
+			{-s}
+			} = s\spalignmat{
+			{0};
+			{1};
+			{-1}
+			}\right. \right\}
+			\mbox{よって、}\mathbold{v}_1 = s\spalignmat{
+			{0};
+			{1};
+			{-1}
+			}\\
+			W(1; A)
+			% & = \left\{\mathbold{v} \left\lvert \spalignmat{
+			% {2\alpha} {-\alpha} {-\alpha};
+			% {-\alpha} {\alpha} {0};
+			% {-\alpha} {0} {\alpha}
+			% }\mathbold{v} = \mathbold{0}\right. \right\}\\
+			% & = \left\{\mathbold{v} \left\lvert \spalignmat{
+			% {0} {0} {0};
+			% {-1} {1} {0};
+			% {-1} {0} {1}
+			% }\mathbold{v} = \mathbold{0}\right. \right\}\\
+			& = \left\{\mathbold{v} \left\lvert
+			\mathbold{v} =\spalignmat{
+			{s};
+			{s};
+			{s}
+			} = s\spalignmat{
+			{1};
+			{1};
+			{1}
+			}\right. \right\}
+			\mbox{よって、}\mathbold{v}_2 = t\spalignmat{
+			{1};
+			{1};
+			{1}
+			}\\
+			W(1 - 3\alpha; A)
+			% & = \left\{\mathbold{v} \left\lvert \spalignmat{
+			% {-\alpha} {-\alpha} {-\alpha};
+			% {-\alpha} {-2\alpha} {0};
+			% {-\alpha} {0} {-2\alpha}
+			% }\mathbold{v} = \mathbold{0}\right. \right\}\\
+			% & = \left\{\mathbold{v} \left\lvert \spalignmat{
+			% {1} {2} {0};
+			% {0} {1} {-1};
+			% {0} {0} {0}
+			% }\mathbold{v} = \mathbold{0}\right. \right\}\\
+			& = \left\{\mathbold{v} \left\lvert
+			\mathbold{v} =\spalignmat{
+			{-2s};
+			{s};
+			{s}
+			} = s\spalignmat{
+			{-2};
+			{1};
+			{1}
+			}\right. \right\}
+			\mbox{よって、}\mathbold{v}_3 = u\spalignmat{
+			{-2};
+			{1};
+			{1}
+			}
+		\end{align*}
+		よって、$\lambda_1 = -1 + \alpha, \lambda_2 = 1, \lambda_3 = 1 - 3\alpha, 
+		\mathbold{v}_1 = s\spalignmat[c]{
+			   {0};
+			   {1};
+			   {-1}
+		},
+		\mathbold{v}_2 = t\spalignmat[c]{
+			   {1};
+			   {1};
+			   {1}
+		},
+		\mathbold{v}_3 = u\spalignmat[c]{
+			   {-2};
+			   {1};
+			   {1}
+		}$\\
+		但し、$s, t, u$は0でない任意の実数とする。
+	\item  題意より、$A$は対称行列であるため、直交行列で対角化できる。また、異なる固有値の基底ベクトルは互いに直交する。
+		よって、以下は正規直交基底ベクトル集合$W$となる。
+		\begin{align*}
+			W = \left\{\cfrac{\mathbold{v}_1}{\left\lvert \mathbold{v}_1\right\rvert}, \, \cfrac{\mathbold{v}_2}{\left\lvert \mathbold{v}_2\right\rvert}, \, \cfrac{\mathbold{v}_3}{\left\lvert \mathbold{v}_3\right\rvert}\right\}
+		\end{align*}
+		よって、この集合の要素を並べたものは直交行列となり、その直交行列$P$を
+		$P = \left(\cfrac{\mathbold{v}_1}{\left\lvert\mathbold{v}_1 \right\rvert}\, \cfrac{\mathbold{v}_2}{\left\lvert\mathbold{v}_2 \right\rvert}\, \cfrac{\mathbold{v}_3}{\left\lvert\mathbold{v}_3 \right\rvert}\right)$とおくと、
+		$P$は直交行列より、$P^{-1} = P^{\top} =\spalignmat[c]{
+			{\cfrac{\mathbold{v}_1{}^{\top}}{\abs{\mathbold{v}_1}}};
+			{\cfrac{\mathbold{v}_2{}^{\top}}{\abs{\mathbold{v}_2}}};
+			{\cfrac{\mathbold{v}_3{}^{\top}}{\abs{\mathbold{v}_3}}}
+			}$となる。よって、以下が成り立つ。
+		\begin{align*}
+			% AP 
+			% & = P\spalignmat[c]{
+			% {\lambda_1} {0} {0};
+			% {0} {\lambda_2} {0};
+			% {0} {0} {\lambda_3}
+			% }\\
+			% \Leftrightarrow
+			A  & = P\spalignmat[c]{
+			{\lambda_1} {0} {0};
+			{0} {\lambda_2} {0};
+			{0} {0} {\lambda_3}
+			}P^{-1}\\
+			\Leftrightarrow
+			A  & = P\spalignmat[c]{
+			{\lambda_1} {0} {0};
+			{0} {\lambda_2} {0};
+			{0} {0} {\lambda_3}
+			}P^{\top}\\
+			& = \left(\cfrac{\mathbold{v}_1}{\abs{\mathbold{v}_1}}\, \cfrac{\mathbold{v}_2}{\abs{\mathbold{v}_2}}\, \cfrac{\mathbold{v}_3}{\abs{\mathbold{v}_3}}\right)
+			\spalignmat[c]{
+			{\lambda_1} {0} {0};
+			{0} {\lambda_2} {0};
+			{0} {0} {\lambda_3}
+			}\spalignmat[c]{
+			{\cfrac{\mathbold{v}_1{}^{\top}}{\abs{\mathbold{v}_1}}};
+			{\cfrac{\mathbold{v}_2{}^{\top}}{\abs{\mathbold{v}_2}}};
+			{\cfrac{\mathbold{v}_3{}^{\top}}{\abs{\mathbold{v}_3}}}
+			}\\
+			& = \left(
+				\lambda_1\cfrac{\mathbold{v}_1}{\abs{\mathbold{v}_1}}\;
+				\lambda_2\cfrac{\mathbold{v}_2}{\abs{\mathbold{v}_2}}\;
+				\lambda_3\cfrac{\mathbold{v}_3}{\abs{\mathbold{v}_3}}
+			\right)
+			\spalignmat[c]{
+			{\cfrac{\mathbold{v}_1{}^{\top}}{\abs{\mathbold{v}_1}}};
+			{\cfrac{\mathbold{v}_2{}^{\top}}{\abs{\mathbold{v}_2}}};
+			{\cfrac{\mathbold{v}_3{}^{\top}}{\abs{\mathbold{v}_3}}}
+			}\\
+			% & = \spalignmat[c]{
+			% 	{0} {\lambda_2} {-2\lambda_3};
+			% 	{\lambda_1} {\lambda_2} {\lambda_3};
+			% 	{-\lambda_1} {\lambda_2} {\lambda_3}
+			% }\spalignmat[c]{
+			% 	{0} {1} {-1};
+			% 	{1} {1} {1};
+			% 	{-2} {1} {1}
+			% }\\
+			% & = \spalignmat[c]{
+			% 	{\lambda_2 + 4\lambda_3} {\lambda_2 - 2\lambda_3} {\lambda_2 - 2\lambda_3};
+			% 	{\lambda_2 - 2\lambda_3} {\lambda_1 + \lambda_2 + \lambda_3} {-\lambda_1 + \lambda_2 + \lambda_3};
+			% 	{\lambda_2 - 2\lambda_3} {-\lambda_1 + \lambda_2 + \lambda_3} {\lambda_1 + \lambda_2 + \lambda_3};
+			% }\\
+			% & = \left(
+			% 		0\cdot\lambda_1\cfrac{\mathbold{v}_1}{\abs{\mathbold{v}_1}} 
+			% 		\, + 1\cdot\lambda_2\cfrac{\mathbold{v}_2}{\abs{\mathbold{v}_2}}
+			% 		\, - 2\cdot\lambda_3\cfrac{\mathbold{v}_3}{\abs{\mathbold{v}_3}}
+			% 	\;
+			% 		1\cdot\lambda_1\cfrac{\mathbold{v}_1}{\abs{\mathbold{v}_1}} 
+			% 		\,+ 1\cdot\lambda_2\cfrac{\mathbold{v}_2}{\abs{\mathbold{v}_2}}
+			% 		\,+ 1\cdot\lambda_3\cfrac{\mathbold{v}_3}{\abs{\mathbold{v}_3}}
+			% \right.\\
+			% &\qquad\left.
+			% 		-1\cdot\lambda_1\cfrac{\mathbold{v}_1}{\abs{\mathbold{v}_1}} 
+			% 		\, + 1\cdot\lambda_2\cfrac{\mathbold{v}_2}{\abs{\mathbold{v}_2}}
+			% 		\, + 1\cdot\lambda_3\cfrac{\mathbold{v}_3}{\abs{\mathbold{v}_3}}
+			% \right)\\
+			& = \spalignmat[c]{
+				{
+					\cfrac{\lambda_2}{\sqrt{3}}\cfrac{\mathbold{v}_2}{\abs{\mathbold{v}_2}}
+					\, - \cfrac{2\lambda_3}{\sqrt{6}}\cfrac{\mathbold{v}_3}{\abs{\mathbold{v}_3}}
+				}
+				{
+					\cfrac{\lambda_1}{\sqrt{2}}\cfrac{\mathbold{v}_1}{\abs{\mathbold{v}_1}} 
+					\,+ \cfrac{\lambda_2}{\sqrt{3}}\cfrac{\mathbold{v}_2}{\abs{\mathbold{v}_2}}
+					\,+ \cfrac{\lambda_3}{\sqrt{6}}\cfrac{\mathbold{v}_3}{\abs{\mathbold{v}_3}}
+				}
+				{
+					-\cfrac{\lambda_1}{\sqrt{2}}\cfrac{\mathbold{v}_1}{\abs{\mathbold{v}_1}} 
+					\, + \cfrac{\lambda_2}{\sqrt{3}}\cfrac{\mathbold{v}_2}{\abs{\mathbold{v}_2}}
+					\, + \cfrac{\lambda_3}{\sqrt{6}}\cfrac{\mathbold{v}_3}{\abs{\mathbold{v}_3}}
+				}
+			}
+		\end{align*}
+	\item 題意より、以下が成り立つ。
+		\begin{align}
+			\spalignmat[c]{
+				{x_n};
+				{y_n};
+				{z_n}
+			} = A^{n} \spalignmat[c]{
+				{x_0};
+				{y_0};
+				{z_0}
+			}\label{prom1:subprom4:eq1}
+		\end{align}
+		但し、$A^{n}$は$A$を$A$に対して右から$n$回かけたことを意味する。また、以下も同様の意味を表す。\\
+		ここで、(3)より、以下が成り立つ。
+		\begin{align*}
+			P^{\top}AP 
+			& = \spalignmat[c]{
+				{\lambda_1} {0} {0};
+				{0}	{\lambda_2} {0};
+				{0} {0} {\lambda_3}
+			}\\
+			\Longleftrightarrow 
+			(P^{\top}AP)^{n} 
+			& = \spalignmat[c]{
+				{\lambda_1} {0} {0};
+				{0}	{\lambda_2} {0};
+				{0} {0} {\lambda_3}
+			}^{n}\\
+			\Longleftrightarrow 
+			P^{\top}A^{n}P 
+			& = \spalignmat[c]{
+				{\lambda_1{}^{n}} {0} {0};
+				{0}	{\lambda_2{}^{n}} {0};
+				{0} {0} {\lambda_3{}^{n}}
+			}\\
+			\Longleftrightarrow 
+			A^{n} 
+			& = P\spalignmat[c]{
+				{\lambda_1{}^{n}} {0} {0};
+				{0}	{\lambda_2{}^{n}} {0};
+				{0} {0} {\lambda_3{}^{n}}
+			}P^{\top}
+		\end{align*}
+		\begin{align*}
+			\therefore 
+			A^{n}
+			&= \spalignmat[c]{
+				{
+					\cfrac{\lambda_2{}^{n}}{\sqrt{3}}\cfrac{\mathbold{v}_2}{\abs{\mathbold{v}_2}}
+					\, - \cfrac{2\lambda_3{}^{n}}{\sqrt{6}}\cfrac{\mathbold{v}_3}{\abs{\mathbold{v}_3}}
+				}
+				{
+					\cfrac{\lambda_1{}^{n}}{\sqrt{2}}\cfrac{\mathbold{v}_1}{\abs{\mathbold{v}_1}} 
+					\,+ \cfrac{\lambda_2{}^{n}}{\sqrt{3}}\cfrac{\mathbold{v}_2}{\abs{\mathbold{v}_2}}
+					\,+ \cfrac{\lambda_3{}^{n}}{\sqrt{6}}\cfrac{\mathbold{v}_3}{\abs{\mathbold{v}_3}}
+				}
+				{
+					-\cfrac{\lambda_1{}^{n}}{\sqrt{2}}\cfrac{\mathbold{v}_1}{\abs{\mathbold{v}_1}} 
+					\, + \cfrac{\lambda_2{}^{n}}{\sqrt{3}}\cfrac{\mathbold{v}_2}{\abs{\mathbold{v}_2}}
+					\, + \cfrac{\lambda_3{}^{n}}{\sqrt{6}}\cfrac{\mathbold{v}_3}{\abs{\mathbold{v}_3}}
+				}
+			}
+		\end{align*}
+		ここで
+		$\mathbold{u}_{1_{n}} =  
+		\cfrac{\lambda_2{}^{n}}{\sqrt{3}}\cfrac{\mathbold{v}_2}{\abs{\mathbold{v}_2}}
+		\, - \cfrac{2\lambda_3{}^{n}}{\sqrt{6}}\cfrac{\mathbold{v}_3}{\abs{\mathbold{v}_3}}$,
+		$\mathbold{u}_{2_{n}} = 
+		\cfrac{\lambda_1{}^{n}}{\sqrt{2}}\cfrac{\mathbold{v}_1}{\abs{\mathbold{v}_1}} 
+					\,+ \cfrac{\lambda_2{}^{n}}{\sqrt{3}}\cfrac{\mathbold{v}_2}{\abs{\mathbold{v}_2}}
+					\,+ \cfrac{\lambda_3{}^{n}}{\sqrt{6}}\cfrac{\mathbold{v}_3}{\abs{\mathbold{v}_3}}$,
+		$\mathbold{u}_{3_{n}} = 
+		-\cfrac{\lambda_1{}^{n}}{\sqrt{2}}\cfrac{\mathbold{v}_1}{\abs{\mathbold{v}_1}} 
+					\, + \cfrac{\lambda_2{}^{n}}{\sqrt{3}}\cfrac{\mathbold{v}_2}{\abs{\mathbold{v}_2}}
+					\, + \cfrac{\lambda_3{}^{n}}{\sqrt{6}}\cfrac{\mathbold{v}_3}{\abs{\mathbold{v}_3}}$と置くと、以下のようになる。
+		\begin{align}
+			A^{n} = \spalignmat[c]{
+				{\mathbold{u}_{1_n}} {\mathbold{u}_{2_n}} {\mathbold{u}_{3_n}}
+			}
+			\label{prom1:subprom4:eq2}
+		\end{align}
+		よって、式\eqref{prom1:subprom4:eq1}, \eqref{prom1:subprom4:eq2}より、題意は以下のようになる。
+		\begin{align*}
+			\spalignmat[c]{
+				{x_n};
+				{y_n};
+				{z_n}
+			}
+			& = \spalignmat[c]{
+				{\mathbold{u}_{1_n}} {\mathbold{u}_{2_n}} {\mathbold{u}_{3_n}}
+			}
+			\spalignmat[c]{
+				{x_0};
+				{y_0};
+				{z_0}
+			}\\
+			&= x_0\mathbold{u}_{1_n} + y_0\mathbold{u}_{2_n} + z_0\mathbold{u}_{3_n}\\
+			&= x_0\left(\cfrac{\lambda_2{}^{n}}{\sqrt{3}}\cfrac{\mathbold{v}_2}{\abs{\mathbold{v}_2}}
+			\, - \cfrac{2\lambda_3{}^{n}}{\sqrt{6}}\cfrac{\mathbold{v}_3}{\abs{\mathbold{v}_3}}\right)
+			\; + y_0\left(\cfrac{\lambda_1{}^{n}}{\sqrt{2}}\cfrac{\mathbold{v}_1}{\abs{\mathbold{v}_1}} 
+			\,+ \cfrac{\lambda_2{}^{n}}{\sqrt{3}}\cfrac{\mathbold{v}_2}{\abs{\mathbold{v}_2}}
+			\,+ \cfrac{\lambda_3{}^{n}}{\sqrt{6}}\cfrac{\mathbold{v}_3}{\abs{\mathbold{v}_3}}\right) 
+			\\ & + z_0\left(-\cfrac{\lambda_1{}^{n}}{\sqrt{2}}\cfrac{\mathbold{v}_1}{\abs{\mathbold{v}_1}} 
+			\, + \cfrac{\lambda_2{}^{n}}{\sqrt{3}}\cfrac{\mathbold{v}_2}{\abs{\mathbold{v}_2}}
+			\, + \cfrac{\lambda_3{}^{n}}{\sqrt{6}}\cfrac{\mathbold{v}_3}{\abs{\mathbold{v}_3}}\right)\\
+			&= \cfrac{\lambda_1{}^{n}}{\sqrt{2}}(y_0 - z_0)\cfrac{\mathbold{v}_1}{\abs{\mathbold{v}_1}} 
+			+ \cfrac{\lambda_2{}^{n}}{\sqrt{3}}(x_0 + y_0 + z_0)\cfrac{\mathbold{v}_2}{\abs{\mathbold{v}_2}}
+			+ \cfrac{\lambda_3{}^{n}}{\sqrt{6}}(-2x_0 + y_0 + z_0)\cfrac{\mathbold{v}_3}{\abs{\mathbold{v}_3}}\\
+			&= \cfrac{\lambda_1{}^{n}}{\sqrt{2}}(y_0 - z_0)\spalignmat[c]{
+				{0};
+				{\frac{1}{\sqrt{2}}};
+				{-\frac{1}{\sqrt{2}}}
+			}
+			+ \cfrac{\lambda_2{}^{n}}{\sqrt{3}}(x_0 + y_0 + z_0)\spalignmat[c]{
+				{\frac{1}{\sqrt{3}}};
+				{\frac{1}{\sqrt{3}}};
+				{\frac{1}{\sqrt{3}}}
+			}
+			+ \cfrac{\lambda_3{}^{n}}{\sqrt{6}}(-2x_0 + y_0 + z_0)\spalignmat[c]{
+				{-\frac{2}{\sqrt{6}}};
+				{\frac{1}{\sqrt{6}}};
+				{\frac{1}{\sqrt{6}}}
+			}\\
+			&= \spalignmat[c]{
+				{\frac{\lambda_2{}^{n}(x_0 + y_0 + z_0)}{3} - \frac{2\lambda_3{}^{n}(-2x_0 + y_0 + z_0)}{6}};
+				{\frac{\lambda_1{}^{n}(y_0 - z_0)}{2} + \frac{\lambda_2{}^{n}(x_0 + y_0 + z_0)}{3} + \frac{\lambda_3{}^{n}(-2x_0 + y_0 + z_0)}{6}};
+				{-\frac{\lambda_1{}^{n}(y_0 - z_0)}{2} + \frac{\lambda_2{}^{n}(x_0 + y_0 + z_0)}{3} + \frac{\lambda_3{}^{n}(-2x_0 + y_0 + z_0)}{6}}
+			}\\
+			&= \frac{1}{6}\spalignmat[c]{
+				{2x_0\left\{1 + 2(1 - 3\alpha)^{n}\right\} + 2y_0\left\{1 - (1 - 3\alpha)^{n}\right\} + 2z_0\left\{1 - (1 - 3\alpha)^{n}\right\}};
+				{2x_0\left\{1 - (1 - 3\alpha)^{n}\right\} + y_0\left\{3(-1 + \alpha)^{n} + 2 + (1 - 3\alpha)^{n}\right\} + z_0\left\{- 3(-1 + \alpha)^{n} + 2 + (1 - 3\alpha)^{n}\right\}};
+				{2x_0\left\{1 - (1 - 3\alpha)^{n}\right\} + y_0\left\{-3(-1 + \alpha)^{n} + 2 + (1 - 3\alpha)^{n}\right\} + z_0\left\{3(-1 + \alpha)^{n} + 2 + (1 - 3\alpha)^{n}\right\}}
+			}
+		\end{align*}
+		\item (4)より、題意は以下のようになる。
+			\begin{align*}
+				&\lim_{n \to \infty} \spalignmat[c]{
+					{x_n};
+					{y_n};
+					{z_n}
+				}\\
+				&= \lim_{n \to \infty} \frac{1}{6}\spalignmat[c]{
+					{2x_0\left\{1 + 2(1 - 3\alpha)^{n}\right\} + 2y_0\left\{1 - (1 - 3\alpha)^{n}\right\} + 2z_0\left\{1 - (1 - 3\alpha)^{n}\right\}};
+					{2x_0\left\{1 - (1 - 3\alpha)^{n}\right\} + y_0\left\{3(-1 + \alpha)^{n} + 2 + (1 - 3\alpha)^{n}\right\} + z_0\left\{- 3(-1 + \alpha)^{n} + 2 + (1 - 3\alpha)^{n}\right\}};
+					{2x_0\left\{1 - (1 - 3\alpha)^{n}\right\} + y_0\left\{-3(-1 + \alpha)^{n} + 2 + (1 - 3\alpha)^{n}\right\} + z_0\left\{3(-1 + \alpha)^{n} + 2 + (1 - 3\alpha)^{n}\right\}}
+				}
+			\end{align*}
+			ここで、題意より$0 < \alpha < \frac{1}{3}$より、$-1 < -1 + \alpha < -\frac{2}{3}$, $0 < 1 - 3\alpha < 1$である。
+			よって、
+			\begin{align*}
+				\lim_{n \to \infty} \spalignmat[c]{
+					{x_n};
+					{y_n};
+					{z_n}
+				} &= \frac{1}{6}\spalignmat[c]{
+					{2x_0 + 2y_0 + 2z_0};
+					{2x_0 + 2y_0 + 2z_0};
+					{2x_0 + 2y_0 + 2z_0}
+				}\\
+				&= \frac{1}{3}\spalignmat[c]{
+					{x_0 + y_0 + z_0};
+					{x_0 + y_0 + z_0};
+					{x_0 + y_0 + z_0}
+				}
+			\end{align*}
+			となる。
+		\item 
+\end{enumerate}

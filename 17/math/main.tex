@@ -1,0 +1,92 @@
+% \documentclass[dvipdfmx, a4paper, 11pt]{jsarticle}%A４用紙縦、明朝（デフォルト）１１ポイント
+\documentclass[dvipdfmx,titlepage, 11pt, a4paper]{jsarticle}%A４用紙縦、明朝（デフォルト）１１ポイント
+\usepackage[top=18truemm,bottom=18truemm,left=18truemm,right=18truemm]{geometry}%余白調整
+% \setlength{\textheight}{45\baselineskip}
+% \setlength{\textwidth}{46zw}% ４６文字/行
+
+\usepackage{template}
+
+%%%====================================================================================================================================
+\renewcommand{\thesection}{第\arabic{section}問}
+\renewcommand{\thesubsection}{\thesection}
+\titleformat*{\section}{\LARGE\mcfamily}%章のタイトルの文字の大きさを通常サイズに設定（明朝体で）
+\titlespacing*{\section}{0pt}{*0}{0pt}%章番号の後の空白行の削除
+\titleformat*{\subsection}{\Large\mcfamily}%節のタイトルの文字の大きさを通常サイズに設定（明朝体で）
+\titlespacing*{\subsection}{0pt}{*0}{0pt}%節番号の後の空白行の削除
+\titleformat*{\subsubsection}{\large\mcfamily}%小節のタイトルの文字の大きさを通常サイズに設定（明朝体で）
+\titlespacing*{\subsubsection}{0pt}{*0}{0pt}%小節番号の後の空白行の削除
+
+\makeatletter
+%章番号付きコード番号
+\AtBeginDocument{
+  \renewcommand*{\thelstlisting}{\arabic{section}.\arabic{lstlisting}}%
+  \@addtoreset{lstlisting}{section}
+}
+
+%章番号付き表番号
+\renewcommand{\thetable}{%
+    \arabic{section}.\arabic{table}%
+}
+\@addtoreset{table}{section}%
+
+%章番号付き図番号
+\renewcommand{\thefigure}{%
+	\arabic{section}.\arabic{figure}%
+}%
+\@addtoreset{figure}{section}%
+
+%章番号付き式番号
+\renewcommand{\theequation}{%
+	\arabic{section}.\arabic{equation}%
+}%
+\@addtoreset{equation}{section}%
+
+\renewcommand{\p@enumiii}{}% 箇条書きの参照時の番号の変更(2(親の番号)a(子の番号)→aだけに)
+\renewcommand{\p@enumii}{}% 箇条書きの参照時の番号の変更(2a→aだけに)
+\makeatother
+%%%====================================================================================================================================
+
+%%%====================================================================================================================================
+%%ページのレイアウト設定
+\pagestyle{fancy}
+\renewcommand{\sectionmark}[1]{\markboth{}{\thesection\ #1}}%                   %\rightmarkにセクション名を格納
+\renewcommand{\subsectionmark}[1]{\markboth{#1}{\rightmark}}%   %\leftmarkにサブセクション名を格納
+%[]は省略可で省略すると{}で指定された内容が偶数ページ奇数のどちらにも適用される。
+% \renewcommand{\headrulewidth}{0pt} %ヘッダの罫線を消す 
+\fancyfoot{}%                        %clear all footer fields
+\lhead{\leftmark}%                   %左側ヘッダの定義[<偶数ページ>]{<奇数ページ>}
+\chead{}%                            %中央ヘッダの定義[<偶数ページ>]{<奇数ページ>}
+\rhead{\rightmark}%                  %右側ヘッダの定義[<偶数ページ>]{<奇数ページ>}
+\lfoot{東大2017年度数学解答例}%       %左側フッターの定義[<偶数ページ>]{<奇数ページ>}
+\cfoot{\thepage}%                    %中央フッターの定義[<偶数ページ>]{<奇数ページ>}
+\rfoot{文殊の知恵}%                  %右側フッターの定義[<偶数ページ>]{<奇数ページ>}
+\renewcommand{\headrulewidth}{0.1pt}%%ヘッダの線の太さ 
+\renewcommand{\footrulewidth}{0.1pt}%%フッターの線の太さ
+%%%====================================================================================================================================
+
+\makeindex%索引用
+
+\renewcommand{\refname}{}%参考文献の文字を非表示にする
+\title{\Huge 東大2017年度数学解答例\\[10mm]}
+\author{{\LARGE 文殊の知恵}\\[1mm]\LARGE 高橋那弥}
+\date{}
+
+\begin{document}
+\maketitle
+\tableofcontents % 目次
+\pagenumbering{roman}%目次のページ番号のスタイルをローマ数字にする
+\newpage
+\setcounter{tocdepth}{3}%章節の深さを3にするsubsubsectionまで
+\pagenumbering{arabic}%他のページ番号は通常の数字にする。
+\section{}%第1問
+\input{problem1.tex}
+\newpage
+\section{}%第2問
+\input{problem2.tex}
+\newpage
+\section{}%第3問
+\input{problem3.tex}
+% \newpage
+\index{ティック@tikz}
+% \printindex
+\end{document}

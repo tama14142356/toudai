@@ -1,0 +1,736 @@
+% \documentclass[dvipdfmx, a4paper, 11pt]{jsarticle}%A４用紙縦、明朝（デフォルト）１１ポイント
+\documentclass[dvipdfmx,titlepage, 11pt, a4paper]{jsarticle}%A４用紙縦、明朝（デフォルト）１１ポイント
+\usepackage[top=18truemm,bottom=18truemm,left=18truemm,right=18truemm]{geometry}%余白調整
+% \setlength{\textheight}{45\baselineskip}
+% \setlength{\textwidth}{46zw}% ４６文字/行
+
+\usepackage{template}
+%%%====================================================================================================================================
+\renewcommand{\thesection}{第\arabic{section}問}
+\renewcommand{\thesubsection}{\thesection}
+\titleformat*{\section}{\LARGE\mcfamily}%章のタイトルの文字の大きさを通常サイズに設定（明朝体で）
+\titlespacing*{\section}{0pt}{*0}{0pt}%章番号の後の空白行の削除
+\titleformat*{\subsection}{\Large\mcfamily}%節のタイトルの文字の大きさを通常サイズに設定（明朝体で）
+\titlespacing*{\subsection}{0pt}{*0}{0pt}%節番号の後の空白行の削除
+\titleformat*{\subsubsection}{\large\mcfamily}%小節のタイトルの文字の大きさを通常サイズに設定（明朝体で）
+\titlespacing*{\subsubsection}{0pt}{*0}{0pt}%小節番号の後の空白行の削除
+
+\makeatletter
+%章番号付きコード番号
+\AtBeginDocument{
+  \renewcommand*{\thelstlisting}{\arabic{section}.\arabic{lstlisting}}%
+  \@addtoreset{lstlisting}{section}
+}
+
+%章番号付き表番号
+\renewcommand{\thetable}{%
+    \arabic{section}.\arabic{table}%
+}
+\@addtoreset{table}{section}%
+
+%章番号付き図番号
+\renewcommand{\thefigure}{%
+	\arabic{section}.\arabic{figure}%
+}%
+\@addtoreset{figure}{section}%
+
+%章番号付き式番号
+\renewcommand{\theequation}{%
+	\arabic{section}.\arabic{equation}%
+}%
+\@addtoreset{equation}{section}%
+
+\renewcommand{\p@enumiii}{}% 箇条書きの参照時の番号の変更(2(親の番号)a(子の番号)→aだけに)
+\renewcommand{\p@enumii}{}% 箇条書きの参照時の番号の変更(2a→aだけに)
+\makeatother
+%%%====================================================================================================================================
+
+%%%====================================================================================================================================
+%%ページのレイアウト設定
+\pagestyle{fancy}
+\renewcommand{\sectionmark}[1]{\markboth{}{\thesection\ #1}}%                   %\rightmarkにセクション名を格納
+\renewcommand{\subsectionmark}[1]{\markboth{#1}{\rightmark}}%   %\leftmarkにサブセクション名を格納
+%[]は省略可で省略すると{}で指定された内容が偶数ページ奇数のどちらにも適用される。
+% \renewcommand{\headrulewidth}{0pt} %ヘッダの罫線を消す 
+\fancyfoot{}%                        %clear all footer fields
+\lhead{\leftmark}%                   %左側ヘッダの定義[<偶数ページ>]{<奇数ページ>}
+\chead{}%                            %中央ヘッダの定義[<偶数ページ>]{<奇数ページ>}
+\rhead{\rightmark}%                  %右側ヘッダの定義[<偶数ページ>]{<奇数ページ>}
+\lfoot{東大2019年度創造情報学専門解答例}%       %左側フッターの定義[<偶数ページ>]{<奇数ページ>}
+\cfoot{\thepage}%                    %中央フッターの定義[<偶数ページ>]{<奇数ページ>}
+\rfoot{文殊の知恵}%                  %右側フッターの定義[<偶数ページ>]{<奇数ページ>}
+\renewcommand{\headrulewidth}{0.1pt}%%ヘッダの線の太さ 
+\renewcommand{\footrulewidth}{0.1pt}%%フッターの線の太さ
+%%%====================================================================================================================================
+
+\makeindex%索引用
+
+\renewcommand{\refname}{}%参考文献の文字を非表示にする
+\title{\Huge 東大2019年度創造情報学専門解答例\\[10mm]}
+\author{{\LARGE 文殊の知恵}\\[1mm]\LARGE 高橋那弥}
+\date{}
+
+\begin{document}
+\maketitle
+\tableofcontents % 目次
+\pagenumbering{roman}%目次のページ番号のスタイルをローマ数字にする
+\newpage
+\setcounter{tocdepth}{3}%章節の深さを3にするsubsubsectionまで
+\pagenumbering{arabic}%他のページ番号は通常の数字にする。
+\section{}%第１問
+\subsection{問題文}
+\begin{wrapfigure}{r}[0pt]{0.2\linewidth}
+    \centering
+    \begin{tikzpicture}[>=stealth]
+        %%%========================================================================================================================================
+        %%グレースケール画像説明図
+        \newcount\x
+        \x = 0
+        \coordinate (O) at (0, 0);
+        \foreach \s in {0, 1, 2, 3}{%
+            \advance\x\s
+            \foreach \t in {0, 1, 2, 3}{%
+                \advance\x\t
+                \multiply\x10
+                \draw [fill = black!\the\x] ($(O) + (3 * \t / 5, -3 * \s / 5)$) circle [radius = 2mm] {};
+                \ifnum \t < 3{%
+                    \draw ($(O) + (3 * \t / 5, -3 * \s / 5) + (2mm, 0mm)$) -- ++(0:0.6);
+                    \ifnum \s < 3{%
+                        \draw ($(O) + (3 * \t / 5, -3 * \s / 5) + ({sqrt(2) / 10}, -{sqrt(2) / 10})$) -- ++(-45:{sqrt(0.6)});
+                    }\fi%
+                }\fi%
+                \ifnum \t > 0{%
+                    \ifnum \s < 3{%
+                        \draw ($(O) + (3 * \t / 5, -3 * \s / 5) + (-{sqrt(2) / 10}, -{sqrt(2) / 10})$) -- ++(-135:{sqrt(0.6)});
+                    }\fi%
+                }\fi%
+                \ifnum \s < 3{%
+                    \draw ($(O) + (3 * \t / 5, -3 * \s / 5) + (0mm, -2mm)$) -- ++(-90:0.6);
+                }\fi%
+            }
+        }
+        %%%========================================================================================================================================
+        %%明るい部分が存在する画像
+        \coordinate (A1) at ($(O) + (0, -5)$);
+        \draw [fill = black] (A1) rectangle ($(O) + (2, -3)$);
+        \draw [fill = black!20] ($(O) + (0.8, -3.5)$) circle [x radius = 2.5mm, y radius = 3mm, rotate = -30];
+        \draw [fill = white] ($(O) + (0.8, -3.5)$) circle [x radius = 2mm, y radius = 2.5mm, rotate = -30];
+        \draw [fill = black!20] ($(O) + (1.6, -4)$) circle [x radius = 2.5mm, y radius = 3mm, rotate = 60];
+        \draw [fill = white] ($(O) + (1.6, -4)$) circle [x radius = 2mm, y radius = 2.5mm, rotate = 60];
+        \draw [fill = black!20] ($(O) + (0.6, -4.4)$) circle [x radius = 4.5mm, y radius = 5mm, rotate = 60];
+        \draw [fill = white] ($(O) + (0.6, -4.4)$) circle [x radius = 4mm, y radius = 4.5mm, rotate = 60];
+        %%%========================================================================================================================================
+        %%黒い曲線
+        \coordinate (A2) at ($(A1) + (0, -4)$);
+        \draw (A2) rectangle ($(A2) + (2, 2)$);
+        \draw [decorate, decoration = {ticks, transform = {rotate = 30}, segment length = 0.8mm}, black!80] ($(A2) + (0.3, 1.8)$) cos ($(A2) + (1, 1)$);
+        \draw [decorate, decoration = {ticks, segment length = 0.8mm, amplitude = 1.5mm}, black!80] ($(A2) + (0.3, 1.8)$) cos ($(A2) + (1, 1)$);
+        \draw [decorate, decoration = {ticks, transform = {rotate = 30}, segment length = 0.8mm}, black!80] ($(A2) + (1, 1.1)$) sin ($(A2) + (1.8, 0.4)$);
+        \draw [decorate, decoration = {ticks, segment length = 0.8mm}, black!80] ($(A2) + (1, 1)$) sin ($(A2) + (1.8, 0.3)$);
+        \draw [very thick] ($(A2) + (0.3, 1.8)$) cos ($(A2) + (1, 1)$) sin ($(A2) + (1.8, 0.3)$);
+        % \draw [very thick, domain = -0.2: {1.1 * pi}, scale = 0.5] plot(\x, {cos(\x r)});
+        %%%========================================================================================================================================
+        %%分割画像
+        \coordinate (A3) at ($(A2) + (0, -3)$);
+        \draw (A3) rectangle ($(A3) + (2, 2)$);
+        \draw [fill = black] (A3) -- ($(A3) + (0, 0.3)$) .. controls ($(A3) + (0.8, 0.8)$) and ($(A3) + (1.2, 1.2)$) .. ($(A3) + (0.3, 2)$)
+        -- ($(A3) + (2, 2)$) -- ($(A3) + (2, 1.7)$) -- ($(A3) + (1.5, 1.2)$) .. controls ($(A3) + (1.5, 0.7)$) and ($(A3) + (1.5, 0.5)$) .. ($(A3) + (1, 0)$) -- cycle;
+        \draw [gray, fill = gray!30] ($(A3) + (0, 2)$) -- ($(A3) + (0, 1.8)$) .. controls ($(A3) + (0.9, 1.2)$) and ($(A3) + (0.9, 0.9)$) .. ($(A3) + (0, 0.7)$)
+        -- ($(A3) + (0, 0.3)$) .. controls ($(A3) + (0.8, 0.8)$) and ($(A3) + (1.2, 1.2)$) .. ($(A3) + (0.3, 2)$) -- cycle;
+        \draw [gray, fill = gray!30] ($(A3) + (2, 1.7)$) -- ($(A3) + (1.5, 1.2)$) .. controls ($(A3) + (1.5, 0.7)$) and ($(A3) + (1.5, 0.5)$) .. ($(A3) + (1, 0)$) -- ($(A3) + (1.1, 0)$) 
+        -- ($(A3) + (1.3, 0.2)$) -- ($(A3) + (2, 0.3)$) -- cycle;
+    \end{tikzpicture}
+\end{wrapfigure}
+$\mathrm{n\times n}$点（ピクセル）からなる2次元階調グレースケール
+画像について考える。なお、各点は、縦横斜めの近傍点とつながってるものとする。（右図参照）
+各ピクセル$\mathrm{p}$は$\mathrm{Pixel}$という型で表現し、その輝度は$\mathrm{p.brightness}$と表現する。
+画像は、$\mathrm{n\times n}$の$\mathrm{Pixel}$の配列$\mathrm{P}$として与えられる。擬似コード内では、基本的なデータ構造を
+適宜利用してよい。計算量については、$\mathrm{n}$の関数として示せ。
+\begin{enumerate}[(1)]
+    \setlength{\itemsep}{10pt}
+    \item 黒い背景に白い物体がいくつか写っているとする（右図参照）。そのうちの１つの物体の面積を求める方法として、以下のような方法が考えられる。\label{subsec1:prom1}
+    
+    「ある閾値に対して、それよりも明るい点のみを残し、それ以外の点を考慮から外す。残っている点から１つ選び、その点を含む連結領域の大きさ（点の数）を計算する。」
+
+    この計算を再帰呼び出しによって行うアルゴリズムを20行以内の擬似コードで示し、その計算量をO記法を用いて答えよ。
+    \item 以下のような方法で白い背景の画像に写っている黒い曲線を検出することを考える（右図参照）。自己交差はないものとする。\label{subsec1:prom2}
+    
+    「両端の2点（与えられているものとする。）を連結する点列のうち、点列上の点の明るさの合計値が最小になるものを求める。」
+
+    この計算を効率よく行うアルゴリズムを20行以内の擬似コードで示し、その計算量をO記法を用いて答えよ。
+    \item 画像を点列で左右に分割する方法として（右図参照）、以下のような方法が考えられる。\label{subsec1:prom3}
+    
+    「画像の上端と下端を結び、各行につき1点を経由するような連結された点列を考える。そのような点列の内、点の明るさの合計が最小になるような点列を求める。」
+
+    この計算を効率よく行うアルゴリズムを20行以内の擬似コードで示し、その計算量をO記法を用いて答えよ。
+    \item 画像をぼかす方法として、以下のような処理が考えられる。\label{subsec1:prom4}
+    
+    「各内部点（近傍を8つ持つ点）について、その8近傍点の輝度の平均値を計算する。全ての内部点について
+    この平均値を計算した後、すべての内部点の輝度を対応する平均値へと同時変更する。」
+
+    ここで、内部点の元の輝度を並べたベクトルを$\mbox{\boldmath $x$}$、変更後の輝度を1列にベクトルを
+    $\mbox{\boldmath $x'$}$、外部点（画像の中の点の内、内部点以外の点）の輝度を並べたベクトルを$\mbox{\boldmath $b$}$として、
+    $\mbox{\boldmath $x$},\mbox{\boldmath $x'$},\mbox{\boldmath $b$}$の関係を行列を使って表現したい。適切に行列を定義して、
+    $\mbox{\boldmath $x$},\mbox{\boldmath $x'$},\mbox{\boldmath $b$}$の関係式を示せ。
+    \item \eqref{subsec1:prom4}における処理を画像に対して無限回適用すると、画像の輝度$\mbox{\boldmath $x$}$は
+    $\mbox{\boldmath $x$}^{\mathrm{inf}}$に収束する。$\mbox{\boldmath $x$}^{\mathrm{inf}}$を\eqref{subsec1:prom4}で定義した行列
+    を用いて解析的な式で表せ。但し、式には極限は含まないものとする。
+\end{enumerate}
+
+\newpage
+
+\subsection{解答例}
+\begin{enumerate}[(1)]
+    \item 題意を満たす擬似コードは以下のようになる。但し、参照範囲は考慮されているものとする。
+\begin{lstlisting}[frame = sigle, style = customText]
+func: 行数iにおいて明るい点だけを残す関数SearchBright(bool P2[][], int i)
+    for j: from 0 to n - 1
+        if P[i][j].brightnessが閾値より大きい
+            (i, j)点が明るいかどうかを表すP2[i][j]にtrueを代入
+        end if
+    end for
+    return 次の行について再帰呼び出しを行った後の戻り値
+end func
+func: 面積を計算する関数area(final boolean P2[][], int si, int sj) 
+    現在訪れている(i, j)点に関して訪れたかどうかを表すvisitid[i][j]をtrueにする。
+    area ← 1
+    for i: from si - 1 to si + 1
+        for j: from sj - 1 to sj + 1
+            if 現在見ている点が訪れていないかつ明るい点である
+                その点へ訪問し、その戻り値を現在の面積areaに足す。
+            end if
+        end for j
+    end for i
+    面積areaを戻り値として返す。
+end func
+\end{lstlisting}
+    この時の計算量は$\mathrm{O}(n^2)$となる。
+    \item 題意を満たす擬似コードは以下のようになる。但し、参照範囲は考慮されているものとする。
+\begin{lstlisting}[frame = single, style = customText]
+for i: from 両端の始点のx座標 to 両端の終点のx座標
+    for j: from 両端の始点のy座標 to 両端の終点のy座標
+        dp[i][j] ← P[i][j].brightness + min(dp[i - 1][j], dp[i][j - 1], dp[i - 1][j - 1])
+        dproot[i][j] ← dp[i - 1][j], dp[i][j - 1], dp[i - 1][j - 1]の中で一番小さい値を持つ点
+    end for j
+end for i
+while rootが両端の終点から両端の始点になるまで
+    root ←　dproot[root.x][root.y]
+    求めたい点列pにrootを追加
+end while
+\end{lstlisting}
+    この時の計算量は$\mathrm{O}(n^2)$
+    \item 
+\end{enumerate}
+\newpage
+\section{}%第２問
+\subsection{問題文}
+太陽光発電システムについて考えよう。ソーラーパネルの維持管理のため、以下のような
+適用規則が定められているとする。
+\begin{enumerate}[(i)]
+    \item $n$枚のパネルが一つのグループとして維持管理される。
+    \item パネルはグループ毎に定期的に点検される。
+    \item パネルの状態は各グループ毎に$n$ビットデータとして報告される。
+    ここで各ビットは対応するパネルに不具合があれば1、不具合がなければ0とする。
+\end{enumerate}
+不具合のあるパネルの数、すなわち$n$ビットデータの1の個数$k$を数える"population count"問題を考えよう。
+以下の設問に答えよ。
+\newline
+\newline
+まず、ソフトウェアによる解法を考えよう。ここでは、$0\, <\, n\, \leq\, 32, 0\, \leq\, k\, <\, \log_{2}n$とする。
+四則演算、論理演算、シフト演算、および表引きには1単位時間かかるとする。単純化のため、インデックスの足し算やループで用いる
+比較演算の演算時間はゼロとする。
+\begin{enumerate}[(1)]
+    \item 単純な方式として各ビットの値をチェックし、1の個数の総和を求める方式が考えられる。
+    この方式の擬似コードを書き、その計算時間を答えよ。\label{subsec2:prom1}
+    \item 実際、表引き操作を行うことで上述の方式\eqref{subsec2:prom1}を高速化できる。その計算時間を答えよ。\label{subsec2:prom2}
+    \item 方式\eqref{subsec2:prom1}より高速かつ方式\eqref{subsec2:prom2}よりストレージを必要としない方式の擬似コードを示せ。その計算時間を答えよ。\label{subsec2:prom3}
+    \newline
+    \newline
+    ハードウェアによる解決を考えよう。ここでは、入力はビット列、出力は2進数とする。
+    \item 入力3ビットのpopulation count 論理回路$P_3$の真理値表を書け。$\mathrm{AND,\, OR,\, NOT}$ゲートを用いて$P_3$を設計せよ。\label{subsec2:prom4}
+    \item 入力6ビットのpopulation count 論理回路$P_6$を論理回路$P_3$を利用して作成せよ。必要に応じて、追加で$\mathrm{AND,\, OR,\, NOT}$ゲートを使ってもよい。\label{subsec2:prom5}
+    \item 入力$n$ビットのpopulation count 論理回路$P_n$を考えるとき、$n$が増えると遅延が問題になる。この問題を解決する方法を述べよ。\label{subsec2:prom6}
+\end{enumerate}
+
+\newpage
+
+\subsection{解答例}
+\begin{enumerate}[(1)]
+    \item 題意の擬似コードは以下のようになる。
+\begin{lstlisting}[frame = single, style = customText]
+k ← 0
+for i 0 to n - 1
+    mask ← 1 << i
+    tmp ← データd & mask
+    if tmpが0でない
+        k ← k + 1
+    end if
+end for
+\end{lstlisting}
+    よってこの計算時間は以下のようになる。
+    \begin{align*}
+        3 \times n = n
+    \end{align*}
+    よって、$3n$単位時間かかる。
+    \item 表引きの操作により、シフト演算と論理演算をしなくて済むため、計算時間は$n$単位時間となる。
+    \item 題意の擬似コードは以下のようになる。データをdとする。
+\begin{lstlisting}[frame = single, style = customText]
+//データdを2bit整数16組に分ける
+d ← d - ((d >> 1) & 0x55555555)
+//データdを4bit整数8組に分ける
+d ← (d & 0x33333333) + ((d >> 2) & 0x33333333)
+//データdを8bit整数4組に分ける
+d ← (d + (d >> 4)) & 0x0f0f0f0f
+//データdを16bit整数2組に分ける
+d ← (d + (d >> 8))
+//データdを32bit整数1組に分ける
+d ← (d + (d >> 16))
+\end{lstlisting}
+    この時の計算時間は5単位時間となる
+    \item 入力3ビットのpopulation count 論理回路$P_3$の真理値表は以下のようになる。
+    \begin{figure}[H]
+        \centering
+        \begin{tabular}{ccc}
+            \begin{minipage}{0.3\linewidth}
+                \centering
+                \begin{table}[H]
+                    \caption{論理回路$P_3$の真理値表}
+                    \centering
+                    \begin{tabular}{c|c}
+                        \hline
+                        入力I & 出力X\\
+                        \hline
+                        000 & 00\\
+                        001 & 01\\
+                        011 & 10\\
+                        010 & 01\\
+                        100 & 01\\
+                        101 & 10\\
+                        111 & 11\\
+                        110 & 10\\
+                        \hline
+                    \end{tabular}
+                \end{table}
+            \end{minipage}
+            \begin{minipage}{0.3\linewidth}
+                \centering
+                \begin{Karnaughvuitl}{ab}{c}
+                    \contingut{0,1,1,0,1,0,0,1}
+                    \implicant{1}{1}{blue}
+                    \implicant{2}{2}{blue}
+                    \implicant{4}{4}{blue}
+                    \implicant{7}{7}{blue}
+                \end{Karnaughvuitl}
+                \caption{下位1ビットカルノー図}
+            \end{minipage}
+            \begin{minipage}{0.3\linewidth}
+                \centering
+                \begin{Karnaughvuitl}{ab}{c}
+                    \contingut{0,0,0,1,0,1,1,1}
+                    \implicant{6}{7}{blue}
+                    \implicant{3}{7}{blue}
+                    \implicant[3pt]{7}{5}{blue}
+                \end{Karnaughvuitl}
+                \caption{上位1ビットカルノー図}
+            \end{minipage}
+        \end{tabular}
+    \end{figure}
+    \begin{align*}
+        \mbox{下位ビットの論理式:}\quad
+        a'b'c + a'bc' + abc + ab'c'
+        &= a'(b'c + bc') + a(bc + b'c')\\
+        &= a'(bc + b'c')' + a(bc + b'c')\\
+        \mbox{上位ビットの論理式:}\quad
+        ab + bc + ac 
+        &= a(b + c) + bc\\
+        &= a(b'c')' + bc
+    \end{align*}
+    よってこの時論理回路$P_3$は以下のように設計できる。但し、$F1$は出力の2桁目を表し、$F2$は出力の1桁目を表す。
+    \begin{figure}[H]
+        \centering
+        \begin{tikzpicture}[>=stealth, circuit logic US]
+            %%and gate at 1st stage
+            \draw (0, 0) node [and gate] (and1) {};
+            \draw (and1) + (0, 1) node [and gate] (and2) {};
+            %%and gate at 2nd stage
+            \draw ($(and2.output)!.5!(and1.output)$) + (5, 0) node [and gate] (and5) {};
+            \draw (and5) + (0, -1.5) node [and gate] (and6) {};
+            \draw ($(and6)!2!(and5)$) node [and gate] (and7) {};
+            %%or gate at 1st stage
+            \draw (and5.input 1) + (-3, 0) node [or gate] (or1) {};
+            %%not gate at 1st stage & 2nd stage
+            \draw (and1 -| or1) + (1.3, -0.5) node [not gate] (not5) {}; 
+            \draw (and2 -| or1) + (0, 0.6) node [not gate] (not4) {}; 
+            \draw (and2.input 1) + (-1.5, 0) node [not gate] (not3) {};
+            \draw (and1.input 1) + (-1.5, 0) node [not gate] (not2) {};
+            \draw (and6.input 2 -| or1) node [not gate] (not1) {}; 
+            %%or gate at 2st stage
+            \draw ($(and5.output)!.5!(and6.output)$) + (1, 0) node [or gate] (or3) {};
+            \draw ($(and5.output)!.5!(and7.output)$) + (1, 0) node [or gate] (or4) {};
+            %%%input
+            \coordinate (c) at ($(not3.input) + (-1, 0)$);
+            \coordinate (b) at ($(not2.input) + (-1, 0)$);
+            \coordinate (a) at ($(b)!(not1.input)!(c)$);
+            %%%1段目and回路接続=========================================================================================================
+            %%%b'c'
+            \draw (not3.output) |- (and2.input 1);
+            \draw (not2.output) to ++(0.3,0) |- (and2.input 2);
+            %%%bc
+            \draw (not3.input) + (-0.5, 0) node [branch] {} |- ($(not2) + (1.3, -0.8)$) |- (and1.input 2);
+            \draw (not2.input) + (-0.3, 0) node [branch] {} |- ($(not2) + (1.1, -0.5)$) |- (and1.input 1);
+            %%%========================================================================================================================
+            %%%1段目or回路接続=========================================================================================================
+            %%b'c' + bc
+            \draw (and2.output) to ++(0.8, 0) |- (or1.input 1);
+            \draw (and1.output) to ++(0.8, 0) |- (or1.input 2);
+            %%%=======================================================================================================================
+            %%%2段目not回路接続=========================================================================================================
+            %%(b'c')'
+            \draw (and2.output) + (0.3, 0) node [branch] {} |- (not4.input);
+            %%(b'c' + bc)'
+            \draw (or1.output) + (0.3, 0) node [branch] {} |- (not5.input);
+            %%%=======================================================================================================================
+            %%%2段目and回路接続=========================================================================================================
+            %% a(bc + b'c')
+            \draw (not5.output) to ++(0.3, 0) |- (and6.input 1);
+            \draw (not1.output) to ++(0.3, 0) |- (and6.input 2);
+            %% a'(bc + b'c')'
+            \draw (not1.input) + (-0.3, 0) node [branch] {} |- ($(not1)!0.7!(or1) + (1.3, 0)$) |- (and5.input 2);
+            \draw (or1.output) to ++(0.3, 0) |- (and5.input 1);
+            %% a(b'c')'
+            \draw (not4.output) -| ($(and7.input 2) + (-0.3, 0)$) |- (and7.input 2);
+            \draw (a) + (0.3, 0) node [branch] {} |- (and7.input 1);
+            %%%========================================================================================================================
+            %%%2段目or回路接続=========================================================================================================
+            %%F2
+            \draw (and5.output) to ++(0.3, 0) |- (or3.input 1);
+            \draw (and6.output) to ++(0.3, 0) |- (or3.input 2);
+            %%F1
+            \draw (and7.output) to ++(0.3, 0) |- (or4.input 1);
+            \draw (and1.output) + (0.5, 0) node [branch] {} |- (or4.input 2);
+            %%%========================================================================================================================
+            % inputs
+            \draw (not1.input) -- (a) node [left] {$a$};
+            \draw (not2.input) -- (b) node [left] {$b$};
+            \draw (not3.input) -- (c) node [left] {$c$};
+            % outputs
+            \draw (or4.output) -- ++(0.3,0) node [right] (output1) {$F1$};
+            \draw (or3.output) -- ++(0.3,0) node [right] (output2) {$F2$};
+        \end{tikzpicture}
+        \caption{論理回路$P_3$}
+        \label{circuit:p3}
+    \end{figure}
+    \defineshape[2]{3}{p3}
+    \tikzstyle{p3 gate}=[draw, shape=p3, minimum size=12mm, inner sep=0pt]
+    \item 次に入力6ビットの論理回路$P_6$は2つの論理回路$P_3$の出力を入力とし、それらの和がこの論理回路の出力となるため、
+    2ビットの加算器を追加すればよい。よって、その加算器の真理値表は以下のようになる。
+    \begin{figure}[H]
+        \centering
+        \begin{tabular}{cc}
+            \begin{minipage}{0.4\linewidth}
+                \centering
+                \begin{table}[H]
+                    \caption{下位1ビット加算器真理値表}
+                    \centering
+                    \begin{tabular}{ccc}
+                        \hline
+                        入力I & 出力X1 & 繰り上がりC1\\
+                        \hline
+                        00 & 0 & 0\\
+                        01 & 1 & 0\\
+                        11 & 0 & 1\\
+                        10 & 1 & 0\\
+                        \hline
+                    \end{tabular}
+                \end{table}
+            \end{minipage}
+            \begin{minipage}{0.5\linewidth}
+                \centering
+                \begin{table}[H]
+                    \caption{上位1ビット加算器真理値表}
+                    \centering
+                    \begin{tabular}{cccc}
+                        \hline
+                        入力I & 前の桁からの& 出力X2 & 繰り上がりC2\\
+                         & 繰り上がりC1&  & \\
+                        \hline
+                        00 & 0 & 0 & 0\\
+                        00 & 1 & 1 & 0\\
+                        01 & 0 & 1 & 0\\
+                        01 & 1 & 0 & 1\\
+                        11 & 0 & 0 & 1\\
+                        11 & 1 & 1 & 1\\
+                        10 & 0 & 1 & 0\\
+                        10 & 1 & 0 & 1\\
+                        \hline
+                    \end{tabular}
+                \end{table}
+            \end{minipage}
+        \end{tabular}
+    \end{figure}
+    よってカルノー図は以下のようになる。
+    \begin{figure}[H]
+        \centering
+        \begin{tabular}{cc}
+            \begin{minipage}{0.4\linewidth}
+                \centering
+                \begin{Karnaughdouble}{a}{b}
+                    \contingut{0,1,1,0}
+                    \implicant{1}{1}{blue}
+                    \implicant{2}{2}{blue}
+                \end{Karnaughdouble}
+                \caption{下位1ビット出力xカルノー図}
+            \end{minipage}
+            \begin{minipage}{0.4\linewidth}
+                \centering
+                \begin{Karnaughdouble}{a}{b}
+                    \contingut{0,0,0,1}
+                    \implicant{3}{3}{blue}
+                \end{Karnaughdouble}
+                \caption{下位1ビット繰り上がりC2カルノー図}
+            \end{minipage}
+        \end{tabular}
+    \end{figure}
+    よって、以下のような式になる。
+    \begin{align*}
+        X1 &= ab' + a'b\\
+        C1 &= ab
+    \end{align*}
+    \begin{figure}[H]
+        \centering
+        \begin{tabular}{cc}
+            \begin{minipage}{0.4\linewidth}
+                \centering
+                \begin{Karnaughvuitl}{cd}{C1}
+                    \contingut{0, 1, 1, 0, 1, 0, 0, 1}
+                    \implicant{2}{2}{blue}
+                    \implicant{4}{4}{blue}
+                    \implicant{1}{1}{blue}
+                    \implicant{7}{7}{blue}
+                \end{Karnaughvuitl}
+                \caption{上位1ビット出力xカルノー図}
+            \end{minipage}
+            \begin{minipage}{0.4\linewidth}
+                \centering
+                \begin{Karnaughvuitl}{cd}{C1}
+                    \contingut{0, 0, 0, 1, 0, 1, 1, 1}
+                    \implicant{6}{7}{blue}
+                    \implicant{3}{7}{blue}
+                    \implicant[3pt]{7}{5}{blue}
+                \end{Karnaughvuitl}
+                \caption{上位1ビット繰り上がりC2カルノー図}
+            \end{minipage}
+        \end{tabular}
+    \end{figure}
+    よって、以下のような式になる。
+    \begin{align*}
+        X2 &= c'd'C1 + c'dC1' + cdC1 + cd'C1' = c'(d'C1 + dC1') + c(d'C1' + dC1)\\
+        C2 &= cd + dC1 + cC1 = c(d + C1) + dC1 = c(d'C1')' + dC1
+    \end{align*}
+    ここで、この論理式は論理回路$P_3$と全く同じものであるので、
+    論理回路$P_3$を一つの素子として扱うと、加算器の論理回路は以下のようになる。
+    \begin{figure}[H]
+        \centering
+        \begin{tikzpicture}[>=stealth, circuit logic US]
+            %%and gate at 1st stage
+            \draw (0, 0) node [and gate] (and1) {};
+            \draw (and1) + (0, 1.5) node [and gate] (and2) {};
+            %%not gate at 1st stage
+            \draw (and1.input 1) + (-1.5, 0) node [not gate] (not1) {};
+            \draw (and2.input 1) + (-1.5, 0) node [not gate] (not2) {};
+            %%or gate at 1st stage
+            \draw ($(and1)!.5!(and2)$) + (1.5, 0) node [or gate] (or1) {};
+            %%p3 gate
+            \draw ($(and1)!2!(and2)$) + (1.5, 0) node [p3 gate] (p3) {$P_3$}; 
+            %%and gate at 1st stage
+            \draw ($(not1)!1.55!(not2)$) node [and gate] (and3) {};
+            %%input
+            \coordinate (a) at ($(not1.input) + (-1, 0)$);
+            \coordinate (b) at ($(not2.input) + (-1, 0)$);
+            \coordinate (c) at (p3.input 2 -| a);
+            \coordinate (d) at (p3.input 3 -| a);
+            %%%1段目and回路接続===================================================================================================
+            %%ab'
+            \draw (not2.output) to ++(0.3, 0) |- (and2.input 1);
+            \draw (not1.input) + (-0.2, 0) node [branch] {} |- ($(and2.input 2) + (-0.3, -0.5)$) |- (and2.input 2);
+            %%a'b
+            \draw (not1.output) to ++(0.3, 0) |- (and1.input 1);
+            \draw (not2.input) + (-0.4, 0) node [branch] {} |- ($(and1.input 2) + (-0.3, -0.5)$) |- (and1.input 2);
+            %%ab
+            \draw (a) + (0.2, 0) node [branch] {} |- (and3.input 1);
+            \draw (b) + (0.35, 0) node [branch] {} |- (and3.input 2);
+            %%%==================================================================================================================
+            %%%1段目or回路接続===================================================================================================
+            %%X1
+            \draw (and1.output) to ++(0.3, 0) |- (or1.input 2);
+            \draw (and2.output) to ++(0.3, 0) |- (or1.input 1);
+            %%%==================================================================================================================
+            %%%1段目p3回路接続===================================================================================================
+            \draw ($(and3.output) + (1, 0)$) to ++(0.3, 0) |- (p3.input 1);
+            %%%==================================================================================================================
+            %%inputs
+            \draw (not1.input) -- (a) node [left] {$a$};
+            \draw (not2.input) -- (b) node [left] {$b$};
+            \draw (p3.input 2) -- (c) node [left] {$c$};
+            \draw (p3.input 3) -- (d) node [left] {$d$};
+            % outputs
+            \draw (or1.output) -- ++(0.3,0) node [right] (output1) {$X1$};
+            \draw (p3.output 1) -- ++(0.3,0) node [right] (output2) {$C2$};
+            \draw (p3.output 2) -- ++(0.3,0) node [right] (output3) {$X2$};
+            \draw (and3.output) -- ++(0.3,0) node [right] (output4) {$C1$};
+        \end{tikzpicture}
+        \caption{加算器の論理回路}
+    \end{figure}
+    よって、求める論理回路$P_6$は以下のようになる。但し、$F1, F2, F3$はそれぞれ出力の下1桁目, 2桁目, 3桁目を表す。
+    \begin{figure}[H]
+        \centering
+        \begin{tikzpicture}[>=stealth, circuit logic US]
+            %%and gate at 1st stage
+            \draw (0, 0) node [and gate] (and1) {};
+            \draw (and1) + (0, 1.5) node [and gate] (and2) {};
+            %%not gate at 1st stage
+            \draw (and1.input 1) + (-1.5, 0) node [not gate] (not1) {};
+            \draw (and2.input 1) + (-1.5, 0) node [not gate] (not2) {};
+            %%or gate at 1st stage
+            \draw ($(and1)!.5!(and2)$) + (1.5, 0) node [or gate] (or1) {};
+            %%p3 gate
+            \draw ($(and1)!2!(and2)$) + (1.5, 0) node [p3 gate] (p3) {$P_3$}; 
+            %%and gate at 1st stage
+            \draw ($(not1)!1.55!(not2)$) node [and gate] (and3) {};
+            %%input
+            \coordinate (a) at ($(not1.input) + (-1, 0)$);
+            \coordinate (b) at ($(not2.input) + (-1, 0)$);
+            \coordinate (c) at (p3.input 2 -| a);
+            \coordinate (d) at (p3.input 3 -| a);
+            %%%1段目and回路接続===================================================================================================
+            %%ab'
+            \draw (not2.output) to ++(0.3, 0) |- (and2.input 1);
+            \draw (not1.input) + (-0.2, 0) node [branch] {} |- ($(and2.input 2) + (-0.3, -0.5)$) |- (and2.input 2);
+            %%a'b
+            \draw (not1.output) to ++(0.3, 0) |- (and1.input 1);
+            \draw (not2.input) + (-0.4, 0) node [branch] {} |- ($(and1.input 2) + (-0.3, -0.5)$) |- (and1.input 2);
+            %%ab
+            \draw (a) node [branch] {} |- (and3.input 1);
+            \draw (b) + (0.35, 0) node [branch] {} |- (and3.input 2);
+            %%%==================================================================================================================
+            %%%1段目or回路接続===================================================================================================
+            %%X1
+            \draw (and1.output) to ++(0.3, 0) |- (or1.input 2);
+            \draw (and2.output) to ++(0.3, 0) |- (or1.input 1);
+            %%%==================================================================================================================
+            %%%1段目p3回路接続===================================================================================================
+            \draw (and3.output) to ++(0.3, 0) |- (p3.input 1);
+            %%%==================================================================================================================
+            %%inputs
+            \draw (not1.input) -- (a);
+            \draw (not2.input) -- (b);
+            \draw (p3.input 2) -- (c);
+            \draw (p3.input 3) -- (d);
+            % outputs
+            \draw (or1.output) -- ++(0.3,0) node [right] (output1) {$F1$};
+            \draw (p3.output 1) -- ++(0.3,0) node [right] (output2) {$F3$};
+            \draw (p3.output 2) -- ++(0.3,0) node [right] (output3) {$F2$};
+            %%p3
+            \draw (a) + (-1.5, 0) node [p3 gate] (p31) {$P_3$};
+            \draw (b) + (-1.5, 0) node [p3 gate] (p32) {$P_3$};
+            % \draw (and3.output) -- ++(0.3,0) node [right] (output4) {$C1$};
+            %%%1段目p3回路接続===================================================================================================
+            \draw (p31.output 2) to ++(0.3, 0) -| ($(a) + (-0.3, 0)$) |- (a);
+            \draw (p31.output 1) to ++(0.3, 0) -| ($(c) + (-0.3, 0)$) |- (c);
+            \draw (p32.output 2) to ++(0.3, 0) |- (b);
+            \draw (p32.output 1) to ++(0.3, 0) |- (d);
+            %%%==================================================================================================================
+            %%input
+            \coordinate (a1) at ($(p31.input 1) + (-2, 0)$);
+            \coordinate (a2) at ($(p31.input 2) + (-2, 0)$);
+            \coordinate (a3) at ($(p31.input 3) + (-2, 0)$);
+            \coordinate (a4) at ($(p32.input 1) + (-2, 0)$);
+            \coordinate (a5) at ($(p32.input 2) + (-2, 0)$);
+            \coordinate (a6) at ($(p32.input 3) + (-2, 0)$);
+            %%inputs
+            \draw (p31.input 1) -- (a1) node [left] {$a$};
+            \draw (p31.input 2) -- (a2) node [left] {$b$};
+            \draw (p31.input 3) -- (a3) node [left] {$c$};
+            \draw (p32.input 1) -- (a4) node [left] {$d$};
+            \draw (p32.input 2) -- (a5) node [left] {$e$};
+            \draw (p32.input 3) -- (a6) node [left] {$f$};
+        \end{tikzpicture}
+        \caption{論理回路$P_6$}
+    \end{figure}
+    \item 
+\end{enumerate}
+\newpage
+\section{}%第３問
+\subsection{問題文}
+以下に示す情報システムに関する8項目から4項目を選択し、各項目を4$\thicksim$8行程度で説明せよ。
+必要に応じて例や図を用いてよい。
+
+\begin{enumerate}[(1)]
+    \item 逆運動学
+    \item 隠れマルコフモデル
+    \item MinMax法
+    \item NP完全問題
+    \item レイトレーシング
+    \item SIMD(Single Instruction Multiple data)
+    \item Call by value(値渡し) and call by reference(参照渡し)
+    \item 公開鍵暗号
+\end{enumerate}
+
+\newpage
+
+\subsection{解答例}
+\begin{enumerate}[(1)]
+    \item ロボットのアームの位置座標からロボットのアームの長さとアームの基準面からの角度を求める
+    もののことである。つまり、以下の図のように位置座標$(x, y)$から$L, \theta$を求める学問のことである。
+    \begin{center}
+        \begin{tikzpicture}[>=stealth]
+            \draw (0, 0) -- (3, 0);
+            \draw (0, 0) -- (0, 3);
+            \coordinate (A) at (3, 0);
+            \coordinate (B) at (0.3, 0);
+            \coordinate (D) at ($(B)!3cm!30:(A)$) node at (D) [above right] {$(x, y)$};
+            \coordinate (C) at ($(B)!0.5!(D)$);
+            \coordinate (E) at ($(B)!.55!(D)!2.5mm!120:(D)$);
+            \draw (E) node [rectangle, minimum height=3cm, minimum width = 0.5cm, rotate = -60, draw] {};
+            \draw (0, 0) circle [radius = 3mm];
+            \draw (A) -- (B)  pic["$\theta$", <->, very thick, angle eccentricity=1.2, angle radius=1cm,draw=orange] {angle=A--B--C};
+            \draw (B).. controls ($(B)!.2!(D)!10pt!90:(D)$) and ($(B)!.8!(D)!10pt!90:(D)$) .. (D) node [midway, sloped, fill=white] {$L$};
+        \end{tikzpicture}
+    \end{center}    
+    \item まずN重マルコフモデルとは前のN個の出力のみに依存する離散確率過程のことを表すモデルである。
+    $N=1$の時は単純マルコフモデルと呼ばれる。つまり、単純マルコフモデルは現在の状態のみで次の状態が確率的に決定されるモデルのことである。
+    但し、単純マルコフモデルは出力が一つしか認められておらず、複雑な出力は表現できないモデルである。そのため、出力を確率的な表現で表すことにより、
+    複数の出力を許すようにしたモデルが隠れマルコフモデルである。
+    \item ゲーム理論で使われるアルゴリズムであり、2人零和ゲームであり、有限の手数で終了することが保証されているのであれば、必ず解くことができる
+    アルゴリズムである。このアルゴリズムは相手の最善手は自分の最悪手であるという考えのもと、自分は最善の手をだし、相手も最善の手を出すと考えた場
+    合に自分の手の場合は最大の評価値を選択し、相手の手の場合は最小の評価値を選択するアルゴリズムである。
+    \begin{center}
+        \begin{tikzpicture}[>=stealth]
+            \draw (0, 0) coordinate (O) rectangle (2, 2) coordinate (A);
+            \draw ($(O -| A)!.5!(O)$) coordinate (B) -- ($(O |- A)!.5!(A)$) coordinate (C);
+            \draw ($(O -| A)!.5!(A)$) coordinate (D) -- ($(O |- A)!.5!(O)$) coordinate (E);
+            \draw (O) node [above right] {$a_{21}$};
+            \draw (A) node [below left] {$b_{12}$};
+            \draw (B) node [above right] {$a_{22}$};
+            \draw (C) node [below left] {$b_{11}$};
+            \draw (D) node [below left] {$b_{22}$};
+            \draw (E) node [above right] {$a_{11}$};
+            \draw ($(B)!.5!(C)$) coordinate (F) node [above right] {$a_{12}$};
+            \draw (F) node [below left] {$b_{21}$};
+            \draw ($(O |- A)!.5!(C)$) coordinate (G) node [above] {$S_1$};
+            \draw ($(A)!.5!(C)$) coordinate (H) node [above] {$S_2$};
+            \draw ($(O |- A)!.5!(E)$) coordinate (I) node [left] {$S_1$};
+            \draw ($(O)!.5!(E)$) coordinate (J) node [left] {$S_2$};
+            \draw ($(I)!.5!(J)$) coordinate (K) node [left = 20] {$P_1$};
+            \draw ($(G)!.5!(H)$) coordinate (L) node [above = 20] {$P_2$};
+        \end{tikzpicture}
+    \end{center}
+    よって、上図のような利得表を考えた場合は、2人零和ゲームであるので$a_{ij} = -b_{ij}$であり、$a_{ij}$の値だけ評価すればよく、自分の
+    その戦略を選んだ際の評価値の最小値を考えることにより、相手の最善手を考え、その最小値の中で最大となるものの戦略を選択すれば自分の最善手を
+    選択することになるので、評価対象$P_1$が取るべき戦略は$S_{\max\limits_{i}\min\limits_{j}a_{ij}}$となるアルゴリズムである。
+    \item 
+\end{enumerate}
+% \newpage
+\index{ティック@tikz}
+% \printindex
+\end{document}

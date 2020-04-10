@@ -1,0 +1,28 @@
+\subsection{問題文}
+\begin{enumerate}[(1)]
+    \item 連続確率変数$T$の確率密度関数$f(t)$が$\lambda$を正の定数として
+        \begin{equation*}
+            f(t) = 
+            \begin{cases}
+                \lambda e^{-\lambda t} & (t\geq 0)\\    
+                0 & (t < 0)\\    
+            \end{cases}
+        \end{equation*}
+        で表されるとき、$T$はパラメータ$\lambda$の指数分布に従うという。この確率変数の平均値を求めよ。
+        またこの指数分布の確率分布関数$F(t) = P (T\leq t)$を求めよ。なお、$P(X)$は事象$X$が起こる確率である。\label{subsec:prom3:subprom1}
+    \item 設問\eqref{subsec:prom3:subprom1}の分布が無記憶であること、すなわち任意の$s > 0, t > 0$に対して
+        \begin{equation*}
+            P(T > s + t | T > s) = P(T > t)
+        \end{equation*}
+        が成立することを示せ。なお、$P(X|Y)$は事象$Y$が起こった条件のもとで事象$X$が起こる確率である。\label{subsec:prom3:subprom2}
+    \item 問題の解答を始めてから解答を終えるまでの時間を解答所要時間と呼ぶことにする。ある問題に対して
+        $n$人の学生の解答所要時間が全て同じパラメータ$\lambda_0$の指数分布に従うものとする。$n$人が同時
+        に解答を始めた時最も早く解答を終える学生の解答所要時間はそれぞれ独立であるとする。\label{subsec:prom3:subprom3}
+    \item 学生A, Bの解答所要時間がパラメータ$\lambda_A, \lambda_B$の指数分布にそれぞれ従うものとする。
+        この二人が同時に解答を開始した時に、学生Aのほうが学生Bより先に解答を終える確率を求めよ。\label{subsec:prom3:subprom4}
+    \item 優秀な学生である秀夫君と、他10名の学生に問題を同時に解かせる。各学生の解答所要時間は指数分布に従うものとし、また
+    秀夫君以外の各学生の平均解答所要時間は、全て秀夫君の平均解答所要時間の10倍であるとする。秀夫君が1番目に解答を終える確率、
+    及び4番目に解答を終える確率をそれぞれ求めよ。\label{subsec:prom3:subprom5}
+\end{enumerate}
+\newpage
+\subsection{解答}

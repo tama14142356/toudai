@@ -1,0 +1,323 @@
+\documentclass[dvipdfmx,titlepage, 11pt, a4paper]{jsarticle}%A４用紙縦,明朝（デフォルト）１１ポイント
+\usepackage[top=18truemm,bottom=18truemm,left=18truemm,right=18truemm]{geometry}%余白調整
+\usepackage{template}
+%%%====================================================================================================================================
+\renewcommand{\thesection}{第\arabic{section}問}
+\renewcommand{\thesubsection}{\thesection}
+\titleformat*{\section}{\LARGE\mcfamily}%章のタイトルの文字の大きさを通常サイズに設定（明朝体で）
+\titlespacing*{\section}{0pt}{*0}{0pt}%章番号の後の空白行の削除
+\titleformat*{\subsection}{\Large\mcfamily}%節のタイトルの文字の大きさを通常サイズに設定（明朝体で）
+\titlespacing*{\subsection}{0pt}{*0}{0pt}%節番号の後の空白行の削除
+\titleformat*{\subsubsection}{\large\mcfamily}%小節のタイトルの文字の大きさを通常サイズに設定（明朝体で）
+\titlespacing*{\subsubsection}{0pt}{*0}{0pt}%小節番号の後の空白行の削除
+
+\makeatletter
+%章番号付きコード番号
+\AtBeginDocument{
+  \renewcommand*{\thelstlisting}{\arabic{section}.\arabic{lstlisting}}%
+  \@addtoreset{lstlisting}{section}
+}
+
+%章番号付き表番号
+\renewcommand{\thetable}{%
+    \arabic{section}.\arabic{table}%
+}
+\@addtoreset{table}{section}%
+
+%章番号付き図番号
+\renewcommand{\thefigure}{%
+	\arabic{section}.\arabic{figure}%
+}%
+\@addtoreset{figure}{section}%
+
+%章番号付き式番号
+\renewcommand{\theequation}{%
+	\arabic{section}.\arabic{equation}%
+}%
+\@addtoreset{equation}{section}%
+
+\renewcommand{\p@enumiii}{}% 箇条書きの参照時の番号の変更(2(親の番号)a(子の番号)→aだけに)
+\renewcommand{\p@enumii}{}% 箇条書きの参照時の番号の変更(2a→aだけに)
+\makeatother
+%%%====================================================================================================================================
+
+%%%====================================================================================================================================
+%%ページのレイアウト設定
+\pagestyle{fancy}
+\renewcommand{\sectionmark}[1]{\markboth{}{\thesection\ #1}}%                   %\rightmarkにセクション名を格納
+\renewcommand{\subsectionmark}[1]{\markboth{#1}{\rightmark}}%   %\leftmarkにサブセクション名を格納
+%[]は省略可で省略すると{}で指定された内容が偶数ページ奇数のどちらにも適用される.
+% \renewcommand{\headrulewidth}{0pt} %ヘッダの罫線を消す 
+\fancyfoot{}%                        %clear all footer fields
+\lhead{\leftmark}%                   %左側ヘッダの定義[<偶数ページ>]{<奇数ページ>}
+\chead{}%                            %中央ヘッダの定義[<偶数ページ>]{<奇数ページ>}
+\rhead{\rightmark}%                  %右側ヘッダの定義[<偶数ページ>]{<奇数ページ>}
+\lfoot{東大2018年度数学解答例}%       %左側フッターの定義[<偶数ページ>]{<奇数ページ>}
+\cfoot{\thepage}%                    %中央フッターの定義[<偶数ページ>]{<奇数ページ>}
+\rfoot{文殊の知恵}%                  %右側フッターの定義[<偶数ページ>]{<奇数ページ>}
+\renewcommand{\headrulewidth}{0.1pt}%%ヘッダの線の太さ 
+\renewcommand{\footrulewidth}{0.1pt}%%フッターの線の太さ
+%%%====================================================================================================================================
+
+\makeindex%索引用
+
+\renewcommand{\refname}{}%参考文献の文字を非表示にする
+\title{\Huge 東大2018年度数学解答例\\[10mm]}
+\author{{\LARGE 文殊の知恵}\\[1mm]\LARGE 高橋那弥}
+\date{}
+
+\begin{document}
+\newcommand{\dix}{\,{\rm d}}
+\maketitle
+\tableofcontents % 目次
+\pagenumbering{roman}%目次のページ番号のスタイルをローマ数字にする
+\newpage
+\setcounter{tocdepth}{3}%章節の深さを3にするsubsubsectionまで
+\pagenumbering{arabic}%他のページ番号は通常の数字にする.
+\section{}%第１問
+\subsection{問題文}
+次の連立一次方程式を解く問題を考える.
+\begin{eqnarray*}
+	\bm{A}\bm{x} = \bm{b}
+\end{eqnarray*}
+ここで, $\bm{A}\in \mathcal{R}^{m\times n},\,b\in \mathcal{R}^{m}$は与えられた定数の行列とベクトルであり, $\bm{x}\in \mathcal{R}^{n}$は未知ベクトルである. 以下の問いに答えよ.
+\begin{enumerate}[(1)]
+	\setlength{\itemsep}{10pt}
+	\item $\overline{\bm{A}}=(\bm{A}\,|\,\bm{b})$のように, 行列$\bm{A}$の最後の列の後ろに1列追加した$m\times (n+1)$行列を作る. 例えば, $\bm{A}=\begin{pmatrix}1&0&-1\\1&1&0\\0&1&1\end{pmatrix},\,\bm{b}=\begin{pmatrix}2\\4\\2\end{pmatrix}$の場合には, $\overline{\bm{A}}=\begin{pmatrix}1&0&-1&2\\1&1&0&4\\0&1&1&2\end{pmatrix}$となる. この例の$\overline{\bm{A}}$の第$i$列ベクトルを$\bm{a}_{i}\ (i=1,\,2,\,3,\,4)$とする.
+	      \begin{enumerate}[(i)]
+		      \item $\bm{a}_{1},\,\bm{a}_{2},\,\bm{a}_{3}$のうち線形独立なベクトルの最大個数を求めよ.
+		      \item $\bm{a}_{4}$が$\bm{a}_{1},\,\bm{a}_{2},\,\bm{a}_{3}$の線形和で表されることを, $\bm{a}_{4}=x_{1}\bm{a}_{1}+x_{2}\bm{a}_{2}+\bm{a_{3}}$となるスカラー$x_{1},\,x_{2}$を求めることで示せ.
+		      \item $\bm{a}_{1},\,\bm{a}_{2},\,\bm{a}_{3},\,\bm{a}_{4}$のうち線形独立なベクトルの最大個数を求めよ.
+	      \end{enumerate}
+	\item 任意の$m,\,n,\,\bm{A},\,\bm{b}$に対して, ${\rm rank}\overline{\bm{A}}={\rm rank}\bm{A}$のとき連立一次方程式の解が存在することを示せ.
+	\item ${\rm rank}\overline{\bm{A}}>{\rm rank}\bm{A}$ならば解は存在しない. $m>n,\,{\rm rank}\bm{A}=n$で, ${\rm rank}\overline{\bm{A}}>{\rm rank}\bm{A}$のとき, 連立一次方程式の右辺と左辺の差のノルムの2乗$\|\bm{b}-\bm{Ax}\|^{2}$を最小にする$\bm{x}$を求めよ.
+	\item $m<n,\,{\rm rank}\bm{A}=m$のとき, どのような$\bm{b}$に対しても連立一次方程式を満たす解が複数存在する. 解のうちで$\|\bm{x}\|^{2}$を最小にする$\bm{x}$を, 連立一次方程式の制約条件として, ラグランジュ乗数法を用いて求めよ.
+	\item 任意の$m,\,n,\,\bm{A}$に対して, 以下の4つの式を満たす$\bm{P}\in\mathcal{R}^{n\times m}$が唯一に決まることを示せ.
+	      \begin{eqnarray*}
+		      \bm{APA}=\bm{A}\\
+		      \bm{PAP}=\bm{P}\\
+		      (\bm{AP})^{T}=\bm{AP}\\
+		      (\bm{PA})^{T}=\bm{PA}
+	      \end{eqnarray*}
+	\item (3)で求めた$\bm{x}$と(4)で求めた$\bm{x}$が, いずれも$\bm{x}=\bm{Pb}$の形で表せることを示せ.
+\end{enumerate}
+
+\newpage
+
+\subsection{解答例}
+\begin{enumerate}[(1)]
+	\setlength{\itemsep}{10pt}
+	\item
+	      \begin{enumerate}[(i)]
+		      \setlength{\itemsep}{10pt}
+		      \item $\bm{a}_{1},\,\bm{a}_{2}$が線形従属の関係にある場合, 実数$c\ (\neq 0,\,\in \mathbb{R})$を用いて
+		            \begin{eqnarray*}
+			            \bm{a}_{1} = c\,\bm{a}_{2}
+		            \end{eqnarray*}
+		            と表すことができる. しかし, $\bm{a}_{1}=\begin{pmatrix}1\\1\\0\end{pmatrix},\ \bm{a}_{2}=\begin{pmatrix}0\\1\\1\end{pmatrix}$であることから, これを満たす実数$c$は存在しないので, $\bm{a}_{1},\,\bm{a}_{2}$は線形独立なベクトルである. 次に, $\bm{a}_{3}$が$\bm{a}_{1},\,\bm{a}_{2}$の線形従属の関係にある場合, 実数$c_{1},\,c_{2}\ (\neq 0,\,\in \mathbb{R})$を用いて
+		            \begin{eqnarray*}
+			            \bm{a}_{3}=c_{1}\bm{a}_{1}+c_{2}\bm{a}_{2}
+		            \end{eqnarray*}
+		            と表すことが出来る. $\bm{a}_{3}=\begin{pmatrix}-1\\0\\1\end{pmatrix}$であるので, $c_{1}=-1,\,c_{2}=1$とすればこの式は満たされる. ゆえに$\bm{a}_{3}$は線形従属の関係にあるので, 線形独立なベクトルの最大個数は2個である.
+		      \item $\bm{a}_{4}$について$\bm{a}_{1},\,\bm{a}_{2},\,\bm{a}_{3}$の線形和で表されることを$x_{1},\,x_{2}$を求めることで示す.
+		            \begin{eqnarray*}
+			            && \bm{a}_{4}=x_{1}\bm{a}_{1}+x_{2}\bm{a}_{2}+\bm{a}_{3}\\
+			            \Longleftrightarrow\ && \begin{pmatrix}2\\4\\2\end{pmatrix}=x_{1}\begin{pmatrix}1\\1\\0\end{pmatrix}+x_{2}\begin{pmatrix}0\\1\\1\end{pmatrix}+\begin{pmatrix}-1\\0\\1\end{pmatrix}\\
+			            \Longleftrightarrow\ &&\left\{\begin{array}{l}
+				            2=x_{1}-1     \\
+				            4=x_{1}+x_{2} \\
+				            2=x_{2}+1
+			            \end{array}
+			            \right.\\
+			            \Longleftrightarrow\ && \left\{\begin{array}{l}
+				            x_{1}=3 \\
+				            x_{2}=1
+			            \end{array}
+			            \right.
+		            \end{eqnarray*}
+		            したがって, $x_{1}=3,\,x_{2}=1$というスカラーの組が求まったので, $\bm{a}_{4}$は$\bm{a}_{1},\,\bm{a}_{2},\,\bm{a}_{3}$の線形和で表される.
+		      \item $\bm{a}_{4}$は$\bm{a}_{1},\,\bm{a}_{2},\,\bm{a}_{3}$の線形和で表されることから$\bm{a}_{4}$は$\bm{a}_{1},\,\bm{a}_{2},\,\bm{a}_{3}$と線形従属な関係であるので, 線形独立なベクトルの最大個数は2個である.
+	      \end{enumerate}
+	\item 行列$\bm{A}$の第$i$列ベクトルを$\bm{a}_{i}\ (i=1,2,...,n)$とする. ${\rm rank}\overline{\bm{A}}={\rm rank}\bm{A}$のとき, 実数$c_{i}\ (\neq 0,\,\in \mathbb{R})$を用いて
+	      \begin{eqnarray*}
+		      \bm{b}=\sum_{i=1}^{n}c_{i}\bm{a}_{i}
+	      \end{eqnarray*}
+	      と表すことができる. この$c_{i}$を1から順に$n$まで縦に並べた$\bm{c}=\begin{pmatrix}c_{1}\\c_{2}\\\vdots\\c_{n}\end{pmatrix}$をつくると
+	      \begin{eqnarray*}
+		      \bm{Ac}=\bm{b}
+	      \end{eqnarray*}
+	      となるので, $\bm{c}$は連立方程式の解$\bm{x}$となる. ゆえに題意は示された.
+	\item 以下のように変形することができる.
+	      \begin{eqnarray*}
+		      \|\bm{b}-\bm{Ax}\|^{2}&=&(\bm{b}-\bm{Ax})^{T}(\bm{b}-\bm{Ax})\\
+		      &=&(\bm{b}^{T}-\bm{x}^{T}\bm{A}^{T})(\bm{b}-\bm{Ax})\\
+		      &=&\bm{x}^{T}\bm{A}^{T}\bm{A}\bm{x}-2\bm{x}^{T}\bm{A}^{T}\bm{b}+\bm{b}^{T}\bm{b}
+	      \end{eqnarray*}
+	      これを$\bm{x}$で微分すると
+	      \begin{eqnarray*}
+		      \frac{\partial \|\bm{b-Ax}\|^{2}}{\partial \bm{x}} = 2\bm{A}^{T}\bm{A}\bm{x}-2\bm{A}^{T}\bm{b}
+	      \end{eqnarray*}
+	      となる. ゆえに最小となる必要条件は
+	      \begin{eqnarray*}
+		      \bm{A}^{T}\bm{A}\bm{x}=\bm{A}^{T}\bm{b}
+	      \end{eqnarray*}
+	      である. ${\rm rank}\bm{A}=n$かつ${\rm rank}\overline{\bm{A}}>{\rm rank}\bm{A}$のとき, ${\rm rank}(\bm{A}^{T}\bm{A})=n$となる. ゆえに$\bm{A}$は正則であるので, 逆行列が存在して
+	      \begin{eqnarray*}
+		      &&(\bm{A}^{T}\bm{A})^{-1}\bm{A}^{T}\bm{A}\bm{x}=(\bm{A}^{T}\bm{A})^{-1}\bm{A}^{T}\bm{b}\\
+		      \Longleftrightarrow\ && \bm{x}=(\bm{A}^{T}\bm{A})^{-1}\bm{A}^{T}\bm{b}
+	      \end{eqnarray*}
+	      となる.
+\end{enumerate}
+\newpage
+\section{}%第2問
+\subsection{問題文}
+関数$f_{1}$を$[0,1]$上で定義される正値の定数関数とし, $f_{1}(x)=c$とおく. また, 正の実数$p,q$を$1/p+1/q=1$を満たすものとする. これらに対し, $[0,1]$上で定義される関数の列$\{f_{n}\}$を
+\begin{eqnarray*}
+	f_{n+1}(x)=p\int_{0}^{x}(f_{n}(t))^{1/q}\dix t
+\end{eqnarray*}
+で定める. 以下の問いに答えよ.
+\begin{enumerate}[(1)]
+	\setlength{\itemsep}{10pt}
+	\item $a_{1}=0,\,c_{1}=c$かつ
+	      \begin{eqnarray*}
+		      && a_{n+1}=q^{-1}a_{n}+1\hspace{15pt} (n=1,2,...),\\
+		      && c_{n+1}=\frac{p\,(c_{n})^{1/q}}{a_{n+1}}\hspace{15pt} (n=1,2,...)
+	      \end{eqnarray*}
+	      で定まる実数列$\{a_{n}\}$と$\{c_{n}\}$を用いて$f_{n}(x)=c_{n}x^{a_{n}}$と表されることを示せ.
+	\item $n\geq 2$に対し$[0,1]$上で定義される関数$g_{n}$を$g_{n}(x)=x^{a_{n}}-x^{p}$とおく. $n\geq 2$に対し$a_{n}\geq 1$となることに注意して, $g_{n}$がある点$x=x_{n}$で最大値をとることを示し, この$x_{n}$を求めよ.
+	\item 任意の$x\in [0,1]$に対して$\displaystyle \lim_{n\to \infty}g_{n}(x)=0$となることを示せ.
+	\item $d_{n}=(c_{n})^{q^{n}}$とおく. $d_{n+1}/d_{n}$が$n\to \infty$のとき有限な正の値に収束することを示せ.\\
+	      なお, $\displaystyle \lim_{t\to \infty}(1-1/t)^{t}=1/{\rm e}$となることは用いて良い.
+	\item $\displaystyle \lim_{n\to \infty}c_{n}$の値を求めよ.
+	\item 任意の$x\in[0,1]$に対して$\displaystyle \lim_{n\to \infty}f_{n}(x)=x^{p}$となることを示せ.
+\end{enumerate}
+\newpage
+\subsection{解答例}
+\begin{enumerate}[(1)]
+	\setlength{\itemsep}{10pt}
+	\item 数学的帰納法によって示す.\\
+	      \begin{enumerate}[(i)]
+		      \item $n=1$のとき,
+		            \begin{eqnarray*}
+			            f_{1}(x)=c=c\cdot x^{0}=c_{1}x^{a_{0}}
+		            \end{eqnarray*}
+		            となるので, 成立する.
+		      \item $n=k$のとき$f_{n}(x)=c_{n}x^{a_{n}}$であると仮定すると, $n=k+1$のときは
+		            \begin{eqnarray*}
+			            f_{k+1}(x)&=&p\int_{0}^{x}((f_{k}(t))^{1/q}\dix t\\
+			            &=&p\int_{0}^{x}(c_{k}x^{a_{k}})^{1/q}\dix t\\
+			            &=&p\left[c_{k}^{1/q}\cdot \frac{q}{a_{k}+q}x^{\frac{a_{k}+q}{q}}\right]_{0}^{x}\\
+			            &=&p\,c_{k}^{1/q}\cdot \frac{1}{q^{-1}a_{k}+1}x^{q^{-1}a_{k}+1}\\
+			            &=&\frac{p\,c_{k}^{1/q}}{a_{k+1}}x^{a_{k+1}}\\
+			            &=&c_{k+1}x^{a_{k+1}}
+		            \end{eqnarray*}
+		            となり, 成立する.
+	      \end{enumerate}
+	      (i),(ii)より, 数学的帰納法より, 題意は示された.
+	\item $n\geq 2$のとき,
+	      \begin{eqnarray*}
+		      g_{n}'(x)=a_{n}x^{a_{n}-1}-px^{p-1}
+	      \end{eqnarray*}
+	      ここで, $a_{n}$の一般項を求める. 特性方程式$\alpha = q^{-1}\alpha+1$を解くことによって, $\alpha = p$となる. ゆえに
+	      \begin{eqnarray*}
+		      &&a_{n}-p=q^{-1}\left(a_{n}-p\right)\\
+		      &&a_{n}=p\left(1-q^{1-n}\right) < p
+	      \end{eqnarray*}
+	      ゆえに, $g'_{n}(x)=0$となるときは
+	      \begin{eqnarray*}
+		      &&g_{n}'(x)=0\\
+		      \Longleftrightarrow\ && a_{n}x^{a_{n}-1}-p\,x^{p-1}=0\\
+		      \Longleftrightarrow\ && x^{a_{n}-1}\Bigl(a_{n}-p\,x^{p-a_{n}}\Bigr)=0\\
+		      \Longleftrightarrow\ && x=0,\left(\frac{a_{n}}{p}\right)^{\frac{1}{p-a_{n}}}
+	      \end{eqnarray*}
+	      $g_{n}'(1)=a_{n}-p<0$より増減表は以下のように書くことができる.
+	      \begin{center}
+		      \begin{tabular}{|c|c||c|c|c|c|}\hline
+			      $x$         & 0 & $\cdots$   & $\displaystyle \left(\frac{a_{n}}{p}\right)^{\frac{1}{p-a_{n}}}$ & $\cdots$   & 1         \\ \hline
+			      $g_{n}'(x)$ & 0 & $+$        & 0                                                                & $-$        & $a_{n}-p$ \\ \hline
+			      $g_{n}(x)$  & 0 & $\nearrow$ &                                                                  & $\searrow$ & 0         \\ \hline
+		      \end{tabular}
+	      \end{center}
+	      よって, $x_{n}=\displaystyle \left(\frac{a_{n}}{p}\right)^{\frac{1}{p-a_{n}}}$のとき最大値をとることが示された.
+	\item まず,
+	      \begin{eqnarray*}
+		      \lim_{n\to \infty}a_{n}=\lim_{n\to \infty}\left\{p(1-q^{1-n})\right\}=p
+	      \end{eqnarray*}
+	      より,
+	      \begin{eqnarray*}
+		      \lim_{n\to \infty}g_{n}'(x) &=& \lim_{n\to \infty}a_{n}x^{a_{n}-1}-px^{p-1}\\
+		      &=& px^{p-1}-px^{p-1}\\
+		      &=&0
+	      \end{eqnarray*}
+	      これより関数$g_{n}'(x)$は区間$[0,1]$において増減がなく, $n\to \infty$において$g_{n}(0)=g_{n}(1)=0$であるから, 任意の$x\in[0,1]$に対しても$n\to \infty$において$g_{n}(x)=0$となる. よって, 題意は示された.
+	\item $q$の大きさについて
+	      \begin{eqnarray*}
+		      \frac{1}{p}+\frac{1}{q}=1&\Longrightarrow& \frac{1}{q}<1\\
+		      &\Longleftrightarrow& q>1
+	      \end{eqnarray*}
+	      となる. $d_{n+1}/d_{n}$について整理すると
+	      \begin{eqnarray*}
+		      \frac{d_{n+1}}{d_{n}}&=&\frac{\displaystyle \left(\frac{p(c_{n})^{1/q}}{a_{n+1}}\right)^{q^{n+1}}}{(c_{n})^{q^{n}}}\\
+		      &=&\frac{\displaystyle \frac{p^{q^{n+1}}(c_{n})^{q^{n}}}{(a_{n+1})^{q^{n+1}}}}{(c_{n})^{q^{n}}}\\
+		      &=&\frac{p^{q^{n+1}}}{(a_{n+1})^{q^{n+1}}}\\
+		      &=&\left(\frac{p}{p(1-q^{-n})}\right)^{q_{n+1}}\\
+		      &=&\left(\frac{1}{1-q^{-n}}\right)^{q^{n+1}}\\
+		      &=&\left(\frac{1}{1-\frac{1}{q^{n}}}\right)^{q^{n}}\cdot \left(\frac{1}{1-\frac{1}{q^{n}}}\right)
+	      \end{eqnarray*}
+	      $q>1$より, $n\to \infty$のとき$q^{n}\to \infty$であることを用いて
+	      \begin{eqnarray*}
+		      \lim_{n\to \infty}\frac{d_{n+1}}{d_{n}}&=&\lim_{n\to \infty}\left(\frac{1}{1-\frac{1}{q^{n}}}\right)^{q^{n}}\cdot \left(\frac{1}{1-\frac{1}{q^{n}}}\right)\\
+		      &=& \frac{1}{\rm e}
+	      \end{eqnarray*}
+\end{enumerate}
+\newpage
+\section{}%第3問
+\subsection{問題文}
+赤いカードが2枚と白いカードが1枚入った袋および複素数$z_{n},\,w_{n}\ (n=0,1,2,...)$について考える. まず, 袋から1枚のカードを取り出し袋に戻す. このとき取り出されたカードの色に応じて$z_{k+1}\ (k=0,1,2,...)$を以下のルールで生成する.
+\begin{eqnarray*}
+	z_{k+1}=\left\{\begin{array}{l}iz_{k}\hspace{30pt} 赤いカードが取り出された場合\\-iz_{k}\hspace{22pt} 白いカードが取り出された場合\end{array}\right.
+\end{eqnarray*}
+次に, 袋からもう一度1枚のカードを取り出し袋に戻す. このとき取り出したカードの色に応じて$w_{k+1}$を以下のルールで生成する.
+\begin{eqnarray*}
+	w_{k+1}=\left\{\begin{array}{l}-iw_{k}\hspace{22pt} 赤いカードが取り出された場合\\iw_{k}\hspace{30pt} 白いカードが取り出された場合\end{array}\right.
+\end{eqnarray*}
+ここで, 各カードは独立に等確率で取り出されるものとする. また初期状態を$z_{0}=1,\,w_{0}=1$とする. すなわち, $z_{n},\,w_{n}$は, $z_{0}=1,\,w_{0}=1$の状態から始め, 上記の一連の二つの操作を$n$回繰り返した後の値である. なお, ここでは$i$は虚数単位とする.\\[0.5cm]
+\hspace{10pt} 以下の問いに答えよ.
+
+\begin{enumerate}[(1)]
+	\setlength{\itemindent}{10pt}
+	      \setlength{\itemsep}{10pt}
+	\item $n$が奇数のとき${\rm Re}(z_{n})=0$, 偶数のとき${\rm Im}(z_{n})=0$であることを示せ. ただし, ${\rm Re}(z),\,{\rm Im}(z)$はそれぞれ$z$の実部, 虚部を表すものとする.
+	\item $z_{n}=1$である確率を$P_{n},\ z_{n}=i$である確率を$Q_{n}$とする. $P_{n},\ Q_{n}$についての漸化式を立てよ.
+	\item $z_{n}=1,\ z_{n}=i,\ z_{n}=-1,\ z_{n}=-i$である確率をそれぞれ求めよ.
+	\item $z_{n}$の期待値が$(i/3)^{n}$であることを示せ.
+	\item $z_{n}=w_{n}$である確率を求めよ.
+	\item $z_{n}+w_{n}$の期待値を求めよ.
+	\item $z_{n}w_{n}$の期待値を求めよ.
+\end{enumerate}
+\newpage
+
+\subsection{解答例}
+\begin{enumerate}[(1)]
+	\setlength{\itemsep}{10pt}
+	\item 赤いカードが2回連続で出されたら
+	      \begin{eqnarray*}
+		      z_{k+2}=-z_{k}^{2}
+	      \end{eqnarray*}
+	      となり, これは白いカードが2回連続で出された場合も同様である. 赤いカードが取り出され, 白いカードが取り出された場合
+	      \begin{eqnarray*}
+		      z_{k+2}=z_{k}^{2}
+	      \end{eqnarray*}
+	      となり, これは白いカードが取り出され, 赤いカードが取り出された場合も同様である. ゆえに,
+	      \begin{eqnarray*}
+		      z_{k+2}=\left\{
+		      \begin{array}{l}
+			      -z_{k}^{2}\hspace{22pt} 同じカードが2回連続で取り出された場合 \\
+			      z_{k}^{2}\hspace{30pt} 異なるカードが取り出された場合
+		      \end{array}
+		      \right.
+	      \end{eqnarray*}
+	      ここで, $n=0$のとき$z_{0}=1$であるので, $z_{2}$は$1$または$-1$の値をとる. 帰納的に$n=2k$のとき$z_{n}$は1または$-1$の値をとるので, ${\rm Im}(z_{n})=0$となる. 一方で, $n=1$のとき, $z_{1}$は$i$または$-i$である.帰納的に$n=2k+1$のとき$z_{n}$は$i$または$-i$の値をとるので, ${\rm Re}(z_{n})=0$となる. よって, 題意は示された.
+\end{enumerate}
+\index{tikz@ティック}
+\end{document}

@@ -1,0 +1,78 @@
+\subsection{問題文}
+実数値関数$u(x, t)$が$0\, \leq \, x\, \leq\, 1, \; t\, \geq \, 0$で定義されている。
+ここで$x$と$t$は互いに独立である。偏微分方程式
+\begin{equation*}
+    \pdiff{u}{t} = \pdiff[2]{u}{x} \qquad (*)
+\end{equation*}
+の解を次の条件
+\begin{align*}
+    \mbox{境界条件：} & \quad u(0, t) = u(1, t) = 0\\
+    \mbox{初期条件：} & \quad u(x, 0) = x - x^{2}
+\end{align*}
+のもとで求める。但し、定数関数$u(x, t) = 0$は明らかに解であるから、それ以外の解を考える。
+以下の問いに答えよ。
+\begin{enumerate}[(1)]
+    \item 次の式を計算せよ。ここで, $n, m$はともに正の整数とする。
+        \begin{equation*}
+            \dint{0}{1}{\sin (n\pi x)\; \sin (m\pi x)}
+        \end{equation*}\label{subsec:prom2:subprom1}
+    \item $x$のみの関数$\xi (x)$及び$t$のみの関数$\tau (t)$を用いて、$u(x, t) = \xi (x)\tau (t)$と置けるとする。
+        任意の定数$C$を用いて、$\xi$および$\tau$が満たす常微分方程式をそれそれ表せ。関数$f(x)$と関数$g(t)$が任意の
+        $x$と$t$について$f(x) = g(t)$を満たす場合は、$f(x)$と$g(t)$が定数関数となることを用いてもよい。\label{subsec:prom2:subprom2}
+    \item 設問\eqref{subsec:prom2:subprom2}の常微分方程式を解け。次に、境界条件を満たす偏微分方程式$(*)$の解の一つが次の式で表される$u_n(x, t)$
+        で与えられることを示し、$\alpha, \beta$を正の整数$n$を用いて表せ。
+        \begin{equation*}
+            u_n (x, t) = e^{\alpha t}\sin (\beta x)
+        \end{equation*}\label{subsec:prom2:subprom3}
+    \item 境界条件と初期条件を満たす偏微分方程式$(*)$の解は$u_n (x, t)$の線形結合として次の式で表される。$c_n$を求めよ。設問\eqref{subsec:prom2:subprom1}の結果を
+        用いてもよい。
+        \begin{equation*}
+            u(x, t) = \sum\limits_{n = 1}^{\infty} c_n u_n (x, t)
+        \end{equation*}\label{subsec:prom2:subprom4}
+\end{enumerate}
+\newpage
+\subsection{解答}
+\begin{enumerate}[(1)]
+    \item 題意の式より以下が成り立つ。
+        \begin{align*}
+            \mbox{(与式)} 
+            & = \frac{1}{2}\dint{0}{1}{\cos (n\pi x - m\pi x) - \cos (n\pi x + m\pi x)}\\
+            & = 
+            \begin{cases}
+                \frac{1}{2}\dint{0}{1}{1 - \cos (2n\pi x)} & n = m\\
+                \frac{1}{2}\left[\frac{\sin ((n - m)\pi x)}{(n - m)\pi}\right]_{0}^{1} - \frac{1}{2}\left[\frac{\sin ((n + m)\pi x)}{(n + m)\pi}\right]_{0}^{1} & n \neq m\\
+            \end{cases}\\
+            & = 
+            \begin{cases}
+                \frac{1}{2} - \frac{1}{2}\left[\frac{\sin (2n\pi x)}{2n\pi}\right]_{0}^{1} & n = m\\
+                0 & n \neq m\\
+            \end{cases}\\
+            & = 
+            \begin{cases}
+                \frac{1}{2} & n = m\\
+                0 & n \neq m\\
+            \end{cases}
+        \end{align*}
+    \item 偏微分方程式$(*)$より$u(x, t) = \xi (x)\tau (t)$と表せるとすると以下が成り立つ。
+        \begin{align*}
+            (*) \Longleftrightarrow
+            \pdiff{\{\xi (x)\tau (t)\}}{t} & = \pdiff[2]{\{\xi (x)\tau (t)\}}{x}\\
+            \Longleftrightarrow
+            \xi (x)\diff{\tau}{t} & = \tau (t)\diff[2]{\xi}{x}\\
+            \Longleftrightarrow&
+            \begin{cases}
+                0 = \tau (t)\diff[2]{\xi}{x} & \diff{\tau}{t} = 0\\
+            \end{cases}
+        \end{align*}
+    \item ここで、初期条件より$u(x, 0) = \xi (x) \tau(0) = x - x^{2}$より、$\xi (x) = x - x^{2}, \tau (0) = 1$と置ける。
+        これは境界条件$u(0, t) = u(1, t) = 0$も満たす。よって、以下のようになる。
+        \begin{align*}
+            \xi(x) = x(1 - x), \; \diff[2]{\xi}{x} = -2\\
+            \Longrightarrow
+            (*) \Longleftrightarrow
+            x(1 - x)\diff{\tau}{t} & = -2\tau (t)\\
+            \therefore
+            \diff{\tau}{t} = 0
+        \end{align*}
+    \item 
+\end{enumerate}
