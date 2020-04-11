@@ -1056,7 +1056,7 @@
             &= \frac{1}{\sqrt{2\pi}}\dint{-\infty}{\infty}{\exp\left(-ax^{2}\right)\exp(-\imag kx)}\\
             &= \frac{1}{\sqrt{2\pi}}\dint{-\infty}{\infty}{\exp\left(-ax^{2}-\imag kx\right)}\\
             &= \frac{1}{\sqrt{2\pi}}\dint{-\infty}{\infty}{\exp\left\{-a\left(x - \frac{\imag k}{2a}\right)^{2} + \frac{1}{a}\cdot \left(\frac{\imag k}{2}\right)^{2}\right\}}\\
-            &= \frac{\exp \left(-\frac{k^{2}}{4a}\right)}{\sqrt{2\pi}}\dint{-\infty}{\infty}{\exp\left\{-a\left(x - \frac{\imag k}{2}\right)^{2}\right\}}\\
+            &= \frac{\exp \left(-\frac{k^{2}}{4a}\right)}{\sqrt{2\pi}}\dint{-\infty}{\infty}{\exp\left\{-a\left(x - \frac{\imag k}{2a}\right)^{2}\right\}}\\
             &= \frac{\exp \left(-\frac{k^{2}}{4a}\right)}{\sqrt{2\pi}}\sqrt{\frac{\pi}{a}}
         \end{align*}
         従って以下が成り立つ.
@@ -1071,19 +1071,19 @@
   \item 設問\eqref{subsec2:prom2}で得られた$U(k, t)$と$a > 0$, 設問\eqref{subsec2:prom1}より,以下が成り立つ.
     \begin{align*}
         u(x, t) &= \frac{1}{\sqrt{2\pi}}\dint[k]{-\infty}{\infty}{U(k, t)\exp(ikx)}\\
-        &= \frac{1}{\sqrt{2\pi}}\dint[k]{-\infty}{\infty}{\frac{\exp\left(\frac{-ak^2}{4}\right)}{\sqrt{2a}}\cos(kct)\exp(\imag kx)}\\
-        &= \frac{1}{2\sqrt{a\pi}}\dint[k]{-\infty}{\infty}{\exp\left(-a\frac{k^2}{4} + \imag kx\right)\frac{\exp\left(\imag kct\right) + \exp\left(-\imag kct\right)}{2}}\\
-        &= \frac{1}{4\sqrt{a\pi}}\dint[k]{-\infty}{\infty}{\exp\left(-a\frac{k^2}{4} + \imag kx + \imag kct\right) + \exp\left(-a\frac{k^2}{4} + \imag kx - \imag kct\right)}\\
-        &= \frac{1}{4\sqrt{a\pi}}\dint[k]{-\infty}{\infty}{\exp\left\{-\frac{a}{4}\left(k - 2\imag \frac{x + ct}{a}\right)^2 + \frac{(x + ct)^2}{a}\right\}}\\
-        &\quad+ \frac{1}{4\sqrt{a\pi}}\dint[k]{-\infty}{\infty}{\exp\left\{-\frac{a}{4}\left(k - 2\imag \frac{x - ct}{a}\right)^2 + \frac{(x - ct)^2}{a}\right\}}\\
-        &= \frac{1}{4\sqrt{a\pi}}\exp\left\{\frac{(x + ct)^2}{a}\right\}\dint[k]{-\infty}{\infty}{\exp\left\{-\frac{a}{4}\left(k - 2\imag \frac{x + ct}{a}\right)^2\right\}}\\
-        &\quad+ \frac{1}{4\sqrt{a\pi}}\exp\left\{\frac{(x - ct)^2}{a}\right\}\dint[k]{-\infty}{\infty}{\exp\left\{-\frac{a}{4}\left(k - 2\imag \frac{x - ct}{a}\right)^2\right\}}\\
-        &= \frac{1}{4\sqrt{a\pi}}\exp\left\{\frac{(x + ct)^2}{a}\right\}\sqrt{\frac{\pi}{\frac{a}{4}}} + \frac{1}{4\sqrt{a\pi}}\exp\left\{\frac{(x - ct)^2}{a}\right\}\sqrt{\frac{\pi}{\frac{a}{4}}}\\
-        &= \frac{1}{2a}\left[\exp\left\{\frac{(x + ct)^2}{a}\right\} + \exp\left\{\frac{(x - ct)^2}{a}\right\}\right]
+        &= \frac{1}{\sqrt{2\pi}}\dint[k]{-\infty}{\infty}{\frac{\exp\left(\frac{-k^2}{4a}\right)}{\sqrt{2a}}\cos(kct)\exp(\imag kx)}\\
+        &= \frac{1}{2\sqrt{a\pi}}\dint[k]{-\infty}{\infty}{\exp\left(-\frac{k^2}{4a} + \imag kx\right)\frac{\exp\left(\imag kct\right) + \exp\left(-\imag kct\right)}{2}}\\
+        &= \frac{1}{4\sqrt{a\pi}}\dint[k]{-\infty}{\infty}{\exp\left(-\frac{k^2}{4a} + \imag kx + \imag kct\right) + \exp\left(-\frac{k^2}{4a} + \imag kx - \imag kct\right)}\\
+        &= \frac{1}{4\sqrt{a\pi}}\dint[k]{-\infty}{\infty}{\exp\left[-\frac{1}{4a}\left\{k - 2a\imag (x + ct)\right\}^2 - a(x + ct)^2\right]}\\
+        &\quad+ \frac{1}{4\sqrt{a\pi}}\dint[k]{-\infty}{\infty}{\exp\left[-\frac{1}{4a}\left\{k - 2a\imag (x - ct)\right\}^2 - a(x - ct)^2\right]}\\
+        &= \frac{1}{4\sqrt{a\pi}}\exp\left\{-a(x + ct)^2\right\}\dint[k]{-\infty}{\infty}{\exp\left[-\frac{1}{4a}\left\{k - 2a\imag (x + ct\right\}^2\right]}\\
+        &\quad+ \frac{1}{4\sqrt{a\pi}}\exp\left\{-a(x - ct)^2\right\}\dint[k]{-\infty}{\infty}{\exp\left[-\frac{1}{4a}\left\{k - 2a\imag (x - ct)\right\}^2\right]}\\
+        &= \frac{1}{4\sqrt{a\pi}}\exp\left\{-a(x + ct)^2\right\}\sqrt{\frac{\pi}{\frac{1}{4a}}} + \frac{1}{4\sqrt{a\pi}}\exp\left\{-a(x - ct)^2\right\}\sqrt{\frac{\pi}{\frac{1}{4a}}}\\
+        &= \frac{1}{2}\left[\exp\left\{-a(x + ct)^2\right\} + \exp\left\{-a(x - ct)^2\right\}\right]
     \end{align*}
     よって,求める関数$u(x, t)$は以下のようになる.
     \begin{equation*}
-        u(x, t) = \frac{1}{2a}\left[\exp\left\{\frac{(x + ct)^2}{a}\right\} + \exp\left\{\frac{(x - ct)^2}{a}\right\}\right]
+        u(x, t) = \frac{1}{2}\left[\exp\left\{-a(x + ct)^2\right\} + \exp\left\{-a(x - ct)^2\right\}\right]
     \end{equation*}
 \end{enumerate}
 
