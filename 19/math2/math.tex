@@ -1415,7 +1415,8 @@ $(X, Y)$とおく.ただし,$X, Y$は確率変数である.以下の問いに答
   ここで$\Theta$は区間$[0, 2\pi)$において一様分布に従うので確率密度関数$g(\Theta)$は式
   \eqref{eq:subsec3:prom1:f}であるため,以下が成り立つ.
   \begin{align*}
-    g(\Theta) &= \frac{1}{2\pi}
+    g(\Theta) &= \frac{\frac{1}{2\pi}}{\frac{3}{8}}\\
+              &= \frac{4}{3\pi}
   \end{align*}
   よって,$\frac{5\pi}{4}\, \leq\, \Theta < \frac{3\pi}{2}$において,つまり $0 < X\, \leq\, 1$の時,
   式\eqref{eq:subsec3:prom4:theta2}より,確率密度関数$f(x)$は変数変換の公式を用いて以下のようになる.
@@ -1424,7 +1425,7 @@ $(X, Y)$とおく.ただし,$X, Y$は確率変数である.以下の問いに答
     \therefore \diff{h}{x}(x) &= \frac{1}{1 + \left(\frac{x - 1}{2x}\right)^2}\frac{x - (x - 1)}{2x^2}\nonumber\\
                   &= \frac{4x^2}{\left\{\left(x - 1\right)^2 + 4x^2\right\}2x^2}\nonumber\\
                   &= \frac{2}{\left(x - 1\right)^2 + 4x^2}\nonumber\\
-    \Longleftrightarrow f(x) &= \frac{1}{2\pi}\frac{2}{\left(x - 1\right)^2 + 4x^2}\label{eq:subsec3:prom5:fx:gz}
+    \Longleftrightarrow f(x) &= \frac{4}{3\pi}\frac{2}{\left(x - 1\right)^2 + 4x^2}\label{eq:subsec3:prom5:fx:gz}
   \end{align}
   $\frac{3\pi}{2} < \Theta < 2\pi$において,つまり$-1\, \leq\, X < 0$の時,
   式\eqref{eq:subsec3:prom4:theta2}より,確率密度関数$f(x)$は変数変換の公式を用いて以下のようになる.
@@ -1434,37 +1435,18 @@ $(X, Y)$とおく.ただし,$X, Y$は確率変数である.以下の問いに答
   $0 < X\, \leq\, 1$の時と同様にして
   \begin{align}
     \diff{h}{x}(x) &= \frac{2}{\left(x - 1\right)^2 + 4x^2}\nonumber\\
-    \Longleftrightarrow f(x) &= \frac{1}{2\pi}\frac{2}{\left(x - 1\right)^2 + 4x^2}\label{eq:subsec3:prom5:fx:lz}
+    \Longleftrightarrow f(x) &= \frac{4}{3\pi}\frac{2}{\left(x - 1\right)^2 + 4x^2}\label{eq:subsec3:prom5:fx:lz}
   \end{align}
-  $\Theta = \frac{3\pi}{2}$において,つまり$X = 0$の時,
-  式\eqref{eq:subsec3:prom4:theta2}より,確率密度関数$f(x)$は変数変換の公式を用いて以下のようになる.
-  \begin{align}
-    h(0) = \Theta &= \frac{3\pi}{2}\nonumber\\
-    \diff{h}{x} &= 0\nonumber\\
-    \Longleftrightarrow f(0) &= 0\label{eq:subsec3:prom5:fx:nez}
-  \end{align}
-  よって,式\eqref{eq:subsec3:prom5:fx:gz}, \eqref{eq:subsec3:prom5:fx:lz}, \eqref{eq:subsec3:prom5:fx:nez}から確率密度関数は以下のようになる.
+  よって,式\eqref{eq:subsec3:prom5:fx:gz}, \eqref{eq:subsec3:prom5:fx:lz}から確率密度関数$f(x)$は$x=0$の時も連続である。よって以下のようになる.
   \begin{equation*}
-    f(x) = 
-    \begin{cases}
-      0 & x = 0\\
-      \frac{1}{\pi\left\{\left(x - 1\right)^2 + 4x^2\right\}} & -1\, \leq\, x < 0,\, 0 < x\, \leq\, 1 
-    \end{cases}
+    f(x) = \frac{8}{3\pi\left\{\left(x - 1\right)^2 + 4x^2\right\}}\quad -1\, \leq\,  x\, \leq\, 1
   \end{equation*}
-  従って期待値は以下のようになる.
+  従って期待値$\delta$は以下のようになる.
   \begin{align*}
-    \delta &= \dint{-\infty}{\infty}{xf(x)}\\
-           &= \lim_{t \to -0}\dint{-1}{t}{xf(x)} + \lim_{t \to +0}\dint{t}{1}{xf(x)}\\
-           &= \lim_{t \to -0}\dint{-1}{t}{\frac{x}{\pi\left\{(x - 1)^2 + 4x^2\right\}}}
-             + \lim_{t \to +0}\dint{t}{1}{\frac{x}{\pi\left\{(x - 1)^2 + 4x^2\right\}}}\\
-           &= \lim_{t \to -0}\frac{1}{10\pi}\dint{-1}{t}{\frac{10x - 2 + 2}{(x - 1)^2 + 4x^2}} 
-             + \lim_{t \to +0}\frac{1}{10\pi}\dint{t}{1}{\frac{10x - 2 + 2}{(x - 1)^2 + 4x^2}}\\
-           &= \lim_{t \to -0}\frac{1}{10\pi}\left\{\left[\log\left\{(x - 1)^2 + 4x^2\right\}\right]_{-1}^{t} + \dint{-1}{t}{\frac{2}{(x - 1)^2 + 4x^2}}\right\}\\
-           &\quad + \lim_{t \to +0}\frac{1}{10\pi}\left\{\left[\log\left\{(x - 1)^2 + 4x^2\right\}\right]_{t}^{1} + \dint{t}{1}{\frac{2}{(x - 1)^2 + 4x^2}}\right\}\\
-           &= \lim_{t \to -0}\left(\frac{1}{10\pi}\left[\log\left\{(t - 1)^2 + 4t^2\right\} - 3\log 2\right] + \frac{1}{5\pi}\dint{-1}{t}{\frac{1}{\frac{1}{5}\left\{(5x - 1)^2 + 4\right\}}}\right)\\
-           &\quad + \lim_{t \to +0}\left(\frac{1}{10\pi}\left[2\log 2 - \log\left\{(t - 1)^2 + 4t^2\right\}\right] + \frac{1}{5\pi}\dint{t}{1}{\frac{1}{\frac{1}{5}\left\{(5x - 1)^2 + 4\right\}}}\right)\\
-           &= \frac{-3\log 2}{10\pi} + \frac{2\log 2}{10\pi} + \lim_{t \to -0}\frac{1}{\pi}\dint{-1}{t}{\frac{1}{(5x - 1)^2 + 4}} + \lim_{t \to +0}\frac{1}{\pi}\dint{t}{1}{\frac{1}{(5x - 1)^2 + 4}}\\
-           &= \frac{-\log 2}{10\pi} + \lim_{t \to -0}\frac{1}{\pi}\dint{-1}{t}{\frac{1}{(5x - 1)^2 + 4}} + \lim_{t \to +0}\frac{1}{\pi}\dint{t}{1}{\frac{1}{(5x - 1)^2 + 4}}
+    \delta &= \dint{-1}{1}{xf(x)}\\
+          &= \dint{-1}{1}{\frac{8x}{3\pi\left\{\left(x - 1\right)^2 + 4x^2\right\}}}\\
+          &= \frac{8}{3\pi}\dint{-1}{1}{\frac{x}{\left\{\left(x - 1\right)^2 + 4x^2\right\}}}\\
+          &= \frac{8}{3\pi}\dint{-1}{1}{\frac{10x - 2}{\left\{\left(x - 1\right)^2 + 4x^2\right\}}}\\
   \end{align*}
   ここで$5x - 1 = 2\tan u$と置換し, $\beta,\, \gamma_1(< \frac{3\pi}{2}),\, \gamma_2(> \frac{3\pi}{2}),\, \eta$を$\tan\beta = -3, \tan\gamma_1 = \tan\gamma_2 = \frac{5t - 1}{2}, \tan\eta = 2$を満たすとものとしておくと以下のようになる.
   \begin{align*}

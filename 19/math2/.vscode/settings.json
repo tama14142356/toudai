@@ -24,10 +24,11 @@
     // 使用パッケージのコマンドや環境の補完を有効にする
     "latex-workshop.intellisense.package.enabled": true,
     // 自動保存
-    "files.autoSave": "afterDelay",
+    "files.autoSave": "off",
+    // "files.autoSave": "afterDelay",
     // autoSaveとの相性が悪いので保存時自動ビルドを無効化
-    // "latex-workshop.latex.autoBuild.run": "onFileChange",
-    "latex-workshop.latex.autoBuild.run": "never",
+    "latex-workshop.latex.autoBuild.run": "onFileChange",
+    // "latex-workshop.latex.autoBuild.run": "never",
     // ビルドコマンド
     "latex-workshop.latex.recipes": [
         {
