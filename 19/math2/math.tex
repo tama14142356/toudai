@@ -1,4 +1,4 @@
-% \documentclass[dvipdfmx, a4paper, 11pt]{jsarticle}%A４用紙縦,明朝（デフォルト）１１ポイント
+%\documentclass[dvipdfmx, a4paper, 11pt]{jsarticle}%A４用紙縦,明朝（デフォルト）１１ポイント
 \documentclass[dvipdfmx,titlepage, 11pt, a4paper]{jsarticle}%A４用紙縦,明朝（デフォルト）１１ポイント
 \usepackage[top=18truemm,bottom=18truemm,left=18truemm,right=18truemm]{geometry}%余白調整
 % \setlength{\textheight}{45\baselineskip}
@@ -428,41 +428,7 @@
         \end{cases}
     \end{align*}
     従って,対角成分のみ1となり,他の成分は全て0となるので,$QQ^{\ast}$は単位行列となる.従って,$Q$はユニタリ行列であることが示された.
-    \item 題意の2次正方行列$H$についてユニタリ行列であることを示す.
-    \begin{align*}
-        HH^{\ast} & = 
-        \spalignmat{
-            {\exp(\imag \psi)\cos\theta} {\exp(\imag \psi)\sin\theta};
-            {-\exp(-\imag \psi)\sin\theta} {\exp(-\imag \psi)\cos\theta}
-        }
-        \spalignmat{
-            {\exp(-\imag \psi)\cos\theta} {-\exp(\imag \psi)\sin\theta};
-            {\exp(-\imag \psi)\sin\theta} {\exp(\imag \psi)\cos\theta}
-        }\\
-        & = 
-        \spalignmat{
-            {\exp(\imag \psi - \imag \psi)(\cos^{2}\theta + \sin^{2}\theta)} 
-            {\exp(2\imag \psi)(-\cos\theta\sin\theta + \sin\theta\cos\theta)};
-            {\exp(-2\imag \psi)(-\sin\theta\cos\theta + \cos\theta\sin\theta)} 
-            {\exp(-\imag \psi + \imag \psi)(\sin^{2}\theta + \cos^{2}\theta)}
-        }\\
-        & = 
-        \spalignmat{
-            {1} {0};
-            {0} {1}
-        }\\
-        & = I
-    \end{align*}
-    よって,行列$H$はユニタリ行列である.また,行列$H$の行列式は以下のようになる.
-    \begin{align*}
-        \mid H \mid & = \exp(\imag \psi)\cos\theta\times\exp(-\imag \psi)\cos\theta - 
-        (-\exp(-\imag \psi)\sin\theta)\times\exp(\imag \psi)\sin\theta\\
-        & = \cos^{2}\theta + \sin^{2}\theta = 1
-    \end{align*}
-    よって,この２次正方行列$H$は行列式が1でユニタリ行列であるので,行列式が1で2次のユニタリ行列の一形式となる
-    ことが示された.\\
-    (中田解)\\
-    求める行列を$H$とする.\\
+    \item 求める行列を$H$とする.\\
     実数$r_{11},r_{12},r_{21},r_{22},\psi_{11},\psi_{12},\psi_{21},\psi_{22}$を用いて次のように$H$を表すことができる.
     \begin{eqnarray*}
       H=\begin{pmatrix}r_{11}\exp(\imag \psi_{11})&r_{12}\exp(\imag \psi_{12})\\r_{21}\exp(\imag \psi_{21})&r_{22}\exp(\imag \psi_{22})\end{pmatrix}
@@ -533,7 +499,7 @@
     また行列式の値が1であるから,
     \begin{align*}
       &\left|\begin{pmatrix}r_{11}\exp(\imag \psi_{11})&r_{12}\exp(\imag \psi_{12})\\r_{21}\exp(\imag \psi_{21})&r_{22}\exp(\imag \psi_{22})\end{pmatrix}\right| = 1 \\
-      \Longleftrightarrow\ & r_{11}r_{22}\exp(\imag (\psi_{11}+\psi_{22}))-r_{12}r_{22}\exp(\imag (\psi_{12}+\psi_{21}))=1 \tag{$\ast$}
+      \Longleftrightarrow\ & r_{11}r_{22}\exp(\imag (\psi_{11}+\psi_{22}))-r_{12}r_{21}\exp(\imag (\psi_{12}+\psi_{21}))=1 \tag{$\ast$}
     \end{align*}
     \begin{enumerate}[(i)]
     \item $r_{21}=\sin \theta,r_{22}=\cos\theta$のとき,
@@ -584,6 +550,13 @@
         \right.\\
         \Longleftrightarrow\ && \psi_{11}=2k\pi+\psi_{12}+\psi_{21}-\psi_{22}\hspace{20pt} (k\in\mathbb{Z})
       \end{eqnarray*}
+      式($\ast$)に代入すると
+      \begin{eqnarray*}
+        &&-\cos^{2}\theta\exp(\imag(2k\pi+\psi_{12}+\psi_{21}-\psi_{22}+\psi_{22}))-\sin^{2}\theta\exp(\imag(\psi_{12}+\psi_{21}))=1\\
+        \Longleftrightarrow\ && -\cos^{2}\theta\exp(\imag((\psi_{12}+\psi_{21}))-\sin^{2}\theta\exp(\imag(\psi_{12}+\psi_{21}))=1\\
+        \Longleftrightarrow\ && \psi_{12}+\psi_{21}=\pi
+      \end{eqnarray*}
+      となり, 以下(i)と同じになる.
     \item $r_{21}=-\sin\theta,r_{22}=\cos\theta$のとき,
       \begin{eqnarray*}
         &&\left\{
@@ -600,6 +573,7 @@
         \right.\\
         \Longleftrightarrow\ && \psi_{11}=2k\pi+\psi_{12}+\psi_{21}-\psi_{22}\hspace{20pt} (k\in\mathbb{Z})
       \end{eqnarray*}
+      となるので, (ii)と同じになる.
     \item $r_{21}=-\sin\theta,r_{22}=-\cos\theta$のとき,
       \begin{eqnarray*}
         &&\left\{
@@ -616,145 +590,78 @@
         \right.\\
         \Longleftrightarrow\ && \psi_{11}=(2k+1)\pi+\psi_{12}+\psi_{21}-\psi_{22}\hspace{20pt} (k\in\mathbb{Z})
       \end{eqnarray*}
-
+      となるので, (i)と同じになる.\\
     \end{enumerate}
-  \item 解けなかったので後述.\\
-    (中田解)\\
-    求める行列を$H$とする.\\
-    実数$r_{11},r_{12},r_{21},r_{22},\psi_{11},\psi_{12},\psi_{21},\psi_{22}$を用いて次のように$H$を表すことができる.
+    したがって, $\psi_{1}=\psi_{11},\ \psi_{2}=\psi_{12}$と書き直せば
+    \begin{eqnarray*}
+      H=\begin{pmatrix}\exp(\imag\psi_{1})\cos\theta&\exp(\imag\psi_{2})\sin\theta\\-\exp(-\imag\psi_{2})\sin\theta&\exp(-\imag\psi_{1})\cos\theta\end{pmatrix}
+    \end{eqnarray*}
+    となり, 題意は示された.\\[0.2cm]
+    \underline{補足}\\
+    これがユニタリ行列となることを確認する.
+    \begin{align*}
+        HH^{\ast} & = 
+        \spalignmat{
+            {\exp(\imag \psi)\cos\theta} {\exp(\imag \psi)\sin\theta};
+            {-\exp(-\imag \psi)\sin\theta} {\exp(-\imag \psi)\cos\theta}
+        }
+        \spalignmat{
+            {\exp(-\imag \psi)\cos\theta} {-\exp(\imag \psi)\sin\theta};
+            {\exp(-\imag \psi)\sin\theta} {\exp(\imag \psi)\cos\theta}
+        }\\
+        & = 
+        \spalignmat{
+            {\exp(\imag \psi - \imag \psi)(\cos^{2}\theta + \sin^{2}\theta)} 
+            {\exp(2\imag \psi)(-\cos\theta\sin\theta + \sin\theta\cos\theta)};
+            {\exp(-2\imag \psi)(-\sin\theta\cos\theta + \cos\theta\sin\theta)} 
+            {\exp(-\imag \psi + \imag \psi)(\sin^{2}\theta + \cos^{2}\theta)}
+        }\\
+        & = 
+        \spalignmat{
+            {1} {0};
+            {0} {1}
+        }\\
+        & = I
+    \end{align*}
+    よって,行列$H$はユニタリ行列である.また,行列$H$の行列式は以下のようになる.
+    \begin{align*}
+        \mid H \mid & = \exp(\imag \psi)\cos\theta\times\exp(-\imag \psi)\cos\theta - 
+        (-\exp(-\imag \psi)\sin\theta)\times\exp(\imag \psi)\sin\theta\\
+        & = \cos^{2}\theta + \sin^{2}\theta = 1
+    \end{align*}
+    よって,この２次正方行列$H$は行列式が1でユニタリ行列であるので,行列式が1で2次のユニタリ行列の一形式となる
+    ことが示された.\\
+  \item 求める行列を$Q$とする.\\
+    ${\rm det}\,Q{\rm det}Q^{\ast}=I$となることから, $|{\rm det} Q|=1$であるから, $Q$の行列式は
+    \begin{eqnarray*}
+      {\rm det}Q = \exp(\imag\beta)
+    \end{eqnarray*}
+    と書くことができる. ここで,
+    \begin{eqnarray*}
+      P = \begin{pmatrix}\exp\left(-\frac{\imag \beta}{2}\right)&0\\0&\exp\left(-\frac{\imag \beta}{2}\right)\end{pmatrix}
+    \end{eqnarray*}
+    とおくと,
+    \begin{eqnarray*}
+      {\rm det}PQ = {\rm det}P\,{\rm det}Q = \exp(-\imag \beta)\cdot \exp(\imag \beta)=1
+    \end{eqnarray*}
+    つまり,
+    \begin{eqnarray*}
+      PQ = \begin{pmatrix}\exp(\imag\psi_{1})\cos\theta&\exp(\imag\psi_{2})\sin\theta\\-\exp(-\imag\psi_{2})\sin\theta&\exp(-\imag\psi_{1})\cos\theta\end{pmatrix}
+    \end{eqnarray*}
+    となるので, $P$の逆行列をかければ2次のユニタリ行列の一般形が得られる.
+    \begin{eqnarray*}
+      Q &=& P^{-1}H\\
+        &=& \begin{pmatrix}\exp\left(\frac{\imag \beta}{2}\right)&0\\0&\exp\left(\frac{\imag \beta}{2}\right)\end{pmatrix}\begin{pmatrix}\exp(\imag\psi_{1})\cos\theta&\exp(\imag\psi_{2}\sin\theta\\-\exp(-\imag\psi_{2})\sin\theta&\exp(-\imag\psi_{1})\cos\theta\end{pmatrix}\\
+        &=& \begin{pmatrix}\exp(\imag(\psi_{1}+\beta/2))\cos\theta&\exp(\imag(\psi_{2}+\beta/2))\sin\theta\\-\exp(-\imag(\psi_{2}-\beta/2))\sin\theta&\exp(-\imag(\psi_{1}-\beta/2))\cos\theta\end{pmatrix}
+    \end{eqnarray*}
+    \vspace{0.5cm}
+
+    \noindent \underline{別方針(愚直に解く)}\\
+    (5)と同様に実数$r_{11},r_{12},r_{21},r_{22},\psi_{11},\psi_{12},\psi_{21},\psi_{22}$を用いて次のように$H$を表すことができる.
     \begin{eqnarray*}
       H=\begin{pmatrix}r_{11}\exp(\imag \psi_{11})&r_{12}\exp(\imag \psi_{12})\\r_{21}\exp(\imag \psi_{21})&r_{22}\exp(\imag \psi_{22})\end{pmatrix}
     \end{eqnarray*}
-    $H$がユニタリ行列になるとき
-    \begin{eqnarray*}
-      &&HH^{\ast}=I\\
-      \Longleftrightarrow\ && \begin{pmatrix}r_{11}\exp(\imag \psi_{11})&r_{12}\exp(\imag \psi_{12})\\r_{21}\exp(\imag \psi_{21})&r_{22}\exp(\imag \psi_{22})\end{pmatrix}\begin{pmatrix}r_{11}\exp(-\imag \psi_{11})&r_{21}\exp(-\imag \psi_{21})\\r_{12}\exp(-\imag \psi_{12})&r_{22}\exp(-\imag \psi_{22})\end{pmatrix}=\begin{pmatrix}1&0\\0&1\end{pmatrix}\\
-      \Longleftrightarrow\ &&\left\{
-                              \begin{array}{l}
-                                r_{11}^{2}+r_{12}^{2}=1\\
-                                r_{11}r_{21}\exp(\imag (\psi_{11}-\psi_{21}))+r_{12}r_{22}\exp(\imag (\psi_{12}-\psi_{22}))=0\\
-                                r_{11}r_{21}\exp(\imag (\psi_{21}-\psi_{11}))+r_{12}r_{22}\exp(\imag (\psi_{22}-\psi_{12}))=0\\
-                                r_{21}^{2}+r_{22}^{2}=1
-                              \end{array}
-      \right.\\
-      \Longleftrightarrow\ &&\left\{
-                              \begin{array}{l}
-                                r_{11}^{2}+r_{12}^{2}=1\\
-                                r_{11}r_{21}\exp(\imag (\psi_{11}-\psi_{21}))+r_{12}r_{22}\exp(\imag (\psi_{12}-\psi_{22}))=0\\
-                                r_{21}^{2}+r_{22}^{2}=1
-                              \end{array}
-      \right.
-    \end{eqnarray*}
-    同様にして,
-    \begin{eqnarray*}
-      &&H^{\ast}H=I\\
-      \Longleftrightarrow\ && \begin{pmatrix}r_{11}\exp(-\imag \psi_{11})&r_{21}\exp(-\imag \psi_{21})\\r_{12}\exp(-\imag \psi_{12})&r_{22}\exp(-\imag \psi_{22})\end{pmatrix}\begin{pmatrix}r_{11}\exp(\imag \psi_{11})&r_{12}\exp(\imag \psi_{12})\\r_{21}\exp(\imag \psi_{21})&r_{22}\exp(\imag \psi_{22})\end{pmatrix}=\begin{pmatrix}1&0\\0&1\end{pmatrix}\\
-      \Longleftrightarrow\ &&\left\{
-                              \begin{array}{l}
-                                r_{11}^{2}+r_{21}^{2}=1\\
-                                r_{11}r_{12}\exp(\imag (\psi_{12}-\psi_{11}))+r_{21}r_{22}\exp(\imag (\psi_{22}-\psi_{21}))=0\\
-                                r_{11}r_{12}\exp(\imag (\psi_{11}-\psi_{12}))+r_{21}r_{22}\exp(\imag (\psi_{21}-\psi_{22}))=0\\
-                                r_{12}^{2}+r_{22}^{2}=1
-                              \end{array}
-      \right.\\
-      \Longleftrightarrow\ &&\left\{
-                              \begin{array}{l}
-                                r_{11}^{2}+r_{21}^{2}=1\\
-                                r_{11}r_{12}\exp(\imag (\psi_{11}-\psi_{12}))+r_{21}r_{22}\exp(\imag (\psi_{21}-\psi_{22}))=0\\
-                                r_{12}^{2}+r_{22}^{2}=1
-                              \end{array}
-      \right.
-    \end{eqnarray*}
-    これらをまとめると,
-    \begin{align*}
-      &\left\{
-      \begin{array}{l}
-        r_{11}^{2}+r_{12}^{2}=1\\
-        r_{11}r_{21}\exp(\imag (\psi_{11}-\psi_{21}))+r_{12}r_{22}\exp(\imag (\psi_{12}-\psi_{22}))=0\\
-        r_{21}^{2}+r_{22}^{2}=1\\
-        r_{11}^{2}+r_{21}^{2}=1\\
-        r_{11}r_{12}\exp(\imag (\psi_{11}-\psi_{12}))+r_{21}r_{22}\exp(\imag (\psi_{21}-\psi_{22}))=0\\
-        r_{12}^{2}+r_{22}^{2}=1
-      \end{array}
-      \right.\\
-      \Longleftrightarrow\ &\left\{
-      \begin{array}{l}
-        r_{11}^{2}+r_{12}^{2}=1\\
-        r_{11}^{2}=r_{22}^{2}\\
-        r_{12}^{2}=r_{21}^{2}\\
-        r_{11}r_{21}\exp(\imag (\psi_{11}-\psi_{21}))+r_{12}r_{22}\exp(\imag (\psi_{12}-\psi_{22}))=0 \\
-        r_{11}r_{12}\exp(\imag (\psi_{11}-\psi_{12}))+r_{21}r_{22}\exp(\imag (\psi_{21}-\psi_{22}))=0　\\
-      \end{array}
-      \right.
-    \end{align*}
-    したがって, $r_{11}=\cos \theta$\ ($\theta\in \mathbb{R}$)とすると, $r_{12}=\sin \theta$となり, $r_{21}=\pm \sin\theta$, $r_{22}=\pm \cos \theta$となる.
-    \begin{enumerate}[(i)]
-    \item $r_{21}=\sin \theta,r_{22}=\cos\theta$のとき,
-      \begin{eqnarray*}
-        &&\left\{
-        \begin{array}{l}
-          \sin\theta\cos\theta\Bigl\{\exp(\imag(\psi_{11}-\psi_{21}))+\exp(\imag(\psi_{12}-\psi_{22}))\Bigr\}=0\\[0.2cm]
-          \sin\theta\cos\theta\Bigl\{\exp(\imag(\psi_{11}-\psi_{21}))+\exp(\imag(\psi_{12}-\psi_{22}))\Bigr\}=0
-        \end{array}
-        \right.\\
-        \Longleftrightarrow\ &&\left\{
-                                \begin{array}{lc}
-                                  \psi_{11}-\psi_{21}=(2k+1)\pi +\psi_{12}+\psi_{22}&(k\in\mathbb{Z})\\
-                                  \psi_{11}-\psi_{12}=(2m+1)\pi+\psi_{21}+\psi_{22}&(m\in\mathbb{Z})\\
-                                \end{array}
-        \right.\\
-        \Longleftrightarrow\ && \psi_{11}=(2k+1)\pi+\psi_{12}+\psi_{21}-\psi_{22}\hspace{20pt} (k\in\mathbb{Z})
-      \end{eqnarray*}
-    \item $r_{21}=\sin\theta,r_{22}=-\cos\theta$のとき,
-      \begin{eqnarray*}
-        &&\left\{
-        \begin{array}{l}
-          \sin\theta\cos\theta\Bigl\{\exp(\imag(\psi_{11}-\psi_{21}))-\exp(\imag(\psi_{12}-\psi_{22}))\Bigr\}=0\\[0.2cm]
-          \sin\theta\cos\theta\Bigl\{\exp(\imag(\psi_{11}-\psi_{21}))-\exp(\imag(\psi_{12}-\psi_{22}))\Bigr\}=0
-        \end{array}
-        \right.\\
-        \Longleftrightarrow\ &&\left\{
-                                \begin{array}{lc}
-                                  \psi_{11}-\psi_{21}=2k\pi -\psi_{12}-\psi_{22}&(k\in\mathbb{Z})\\
-                                  \psi_{11}-\psi_{12}=2m\pi-\psi_{21}-\psi_{22}&(m\in\mathbb{Z})\\
-                                \end{array}
-        \right.\\
-        \Longleftrightarrow\ && \psi_{11}=2k\pi+\psi_{12}+\psi_{21}-\psi_{22}\hspace{20pt} (k\in\mathbb{Z})
-      \end{eqnarray*}
-    \item $r_{21}=-\sin\theta,r_{22}=\cos\theta$のとき,
-      \begin{eqnarray*}
-        &&\left\{
-        \begin{array}{l}
-          \sin\theta\cos\theta\Bigl\{\exp(\imag(\psi_{11}-\psi_{21}))-\exp(\imag(\psi_{12}-\psi_{22}))\Bigr\}=0\\[0.2cm]
-          \sin\theta\cos\theta\Bigl\{-\exp(\imag(\psi_{11}-\psi_{21}))+\exp(\imag(\psi_{12}-\psi_{22}))\Bigr\}=0
-        \end{array}
-        \right.\\
-        \Longleftrightarrow\ &&\left\{
-                                \begin{array}{lc}
-                                  \psi_{11}-\psi_{21}=2k\pi -\psi_{12}-\psi_{22}&(k\in\mathbb{Z})\\
-                                  \psi_{11}-\psi_{12}=2m\pi-\psi_{21}-\psi_{22}&(m\in\mathbb{Z})\\
-                                \end{array}
-        \right.\\
-        \Longleftrightarrow\ && \psi_{11}=2k\pi+\psi_{12}+\psi_{21}-\psi_{22}\hspace{20pt} (k\in\mathbb{Z})
-      \end{eqnarray*}
-    \item $r_{21}=-\sin\theta,r_{22}=-\cos\theta$のとき,
-      \begin{eqnarray*}
-        &&\left\{
-        \begin{array}{l}
-          \sin\theta\cos\theta\Bigl\{-\exp(\imag(\psi_{11}-\psi_{21}))-\exp(\imag(\psi_{12}-\psi_{22}))\Bigr\}=0\\[0.2cm]
-          \sin\theta\cos\theta\Bigl\{-\exp(\imag(\psi_{11}-\psi_{21}))-\exp(\imag(\psi_{12}-\psi_{22}))\Bigr\}=0
-        \end{array}
-        \right.\\
-        \Longleftrightarrow\ &&\left\{
-                                \begin{array}{lc}
-                                  \psi_{11}-\psi_{21}=2k\pi -\psi_{12}-\psi_{22}&(k\in\mathbb{Z})\\
-                                  \psi_{11}-\psi_{12}=2m\pi-\psi_{21}-\psi_{22}&(m\in\mathbb{Z})\\
-                                \end{array}
-        \right.\\
-        \Longleftrightarrow\ && \psi_{11}=(2k+1)\pi+\psi_{12}+\psi_{21}-\psi_{22}\hspace{20pt} (k\in\mathbb{Z})
-      \end{eqnarray*}    
-    \end{enumerate}
-    したがって, 一般形は(i),(ii),(iii),(iv)より
+    一般系は(5)の(i),(ii),(iii),(iv)より
     \begin{eqnarray*}
       H=\begin{pmatrix}-\exp(\imag(\psi_{12}+\psi_{21}-\psi_{22}))\cos\theta&\exp(\imag\psi_{12})\sin\theta\\\exp(\imag \psi_{21})\sin\theta&\exp(\imag\psi_{22})\cos\theta\end{pmatrix}
     \end{eqnarray*}
@@ -1056,7 +963,7 @@
             &= \frac{1}{\sqrt{2\pi}}\dint{-\infty}{\infty}{\exp\left(-ax^{2}\right)\exp(-\imag kx)}\\
             &= \frac{1}{\sqrt{2\pi}}\dint{-\infty}{\infty}{\exp\left(-ax^{2}-\imag kx\right)}\\
             &= \frac{1}{\sqrt{2\pi}}\dint{-\infty}{\infty}{\exp\left\{-a\left(x - \frac{\imag k}{2a}\right)^{2} + \frac{1}{a}\cdot \left(\frac{\imag k}{2}\right)^{2}\right\}}\\
-            &= \frac{\exp \left(-\frac{k^{2}}{4a}\right)}{\sqrt{2\pi}}\dint{-\infty}{\infty}{\exp\left\{-a\left(x - \frac{\imag k}{2a}\right)^{2}\right\}}\\
+            &= \frac{\exp \left(-\frac{k^{2}}{4a}\right)}{\sqrt{2\pi}}\dint{-\infty}{\infty}{\exp\left\{-a\left(x - \frac{\imag k}{2}\right)^{2}\right\}}\\
             &= \frac{\exp \left(-\frac{k^{2}}{4a}\right)}{\sqrt{2\pi}}\sqrt{\frac{\pi}{a}}
         \end{align*}
         従って以下が成り立つ.
@@ -1071,19 +978,19 @@
   \item 設問\eqref{subsec2:prom2}で得られた$U(k, t)$と$a > 0$, 設問\eqref{subsec2:prom1}より,以下が成り立つ.
     \begin{align*}
         u(x, t) &= \frac{1}{\sqrt{2\pi}}\dint[k]{-\infty}{\infty}{U(k, t)\exp(ikx)}\\
-        &= \frac{1}{\sqrt{2\pi}}\dint[k]{-\infty}{\infty}{\frac{\exp\left(\frac{-k^2}{4a}\right)}{\sqrt{2a}}\cos(kct)\exp(\imag kx)}\\
-        &= \frac{1}{2\sqrt{a\pi}}\dint[k]{-\infty}{\infty}{\exp\left(-\frac{k^2}{4a} + \imag kx\right)\frac{\exp\left(\imag kct\right) + \exp\left(-\imag kct\right)}{2}}\\
-        &= \frac{1}{4\sqrt{a\pi}}\dint[k]{-\infty}{\infty}{\exp\left(-\frac{k^2}{4a} + \imag kx + \imag kct\right) + \exp\left(-\frac{k^2}{4a} + \imag kx - \imag kct\right)}\\
-        &= \frac{1}{4\sqrt{a\pi}}\dint[k]{-\infty}{\infty}{\exp\left[-\frac{1}{4a}\left\{k - 2a\imag (x + ct)\right\}^2 - a(x + ct)^2\right]}\\
-        &\quad+ \frac{1}{4\sqrt{a\pi}}\dint[k]{-\infty}{\infty}{\exp\left[-\frac{1}{4a}\left\{k - 2a\imag (x - ct)\right\}^2 - a(x - ct)^2\right]}\\
-        &= \frac{1}{4\sqrt{a\pi}}\exp\left\{-a(x + ct)^2\right\}\dint[k]{-\infty}{\infty}{\exp\left[-\frac{1}{4a}\left\{k - 2a\imag (x + ct\right\}^2\right]}\\
-        &\quad+ \frac{1}{4\sqrt{a\pi}}\exp\left\{-a(x - ct)^2\right\}\dint[k]{-\infty}{\infty}{\exp\left[-\frac{1}{4a}\left\{k - 2a\imag (x - ct)\right\}^2\right]}\\
-        &= \frac{1}{4\sqrt{a\pi}}\exp\left\{-a(x + ct)^2\right\}\sqrt{\frac{\pi}{\frac{1}{4a}}} + \frac{1}{4\sqrt{a\pi}}\exp\left\{-a(x - ct)^2\right\}\sqrt{\frac{\pi}{\frac{1}{4a}}}\\
-        &= \frac{1}{2}\left[\exp\left\{-a(x + ct)^2\right\} + \exp\left\{-a(x - ct)^2\right\}\right]
+        &= \frac{1}{\sqrt{2\pi}}\dint[k]{-\infty}{\infty}{\frac{\exp\left(\frac{-ak^2}{4}\right)}{\sqrt{2a}}\cos(kct)\exp(\imag kx)}\\
+        &= \frac{1}{2\sqrt{a\pi}}\dint[k]{-\infty}{\infty}{\exp\left(-a\frac{k^2}{4} + \imag kx\right)\frac{\exp\left(\imag kct\right) + \exp\left(-\imag kct\right)}{2}}\\
+        &= \frac{1}{4\sqrt{a\pi}}\dint[k]{-\infty}{\infty}{\exp\left(-a\frac{k^2}{4} + \imag kx + \imag kct\right) + \exp\left(-a\frac{k^2}{4} + \imag kx - \imag kct\right)}\\
+        &= \frac{1}{4\sqrt{a\pi}}\dint[k]{-\infty}{\infty}{\exp\left\{-\frac{a}{4}\left(k - 2\imag \frac{x + ct}{a}\right)^2 + \frac{(x + ct)^2}{a}\right\}}\\
+        &\quad+ \frac{1}{4\sqrt{a\pi}}\dint[k]{-\infty}{\infty}{\exp\left\{-\frac{a}{4}\left(k - 2\imag \frac{x - ct}{a}\right)^2 + \frac{(x - ct)^2}{a}\right\}}\\
+        &= \frac{1}{4\sqrt{a\pi}}\exp\left\{\frac{(x + ct)^2}{a}\right\}\dint[k]{-\infty}{\infty}{\exp\left\{-\frac{a}{4}\left(k - 2\imag \frac{x + ct}{a}\right)^2\right\}}\\
+        &\quad+ \frac{1}{4\sqrt{a\pi}}\exp\left\{\frac{(x - ct)^2}{a}\right\}\dint[k]{-\infty}{\infty}{\exp\left\{-\frac{a}{4}\left(k - 2\imag \frac{x - ct}{a}\right)^2\right\}}\\
+        &= \frac{1}{4\sqrt{a\pi}}\exp\left\{\frac{(x + ct)^2}{a}\right\}\sqrt{\frac{\pi}{\frac{a}{4}}} + \frac{1}{4\sqrt{a\pi}}\exp\left\{\frac{(x - ct)^2}{a}\right\}\sqrt{\frac{\pi}{\frac{a}{4}}}\\
+        &= \frac{1}{2a}\left[\exp\left\{\frac{(x + ct)^2}{a}\right\} + \exp\left\{\frac{(x - ct)^2}{a}\right\}\right]
     \end{align*}
     よって,求める関数$u(x, t)$は以下のようになる.
     \begin{equation*}
-        u(x, t) = \frac{1}{2}\left[\exp\left\{-a(x + ct)^2\right\} + \exp\left\{-a(x - ct)^2\right\}\right]
+        u(x, t) = \frac{1}{2a}\left[\exp\left\{\frac{(x + ct)^2}{a}\right\} + \exp\left\{\frac{(x - ct)^2}{a}\right\}\right]
     \end{equation*}
 \end{enumerate}
 
@@ -1494,94 +1401,6 @@ $(X, Y)$とおく.ただし,$X, Y$は確率変数である.以下の問いに答
         &= \frac{1}{8}\left\{1 - \frac{3\log 2}{20\pi} + \frac{9}{10\pi}(\arctan 2 + \arctan 3)\right\}
   \end{align*}
 \end{enumerate}
-
-\newpage
-
-\renewcommand{\thesection}{自信のない解法or解けたとこまで}
-\renewcommand{\thesubsection}{第\arabic{subsection}問}
-\section{}
-\subsection{}
-\markboth{\thesubsection}{\thesection}
-\begin{itemize}
-    \item[(6)]解法その１\\
-    \setlength{\itemsep}{10pt} 
-    行列式が1で2次のユニタリ行列の一般形$P$は設問(5)より,以下のように表せる.
-    \begin{align*}
-        P = 
-        \spalignmat{
-            {p_{11}\exp(\imag \psi + \alpha_{11})\cos(\theta + \beta_{11})} {p_{12}\exp(\imag \psi + \alpha_{12})\sin(\theta + \beta_{12})};
-            {-p_{21}\exp(-\imag \psi + \alpha_{21})\sin(\theta + \beta_{12})} {p_{22}\exp(-\imag \psi + \alpha_{22})\cos(\theta + \beta_{22})}
-        }
-    \end{align*}
-    よって,この時以下が成り立つ.
-    \begin{align*}
-        &\mid P \mid = 1\\
-        &\Longleftrightarrow p_{11}\exp(\imag \psi + \alpha_{11})\cos(\theta + \beta_{11})\times p_{22}\exp(-\imag \psi + \alpha_{22})\cos(\theta + \beta_{22})\\
-        &-(-p_{21}\exp(-\imag \psi + \alpha_{21})\sin(\theta + \beta_{21}))\times p_{12}\exp(\imag \psi + \alpha_{12})\sin(\theta + \beta_{12}) = 1\\
-        &\Longleftrightarrow p_{11}p_{22}\exp(\alpha_{11} + \alpha_{22})\cos(\theta + \beta_{11})\cos(\theta + \beta_{22})\\
-        &+ p_{21}p_{12}\exp(\alpha_{21} + \alpha_{12})\sin(\theta + \beta_{21}))\sin(\theta + \beta_{12}) = 1
-    \end{align*}
-    \begin{align*}
-        PP^{\ast} = I
-    \end{align*}
-    以下挫折...
-    \item[(6)]　解法その２\\
-    行列$A$の$(j, k)$成分が$a_{jk}$の時,$A=\{ a_{jk}\}$と表すとき,行列式が1である2次ユニタリ行列
-    $A = \{ a_{jk}\} = \{ c_{jk} + \imag d_{jk}\}$を考えると以下の条件を行列$A$は満たす.
-    共役転置行列を$A^{\ast} = \{ a^{\ast}_{jk}\} = \{\overline{a_{kj}}\}$とし,それと行列$A$との積を
-    $AA^{\ast} = \{ A_{jk}\}$とおく.
-    \begin{align*}
-        & \begin{cases}
-            AA^{\ast} = I\\
-            \mid A\mid = 1
-        \end{cases}\\
-        \Longleftrightarrow & 
-        \begin{cases}
-            A_{jk} = \sum\limits_{l = 1}^{2} a_{jl}\overline{a_{kl}}
-            = 
-            \begin{cases}
-                0 & j = k\\
-                1 & j \neq k  
-            \end{cases}\\
-            a_{11}a_{22} - a_{12}a_{21} = 1
-        \end{cases}\\
-        \Longleftrightarrow & 
-        \begin{cases}
-            A_{11} = a_{11}\overline{a_{11}} + a_{12}\overline{a_{12}} = 1\\
-            A_{12} = a_{11}\overline{a_{21}} + a_{12}\overline{a_{22}} = 0\\
-            A_{21} = a_{21}\overline{a_{11}} + a_{22}\overline{a_{12}} = 0\\
-            A_{22} = a_{21}\overline{a_{21}} + a_{22}\overline{a_{22}} = 1\\
-            a_{11}a_{22} - a_{12}a_{21} = 1
-        \end{cases}\\
-        \Longleftrightarrow & 
-        \begin{cases}
-            A_{11} = c_{11}^{2} + d_{11}^{2} + c_{12}^{2} + d_{12}^{2} = 1\\
-            A_{12} = (c_{11} + \imag d_{11})(c_{21} - \imag d_{21}) + (c_{12} + \imag d_{12})(c_{22} - \imag d_{22}) = \\
-            A_{21} = (c_{21} + \imag d_{21})(c_{11} - \imag d_{11}) + (c_{22} 
-+ \imag d_{22})(c_{12} - \imag d_{12}) = 0\\
-            A_{22} = c_{21}^{2} + d_{21}^{2} + c_{22}^{2} + d_{22}^{2} = 1\\
-            (c_{11} + \imag d_{11})(c_{22} + \imag d_{22}) - (c_{12} + \imag d_{12})(c_{21} + \imag d_{21}) = 1
-        \end{cases}\\
-        \Longleftrightarrow & 
-        \begin{cases}
-            A_{11} = c_{11}^{2} + d_{11}^{2} + c_{12}^{2} + d_{12}^{2} = 1\\
-            A_{12} = (c_{11}c_{21} + d_{11}d_{21} + c_{12}c_{22} + d_{12}d_{22}) + \imag (d_{11}c_{21} -  c_{11}d_{21} + d_{12}c_{22} - c_{12}d_{22}) = 0\\
-            A_{21} = (c_{21}c_{11} + d_{21}d_{11} + c_{22}c_{12} + d_{22}d_{12}) + \imag(d_{21}c_{11} - c_{21}d_{11} + d_{22}c_{12} - c_{22}d_{12}) = 0\\
-            A_{22} = c_{21}^{2} + d_{21}^{2} + c_{22}^{2} + d_{22}^{2} = 1\\
-            (c_{11}c_{22} + d_{11}d_{22} - c_{12}c_{21} - d_{12}d_{21}) + \imag (d_{11}c_{22} + c_{11}d_{22} - d_{12}c_{21} - c_{12}d_{21}) = 1
-        \end{cases}
-    \end{align*}
-    よってここで,$\forall k \in \mathbb{Z}$についてオイラーの定理より以下が成り立つ.
-    \begin{align*}
-        \begin{cases}
-            \exp(2\pi\ell\imag) = 1 & \ell = k\\
-            \exp(\pi\ell\imag) = -1 & \ell = 2k + 1\\
-            \exp\left(\frac{\pi\ell}{2}\imag\right)  = \imag & \ell = 4k + 1\\
-            \exp\left(\frac{\pi\ell}{2}\imag\right)  = -\imag & \ell = 4k + 3\\
-        \end{cases}
-    \end{align*}
-    以下挫折...
-\end{itemize}
 \index{ティック@tikz}
 % \printindex
 \end{document}
