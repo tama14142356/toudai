@@ -1197,49 +1197,21 @@ $(X, Y)$とおく.ただし,$X, Y$は確率変数である.以下の問いに答
   \end{align}
   よって,式\eqref{eq:subsec3:prom3:fx:nez}より, $x=0$の時も連続であるため,求める確率密度関数$f(x)$は以下のようになる.
   \begin{equation*}
-    f(x) = \frac{4}{3\pi\left\{\left(2x + 1\right)^2 + x^2\right\}}  -1\, \leq\, x \, \leq 0
+    f(x) = \frac{4}{3\pi(5x^2 + 4x + 1)}
   \end{equation*}
-  \vspace{0.7cm}
-  
-  \noindent (中田解)\\
-  辺BC上を通る直線の式は$y=2x+1$である. ここで辺BC上に点Qが存在する確率密度関数は$\Theta$の範囲が$\displaystyle \left[\frac{\pi}{2},\frac{5}{4}\pi\right]$であるから,
-  \begin{eqnarray*}
-    g(x) = \frac{4}{3\pi}
-  \end{eqnarray*}
-  $X,\ \Theta$の関係について$Y=2X+1$であることと, $X=r\cos \Theta,\ Y=r\sin \Theta$であることから,
-  \begin{eqnarray*}
-    \tan \Theta X = 2X+1
-  \end{eqnarray*}
-  となる. $X=0$のとき, $\displaystyle \Theta=\frac{\pi}{2}$である. $X\neq 0$のときは
-  \begin{eqnarray*}
-    &&\tan \Theta X = 2X+1\\
-    \Longleftrightarrow\ &&\tan \Theta = 2+\frac{1}{X}\\
-    \Longleftrightarrow\ &&\Theta = {\rm Arctan} \left(2+\frac{1}{X}\right)
-  \end{eqnarray*}
-  ゆえに
-  \begin{eqnarray*}
-    h(X) = {\rm Arctan} \left(2+\frac{1}{X}\right)
-  \end{eqnarray*}
-  よって,
-  \begin{eqnarray*}
-    f(x) &=& g(h(x))\left|\frac{{\rm d}h}{{\rm d}x}(x)\right|\\
-         &=& \frac{4}{3\pi}\left|\frac{1}{1+\left(2+\frac{1}{x}\right)^{2}}\cdot \left(-\frac{1}{x^{2}}\right)\right|\\
-         &=& \left|\frac{4}{3\pi}\cdot \frac{1}{5x^{2}+4x+1}\right|\\
-         &=& \frac{4}{3\pi}\cdot \frac{1}{5x^{2}+4x+1}
-  \end{eqnarray*}
-  $x=0$に関しても連続であるから同様の答えとなる. 
 \item 設問\eqref{subsec3:prom3}より辺$\mathrm{BC}$上に点$\mathrm{Q}$
   が存在する時の$X$の期待値$\alpha$は以下のようになる.
   \begin{align*}
     \alpha &= \dint{-1}{0}{xf(x)}\\
-          &= \dint{-1}{0}{\frac{4}{3\pi}\frac{x}{\left(2x + 1\right)^2 + x^2}}\\
-          &= \frac{4}{3\pi}\dint{-1}{0}{\frac{1}{10}\left(\frac{10x + 4}{\left(2x + 1\right)^2 + x^2} - \frac{4}{\left(2x + 1\right)^2 + x^2}\right)}\\
+          &= \dint{-1}{0}{\frac{4}{3\pi}\frac{x}{5x^2 + 4x + 1}}\\
+          &= \frac{4}{3\pi}\dint{-1}{0}{\frac{1}{10}\left(\frac{10x + 4}{5x^2 + 4x + 1} - \frac{4}{5x^2 + 4x + 1}\right)}\\
           &= \frac{2}{15\pi}\left[\log |(2x + 1)^2 + x^2|\right]_{-1}^{0} - \frac{8}{15\pi}\dint{-1}{0}{\frac{1}{5(x^2 + \frac{4x}{5}) + 1}}\\
           &= -\frac{2}{15\pi}\log 2 - \frac{8}{15\pi}\dint{-1}{0}{\frac{1}{5(x + \frac{2}{5})^2 - 5\cdot \frac{4}{25} + 1}}\\
           &= -\frac{2}{15\pi}\log 2 - \frac{8}{15\pi}\dint{-1}{0}{\frac{1}{5(x + \frac{2}{5})^2 + \frac{1}{5}}}\\
           &= -\frac{2}{15\pi}\log 2 - \frac{8}{15\pi}\dint{-1}{0}{\frac{5}{25(x + \frac{2}{5})^2 + 1}}\\
           &= -\frac{2}{15\pi}\log 2 - \frac{8}{3\pi}\left[\frac{1}{5}\arctan \left\{5\cdot \left(x + \frac{2}{5}\right)\right\}\right]_{-1}^{0}\\
           &= -\frac{2}{15\pi}\log 2 - \frac{8}{15\pi}(\arctan 2 + \arctan 3)\\
+          &= -\frac{2}{15\pi}\log 2 - \frac{8}{15\pi}(\arctan \frac{2}{})\\
           &= -\frac{2}{15\pi}\log 2 - \frac{8}{15\pi}\left(\frac{3\pi}{4}\right)\\
           &= -\frac{2}{15\pi}\log 2 - \frac{2}{5}
   \end{align*}
@@ -1247,25 +1219,6 @@ $(X, Y)$とおく.ただし,$X, Y$は確率変数である.以下の問いに答
   \begin{equation}
     \alpha = -\frac{2}{15\pi}\log 2 - \frac{2}{5}\label{eq:subsec3:prom4:ans}
   \end{equation}
-  \vspace{0.3cm}
-
-  \noindent (中田解)\\
-  (3)の結果を用いて以下のように期待値は表せる.
-  \begin{eqnarray*}
-    \alpha &=& \int_{-1}^{0}xf(x)\ {\rm d}x\\
-           &=& \int_{-1}^{0}\left(\frac{4}{3\pi}\cdot\frac{1}{5x^{2}+4x+1}\right)\cdot x\ {\rm d}x\\
-           &=& \frac{4}{3\pi}\int_{-1}^{0}\frac{x}{5x^{2}+4x+1}\ {\rm d}x\\
-           &=& \frac{4}{3\pi}\int_{-1}^{0}\frac{1}{10}\left(\frac{10x+4}{5x^{2}+4x+1}-\frac{4}{5x^{2}+4x+1}\right)\ {\rm d}x\\
-           &=& \frac{2}{15\pi}\left(\Bigl[\log\left|5x^{2}+4x+1\right|\Bigr]_{-1}^{0}-4\int_{-1}^{0}\frac{1}{5x^{2}+4x+1}\ {\rm d}x\right)\\
-           &=& \frac{2}{15\pi}\left(-\log 2-4\int_{-1}^{0}\frac{1}{5\left(x^{2}+\frac{4}{5}x\right)+1}\ {\rm d}x\right)\\
-           &=& \frac{2}{15\pi}\left(-\log 2-4\int_{-1}^{0}\frac{1}{5\left\{\left(x+\frac{2}{5}\right)^{2}-\frac{4}{25}\right\}+1}\ {\rm d}x\right)\\
-           &=& \frac{2}{15\pi}\left(-\log 2-4\int_{-1}^{0}\frac{1}{5\left(x+\frac{2}{5}\right)^{2}+\frac{1}{5}}\ {\rm d}x\right)\\
-           &=& \frac{2}{15\pi}\left(-\log 2-4\int_{-1}^{0}5\cdot \frac{1}{25\left(x+\frac{2}{5}\right)^{2}+1}\ {\rm d}x\right)\\
-           &=& \frac{2}{15\pi}\left(-\log 2-\left[4\cdot 5\cdot \frac{1}{5}\cdot {\rm Arctan} \left\{5\cdot \left(x+\frac{2}{5}\right)\right\}\right]_{-1}^{0}\right)\\
-           &=& \frac{2}{15\pi}\Bigl\{-\log 2-4\cdot \left({\rm Arctan}2+{\rm Arctan 3}\right)\Bigr\}\\
-           &=& \frac{2}{15\pi}\left\{-\log 2-4\cdot \left(\frac{3\pi}{4}\right)\right\}\\
-           &=& -\frac{2}{15\pi}\log 2-\frac{2}{5}
-  \end{eqnarray*}
 \item まず,点$\mathrm{Q}$が辺$\mathrm{AC}$上にある時の$X$の期待値$\delta$を求める.
   
   設問\eqref{subsec3:prom4}, \eqref{subsec3:prom3}と同様にして確率密度関数を求めてから期待値を求める.
@@ -1332,19 +1285,19 @@ $(X, Y)$とおく.ただし,$X, Y$は確率変数である.以下の問いに答
   \end{align}
   よって,式\eqref{eq:subsec3:prom5:fx:gz}, \eqref{eq:subsec3:prom5:fx:lz}から確率密度関数$f(x)$は$x=0$の時も連続である。よって以下のようになる.
   \begin{equation*}
-    f(x) = \frac{8}{3\pi\left\{\left(x - 1\right)^2 + 4x^2\right\}}\quad -1\, \leq\,  x\, \leq\, 1
+    f(x) = \frac{8}{3\pi(5x^2 - 2x + 1)}
   \end{equation*}
   従って期待値$\delta$は以下のようになる.
   \begin{align*}
     \delta &= \dint{-1}{1}{xf(x)}\\
-          &= \dint{-1}{1}{\frac{8x}{3\pi\left\{\left(x - 1\right)^2 + 4x^2\right\}}}\\
-          &= \frac{8}{3\pi}\dint{-1}{1}{\frac{x}{\left\{\left(x - 1\right)^2 + 4x^2\right\}}}\\
-          &= \frac{8}{3\pi}\dint{-1}{1}{\frac{1}{10}\left[\frac{10x - 2}{\left\{\left(x - 1\right)^2 + 4x^2\right\}} + \frac{2}{\left\{\left(x - 1\right)^2 + 4x^2\right\}}\right]}\\
-          &= \frac{4}{15\pi}\dint{-1}{1}{\left[\frac{10x - 2}{\left\{\left(x - 1\right)^2 + 4x^2\right\}} + \frac{2}{\left\{\left(x - 1\right)^2 + 4x^2\right\}}\right]}\\
+          &= \dint{-1}{1}{\frac{8x}{3\pi(5x^2 - 2x + 1)}}\\
+          &= \frac{8}{3\pi}\dint{-1}{1}{\frac{x}{(5x^2 - 2x + 1)}}\\
+          &= \frac{8}{3\pi}\dint{-1}{1}{\frac{1}{10}\left[\frac{10x - 2}{(5x^2 - 2x + 1)} + \frac{2}{(5x^2 - 2x + 1)}\right]}\\
+          &= \frac{4}{15\pi}\dint{-1}{1}{\left[\frac{10x - 2}{(5x^2 - 2x + 1)} + \frac{2}{(5x^2 - 2x + 1)}\right]}\\
           &= \frac{4}{15\pi}\left[\log |(x - 1)^2 + 4x^2|\right]_{-1}^{1} + \frac{8}{15\pi}\dint{-1}{1}{\frac{1}{5(x^2 - \frac{2x}{5}) + 1}}\\
           &= -\frac{4}{15\pi}\log 2 + \frac{8}{15\pi}\dint{-1}{1}{\frac{1}{5(x - \frac{1}{5})^2 - 5\cdot \frac{1}{25} + 1}}\\
           &= -\frac{4}{15\pi}\log 2 + \frac{8}{15\pi}\dint{-1}{1}{\frac{1}{5(x - \frac{1}{5})^2 + \frac{4}{5}}}\\
-          &= -\frac{4}{15\pi}\log 2 + \frac{8}{15\pi}\dint{-1}{1}{\frac{5}{4\frac{25}{4}(x - \frac{1}{5})^2 + 1}}\\
+          &= -\frac{4}{15\pi}\log 2 + \frac{8}{15\pi}\dint{-1}{1}{\frac{1}{\frac{4}{5}\left\{\frac{25}{4}(x - \frac{1}{5})^2 + 1\right\}}}\\
           &= -\frac{4}{15\pi}\log 2 + \frac{2}{3\pi}\left[\frac{2}{5}\arctan \left\{\frac{5}{2}\cdot \left(x - \frac{1}{5}\right)\right\}\right]_{-1}^{1}\\
           &= -\frac{4}{15\pi}\log 2 + \frac{4}{15\pi}(\arctan 2 + \arctan 3)\\
           &= -\frac{4}{15\pi}\log 2 + \frac{4}{15\pi}\left(\frac{3\pi}{4}\right)\\
