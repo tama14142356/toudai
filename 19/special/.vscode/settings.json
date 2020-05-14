@@ -1,0 +1,59 @@
+{
+    "[tex]": {
+        // スニペット補完中にも補完を使えるようにする
+        "editor.suggest.snippetsPreventQuickSuggestions": false,
+        // インデント幅を4にする
+        "editor.tabSize": 4
+    },
+
+    "[latex]": {
+        // スニペット補完中にも補完を使えるようにする
+        "editor.suggest.snippetsPreventQuickSuggestions": false,
+        // インデント幅を4にする
+        "editor.tabSize": 4
+    },
+
+    "[bibtex]": {
+        // インデント幅を4にする
+        "editor.tabSize": 4
+    },
+
+
+    // ---------- LaTeX Workshop ----------
+
+    // 使用パッケージのコマンドや環境の補完を有効にする
+    "latex-workshop.intellisense.package.enabled": true,
+    // 自動保存
+    // "files.autoSave": "afterDelay",
+    "files.autoSave": "off",
+    // autoSaveとの相性が悪いので保存時自動ビルドを無効化
+    "latex-workshop.latex.autoBuild.run": "onFileChange",
+    // "latex-workshop.latex.autoBuild.run": "never",
+    // ビルドコマンド
+    "latex-workshop.latex.recipes": [
+        {
+            "name": "latexmk",
+            "tools": [
+                "latexmk"
+            ]
+        },
+    ],
+    "latex-workshop.latex.tools": [
+        {
+            "name": "latexmk",
+            "command": "latexmk",
+            "args": [
+                "-synctex=1",
+                "-interaction=nonstopmode",
+                "-file-line-error",
+                "-pdfdvi",
+                "%DOC%"
+            ]
+        },
+    ],
+    // .latexmkrc に書かれたディレクトリに設定すること
+    "latex-workshop.latex.outDir": "%DIR%/build",
+    // Viewer関係
+    "latex-workshop.view.pdf.viewer": "tab",
+    "latex-workshop.view.pdf.zoom": "page-width",
+}
