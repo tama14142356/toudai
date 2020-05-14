@@ -5,3 +5,14 @@
 git
 *.pdf
 *.sty
+
+*.aux
+*.dvi
+*.fdb_latexmk
+*.idx
+*.fls
+*.ilg
+*.ind
+*.log
+*.synctex.gz
+*.toc
