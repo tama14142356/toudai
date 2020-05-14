@@ -106,22 +106,23 @@ $\mathrm{n\times n}$点（ピクセル）からなる2次元階調グレース�
 func: 行数iにおいて明るい点だけを残す関数SearchBright(bool P2[][], int i)
     for j: from 0 to n - 1
         if P[i][j].brightnessが閾値より大きい
-            (i, j)点が明るいかどうかを表すP2[i][j]にtrueを代入
+            P2[i][j] ←　true (P2は(i, j)点が明るいかどうかを表すbool型の二次元配列)
         end if
     end for
-    return 次の行について再帰呼び出しを行った後の戻り値
+    return SearchBright(P2, i + 1)
 end func
-func: 面積を計算する関数area(final boolean P2[][], int si, int sj) 
-    現在訪れている(i, j)点に関して訪れたかどうかを表すvisitid[i][j]をtrueにする。
+func: 面積を計算する関数calcarea(final boolean P2[][], int si, int sj) 
+    visited[i][j] ← true 
+    (visitedは現在訪れている(i, j)点に関して訪れたかどうかを表すbool型の二次元配列)
     area ← 1
     for i: from si - 1 to si + 1
         for j: from sj - 1 to sj + 1
-            if 現在見ている点が訪れていないかつ明るい点である
-                その点へ訪問し、その戻り値を現在の面積areaに足す。
+            if visited[i][j] != true かつ P2[i][j] == true
+                area ← calcarea(P2, i, j)
             end if
         end for j
     end for i
-    面積areaを戻り値として返す。
+    return area
 end func
 \end{lstlisting}
     この時の計算量は$\mathrm{O}(n^2)$となる。
