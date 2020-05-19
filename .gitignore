@@ -16,3 +16,4 @@ git
 *.log
 *.synctex.gz
 *.toc
+*.out
