@@ -1,0 +1,922 @@
+% \documentclass[dvipdfmx, a4paper, 11pt]{jsarticle}%A４用紙縦、明朝（デフォルト）１１ポイント
+\documentclass[dvipdfmx,titlepage, 11pt, a4paper]{jsarticle}%A４用紙縦、明朝（デフォルト）１１ポイント
+\usepackage[top=18truemm,bottom=18truemm,left=18truemm,right=18truemm]{geometry}%余白調整
+% \setlength{\textheight}{45\baselineskip}
+% \setlength{\textwidth}{46zw}% ４６文字/行
+
+\usepackage{template}
+
+%%%====================================================================================================================================
+\renewcommand{\thesection}{第\arabic{section}問}
+\renewcommand{\thesubsection}{\thesection}
+\titleformat*{\section}{\LARGE\mcfamily}%章のタイトルの文字の大きさを通常サイズに設定（明朝体で）
+\titlespacing*{\section}{0pt}{*0}{0pt}%章番号の後の空白行の削除
+\titleformat*{\subsection}{\Large\mcfamily}%節のタイトルの文字の大きさを通常サイズに設定（明朝体で）
+\titlespacing*{\subsection}{0pt}{*0}{0pt}%節番号の後の空白行の削除
+\titleformat*{\subsubsection}{\large\mcfamily}%小節のタイトルの文字の大きさを通常サイズに設定（明朝体で）
+\titlespacing*{\subsubsection}{0pt}{*0}{0pt}%小節番号の後の空白行の削除
+
+\makeatletter
+%章番号付きコード番号
+\AtBeginDocument{
+  \renewcommand*{\thelstlisting}{\arabic{section}.\arabic{lstlisting}}%
+  \@addtoreset{lstlisting}{section}
+}
+
+%章番号付き表番号
+\renewcommand{\thetable}{%
+    \arabic{section}.\arabic{table}%
+}
+\@addtoreset{table}{section}%
+
+%章番号付き図番号
+\renewcommand{\thefigure}{%
+	\arabic{section}.\arabic{figure}%
+}%
+\@addtoreset{figure}{section}%
+
+%章番号付き式番号
+\renewcommand{\theequation}{%
+	\arabic{section}.\arabic{equation}%
+}%
+\@addtoreset{equation}{section}%
+
+\renewcommand{\p@enumiii}{}% 箇条書きの参照時の番号の変更(2(親の番号)a(子の番号)→aだけに)
+\renewcommand{\p@enumii}{}% 箇条書きの参照時の番号の変更(2a→aだけに)
+\makeatother
+%%%====================================================================================================================================
+
+%%%====================================================================================================================================
+%%ページのレイアウト設定
+\pagestyle{fancy}
+\renewcommand{\sectionmark}[1]{\markboth{}{\thesection\ #1}}%                   %\rightmarkにセクション名を格納
+\renewcommand{\subsectionmark}[1]{\markboth{#1}{\rightmark}}%   %\leftmarkにサブセクション名を格納
+%[]は省略可で省略すると{}で指定された内容が偶数ページ奇数のどちらにも適用される。
+% \renewcommand{\headrulewidth}{0pt} %ヘッダの罫線を消す 
+\fancyfoot{}%                        %clear all footer fields
+\lhead{\leftmark}%                   %左側ヘッダの定義[<偶数ページ>]{<奇数ページ>}
+\chead{}%                            %中央ヘッダの定義[<偶数ページ>]{<奇数ページ>}
+\rhead{\rightmark}%                  %右側ヘッダの定義[<偶数ページ>]{<奇数ページ>}
+\lfoot{東大2017年度数学解答例}%       %左側フッターの定義[<偶数ページ>]{<奇数ページ>}
+\cfoot{\thepage}%                    %中央フッターの定義[<偶数ページ>]{<奇数ページ>}
+\rfoot{文殊の知恵}%                  %右側フッターの定義[<偶数ページ>]{<奇数ページ>}
+\renewcommand{\headrulewidth}{0.1pt}%%ヘッダの線の太さ 
+\renewcommand{\footrulewidth}{0.1pt}%%フッターの線の太さ
+%%%====================================================================================================================================
+
+\makeindex%索引用
+
+\renewcommand{\refname}{}%参考文献の文字を非表示にする
+\title{\Huge 東大2017年度数学解答例\\[10mm]}
+\author{{\LARGE 文殊の知恵}\\[1mm]\LARGE 高橋那弥}
+\date{}
+
+\begin{document}
+\maketitle
+\tableofcontents % 目次
+\pagenumbering{roman}%目次のページ番号のスタイルをローマ数字にする
+\newpage
+\setcounter{tocdepth}{3}%章節の深さを3にするsubsubsectionまで
+\pagenumbering{arabic}%他のページ番号は通常の数字にする。
+\section{}%第1問
+\subsection{問題文}
+3次元ベクトル$\spalignmat[c]{
+    {x_n};
+    {y_n};
+    {z_n}
+}$は式
+\begin{equation*}
+    \spalignmat[c]{
+        {x_{n + 1}};
+        {y_{n + 1}};
+        {z_{n + 1}}
+    }
+    = 
+    A \spalignmat[c]{
+        {x_n};
+        {y_n};
+        {z_n}
+    }\qquad (n \, = \, 0, 1, 2, \cdots)
+\end{equation*}
+を満たすものとする。但し、$x_0, y_0, z_0, \alpha$は実数とし、
+\begin{equation*}
+    A = \spalignmat[c]{
+        {1 - 2\alpha} {\alpha} {\alpha};
+        {\alpha} {1 - \alpha} {0};
+        {\alpha} {0} {1 - \alpha}
+    }, \qquad 0 < \alpha < \frac{1}{3}
+\end{equation*}
+とする。以下の問いに答えよ。
+\begin{enumerate}[(1)]
+  \item $x_n + y_n + z_n$を$x_0, y_0, z_0$を用いて表せ。
+  \item 行列$A$の固有値$\lambda_1, \lambda_2, \lambda_3$と、それぞれの固有値に対応する固有ベクトル
+        $\mathbold{v}_1, \mathbold{v}_2, \mathbold{v}_3$を求めよ。
+  \item 行列$A$を$\lambda_1, \lambda_2, \lambda_3, \mathbold{v}_1, \mathbold{v}_2, \mathbold{v}_3$を用いて表せ。
+  \item $\spalignmat[c]{
+    {x_n};
+    {y_n};
+    {z_n}
+  }$を$x_0, y_0, z_0, \alpha$を用いて表せ。
+  \item $\lim\limits_{n \to \infty} \spalignmat[c]{
+      {x_n};
+      {y_n};
+      {z_n}
+  }$を求めよ。
+  \item 以下の式
+  \begin{equation*}
+	  f(x_0, y_0, z_0)\, = \, \frac{
+		  (x_n\;y_n\; z_n)
+	  \spalignmat[c]{
+		  {x_{n + 1}};
+		  {y_{n + 1}};
+		  {z_{n + 1}}
+	  }}{(x_n\;y_n\; z_n)\spalignmat[c]{
+		  {x_n};
+		  {y_n};
+		  {z_n}
+	  }}
+  \end{equation*}
+  を$x_0, y_0, z_0$の関数とみなして、$f(x_0, y_0, z_0)$の最大値及び最小値を求めよ。但し、
+  $x_0^{2} + y_0^{2} + z_0^{2}\, \neq \, 0$
+\end{enumerate}
+\newpage
+\subsection{解答}
+\begin{enumerate}[(1)]
+	\item 題意より以下が成り立つ。
+		\begin{align*}
+			\spalignmat[c]{
+				{x_{n + 1}};
+				{y_{n + 1}};
+				{z_{n + 1}}
+			} 
+			& = A
+			\spalignmat[c]{
+				{x_n};
+				{y_n};
+				{z_n}
+			}\\
+			& = \spalignmat[c]{
+				{1 - 2\alpha} {\alpha} {\alpha};
+				{\alpha} {1 - \alpha} {0};
+				{\alpha} {0} {1 - \alpha}
+			}
+			\spalignmat[c]{
+				{x_n};
+				{y_n};
+				{z_n}
+			}\\
+			& = \spalignmat[c]{
+				{(1 - 2\alpha)x_n + \alpha y_n + \alpha z_n};
+				{\alpha x_n + (1 - \alpha)y_n};
+				{\alpha x_n + (1 - \alpha)z_n}
+			}\\
+			\therefore
+			x_{n + 1} + y_{n + 1} + z_{n + 1} 
+			&=  (1 - 2\alpha)x_n + \alpha y_n + \alpha z_n + \alpha x_n + (1 - \alpha)y_n + \alpha x_n + (1 - \alpha)z_n\\
+			&=  x_n + y_n + z_n\\
+			\therefore
+			x_n + y_n + z_n &= x_0 + y_0 + z_0
+		\end{align*}
+	\item まずAの固有値を求める。
+		\begin{align*}
+			\spaligndelims\vert\vert \spalignmat{{\lambda I - A}}
+			& = \spaligndelims\vert\vert \spalignmat{
+			{\lambda - 1 + 2\alpha} {-\alpha} {-\alpha};
+			{-\alpha} {\lambda - 1 + \alpha} {0};
+			{-\alpha} {0} {\lambda - 1 + \alpha};
+			}\\
+			& = \frac{1}{\alpha}\spaligndelims\vert\vert \spalignmat{
+			{(\lambda - 1 + 2\alpha)} {-\alpha} {-\alpha};
+			{-\alpha} {\lambda - 1 + \alpha} {0};
+			{-\alpha^{2} + (\lambda - 1 + 2\alpha)(\lambda - 1 + \alpha)} {-\alpha(\lambda - 1 + \alpha)} {0};
+			}\\
+			& = (-1)^{1 + 3}(-1)\spaligndelims\vert\vert \spalignmat{
+			{-\alpha} {\lambda - 1 + \alpha};
+			{-\alpha^{2} + (\lambda - 1 + 2\alpha)(\lambda - 1 + \alpha)} {-\alpha(\lambda - 1 + \alpha)};
+			}\\
+			& = -\left\{\alpha^{2}(\lambda - 1 + \alpha) - (\lambda - 1 + \alpha)(-\alpha^{2} + (\lambda - 1 + 2\alpha)(\lambda - 1 + \alpha))\right\} \\
+			& = -(\lambda - 1 + \alpha)\left\{\alpha^{2} - (-\alpha^{2} + (\lambda - 1 + 2\alpha)(\lambda - 1 + \alpha))\right\}                       \\
+			& = -(\lambda - 1 + \alpha)\left\{ 2\alpha^{2} - (\lambda - 1)^2 - 2\alpha^2 - 3\alpha(\lambda - 1))\right\}                               \\
+			& = (\lambda - 1 + \alpha)(\lambda - 1)(\lambda - 1 + 3\alpha)
+		\end{align*}
+		よって、$\lambda = 1 - \alpha, 1, 1 - 3\alpha$より、$\lambda_1 = 1 - \alpha, \lambda_2 = 1, \lambda_3 = 1 - 3\alpha$\\
+		従って固有空間$W(\lambda; A) = \{\mathbold{v} | \left(\lambda I - A\right)\mathbold{v} = \mathbold{0}\}$は以下のようになる。
+		\begin{align*}
+			W(1 - \alpha; A)  
+			% & = \left\{\mathbold{v} \left\lvert \spalignmat{
+			% {\alpha} {-\alpha} {-\alpha};
+			% {-\alpha} {0} {0};
+			% {-\alpha} {0} {0}
+			% }\mathbold{v} = \mathbold{0}\right. \right\}\\
+			% & = \left\{\mathbold{v} \left\lvert \spalignmat{
+			% {1} {0} {0};
+			% {0} {-1} {-1};
+			% {0} {0} {0}
+			% }\mathbold{v} = \mathbold{0}\right. \right\}\\
+			& = \left\{\mathbold{v} \left\lvert
+			\mathbold{v} =\spalignmat{
+			{0};
+			{s};
+			{-s}
+			} = s\spalignmat{
+			{0};
+			{1};
+			{-1}
+			}\right. \right\}
+			\mbox{よって、}\mathbold{v}_1 = s\spalignmat{
+			{0};
+			{1};
+			{-1}
+			}\\
+			W(1; A)
+			% & = \left\{\mathbold{v} \left\lvert \spalignmat{
+			% {2\alpha} {-\alpha} {-\alpha};
+			% {-\alpha} {\alpha} {0};
+			% {-\alpha} {0} {\alpha}
+			% }\mathbold{v} = \mathbold{0}\right. \right\}\\
+			% & = \left\{\mathbold{v} \left\lvert \spalignmat{
+			% {0} {0} {0};
+			% {-1} {1} {0};
+			% {-1} {0} {1}
+			% }\mathbold{v} = \mathbold{0}\right. \right\}\\
+			& = \left\{\mathbold{v} \left\lvert
+			\mathbold{v} =\spalignmat{
+			{s};
+			{s};
+			{s}
+			} = s\spalignmat{
+			{1};
+			{1};
+			{1}
+			}\right. \right\}
+			\mbox{よって、}\mathbold{v}_2 = t\spalignmat{
+			{1};
+			{1};
+			{1}
+			}\\
+			W(1 - 3\alpha; A)
+			% & = \left\{\mathbold{v} \left\lvert \spalignmat{
+			% {-\alpha} {-\alpha} {-\alpha};
+			% {-\alpha} {-2\alpha} {0};
+			% {-\alpha} {0} {-2\alpha}
+			% }\mathbold{v} = \mathbold{0}\right. \right\}\\
+			% & = \left\{\mathbold{v} \left\lvert \spalignmat{
+			% {1} {2} {0};
+			% {0} {1} {-1};
+			% {0} {0} {0}
+			% }\mathbold{v} = \mathbold{0}\right. \right\}\\
+			& = \left\{\mathbold{v} \left\lvert
+			\mathbold{v} =\spalignmat{
+			{-2s};
+			{s};
+			{s}
+			} = s\spalignmat{
+			{-2};
+			{1};
+			{1}
+			}\right. \right\}
+			\mbox{よって、}\mathbold{v}_3 = u\spalignmat{
+			{-2};
+			{1};
+			{1}
+			}
+		\end{align*}
+		よって、$\lambda_1 = 1 - \alpha, \lambda_2 = 1, \lambda_3 = 1 - 3\alpha, 
+		\mathbold{v}_1 = s\spalignmat[c]{
+			   {0};
+			   {1};
+			   {-1}
+		},
+		\mathbold{v}_2 = t\spalignmat[c]{
+			   {1};
+			   {1};
+			   {1}
+		},
+		\mathbold{v}_3 = u\spalignmat[c]{
+			   {-2};
+			   {1};
+			   {1}
+		}$\\
+		但し、$s, t, u$は0でない任意の実数とする。
+	\item  題意より、$A$は対称行列であるため、直交行列で対角化できる。また、異なる固有値の基底ベクトルは互いに直交する。
+		よって、以下は正規直交基底ベクトル集合$W$となる。
+		\begin{align*}
+			W = \left\{\cfrac{\mathbold{v}_1}{\left\lvert \mathbold{v}_1\right\rvert}, \, \cfrac{\mathbold{v}_2}{\left\lvert \mathbold{v}_2\right\rvert}, \, \cfrac{\mathbold{v}_3}{\left\lvert \mathbold{v}_3\right\rvert}\right\}
+		\end{align*}
+		よって、この集合の要素を並べたものは直交行列となり、その直交行列$P$を
+		$P = \left(\cfrac{\mathbold{v}_1}{\left\lvert\mathbold{v}_1 \right\rvert}\, \cfrac{\mathbold{v}_2}{\left\lvert\mathbold{v}_2 \right\rvert}\, \cfrac{\mathbold{v}_3}{\left\lvert\mathbold{v}_3 \right\rvert}\right)$とおくと、
+		$P$は直交行列より、$P^{-1} = P^{\top} =\spalignmat[c]{
+			{\cfrac{\mathbold{v}_1{}^{\top}}{\abs{\mathbold{v}_1}}};
+			{\cfrac{\mathbold{v}_2{}^{\top}}{\abs{\mathbold{v}_2}}};
+			{\cfrac{\mathbold{v}_3{}^{\top}}{\abs{\mathbold{v}_3}}}
+			}$となる。よって、以下が成り立つ。
+		\begin{align*}
+			A  & = P\spalignmat[c]{
+			{\lambda_1} {0} {0};
+			{0} {\lambda_2} {0};
+			{0} {0} {\lambda_3}
+			}P^{-1}\\
+			\Leftrightarrow
+			A  & = P\spalignmat[c]{
+			{\lambda_1} {0} {0};
+			{0} {\lambda_2} {0};
+			{0} {0} {\lambda_3}
+			}P^{\top}\\
+			& = \left(\cfrac{\mathbold{v}_1}{\abs{\mathbold{v}_1}}\, \cfrac{\mathbold{v}_2}{\abs{\mathbold{v}_2}}\, \cfrac{\mathbold{v}_3}{\abs{\mathbold{v}_3}}\right)
+			\spalignmat[c]{
+			{\lambda_1} {0} {0};
+			{0} {\lambda_2} {0};
+			{0} {0} {\lambda_3}
+			}\spalignmat[c]{
+			{\cfrac{\mathbold{v}_1{}^{\top}}{\abs{\mathbold{v}_1}}};
+			{\cfrac{\mathbold{v}_2{}^{\top}}{\abs{\mathbold{v}_2}}};
+			{\cfrac{\mathbold{v}_3{}^{\top}}{\abs{\mathbold{v}_3}}}
+			}\\
+			& = \left(
+				\lambda_1\cfrac{\mathbold{v}_1}{\abs{\mathbold{v}_1}}\;
+				\lambda_2\cfrac{\mathbold{v}_2}{\abs{\mathbold{v}_2}}\;
+				\lambda_3\cfrac{\mathbold{v}_3}{\abs{\mathbold{v}_3}}
+			\right)
+			\spalignmat[c]{
+			{\cfrac{\mathbold{v}_1{}^{\top}}{\abs{\mathbold{v}_1}}};
+			{\cfrac{\mathbold{v}_2{}^{\top}}{\abs{\mathbold{v}_2}}};
+			{\cfrac{\mathbold{v}_3{}^{\top}}{\abs{\mathbold{v}_3}}}
+			}\\
+			% & = \spalignmat[c]{
+			% 	{0} {\lambda_2} {-2\lambda_3};
+			% 	{\lambda_1} {\lambda_2} {\lambda_3};
+			% 	{-\lambda_1} {\lambda_2} {\lambda_3}
+			% }\spalignmat[c]{
+			% 	{0} {1} {-1};
+			% 	{1} {1} {1};
+			% 	{-2} {1} {1}
+			% }\\
+			% & = \spalignmat[c]{
+			% 	{\lambda_2 + 4\lambda_3} {\lambda_2 - 2\lambda_3} {\lambda_2 - 2\lambda_3};
+			% 	{\lambda_2 - 2\lambda_3} {\lambda_1 + \lambda_2 + \lambda_3} {-\lambda_1 + \lambda_2 + \lambda_3};
+			% 	{\lambda_2 - 2\lambda_3} {-\lambda_1 + \lambda_2 + \lambda_3} {\lambda_1 + \lambda_2 + \lambda_3};
+			% }\\
+			% & = \left(
+			% 		0\cdot\lambda_1\cfrac{\mathbold{v}_1}{\abs{\mathbold{v}_1}} 
+			% 		\, + 1\cdot\lambda_2\cfrac{\mathbold{v}_2}{\abs{\mathbold{v}_2}}
+			% 		\, - 2\cdot\lambda_3\cfrac{\mathbold{v}_3}{\abs{\mathbold{v}_3}}
+			% 	\;
+			% 		1\cdot\lambda_1\cfrac{\mathbold{v}_1}{\abs{\mathbold{v}_1}} 
+			% 		\,+ 1\cdot\lambda_2\cfrac{\mathbold{v}_2}{\abs{\mathbold{v}_2}}
+			% 		\,+ 1\cdot\lambda_3\cfrac{\mathbold{v}_3}{\abs{\mathbold{v}_3}}
+			% \right.\\
+			% &\qquad\left.
+			% 		-1\cdot\lambda_1\cfrac{\mathbold{v}_1}{\abs{\mathbold{v}_1}} 
+			% 		\, + 1\cdot\lambda_2\cfrac{\mathbold{v}_2}{\abs{\mathbold{v}_2}}
+			% 		\, + 1\cdot\lambda_3\cfrac{\mathbold{v}_3}{\abs{\mathbold{v}_3}}
+			% \right)\\
+			% & = \spalignmat[c]{
+			% 	{
+			% 		\cfrac{\lambda_2}{\sqrt{3}}\cfrac{\mathbold{v}_2}{\abs{\mathbold{v}_2}}
+			% 		\, - \cfrac{2\lambda_3}{\sqrt{6}}\cfrac{\mathbold{v}_3}{\abs{\mathbold{v}_3}}
+			% 	}
+			% 	{
+			% 		\cfrac{\lambda_1}{\sqrt{2}}\cfrac{\mathbold{v}_1}{\abs{\mathbold{v}_1}} 
+			% 		\,+ \cfrac{\lambda_2}{\sqrt{3}}\cfrac{\mathbold{v}_2}{\abs{\mathbold{v}_2}}
+			% 		\,+ \cfrac{\lambda_3}{\sqrt{6}}\cfrac{\mathbold{v}_3}{\abs{\mathbold{v}_3}}
+			% 	}
+			% 	{
+			% 		-\cfrac{\lambda_1}{\sqrt{2}}\cfrac{\mathbold{v}_1}{\abs{\mathbold{v}_1}} 
+			% 		\, + \cfrac{\lambda_2}{\sqrt{3}}\cfrac{\mathbold{v}_2}{\abs{\mathbold{v}_2}}
+			% 		\, + \cfrac{\lambda_3}{\sqrt{6}}\cfrac{\mathbold{v}_3}{\abs{\mathbold{v}_3}}
+			% 	}
+			% }
+		\end{align*}
+	\item 題意より、以下が成り立つ。
+		\begin{align}
+			\spalignmat[c]{
+				{x_n};
+				{y_n};
+				{z_n}
+			} = A^{n} \spalignmat[c]{
+				{x_0};
+				{y_0};
+				{z_0}
+			}\label{prom1:subprom4:eq1}
+		\end{align}
+		但し、$A^{n}$は$A$を$A$に対して右から$n$回かけたことを意味する。また、以下も同様の意味を表す。\\
+		ここで、(3)より、以下が成り立つ。
+		\begin{align*}
+			P^{\top}AP 
+			& = \spalignmat[c]{
+				{\lambda_1} {0} {0};
+				{0}	{\lambda_2} {0};
+				{0} {0} {\lambda_3}
+			}\\
+			\Longleftrightarrow 
+			(P^{\top}AP)^{n} 
+			& = \spalignmat[c]{
+				{\lambda_1} {0} {0};
+				{0}	{\lambda_2} {0};
+				{0} {0} {\lambda_3}
+			}^{n}\\
+			\Longleftrightarrow 
+			P^{\top}A^{n}P 
+			& = \spalignmat[c]{
+				{\lambda_1{}^{n}} {0} {0};
+				{0}	{\lambda_2{}^{n}} {0};
+				{0} {0} {\lambda_3{}^{n}}
+			}\\
+			\Longleftrightarrow 
+			A^{n} 
+			& = P\spalignmat[c]{
+				{\lambda_1{}^{n}} {0} {0};
+				{0}	{\lambda_2{}^{n}} {0};
+				{0} {0} {\lambda_3{}^{n}}
+			}P^{\top}
+		\end{align*}
+		\begin{align*}
+			\therefore 
+			A^{n}
+			&= \spalignmat[c]{
+				{
+					\cfrac{\lambda_2{}^{n}}{\sqrt{3}}\cfrac{\mathbold{v}_2}{\abs{\mathbold{v}_2}}
+					\, - \cfrac{2\lambda_3{}^{n}}{\sqrt{6}}\cfrac{\mathbold{v}_3}{\abs{\mathbold{v}_3}}
+				}
+				{
+					\cfrac{\lambda_1{}^{n}}{\sqrt{2}}\cfrac{\mathbold{v}_1}{\abs{\mathbold{v}_1}} 
+					\,+ \cfrac{\lambda_2{}^{n}}{\sqrt{3}}\cfrac{\mathbold{v}_2}{\abs{\mathbold{v}_2}}
+					\,+ \cfrac{\lambda_3{}^{n}}{\sqrt{6}}\cfrac{\mathbold{v}_3}{\abs{\mathbold{v}_3}}
+				}
+				{
+					-\cfrac{\lambda_1{}^{n}}{\sqrt{2}}\cfrac{\mathbold{v}_1}{\abs{\mathbold{v}_1}} 
+					\, + \cfrac{\lambda_2{}^{n}}{\sqrt{3}}\cfrac{\mathbold{v}_2}{\abs{\mathbold{v}_2}}
+					\, + \cfrac{\lambda_3{}^{n}}{\sqrt{6}}\cfrac{\mathbold{v}_3}{\abs{\mathbold{v}_3}}
+				}
+			}
+		\end{align*}
+		ここで
+		$\mathbold{u}_{1_{n}} =  
+		\cfrac{\lambda_2{}^{n}}{\sqrt{3}}\cfrac{\mathbold{v}_2}{\abs{\mathbold{v}_2}}
+		\, - \cfrac{2\lambda_3{}^{n}}{\sqrt{6}}\cfrac{\mathbold{v}_3}{\abs{\mathbold{v}_3}}$,
+		$\mathbold{u}_{2_{n}} = 
+		\cfrac{\lambda_1{}^{n}}{\sqrt{2}}\cfrac{\mathbold{v}_1}{\abs{\mathbold{v}_1}} 
+					\,+ \cfrac{\lambda_2{}^{n}}{\sqrt{3}}\cfrac{\mathbold{v}_2}{\abs{\mathbold{v}_2}}
+					\,+ \cfrac{\lambda_3{}^{n}}{\sqrt{6}}\cfrac{\mathbold{v}_3}{\abs{\mathbold{v}_3}}$,
+		$\mathbold{u}_{3_{n}} = 
+		-\cfrac{\lambda_1{}^{n}}{\sqrt{2}}\cfrac{\mathbold{v}_1}{\abs{\mathbold{v}_1}} 
+					\, + \cfrac{\lambda_2{}^{n}}{\sqrt{3}}\cfrac{\mathbold{v}_2}{\abs{\mathbold{v}_2}}
+					\, + \cfrac{\lambda_3{}^{n}}{\sqrt{6}}\cfrac{\mathbold{v}_3}{\abs{\mathbold{v}_3}}$と置くと、以下のようになる。
+		\begin{align}
+			A^{n} = \spalignmat[c]{
+				{\mathbold{u}_{1_n}} {\mathbold{u}_{2_n}} {\mathbold{u}_{3_n}}
+			}
+			\label{prom1:subprom4:eq2}
+		\end{align}
+		よって、式\eqref{prom1:subprom4:eq1}, \eqref{prom1:subprom4:eq2}より、題意は以下のようになる。
+		\begin{align*}
+			\spalignmat[c]{
+				{x_n};
+				{y_n};
+				{z_n}
+			}
+			& = \spalignmat[c]{
+				{\mathbold{u}_{1_n}} {\mathbold{u}_{2_n}} {\mathbold{u}_{3_n}}
+			}
+			\spalignmat[c]{
+				{x_0};
+				{y_0};
+				{z_0}
+			}\\
+			&= x_0\mathbold{u}_{1_n} + y_0\mathbold{u}_{2_n} + z_0\mathbold{u}_{3_n}\\
+			&= x_0\left(\cfrac{\lambda_2{}^{n}}{\sqrt{3}}\cfrac{\mathbold{v}_2}{\abs{\mathbold{v}_2}}
+			\, - \cfrac{2\lambda_3{}^{n}}{\sqrt{6}}\cfrac{\mathbold{v}_3}{\abs{\mathbold{v}_3}}\right)
+			\; + y_0\left(\cfrac{\lambda_1{}^{n}}{\sqrt{2}}\cfrac{\mathbold{v}_1}{\abs{\mathbold{v}_1}} 
+			\,+ \cfrac{\lambda_2{}^{n}}{\sqrt{3}}\cfrac{\mathbold{v}_2}{\abs{\mathbold{v}_2}}
+			\,+ \cfrac{\lambda_3{}^{n}}{\sqrt{6}}\cfrac{\mathbold{v}_3}{\abs{\mathbold{v}_3}}\right) 
+			\\ & + z_0\left(-\cfrac{\lambda_1{}^{n}}{\sqrt{2}}\cfrac{\mathbold{v}_1}{\abs{\mathbold{v}_1}} 
+			\, + \cfrac{\lambda_2{}^{n}}{\sqrt{3}}\cfrac{\mathbold{v}_2}{\abs{\mathbold{v}_2}}
+			\, + \cfrac{\lambda_3{}^{n}}{\sqrt{6}}\cfrac{\mathbold{v}_3}{\abs{\mathbold{v}_3}}\right)\\
+			&= \cfrac{\lambda_1{}^{n}}{\sqrt{2}}(y_0 - z_0)\cfrac{\mathbold{v}_1}{\abs{\mathbold{v}_1}} 
+			+ \cfrac{\lambda_2{}^{n}}{\sqrt{3}}(x_0 + y_0 + z_0)\cfrac{\mathbold{v}_2}{\abs{\mathbold{v}_2}}
+			+ \cfrac{\lambda_3{}^{n}}{\sqrt{6}}(-2x_0 + y_0 + z_0)\cfrac{\mathbold{v}_3}{\abs{\mathbold{v}_3}}\\
+			&= \cfrac{\lambda_1{}^{n}}{\sqrt{2}}(y_0 - z_0)\spalignmat[c]{
+				{0};
+				{\frac{1}{\sqrt{2}}};
+				{-\frac{1}{\sqrt{2}}}
+			}
+			+ \cfrac{\lambda_2{}^{n}}{\sqrt{3}}(x_0 + y_0 + z_0)\spalignmat[c]{
+				{\frac{1}{\sqrt{3}}};
+				{\frac{1}{\sqrt{3}}};
+				{\frac{1}{\sqrt{3}}}
+			}
+			+ \cfrac{\lambda_3{}^{n}}{\sqrt{6}}(-2x_0 + y_0 + z_0)\spalignmat[c]{
+				{-\frac{2}{\sqrt{6}}};
+				{\frac{1}{\sqrt{6}}};
+				{\frac{1}{\sqrt{6}}}
+			}\\
+			&= \spalignmat[c]{
+				{\frac{\lambda_2{}^{n}(x_0 + y_0 + z_0)}{3} - \frac{2\lambda_3{}^{n}(-2x_0 + y_0 + z_0)}{6}};
+				{\frac{\lambda_1{}^{n}(y_0 - z_0)}{2} + \frac{\lambda_2{}^{n}(x_0 + y_0 + z_0)}{3} + \frac{\lambda_3{}^{n}(-2x_0 + y_0 + z_0)}{6}};
+				{-\frac{\lambda_1{}^{n}(y_0 - z_0)}{2} + \frac{\lambda_2{}^{n}(x_0 + y_0 + z_0)}{3} + \frac{\lambda_3{}^{n}(-2x_0 + y_0 + z_0)}{6}}
+			}\\
+			&= \frac{1}{6}\spalignmat[c]{
+				{2x_0\left\{1 + 2(1 - 3\alpha)^{n}\right\} + 2y_0\left\{1 - (1 - 3\alpha)^{n}\right\} + 2z_0\left\{1 - (1 - 3\alpha)^{n}\right\}};
+				{2x_0\left\{1 - (1 - 3\alpha)^{n}\right\} + y_0\left\{3(1 - \alpha)^{n} + 2 + (1 - 3\alpha)^{n}\right\} + z_0\left\{- 3(1 - \alpha)^{n} + 2 + (1 - 3\alpha)^{n}\right\}};
+				{2x_0\left\{1 - (1 - 3\alpha)^{n}\right\} + y_0\left\{-3(1 - \alpha)^{n} + 2 + (1 - 3\alpha)^{n}\right\} + z_0\left\{3(1 - \alpha)^{n} + 2 + (1 - 3\alpha)^{n}\right\}}
+			}
+		\end{align*}
+		\item (4)より、題意は以下のようになる。
+			\begin{align*}
+				&\lim_{n \to \infty} \spalignmat[c]{
+					{x_n};
+					{y_n};
+					{z_n}
+				}\\
+				&= \lim_{n \to \infty} \frac{1}{6}\spalignmat[c]{
+					{2x_0\left\{1 + 2(1 - 3\alpha)^{n}\right\} + 2y_0\left\{1 - (1 - 3\alpha)^{n}\right\} + 2z_0\left\{1 - (1 - 3\alpha)^{n}\right\}};
+					{2x_0\left\{1 - (1 - 3\alpha)^{n}\right\} + y_0\left\{3(1 - \alpha)^{n} + 2 + (1 - 3\alpha)^{n}\right\} + z_0\left\{- 3(1 - \alpha)^{n} + 2 + (1 - 3\alpha)^{n}\right\}};
+					{2x_0\left\{1 - (1 - 3\alpha)^{n}\right\} + y_0\left\{-3(1 - \alpha)^{n} + 2 + (1 - 3\alpha)^{n}\right\} + z_0\left\{3(1 - \alpha)^{n} + 2 + (1 - 3\alpha)^{n}\right\}}
+				}
+			\end{align*}
+			ここで、題意より$0 < \alpha < \frac{1}{3}$より、$\frac{2}{3} < 1 - \alpha < 1$, $0 < 1 - 3\alpha < 1$である。
+			よって、
+			\begin{align*}
+				\lim_{n \to \infty} \spalignmat[c]{
+					{x_n};
+					{y_n};
+					{z_n}
+				} &= \frac{1}{6}\spalignmat[c]{
+					{2x_0 + 2y_0 + 2z_0};
+					{2x_0 + 2y_0 + 2z_0};
+					{2x_0 + 2y_0 + 2z_0}
+				}\\
+				&= \frac{1}{3}\spalignmat[c]{
+					{x_0 + y_0 + z_0};
+					{x_0 + y_0 + z_0};
+					{x_0 + y_0 + z_0}
+				}
+			\end{align*}
+			となる。
+	\item まず$\mathbold{w}_n = (x_n\;y_n\; z_n)^{\top}, \Lambda = \spalignmat[c]{
+		{\lambda_1} {0} {0};
+		{0} {\lambda_2} {0};
+		{0} {0} {\lambda_3}
+		}$とおくと$(3)$と題意より以下が成り立つ。
+		\begin{align*}
+			f(x_0, y_0, z_0) &= \frac{\mathbold{w}_n{}^{\top} A \mathbold{w}_n}{\mathbold{w}_n{}^{\top}\mathbold{w}_n}\\
+			&= \frac{\mathbold{w}_n{}^{\top} P \Lambda P^{-1} \mathbold{w}_n}{\mathbold{w}_n{}^{\top}\mathbold{w}_n}\\
+			&= \frac{\left(P^{-1}\mathbold{w}_n\right)^{\top} \Lambda P^{-1} \mathbold{w}_n}{\mathbold{w}_n{}^{\top}\mathbold{w}_n}
+		\end{align*}
+		よって、ここで$\mathbold{w}_n' = P^{-1}\mathbold{w}_n = (x_n'\;y_n'\; z_n')^{\top}$とおくと以下が成り立つ。
+		\begin{align*}
+			f(x_0, y_0, z_0) &= \frac{\mathbold{w}_n'^{\top} \Lambda \mathbold{w}_n'}{\left(P\mathbold{w}_n'\right)^{\top}P\mathbold{w}_n'}\\
+			&= \frac{\mathbold{w}_n'^{\top} \Lambda \mathbold{w}_n'}{\mathbold{w}_n'{}^{\top}\mathbold{w}_n'}\\
+			&= \frac{\lambda_1 x_n'^2 + \lambda_2 y_n'^2 + \lambda_3 z_n'^2}{x_n'^2 + y_n'^2 + z_n'^2}\\
+			&= \frac{x_n'^2 + y_n'^2 + z_n'^2 - \alpha(x_n'^2 + 3z_n'^2)}{x_n'^2 + y_n'^2 + z_n'^2}\\
+			&= 1 - \alpha\frac{x_n'^2 + 3z_n'^2}{x_n'^2 + y_n'^2 + z_n'^2}\\
+		\end{align*}
+		よって、$g(x_0, y_0, z_0) = \frac{x_n'^2 + 3z_n'^2}{x_n'^2 + y_n'^2 + z_n'^2}$とおくと、$f(x_0, y_0, z_0)$は
+		$g(x_0, y_0, z_0)$が最大の時、最小となり、$g(x_0, y_0, z_0)$が最小の時、最大となる。よって、$g(x_0, y_0, z_0)$の最大、最小を考える。
+		\begin{align*}
+			g(x_0, y_0, z_0) \leq 0
+		\end{align*}
+		が成り立ち、等号成立条件は$x_n'^2 = z_n'^2 = 0$つまり$x_n' = z_n' = 0$の時である。\\
+		よって、この値を満たす$\mathbold{w}_0$が存在することを以下に示す。まず以下が成り立つ。
+		\begin{align*}
+			\mathbold{w}_{n + 1}' &= P^{-1}\mathbold{w}_{n + 1}\\
+			&= P^{-1}A\mathbold{w}_n = P^{-1}P\Lambda P^{-1}\mathbold{w}_n\\
+			&= \Lambda \mathbold{w}_n'\\
+			\therefore \mathbold{w}_n' &= \Lambda^n \mathbold{w}_0' = \Lambda^{n} P^{-1}\mathbold{w}_0\\
+			\spalignmat{
+				{x_n'};
+				{y_n'};
+				{z_n'}
+			} &= 
+			\spalignmat{
+				{\lambda_1^n\left(\frac{y_0}{\sqrt{2}} - \frac{z_0}{\sqrt{2}}\right)};
+				{\lambda_2^n\left(\frac{x_0}{\sqrt{3}} + \frac{y_0}{\sqrt{3}} + \frac{z_0}{\sqrt{3}}\right)};
+				{\lambda_3^n\left(-\frac{2x_0}{\sqrt{6}} + \frac{y_0}{\sqrt{6}} + \frac{z_0}{\sqrt{6}}\right)}
+			}\\
+			\therefore x_n' = 0より、\qquad y_0 &= z_0\\
+			z_n' = 0より、\qquad y_0 + z_0 &= 2x_0\\
+			\therefore x_0 = y_0 &= z_0 = a \qquad (a \in \mathbb{R},\; a\neq 0)
+		\end{align*}
+		よって、$x_0 = y_0 = z_0 = a$の時、$g(x_0, y_0, z_0)$は最小値$0$を取るので、$f(x_0, y_0, z_0)$は最大値$1 - \alpha$を取る。\\
+		次に$g(x_0, y_0, z_0)$の最大値について考える。\\
+		$y_n'^2 \leq 0$より以下が成り立つ。
+		\begin{align*}
+			g(x_0, y_0, z_0) &\leq \frac{x_n'^2 + 3z_n'^2}{x_n'^2 + z_n'^2} = 1 + \frac{2z_n'^2}{x_n'^2 + z_n'^2}\\
+			&= 1 + \frac{2}{\displaystyle \frac{x_n'^2}{z_n'^2} + 1}
+		\end{align*}
+		よって、この不等号の等号成立条件は以下のようになる。
+		\begin{align*}
+			まず、y_n' = 0より、x_0 + y_0 + z_0 &= 0かつ\\
+			\frac{x_n'^2}{z_n'^2} \leq 0の時、\frac{x_n'^2}{z_n'^2} &= 0の時、等号が成り立つ。\\
+			よって、x_n' = 0よりy_0 =& z_0\\
+			よって、b \in \mathbb{R}, b\neq 0を満たすbを用いて、
+			&\begin{cases}
+				x_0 = -2b\\
+				y_0 = z_0 = b\\
+			\end{cases}となる。
+		\end{align*}
+		よって、$x_0 = -2b, y_0 = z_0 = b$の時、$g(x_0, y_0, z_0)$は最大値$3$をとる。
+		よって、$f(x_0, y_0, z_0)$は最小値$1 - 3\alpha$を取る。
+		従って求める解答は以下のようになる。
+		\begin{equation*}
+			\begin{cases}
+				最大値 & 1 - \alpha\\
+				最小値 & 1 - 3\alpha\\
+			\end{cases}
+		\end{equation*}
+\end{enumerate}
+
+\newpage
+\section{}%第2問
+\subsection{問題文}
+実数値関数$u(x, t)$が$0\, \leq \, x\, \leq\, 1, \; t\, \geq \, 0$で定義されている。
+ここで$x$と$t$は互いに独立である。偏微分方程式
+\begin{equation*}
+    \pdiff{u}{t} = \pdiff[2]{u}{x} \qquad (*)
+\end{equation*}
+の解を次の条件
+\begin{align*}
+    \mbox{境界条件：} & \quad u(0, t) = u(1, t) = 0\\
+    \mbox{初期条件：} & \quad u(x, 0) = x - x^{2}
+\end{align*}
+のもとで求める。但し、定数関数$u(x, t) = 0$は明らかに解であるから、それ以外の解を考える。
+以下の問いに答えよ。
+\begin{enumerate}[(1)]
+    \item 次の式を計算せよ。ここで, $n, m$はともに正の整数とする。
+        \begin{equation*}
+            \dint{0}{1}{\sin (n\pi x)\; \sin (m\pi x)}
+        \end{equation*}\label{subsec:prom2:subprom1}
+    \item $x$のみの関数$\xi (x)$及び$t$のみの関数$\tau (t)$を用いて、$u(x, t) = \xi (x)\tau (t)$と置けるとする。
+        任意の定数$C$を用いて、$\xi$および$\tau$が満たす常微分方程式をそれそれ表せ。関数$f(x)$と関数$g(t)$が任意の
+        $x$と$t$について$f(x) = g(t)$を満たす場合は、$f(x)$と$g(t)$が定数関数となることを用いてもよい。\label{subsec:prom2:subprom2}
+    \item 設問\eqref{subsec:prom2:subprom2}の常微分方程式を解け。次に、境界条件を満たす偏微分方程式$(*)$の解の一つが次の式で表される$u_n(x, t)$
+        で与えられることを示し、$\alpha, \beta$を正の整数$n$を用いて表せ。
+        \begin{equation*}
+            u_n (x, t) = e^{\alpha t}\sin (\beta x)
+        \end{equation*}\label{subsec:prom2:subprom3}
+    \item 境界条件と初期条件を満たす偏微分方程式$(*)$の解は$u_n (x, t)$の線形結合として次の式で表される。$c_n$を求めよ。設問\eqref{subsec:prom2:subprom1}の結果を
+        用いてもよい。
+        \begin{equation*}
+            u(x, t) = \sum\limits_{n = 1}^{\infty} c_n u_n (x, t)
+        \end{equation*}\label{subsec:prom2:subprom4}
+\end{enumerate}
+\newpage
+\subsection{解答}
+\begin{enumerate}[(1)]
+    \item 題意の式より以下が成り立つ。
+        \begin{align*}
+            \mbox{(与式)} 
+            & = \frac{1}{2}\dint{0}{1}{\cos (n\pi x - m\pi x) - \cos (n\pi x + m\pi x)}\\
+            & = 
+            \begin{cases}
+                \frac{1}{2}\dint{0}{1}{1 - \cos (2n\pi x)} & n = m\\
+                \frac{1}{2}\left[\frac{\sin ((n - m)\pi x)}{(n - m)\pi}\right]_{0}^{1} - \frac{1}{2}\left[\frac{\sin ((n + m)\pi x)}{(n + m)\pi}\right]_{0}^{1} & n \neq m\\
+            \end{cases}\\
+            & = 
+            \begin{cases}
+                \frac{1}{2} - \frac{1}{2}\left[\frac{\sin (2n\pi x)}{2n\pi}\right]_{0}^{1} & n = m\\
+                0 & n \neq m\\
+            \end{cases}\\
+            & = 
+            \begin{cases}
+                \frac{1}{2} & n = m\\
+                0 & n \neq m\\
+            \end{cases}
+        \end{align*}
+    \item 偏微分方程式$(*)$より$u(x, t) = \xi (x)\tau (t)$と表せるとすると以下が成り立つ。
+        \begin{align*}
+            (*) \Longleftrightarrow
+            \pdiff{\{\xi (x)\tau (t)\}}{t} & = \pdiff[2]{\{\xi (x)\tau (t)\}}{x}\\
+            \Longleftrightarrow
+            \xi (x)\diff{\tau (t)}{t} & = \tau (t)\diff[2]{\xi (x)}{x}
+        \end{align*}
+        ここで、$\xi (x)\tau(t) \neq 0$より$\xi (x) \neq 0, \tau (t) \neq 0$よって、以下のようになる。
+        \begin{align*}
+            \frac{\diff[2]{\xi (x)}{x}}{\xi (x)} &= \frac{\diff{\tau (t)}{t}}{\tau (t)}\\
+            \therefore &
+            \begin{cases}
+                \frac{\diff[2]{\xi (x)}{x}}{\xi (x)} = C\\
+                \frac{\diff{\tau (t)}{t}}{\tau (t)} = C\\
+            \end{cases}\\
+            \Longleftrightarrow &
+            \begin{cases}
+                C\xi (x) = \diff[2]{\xi (x)}{x}\\
+                C\tau (t) = \diff{\tau (t)}{t}\\
+            \end{cases}\\
+        \end{align*}
+    \item $(2)$よりそれぞれ解くと以下のようになる。\\
+    $\tau (t)$に関する常微分方程式を解く。$\tau (t) \neq 0$より以下が成り立つ。
+        \begin{align*}
+            C &= \frac{1}{\tau (t)}\diff{\tau (t)}{t}
+        \end{align*}
+        よって両辺$t$で積分して、
+        \begin{align*}
+            \dint[t]{}{}{C} &= \dint[t]{}{}{\frac{1}{\tau (t)}\diff{\tau (t)}{t}}\\
+            \dint[t]{}{}{C} &= \dint[\tau]{}{}{\frac{1}{\tau}} \qquad(分かりやすくするため(t)を省略)\\
+            Ct + C_3 &= \log |\tau (t)|\\
+            |\tau (t)| &= e^{Ct + C_3}\\
+            \tau (t) &= e^{Ct + C_3}
+        \end{align*}
+        よって、一般解は以下のようになる。
+        \begin{equation*}
+            \tau (t) = e^{Ct + C_3}
+        \end{equation*}
+        ここで常微分方程式から$t\to \infty$の時、$\tau (t)$は発散しないが、$C > 0$とすると、
+        この一般解の式から$\tau (t)$は発散するので矛盾してしまう。よって、$C < 0$となるので、正の実数$k$を用いて、$C = -k^2$とおく。\\
+    次に$\xi (x) = C_1 e^{\lambda x}$とおくと、$(2)$の常微分方程式と、$C = -k^2$より
+        \begin{align*}
+            -k^2 C_1 e^{\lambda x} &= \lambda^2 C_1 e^{\lambda x}\\
+            -k^2 &= \lambda^2 \\
+            \therefore \lambda &= \pm \imag k
+        \end{align*}
+    よって、斉次の微分方程式より独立な2つの解の和も解となるので、$\xi(x)$の一般解は以下のようになる。
+        \begin{align*}
+            \xi (x) &= C_1 e^{\imag kx} + C_2 e^{-\imag kx}\\
+            \xi (x) &= (C_1 + C_2)\cos (kx) + \imag(C_1 - C_2)\sin (kx)
+        \end{align*}
+        よって、$C_1 + C_2 = A \in \mathbb{R}, \imag(C_1 - C_2) = B\in\mathbb{R}$とおくと以下のようになる。
+        \begin{align*}
+            \xi (x) &= A\cos (kx) + B\sin (kx)
+        \end{align*}
+        次に境界条件を満たす偏微分方程式$(*)$の解の一つに題意の式$u_n(x, t)$が存在することを示す。\\
+        $(2)$より$u(x, t) = \xi (x)\tau (t) = e^{-k^2 t + C_3}(A\cos (kx) + B\sin (kx))$となる。\\
+        よって、この時初期条件より
+        \begin{align*}
+            \tau (0) &= 1\\
+            e^{C_3} &= 1\\
+            \therefore C_3 &= 0\\
+            \therefore \tau (t) &= e^{-k^2t}
+        \end{align*}
+        境界条件より、
+        \begin{align*}
+            &\begin{cases}
+                \xi(0) = 0\\
+                \xi(1) = 0\\
+            \end{cases}\\
+            &\begin{cases}
+                A\cos (0) + B\sin (0) = 0\\
+                A\cos (k) + B\sin (k) = 0\\
+            \end{cases}\\
+            &\begin{cases}
+                A = 0\\
+                B\sin (k) = 0\\
+            \end{cases}\\
+        \end{align*}
+        よって、$\xi (x) \neq 0$より$B \neq 0$より、
+        \begin{align*}
+            \sin (k) &= 0\\
+            \therefore k = n\pi
+        \end{align*}
+        \begin{equation*}
+            \xi (x) = B\sin (n\pi x)
+        \end{equation*}
+        となる。よって、この時、$(2)$より、$u(x, t) = \xi (x)\tau (t)$は偏微分方程式$(*)$を満たすので、以下の式はこの偏微分方程式の解の一つである。
+        \begin{equation*}
+            u(x, t) = Be^{-n^2\pi^2t}\sin(n\pi x)
+        \end{equation*}
+        よって、この式の$B = 1, n\pi = \beta, -n^2\pi^2 = \alpha$とおくと、
+        \begin{align*}
+            e^{\alpha t}\sin(\beta x) = u_n(x, t)
+        \end{align*}
+        となるので、題意は示された。また、$\alpha = -n^2\pi^2, \beta = n\pi$となる。
+    \item 題意のように偏微分方程式$(*)$は線形であるため、その解は$u_n(x, t)$の線形結合で表される。よって、$(3)$より以下のようになる。
+    \begin{align*}
+        初期条件から、u(x, 0) &= x - x^2 = \sum_{n = 1}^{\infty}c_n\sin(n\pi x)\\
+        \dint{0}{1}{(x - x^2)\sin(m\pi x)} &= \dint{0}{1}{\left(\sum_{n = 1}^{\infty}c_n\sin(n\pi x)\right)\sin (m\pi x)}
+    \end{align*}
+    よって、それぞれ計算する。
+    \begin{align*}
+        m = 0の時、
+        (左辺) = 0&\\
+        m \neq 0の時、\qquad
+        \dint{0}{1}{x\sin(m\pi x)} &= \left[x\frac{-\cos(m\pi x)}{m\pi}\right]_{0}^{1} + \frac{1}{m\pi}\dint{0}{1}{\cos(m\pi x)}\\
+        &= \frac{(-1)^{m + 1}}{m\pi} + \frac{1}{m^2\pi^2}\bigl[\sin (m\pi x)\bigr]_{0}^{1} = \frac{(-1)^{m + 1}}{m\pi}\\
+        \dint{0}{1}{x\cos(m\pi x)} &= \left[x\frac{\sin(m\pi x)}{m\pi}\right]_{0}^{1} - \frac{1}{m\pi}\dint{0}{1}{\sin(m\pi x)}\\
+        &= -\frac{1}{m^2\pi^2}\bigl[-\cos (m\pi x)\bigr]_{0}^{1} = \frac{(-1)^{m} - 1}{m^2\pi^2}\\
+        \dint{0}{1}{x^2\sin(m\pi x)} &= \left[x^2\frac{-\cos(m\pi x)}{m\pi}\right]_{0}^{1} + \frac{2}{m\pi}\dint{0}{1}{x\cos(m\pi x)}\\
+        &= \frac{(-1)^{m + 1}}{m\pi} + \frac{2}{m\pi}\frac{(-1)^{m} - 1}{m^2\pi^2}\\
+        (左辺) &= \dint{0}{1}{x\sin(m\pi x)} - \dint{0}{1}{x^2\sin(m\pi x)}\\
+        &= \frac{(-1)^{m + 1}}{m\pi} - \left(\frac{(-1)^{m + 1}}{m\pi} + \frac{2}{m\pi}\frac{(-1)^{m} - 1}{m^2\pi^2}\right)\\
+        &= \frac{2 - 2(-1)^{m}}{m^3\pi^3}
+    \end{align*}
+    $(1)$より右辺に関しては以下のようになる。
+    \begin{align*}
+        (右辺) &= \sum_{n = 1}^{\infty}c_n \dint{0}{1}{\sin(n\pi x)\sin(m\pi x)}\\
+        &= \frac{1}{2}c_m
+    \end{align*}
+    従って、以下が成り立つ。
+    \begin{align*}
+        \frac{2 - 2(-1)^{m}}{m^3\pi^3} &= \frac{1}{2}c_m\\
+        c_m &= \frac{4\left\{1 - (-1)^{m}\right\}}{m^3\pi^3}\\
+    \end{align*}
+    従って求める解答は以下のようになる。
+    \begin{equation*}
+        c_n = \frac{4\left\{1 - (-1)^{n}\right\}}{n^3\pi^3}
+    \end{equation*}
+\end{enumerate}
+
+\newpage
+\section{}%第3問
+\subsection{問題文}
+\begin{enumerate}[(1)]
+    \item 連続確率変数$T$の確率密度関数$f(t)$が$\lambda$を正の定数として
+        \begin{equation*}
+            f(t) = 
+            \begin{cases}
+                \lambda e^{-\lambda t} & (t\geq 0)\\    
+                0 & (t < 0)\\    
+            \end{cases}
+        \end{equation*}
+        で表されるとき、$T$はパラメータ$\lambda$の指数分布に従うという。この確率変数の平均値を求めよ。
+        またこの指数分布の確率分布関数$F(t) = P (T\leq t)$を求めよ。なお、$P(X)$は事象$X$が起こる確率である。\label{subsec:prom3:subprom1}
+    \item 設問\eqref{subsec:prom3:subprom1}の分布が無記憶であること、すなわち任意の$s > 0, t > 0$に対して
+        \begin{equation*}
+            P(T > s + t | T > s) = P(T > t)
+        \end{equation*}
+        が成立することを示せ。なお、$P(X|Y)$は事象$Y$が起こった条件のもとで事象$X$が起こる確率である。\label{subsec:prom3:subprom2}
+    \item 問題の解答を始めてから解答を終えるまでの時間を解答所要時間と呼ぶことにする。ある問題に対して
+        $n$人の学生の解答所要時間が全て同じパラメータ$\lambda_0$の指数分布に従うものとする。$n$人が同時に解答を始めた時、
+        最も早く解答を終える学生の解答所要時間の確率分布関数と平均値を示せ。ただし、各学生の解答所要時間はそれぞれ独立であるとする。\label{subsec:prom3:subprom3}
+    \item 学生A, Bの解答所要時間がパラメータ$\lambda_A, \lambda_B$の指数分布にそれぞれ従うものとする。
+        この二人が同時に解答を開始した時に、学生Aのほうが学生Bより先に解答を終える確率を求めよ。\label{subsec:prom3:subprom4}
+    \item 優秀な学生である秀夫君と、他10名の学生に問題を同時に解かせる。各学生の解答所要時間は指数分布に従うものとし、また
+    秀夫君以外の各学生の平均解答所要時間は、全て秀夫君の平均解答所要時間の10倍であるとする。秀夫君が1番目に解答を終える確率、
+    及び4番目に解答を終える確率をそれぞれ求めよ。\label{subsec:prom3:subprom5}
+\end{enumerate}
+\newpage
+\subsection{解答}
+\begin{enumerate}[(1)]
+    \item 平均値$E[T]$はこの確率変数の期待値$E[T]$を求めることと同義であるため、以下のようになる。
+        \begin{align*}
+            E[T] 
+            &= \dint[t]{-\infty}{\infty}{tf(t)}\\
+            &= \dint[t]{0}{\infty}{\lambda te^{-\lambda t}}\\
+            &= \lambda\left[t\frac{e^{-\lambda t}}{-\lambda}\right]_{0}^{\infty} + \dint[t]{0}{\infty}{e^{-\lambda t}}
+            \left(= \left[\frac{e^{-\lambda t}}{-\lambda}\right]_{0}^{\infty}\right)\\
+            &= \frac{1}{\lambda}\\
+        \end{align*}
+        また確率分布関数は以下のようになる。
+        \begin{align*}
+            F(t) 
+            &= \dint{0}{t}{f(x)}\\
+            &= \lambda\left[\frac{e^{-\lambda x}}{-\lambda}\right]_{0}^{t}\\
+            &= 1 - e^{-\lambda t}
+        \end{align*}
+    \item \eqref{subsec:prom3:subprom1}より題意の式について以下が成り立つ。
+        \begin{align*}
+            (左辺) 
+            &= \frac{P(T > s + t \cap T > s)}{P(T > s)} \left(= \frac{P(T > s + t)}{P(T > s)}\right)\\
+            &= \frac{1 - F(s + t)}{1 - F(s)}
+            = \frac{e^{\displaystyle -\lambda(s + t)}}{e^{\displaystyle -\lambda s}}\\
+            &= e^{-\lambda t}\\
+            &= 1 - F(t) = P(T > t)\\
+            &= (右辺)
+        \end{align*}
+        従って題意は示された。
+    \item 最も早く解答を終える学生が$t$秒までに解答を終える確率は学生全員が$t$秒の時点で解答を終えてない事象の余事象が
+    求める確率であるので、確率分布関数は以下のようになる。
+        \begin{align*}
+            P(T' \leq t) &= 1 - (P(T > t))^{n}\\
+            \therefore P(T \leq t) &= 1 - e^{- \lambda n t}
+        \end{align*}
+        従って確率密度関数$f(t)$、平均値$E[T']$は以下のようになる。
+        \begin{align*}
+            f(t) &= \diff{P(T \leq t)}{t}\\
+            &= \lambda n e^{- \lambda n t}\\
+            \therefore E[T'] &= \dint[t]{0}{\infty}{tf(t)}\\
+            &= n E[T] = \frac{n}{\lambda}\\
+        \end{align*}
+    \item 題意の確率$P$は学生$A$が$t$秒で解答を終えた時、学生$B$は$t$秒より後に解答を終える確率を積分したものであるため以下のようになる。
+        \begin{align*}
+            P &= \dint[t]{0}{\infty}{\lambda_Ae^{-\lambda_A t}e^{-\lambda_B t}}\\
+            &= \lambda_A \dint[t]{0}{\infty}{e^{-(\lambda_A + \lambda_B)t}}\\
+            &= \frac{\lambda_A}{\lambda_A + \lambda_B} \bigl[-e^{-(\lambda_A + \lambda_B)t}\bigr]_{0}^{\infty} 
+            = \frac{\lambda_A}{\lambda_A + \lambda_B} 
+        \end{align*}
+    \item 秀夫君のパラメータを$\lambda_s$、他の学生のパラメータを$\lambda_1$とおくと秀夫君の平均値は
+    他の学生の平均値の$\frac{1}{10}$倍より以下が成り立つ。
+        \begin{align*}
+            \frac{1}{\lambda_s} &= \frac{1}{10\lambda_1}\\
+            \therefore \lambda_s &= 10\lambda_1
+        \end{align*}
+        従って、秀夫君が一番目に解答を終える確率$P_1$は以下のようになる。
+        \begin{align*}
+            P_1 &= \dint[t]{0}{\infty}{10\lambda_1 e^{-10\lambda_1 t}\left(e^{-\lambda_1 t}\right)^{10}}\\
+            &= 10\lambda_1 \dint[t]{0}{\infty}{e^{-20\lambda_1 t}}\\
+            &= \frac{1}{2}
+        \end{align*}
+        次に４番目に解答を終える確率$P_4$は以下のようになる。
+        \begin{align*}
+            P_4 &= \dint[t]{0}{\infty}{\left(1 - e^{-\lambda_1 t}\right)^{3}10\lambda_1 e^{-\lambda_1 t}\left(e^{-\lambda_1 t}\right)^{7}}\\
+            &= 10\lambda_1 \dint[t]{0}{\infty}{\left(1 - e^{-3\lambda_1 t} + 3e^{-2\lambda_1 t} - 3e^{-\lambda_1 t}\right)e^{-8\lambda_1 t}}\\
+            &= 10\lambda_1 \dint[t]{0}{\infty}{e^{-8\lambda_1 t} - e^{-11\lambda_1 t} + 3e^{-10\lambda_1 t} - 3e^{-9\lambda_1 t}}\\
+            &= 10\left(\frac{1}{8} - \frac{1}{11} + \frac{3}{10} - \frac{3}{9}\right)\\
+            &= 10\left(\frac{17}{40} - \frac{14}{33}\right)\\
+            &= \frac{17\cdot 33 - 140 \cdot 4}{132}\\
+            &= \frac{1}{132}
+        \end{align*}
+\end{enumerate}
+% \newpage
+\index{ティック@tikz}
+% \printindex
+\end{document}
