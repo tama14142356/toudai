@@ -1,18 +1,18 @@
 \subsection{問題文}
-複素正方行列$X$は$XX^{\ast}=I$を満たすとき、ユニタリ行列であるという。但し、$X^{\ast}$は行列$X$の共役転置行列（もしくは随伴行列）を
-表し、$I$は単位行列とする。また、iは虚数単位とする。以下の問いに答えよ。
+複素正方行列$X$は$XX^{\ast}=I$を満たすとき,ユニタリ行列であるという.但し,$X^{\ast}$は行列$X$の共役転置行列（もしくは随伴行列）を
+表し,$I$は単位行列とする.また,iは虚数単位とする.以下の問いに答えよ.
 \begin{enumerate}[(1)]
     \setlength{\itemsep}{10pt}
-    \item $n$を正の整数とし、$A, B$を$n$次ユニタリ行列とする。行列$AB$もユニタリ行列であることを示せ。
-    \item $n$を正の整数とし、$C, D$を$n$次実正方行列とする。行列$F$を$F = C + \imag D$と定義し、行列$G$を
+    \item $n$を正の整数とし,$A, B$を$n$次ユニタリ行列とする.行列$AB$もユニタリ行列であることを示せ.
+    \item $n$を正の整数とし,$C, D$を$n$次実正方行列とする.行列$F$を$F = C + \imag D$と定義し,行列$G$を
     \begin{align*}
         G = \spalignmat{
             C {-D};
             D {C}
         }
     \end{align*}
-    と定義する。行列$F$がユニタリ行列であることと行列$G$が直交行列であることは同値であることを示せ。
-    \item 次の行列の固有値を求めよ。
+    と定義する.行列$F$がユニタリ行列であることと行列$G$が直交行列であることは同値であることを示せ.
+    \item 次の行列の固有値を求めよ.
     \begin{align*}
         \frac{1}{2}\spalignmat{
             1 1 1 1;
@@ -21,16 +21,16 @@
             1 {-\imag} -1 {\imag}
         }
     \end{align*}
-    \item $n$を正の整数とし、$n$次正方行列$Q$の$(j, k)$成分$q_{jk}$を
+    \item $n$を正の整数とし,$n$次正方行列$Q$の$(j, k)$成分$q_{jk}$を
     \begin{equation*}
         q_{jk} = \cfrac{1}{\sqrt{n}}\exp \left(\cfrac{2\pi\imag (j - 1)(k - 1)}{n}\right)
     \end{equation*}
-    とする。行列$Q$はユニタリ行列であることを示せ。
-    \item 行列式が1である2次のユニタリ行列は次の一形式を持つことを示せ。但し、$\theta, \psi$は実数であるとする。
+    とする.行列$Q$はユニタリ行列であることを示せ.
+    \item 行列式が1である2次のユニタリ行列は次の一形式を持つことを示せ.但し,$\theta, \psi$は実数であるとする. (これは一般形ではないので, 誤植修正しました).
     \begin{equation*}
         H = \spalignmat{
-            {\exp(\imag \psi)\cos\theta} {\exp(\imag \psi)\sin\theta};
-            {-\exp(-\imag \psi)\sin\theta} {\exp(-\imag \psi)\cos\theta}
+            {\exp(\imag \psi_{1})\cos\theta} {\exp(\imag \psi_{2})\sin\theta};
+            {-\exp(-\imag \psi_{2})\sin\theta} {\exp(-\imag \psi_{1})\cos\theta}
         }
     \end{equation*}
     \item 2次のユニタリ行列の一般形を求めよ
@@ -41,7 +41,7 @@
 \subsection{解答例}
 \begin{enumerate}[(1)]
     \setlength{\itemsep}{10pt}
-    \item $A, B$ともにユニタリ行列より以下が成り立つ。
+    \item $A, B$ともにユニタリ行列より以下が成り立つ.
     \begin{align}
         \left\{
             \begin{array}{lcl}
@@ -50,28 +50,28 @@
             \end{array}
         \right.\label{eq:abunitary}
     \end{align}
-    よって、式\eqref{eq:abunitary}より、以下が成り立つ。
+    よって,式\eqref{eq:abunitary}より,以下が成り立つ.
     \begin{align*}
         (AB)(AB)^{\ast} & = ABB^{\ast}A^{\ast}\\
                         & = AIA^{\ast}\\
                         & = AA^{\ast}\\
                         & = I
     \end{align*}
-    よって、行列$AB$についてもユニタリ行列であることが示された。
-    \item 題意は以下のように同値変形できる。
+    よって,行列$AB$についてもユニタリ行列であることが示された.
+    \item 題意は以下のように同値変形できる.
     \begin{align}
         \mbox{行列$F$がユニタリ行列であること}&\mbox{と行列$G$が直交行列であることは同値である}\nonumber\\
         \Longleftrightarrow \mbox{行列$F$がユニタリ行列である} &\Leftrightarrow \mbox{行列$G$が直交行列である} \nonumber\\
         \Longleftrightarrow FF^{\ast} = I &\Leftrightarrow GG^{\top} = I\label{eq:hodai1_2}
     \end{align}
-    よって、式\eqref{eq:hodai1_2}が成り立つことを示せばよい。
+    よって,式\eqref{eq:hodai1_2}が成り立つことを示せばよい.
 
-    まず以下の式\eqref{eq:hodai1_2_1}が成り立つことを示す。
+    まず以下の式\eqref{eq:hodai1_2_1}が成り立つことを示す.
     \begin{equation}
         FF^{\ast} = I \Rightarrow GG^{\top} = I \label{eq:hodai1_2_1}
     \end{equation}
-    題意より、$F = C + \imag D$より、$F^{\ast} = C^{\top} - \imag D^{\top}$であり、
-    式\eqref{eq:hodai1_2_1}の仮定条件$FF^{\ast} = I$から以下が成り立つ。
+    題意より,$F = C + \imag D$より,$F^{\ast} = C^{\top} - \imag D^{\top}$であり,
+    式\eqref{eq:hodai1_2_1}の仮定条件$FF^{\ast} = I$から以下が成り立つ.
     \begin{align*}
         FF^{\ast} & = \left(C + \imag D\right)\left(C^{\top} - \imag D^{\top}\right)\\
                 & = CC^{\top} + DD^{\top} + \imag \left(DC^{\top} - CD^{\top}\right)\\
@@ -101,13 +101,13 @@
         }\\
         & = I
     \end{align*}
-    よって、式\eqref{eq:hodai1_2_1}が成り立つことは示された。
+    よって,式\eqref{eq:hodai1_2_1}が成り立つことは示された.
 
-    次に以下の式\eqref{eq:hodai1_2_2}が成り立つを示す。
+    次に以下の式\eqref{eq:hodai1_2_2}が成り立つを示す.
     \begin{equation}
         GG^{\top} = I \Rightarrow FF^{\ast} = I \label{eq:hodai1_2_2}
     \end{equation}
-    題意と式\eqref{eq:hodai1_2_2}の仮定条件$GG^{\top} = I$から以下が成り立つ。
+    題意と式\eqref{eq:hodai1_2_2}の仮定条件$GG^{\top} = I$から以下が成り立つ.
     \begin{align*}
         GG^{\top} & = 
         \spalignmat{
@@ -136,10 +136,10 @@
             & = I + \mbox{\boldmath $0$}\\
             & = I
     \end{align*}
-    よって、式\eqref{eq:hodai1_2_2}が成り立つことが示された。
+    よって,式\eqref{eq:hodai1_2_2}が成り立つことが示された.
 
-    従って、式\eqref{eq:hodai1_2_1}, \eqref{eq:hodai1_2_2}が成り立つことが示されたので、式\eqref{eq:hodai1_2}
-    が成り立つことが示された。よって、題意は示された。\\[1cm]
+    従って,式\eqref{eq:hodai1_2_1}, \eqref{eq:hodai1_2_2}が成り立つことが示されたので,式\eqref{eq:hodai1_2}
+    が成り立つことが示された.よって,題意は示された.\\[1cm]
     (中田解)
     \begin{eqnarray*}
     行列Fがユニタリ行列である&\Longleftrightarrow&FF^{*}=I\\
@@ -152,12 +152,12 @@
                             &\Longleftrightarrow&GG^{\sf T}=I
     \end{eqnarray*}
     よって, 題意は示された.
-    \item 題意の4次正方行列を$A$とおき、$\mid A \mid$は行列$A$の行列式を表すとすると、
-    固有値$\lambda$は以下を満たす。
+    \item 題意の4次正方行列を$A$とおき,$\mid A \mid$は行列$A$の行列式を表すとすると,
+    固有値$\lambda$は以下を満たす.
     \begin{equation*}
         \mid \lambda I - A \mid = 0
     \end{equation*}
-    よって、この方程式を解くと以下のようになる。
+    よって,この方程式を解くと以下のようになる.
     \begin{align*}
         \mid \lambda I - A \mid 
         & = \left(\frac{1}{2}\right)^{4} \mid 2\lambda I - 2A \mid\\
@@ -198,7 +198,7 @@
         & = (\lambda - \imag)(\lambda - 1)^2(\lambda + 1)\\
         \therefore\, \lambda & = \pm 1, \imag
     \end{align*}
-    よって、固有値は$\pm 1 \imag$である。\\[1cm]
+    よって,固有値は$\pm 1 \imag$である.\\[1cm]
     (中田解)\\
     この行列を$A$とし, この行列$A$に対する固有値を$\lambda$, 固有ベクトルを$\bm{x}$とおくと
     \begin{eqnarray*}
@@ -314,13 +314,13 @@
       |\lambda|^{2} = 1\Longleftrightarrow |\lambda| = 1
     \end{eqnarray*}
     となる. 4次のユニタリ行列であるので, $\lambda =\pm 1,\pm \imag$が候補に上がる. これから固有ベクトルを求めて一致するかどうかを確認する.
-    \item 題意より複素数$z$に対する共役な複素数を$\overline{z}$と表すとき、
-    $n$次正方行列$Q$の共役転置行列$Q^{\ast}$の$(j, k)$成分$q^{\ast}_{jk}$は以下のようになる。
+    \item 題意より複素数$z$に対する共役な複素数を$\overline{z}$と表すとき,
+    $n$次正方行列$Q$の共役転置行列$Q^{\ast}$の$(j, k)$成分$q^{\ast}_{jk}$は以下のようになる.
     \begin{align}
         q^{\ast}_{jk} & = \overline{q_{kj}}\nonumber\\
         & = \cfrac{1}{\sqrt{n}}\exp \left(\cfrac{-2\pi\imag (k - 1)(j - 1)}{n}\right)\label{eq:kyoyaku}
     \end{align}
-    よって、式\eqref{eq:kyoyaku}から$QQ^{\ast}$の$(j, k)$成分$Q_{jk}$は以下のようになる。
+    よって,式\eqref{eq:kyoyaku}から$QQ^{\ast}$の$(j, k)$成分$Q_{jk}$は以下のようになる.
     \begin{align*}
         Q_{jk} & = \sum_{l = 1}^{n} \left(q_{jl}\times q^{\ast}_{lk}\right)\\
                & = \sum_{l = 1}^{n}
@@ -346,8 +346,178 @@
             \cfrac{1}{n}\cfrac{\cos\{2\pi(j - k)\} + \imag \sin\{2\pi(j - k)\} - 1}{\exp\left(\cfrac{2\pi\imag (j - k)}{n}\right) - 1} = 0 & j \neq k
         \end{cases}
     \end{align*}
-    従って、対角成分のみ1となり、他の成分は全て0となるので、$QQ^{\ast}$は単位行列となる。従って、$Q$はユニタリ行列であることが示された。
-    \item 題意の2次正方行列$H$についてユニタリ行列であることを示す。
+    従って,対角成分のみ1となり,他の成分は全て0となるので,$QQ^{\ast}$は単位行列となる.従って,$Q$はユニタリ行列であることが示された.
+    \item 求める行列を$H$とする.\\
+    実数$r_{11},r_{12},r_{21},r_{22},\psi_{11},\psi_{12},\psi_{21},\psi_{22}$を用いて次のように$H$を表すことができる.
+    \begin{eqnarray*}
+      H=\begin{pmatrix}r_{11}\exp(\imag \psi_{11})&r_{12}\exp(\imag \psi_{12})\\r_{21}\exp(\imag \psi_{21})&r_{22}\exp(\imag \psi_{22})\end{pmatrix}
+    \end{eqnarray*}
+    $H$がユニタリ行列になるとき
+    \begin{eqnarray*}
+      &&HH^{\ast}=I\\
+      \Longleftrightarrow\ && \begin{pmatrix}r_{11}\exp(\imag \psi_{11})&r_{12}\exp(\imag \psi_{12})\\r_{21}\exp(\imag \psi_{21})&r_{22}\exp(\imag \psi_{22})\end{pmatrix}\begin{pmatrix}r_{11}\exp(-\imag \psi_{11})&r_{21}\exp(-\imag \psi_{21})\\r_{12}\exp(-\imag \psi_{12})&r_{22}\exp(-\imag \psi_{22})\end{pmatrix}=\begin{pmatrix}1&0\\0&1\end{pmatrix}\\
+      \Longleftrightarrow\ &&\left\{
+                              \begin{array}{l}
+                                r_{11}^{2}+r_{12}^{2}=1\\
+                                r_{11}r_{21}\exp(\imag (\psi_{11}-\psi_{21}))+r_{12}r_{22}\exp(\imag (\psi_{12}-\psi_{22}))=0\\
+                                r_{11}r_{21}\exp(\imag (\psi_{21}-\psi_{11}))+r_{12}r_{22}\exp(\imag (\psi_{22}-\psi_{12}))=0\\
+                                r_{21}^{2}+r_{22}^{2}=1
+                              \end{array}
+      \right.\\
+      \Longleftrightarrow\ &&\left\{
+                              \begin{array}{l}
+                                r_{11}^{2}+r_{12}^{2}=1\\
+                                r_{11}r_{21}\exp(\imag (\psi_{11}-\psi_{21}))+r_{12}r_{22}\exp(\imag (\psi_{12}-\psi_{22}))=0\\
+                                r_{21}^{2}+r_{22}^{2}=1
+                              \end{array}
+      \right.
+    \end{eqnarray*}
+    同様にして,
+    \begin{eqnarray*}
+      &&H^{\ast}H=I\\
+      \Longleftrightarrow\ && \begin{pmatrix}r_{11}\exp(-\imag \psi_{11})&r_{21}\exp(-\imag \psi_{21})\\r_{12}\exp(-\imag \psi_{12})&r_{22}\exp(-\imag \psi_{22})\end{pmatrix}\begin{pmatrix}r_{11}\exp(\imag \psi_{11})&r_{12}\exp(\imag \psi_{12})\\r_{21}\exp(\imag \psi_{21})&r_{22}\exp(\imag \psi_{22})\end{pmatrix}=\begin{pmatrix}1&0\\0&1\end{pmatrix}\\
+      \Longleftrightarrow\ &&\left\{
+                              \begin{array}{l}
+                                r_{11}^{2}+r_{21}^{2}=1\\
+                                r_{11}r_{12}\exp(\imag (\psi_{12}-\psi_{11}))+r_{21}r_{22}\exp(\imag (\psi_{22}-\psi_{21}))=0\\
+                                r_{11}r_{12}\exp(\imag (\psi_{11}-\psi_{12}))+r_{21}r_{22}\exp(\imag (\psi_{21}-\psi_{22}))=0\\
+                                r_{12}^{2}+r_{22}^{2}=1
+                              \end{array}
+      \right.\\
+      \Longleftrightarrow\ &&\left\{
+                              \begin{array}{l}
+                                r_{11}^{2}+r_{21}^{2}=1\\
+                                r_{11}r_{12}\exp(\imag (\psi_{11}-\psi_{12}))+r_{21}r_{22}\exp(\imag (\psi_{21}-\psi_{22}))=0\\
+                                r_{12}^{2}+r_{22}^{2}=1
+                              \end{array}
+      \right.
+    \end{eqnarray*}
+    これらをまとめると,
+    \begin{align*}
+      &\left\{
+      \begin{array}{l}
+        r_{11}^{2}+r_{12}^{2}=1\\
+        r_{11}r_{21}\exp(\imag (\psi_{11}-\psi_{21}))+r_{12}r_{22}\exp(\imag (\psi_{12}-\psi_{22}))=0\\
+        r_{21}^{2}+r_{22}^{2}=1\\
+        r_{11}^{2}+r_{21}^{2}=1\\
+        r_{11}r_{12}\exp(\imag (\psi_{11}-\psi_{12}))+r_{21}r_{22}\exp(\imag (\psi_{21}-\psi_{22}))=0\\
+        r_{12}^{2}+r_{22}^{2}=1
+      \end{array}
+      \right.\\
+      \Longleftrightarrow\ &\left\{
+      \begin{array}{l}
+        r_{11}^{2}+r_{12}^{2}=1\\
+        r_{11}^{2}=r_{22}^{2}\\
+        r_{12}^{2}=r_{21}^{2}\\
+        r_{11}r_{21}\exp(\imag (\psi_{11}-\psi_{21}))+r_{12}r_{22}\exp(\imag (\psi_{12}-\psi_{22}))=0 \\
+        r_{11}r_{12}\exp(\imag (\psi_{11}-\psi_{12}))+r_{21}r_{22}\exp(\imag (\psi_{21}-\psi_{22}))=0　\\
+      \end{array}
+      \right.
+    \end{align*}
+    したがって, $r_{11}=\cos \theta$\ ($\theta\in \mathbb{R}$)とすると, $r_{12}=\sin \theta$となり, $r_{21}=\pm \sin\theta$, $r_{22}=\pm \cos \theta$となる.
+    また行列式の値が1であるから,
+    \begin{align*}
+      &\left|\begin{pmatrix}r_{11}\exp(\imag \psi_{11})&r_{12}\exp(\imag \psi_{12})\\r_{21}\exp(\imag \psi_{21})&r_{22}\exp(\imag \psi_{22})\end{pmatrix}\right| = 1 \\
+      \Longleftrightarrow\ & r_{11}r_{22}\exp(\imag (\psi_{11}+\psi_{22}))-r_{12}r_{21}\exp(\imag (\psi_{12}+\psi_{21}))=1 \tag{$\ast$}
+    \end{align*}
+    \begin{enumerate}[(i)]
+    \item $r_{21}=\sin \theta,r_{22}=\cos\theta$のとき,
+      \begin{eqnarray*}
+        &&\left\{
+        \begin{array}{l}
+          \sin\theta\cos\theta\Bigl\{\exp(\imag(\psi_{11}-\psi_{21}))+\exp(\imag(\psi_{12}-\psi_{22}))\Bigr\}=0\\[0.2cm]
+          \sin\theta\cos\theta\Bigl\{\exp(\imag(\psi_{11}-\psi_{21}))+\exp(\imag(\psi_{12}-\psi_{22}))\Bigr\}=0
+        \end{array}
+        \right.\\
+        \Longleftrightarrow\ &&\left\{
+                                \begin{array}{lc}
+                                  \psi_{11}-\psi_{21}=(2k+1)\pi +\psi_{12}+\psi_{22}&(k\in\mathbb{Z})\\
+                                  \psi_{11}-\psi_{12}=(2m+1)\pi+\psi_{21}+\psi_{22}&(m\in\mathbb{Z})\\
+                                \end{array}
+        \right.\\
+        \Longleftrightarrow\ && \psi_{11}=(2k+1)\pi+\psi_{12}+\psi_{21}-\psi_{22}\hspace{20pt} (k\in\mathbb{Z})
+      \end{eqnarray*}
+      式($\ast$)に代入すると
+      \begin{eqnarray*}
+        &&\cos^{2}\theta\exp\{\imag((2k+1)\pi+\psi_{12}+\psi_{21}-\psi_{22}+\psi_{22})\}-\sin^{2}\theta\exp(\imag(\psi_{12}+\psi_{21}))=1\\
+        \Longleftrightarrow\ &&-\cos^{2}\theta\exp(\imag(\psi_{12}+\psi_{21}))-\sin^{2}\theta\exp(\imag(\psi_{12}+\psi_{21}))=1\\
+        \Longleftrightarrow\ && \psi_{12}+\psi_{21} = \pi
+      \end{eqnarray*}
+      したがって,
+      \begin{eqnarray*}
+        r_{21}\exp(\imag \psi_{21}) &=& \sin\theta \exp(\imag (\pi-\psi_{12}))\\
+                        &=& -\sin\theta\exp(-\imag\psi_{12})
+      \end{eqnarray*}
+      また, $\psi_{12}+\psi_{21}=\pi$より
+      \begin{eqnarray*}
+        \psi_{11}&=&(2k+1)\pi+\pi-\psi_{22}\\
+                 &=&-\psi_{22}
+      \end{eqnarray*}
+    \item $r_{21}=\sin\theta,r_{22}=-\cos\theta$のとき,
+      \begin{eqnarray*}
+        &&\left\{
+        \begin{array}{l}
+          \sin\theta\cos\theta\Bigl\{\exp(\imag(\psi_{11}-\psi_{21}))-\exp(\imag(\psi_{12}-\psi_{22}))\Bigr\}=0\\[0.2cm]
+          \sin\theta\cos\theta\Bigl\{\exp(\imag(\psi_{11}-\psi_{21}))-\exp(\imag(\psi_{12}-\psi_{22}))\Bigr\}=0
+        \end{array}
+        \right.\\
+        \Longleftrightarrow\ &&\left\{
+                                \begin{array}{lc}
+                                  \psi_{11}-\psi_{21}=2k\pi -\psi_{12}-\psi_{22}&(k\in\mathbb{Z})\\
+                                  \psi_{11}-\psi_{12}=2m\pi-\psi_{21}-\psi_{22}&(m\in\mathbb{Z})\\
+                                \end{array}
+        \right.\\
+        \Longleftrightarrow\ && \psi_{11}=2k\pi+\psi_{12}+\psi_{21}-\psi_{22}\hspace{20pt} (k\in\mathbb{Z})
+      \end{eqnarray*}
+      式($\ast$)に代入すると
+      \begin{eqnarray*}
+        &&-\cos^{2}\theta\exp(\imag(2k\pi+\psi_{12}+\psi_{21}-\psi_{22}+\psi_{22}))-\sin^{2}\theta\exp(\imag(\psi_{12}+\psi_{21}))=1\\
+        \Longleftrightarrow\ && -\cos^{2}\theta\exp(\imag((\psi_{12}+\psi_{21}))-\sin^{2}\theta\exp(\imag(\psi_{12}+\psi_{21}))=1\\
+        \Longleftrightarrow\ && \psi_{12}+\psi_{21}=\pi
+      \end{eqnarray*}
+      となり, 以下(i)と同じになる.
+    \item $r_{21}=-\sin\theta,r_{22}=\cos\theta$のとき,
+      \begin{eqnarray*}
+        &&\left\{
+        \begin{array}{l}
+          \sin\theta\cos\theta\Bigl\{\exp(\imag(\psi_{11}-\psi_{21}))-\exp(\imag(\psi_{12}-\psi_{22}))\Bigr\}=0\\[0.2cm]
+          \sin\theta\cos\theta\Bigl\{-\exp(\imag(\psi_{11}-\psi_{21}))+\exp(\imag(\psi_{12}-\psi_{22}))\Bigr\}=0
+        \end{array}
+        \right.\\
+        \Longleftrightarrow\ &&\left\{
+                                \begin{array}{lc}
+                                  \psi_{11}-\psi_{21}=2k\pi -\psi_{12}-\psi_{22}&(k\in\mathbb{Z})\\
+                                  \psi_{11}-\psi_{12}=2m\pi-\psi_{21}-\psi_{22}&(m\in\mathbb{Z})\\
+                                \end{array}
+        \right.\\
+        \Longleftrightarrow\ && \psi_{11}=2k\pi+\psi_{12}+\psi_{21}-\psi_{22}\hspace{20pt} (k\in\mathbb{Z})
+      \end{eqnarray*}
+      となるので, (ii)と同じになる.
+    \item $r_{21}=-\sin\theta,r_{22}=-\cos\theta$のとき,
+      \begin{eqnarray*}
+        &&\left\{
+        \begin{array}{l}
+          \sin\theta\cos\theta\Bigl\{-\exp(\imag(\psi_{11}-\psi_{21}))-\exp(\imag(\psi_{12}-\psi_{22}))\Bigr\}=0\\[0.2cm]
+          \sin\theta\cos\theta\Bigl\{-\exp(\imag(\psi_{11}-\psi_{21}))-\exp(\imag(\psi_{12}-\psi_{22}))\Bigr\}=0
+        \end{array}
+        \right.\\
+        \Longleftrightarrow\ &&\left\{
+                                \begin{array}{lc}
+                                  \psi_{11}-\psi_{21}=2k\pi -\psi_{12}-\psi_{22}&(k\in\mathbb{Z})\\
+                                  \psi_{11}-\psi_{12}=2m\pi-\psi_{21}-\psi_{22}&(m\in\mathbb{Z})\\
+                                \end{array}
+        \right.\\
+        \Longleftrightarrow\ && \psi_{11}=(2k+1)\pi+\psi_{12}+\psi_{21}-\psi_{22}\hspace{20pt} (k\in\mathbb{Z})
+      \end{eqnarray*}
+      となるので, (i)と同じになる.\\
+    \end{enumerate}
+    したがって, $\psi_{1}=\psi_{11},\ \psi_{2}=\psi_{12}$と書き直せば
+    \begin{eqnarray*}
+      H=\begin{pmatrix}\exp(\imag\psi_{1})\cos\theta&\exp(\imag\psi_{2})\sin\theta\\-\exp(-\imag\psi_{2})\sin\theta&\exp(-\imag\psi_{1})\cos\theta\end{pmatrix}
+    \end{eqnarray*}
+    となり, 題意は示された.\\[0.2cm]
+    \underline{補足}\\
+    これがユニタリ行列となることを確認する.
     \begin{align*}
         HH^{\ast} & = 
         \spalignmat{
@@ -372,13 +542,46 @@
         }\\
         & = I
     \end{align*}
-    よって、行列$H$はユニタリ行列である。また、行列$H$の行列式は以下のようになる。
+    よって,行列$H$はユニタリ行列である.また,行列$H$の行列式は以下のようになる.
     \begin{align*}
         \mid H \mid & = \exp(\imag \psi)\cos\theta\times\exp(-\imag \psi)\cos\theta - 
         (-\exp(-\imag \psi)\sin\theta)\times\exp(\imag \psi)\sin\theta\\
         & = \cos^{2}\theta + \sin^{2}\theta = 1
     \end{align*}
-    よって、この２次正方行列$H$は行列式が1でユニタリ行列であるので、行列式が1で2次のユニタリ行列の一形式となる
-    ことが示された。
-    \item 解けなかったので後述。
+    よって,この２次正方行列$H$は行列式が1でユニタリ行列であるので,行列式が1で2次のユニタリ行列の一形式となる
+    ことが示された.\\
+  \item 求める行列を$Q$とする.\\
+    ${\rm det}\,Q{\rm det}Q^{\ast}=I$となることから, $|{\rm det} Q|=1$であるから, $Q$の行列式は
+    \begin{eqnarray*}
+      {\rm det}Q = \exp(\imag\beta)
+    \end{eqnarray*}
+    と書くことができる. ここで,
+    \begin{eqnarray*}
+      P = \begin{pmatrix}\exp\left(-\frac{\imag \beta}{2}\right)&0\\0&\exp\left(-\frac{\imag \beta}{2}\right)\end{pmatrix}
+    \end{eqnarray*}
+    とおくと,
+    \begin{eqnarray*}
+      {\rm det}PQ = {\rm det}P\,{\rm det}Q = \exp(-\imag \beta)\cdot \exp(\imag \beta)=1
+    \end{eqnarray*}
+    つまり,
+    \begin{eqnarray*}
+      PQ = \begin{pmatrix}\exp(\imag\psi_{1})\cos\theta&\exp(\imag\psi_{2})\sin\theta\\-\exp(-\imag\psi_{2})\sin\theta&\exp(-\imag\psi_{1})\cos\theta\end{pmatrix}
+    \end{eqnarray*}
+    となるので, $P$の逆行列をかければ2次のユニタリ行列の一般形が得られる.
+    \begin{eqnarray*}
+      Q &=& P^{-1}H\\
+        &=& \begin{pmatrix}\exp\left(\frac{\imag \beta}{2}\right)&0\\0&\exp\left(\frac{\imag \beta}{2}\right)\end{pmatrix}\begin{pmatrix}\exp(\imag\psi_{1})\cos\theta&\exp(\imag\psi_{2}\sin\theta\\-\exp(-\imag\psi_{2})\sin\theta&\exp(-\imag\psi_{1})\cos\theta\end{pmatrix}\\
+        &=& \begin{pmatrix}\exp(\imag(\psi_{1}+\beta/2))\cos\theta&\exp(\imag(\psi_{2}+\beta/2))\sin\theta\\-\exp(-\imag(\psi_{2}-\beta/2))\sin\theta&\exp(-\imag(\psi_{1}-\beta/2))\cos\theta\end{pmatrix}
+    \end{eqnarray*}
+    \vspace{0.5cm}
+
+    \noindent \underline{別方針(愚直に解く)}\\
+    (5)と同様に実数$r_{11},r_{12},r_{21},r_{22},\psi_{11},\psi_{12},\psi_{21},\psi_{22}$を用いて次のように$H$を表すことができる.
+    \begin{eqnarray*}
+      H=\begin{pmatrix}r_{11}\exp(\imag \psi_{11})&r_{12}\exp(\imag \psi_{12})\\r_{21}\exp(\imag \psi_{21})&r_{22}\exp(\imag \psi_{22})\end{pmatrix}
+    \end{eqnarray*}
+    一般系は(5)の(i),(ii),(iii),(iv)より
+    \begin{eqnarray*}
+      H=\begin{pmatrix}-\exp(\imag(\psi_{12}+\psi_{21}-\psi_{22}))\cos\theta&\exp(\imag\psi_{12})\sin\theta\\\exp(\imag \psi_{21})\sin\theta&\exp(\imag\psi_{22})\cos\theta\end{pmatrix}
+    \end{eqnarray*}
 \end{enumerate}

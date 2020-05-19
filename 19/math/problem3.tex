@@ -1,25 +1,25 @@
 \subsection{問題文}
-下図のように、平面上に三角形$\mathrm{ABC}$が与えられており、各頂点の座標は
-$\mathrm{A(1, 0), B(0, 1), C(-1, -1)}$とする。原点$(0, 0)$を端点とする半直線$\ell$をランダムに選ぶ。
-すなわち、$\Theta$を区間$[0, 2\pi)$上の一様分布に従う確率変数として、
+下図のように,平面上に三角形$\mathrm{ABC}$が与えられており,各頂点の座標は
+$\mathrm{A(1, 0), B(0, 1), C(-1, -1)}$とする.原点$(0, 0)$を端点とする半直線$\ell$をランダムに選ぶ.
+すなわち,$\Theta$を区間$[0, 2\pi)$上の一様分布に従う確率変数として,
 \begin{equation*}
     \ell = \left\{(r\cos\Theta, r\sin\Theta) \mid r \geq 0\right\}
 \end{equation*}
-とおく。この半直線$\ell$と三角形$\mathrm{ABC}$の周との交点を$\mathrm{Q}$とおく。また、$\mathrm{Q}$の座標を
-$(X, Y)$とおく。ただし、$X, Y$は確率変数である。以下の問いに答えよ。
+とおく.この半直線$\ell$と三角形$\mathrm{ABC}$の周との交点を$\mathrm{Q}$とおく.また,$\mathrm{Q}$の座標を
+$(X, Y)$とおく.ただし,$X, Y$は確率変数である.以下の問いに答えよ.
 \begin{enumerate}[(1)]
     \setlength{\itemsep}{10pt}
-    \item 点$\mathrm{Q}$が辺$\mathrm{AB}$上にある確率を求めよ。\label{subsec3:prom1}
-    \item 点$\mathrm{Q}$が辺$\mathrm{AB}$上にあるという条件の下での$X$の期待値は$1/2$であることを示せ。但し、
-    三角形$\mathrm{ABC}$が直線$y = x$に関して対称であることを利用してもよい。\label{subsec3:prom2}
-    \item 点$\mathrm{Q}$が辺$\mathrm{BC}$にあるという条件のもとでの$X$の確率密度関数を、変数変換の公式
+    \item 点$\mathrm{Q}$が辺$\mathrm{AB}$上にある確率を求めよ.\label{subsec3:prom1}
+    \item 点$\mathrm{Q}$が辺$\mathrm{AB}$上にあるという条件の下での$X$の期待値は$1/2$であることを示せ.但し,
+    三角形$\mathrm{ABC}$が直線$y = x$に関して対称であることを利用してもよい.\label{subsec3:prom2}
+    \item 点$\mathrm{Q}$が辺$\mathrm{BC}$にあるという条件のもとでの$X$の確率密度関数を,変数変換の公式
     \begin{equation*}
         f(x) = g(h(x))\left\lvert \diff{h}{x}(x) \right\rvert
     \end{equation*}
-    を使って求めよ。ただし、$x$は任意の実数とし、$f$と$g$はそれぞれ$X$と$\Theta$の確率密度関数を表し、$h$は$\Theta = h(X)$を満たす関数とする。\label{subsec3:prom3}
-    \item 点$\mathrm{Q}$が辺$\mathrm{BC}$にあるという条件のもとでの$X$の期待値を$\alpha$とおく。設問\ref{subsec3:prom3}の結果を用いて$\alpha$
-    を求めよ。\label{subsec3:prom4}
-    \item $X$の期待値$\mu$を求めよ。
+    を使って求めよ.ただし,$x$は任意の実数とし,$f$と$g$はそれぞれ$X$と$\Theta$の確率密度関数を表し,$h$は$\Theta = h(X)$を満たす関数とする.\label{subsec3:prom3}
+    \item 点$\mathrm{Q}$が辺$\mathrm{BC}$にあるという条件のもとでの$X$の期待値を$\alpha$とおく.設問\ref{subsec3:prom3}の結果を用いて$\alpha$
+    を求めよ.\label{subsec3:prom4}
+    \item $X$の期待値$\mu$を求めよ.
 \end{enumerate}
 \begin{figure}[htbp]
     \centering
@@ -42,311 +42,281 @@ $(X, Y)$とおく。ただし、$X, Y$は確率変数である。以下の問い
 
 \subsection{解答例}
 \begin{enumerate}[(1)]
-    \setlength{\itemsep}{10pt}
-    \item 点$\mathrm{Q}$が辺$\mathrm{AB}$にある時、確率変数$\Theta$は以下の範囲に存在する。
-    \begin{equation}
-        0\, \leq\, \Theta\, \leq\, \frac{\pi}{2}\label{eq:subsec3:prom1:hanni}
-    \end{equation}
-    ここで、確率変数$\Theta$は区間$[0, 2\pi)$上の一様分布に従う確率変数であるので、
-    $\Theta$に関する確率密度関数$f_{\Theta}(\Theta)$は定数$c\, \in \mathbb{R}$を用いて、以下のように定義される。
-    \begin{align}
-        f_{\Theta}(\Theta) = 
-        \begin{cases}
-            c & 0\, \leq\, \Theta\, <\, 2\pi\\
-            0 & 0 > \Theta,\, \Theta\, \geq\, 2\pi
-        \end{cases}\label{eq:subsec3:prom1:ftheta}
-    \end{align}
-    よって、式\eqref{eq:subsec3:prom1:ftheta}と確率密度関数の定義より、以下が成り立つ。
-    \begin{align*}
-        \dint[\Theta]{-\infty}{\infty}{f_{\Theta}(\Theta)} = 1\\
-        \Longleftrightarrow\; &\lim_{x \to 2\pi-0}\dint[\Theta]{0}{x}{c} = 1\\
-        \Longleftrightarrow\; &\lim_{x \to 2\pi-0}cx = 1\\
-        \Longleftrightarrow\; &2c\pi = 1\\
-        \Longleftrightarrow\; &c = \frac{1}{2\pi}
-    \end{align*}
-    よって、式\eqref{eq:subsec3:prom1:ftheta}から$f_{\Theta}(\Theta)$は以下のように定義し直すことができる。
-    \begin{align}
-        f_{\Theta}(\Theta) = 
-        \begin{cases}
-            \frac{1}{2\pi} & 0\, \leq\, \Theta\, <\, 2\pi\\
-            0 & 0 > \Theta,\, \Theta\, \geq\, 2\pi
-        \end{cases}\label{eq:subsec3:prom1:f}
-    \end{align}
-    従って式\eqref{eq:subsec3:prom1:f}, \eqref{eq:subsec3:prom1:hanni}から求める確率$P$は以下のようになる。
-    \begin{align*}
-        P &= \dint[\Theta]{0}{\cfrac{\pi}{2}}{f_{\Theta}(\Theta)} = \dint[\Theta]{0}{\cfrac{\pi}{2}}{\frac{1}{2\pi}}\\
-        &= \frac{1}{2\pi}\frac{\pi}{2} = \frac{1}{4}
-    \end{align*}
-    よって、求める確率は$\frac{1}{4}$になる。
-    \item 設問\eqref{subsec3:prom1}より、辺$\mathrm{AB}$上に点$\mathrm{Q}$が存在するときは$0\, \leq \, \Theta\, \leq \frac{\pi}{2}$を満たす。
-   
-    また、この時、題意より確率変数$X$について以下が成り立つ。
+  \setlength{\itemsep}{10pt}
+\item 点$\mathrm{Q}$が辺$\mathrm{AB}$にある時,確率変数$\Theta$は以下の範囲に存在する.
+  \begin{equation}
+    0\, \leq\, \Theta\, \leq\, \frac{\pi}{2}\label{eq:subsec3:prom1:hanni}
+  \end{equation}
+  ここで,確率変数$\Theta$は区間$[0, 2\pi)$上の一様分布に従う確率変数であるので,
+  $\Theta$に関する確率密度関数$f_{\Theta}(\Theta)$は定数$c\, \in \mathbb{R}$を用いて,以下のように定義される.
+  \begin{align}
+    f_{\Theta}(\Theta) = 
+    \begin{cases}
+      c & 0\, \leq\, \Theta\, <\, 2\pi\\
+      0 & 0 > \Theta,\, \Theta\, \geq\, 2\pi
+    \end{cases} \label{eq:subsec3:prom1:ftheta}
+  \end{align}
+  よって,式\eqref{eq:subsec3:prom1:ftheta}と確率密度関数の定義より,以下が成り立つ.
+  \begin{align*}
+    \dint[\Theta]{-\infty}{\infty}{f_{\Theta}(\Theta)} = 1\\
+    \Longleftrightarrow\; &\lim_{x \to 2\pi-0}\dint[\Theta]{0}{x}{c} = 1\\
+    \Longleftrightarrow\; &\lim_{x \to 2\pi-0}cx = 1\\
+    \Longleftrightarrow\; &2c\pi = 1\\
+    \Longleftrightarrow\; &c = \frac{1}{2\pi}
+  \end{align*}
+  よって,式\eqref{eq:subsec3:prom1:ftheta}から$f_{\Theta}(\Theta)$は以下のように定義し直すことができる.
+  \begin{align}
+    f_{\Theta}(\Theta) = 
+    \begin{cases}
+      \frac{1}{2\pi} & 0\, \leq\, \Theta\, <\, 2\pi\\
+      0 & 0 > \Theta,\, \Theta\, \geq\, 2\pi
+    \end{cases}\label{eq:subsec3:prom1:f}
+  \end{align}
+  従って式\eqref{eq:subsec3:prom1:f}, \eqref{eq:subsec3:prom1:hanni}から求める確率$P$は以下のようになる.
+  \begin{align*}
+    P &= \dint[\Theta]{0}{\cfrac{\pi}{2}}{f_{\Theta}(\Theta)} = \dint[\Theta]{0}{\cfrac{\pi}{2}}{\frac{1}{2\pi}}\\
+      &= \frac{1}{2\pi}\frac{\pi}{2} = \frac{1}{4}
+  \end{align*}
+  よって,求める確率は$\frac{1}{4}$になる.\\[1cm]
+  (中田解)\\
+  QがAB上にある確率とは, Qが第1象限上に存在する確率と等しい. ここで, $\Theta$は区間$[0,2\pi)$上の一様分布に従う確率変数であるので, 半直線$l$が第1象限上に存在する確率は$\displaystyle \frac{1}{4}$である. よって答えは$\displaystyle \frac{1}{4}$である.
+\item 設問\eqref{subsec3:prom1}より,辺$\mathrm{AB}$上に点$\mathrm{Q}$が存在するときは$0\, \leq \, \Theta\, \leq \frac{\pi}{2}$を満たす.
+  
+  また,この時,題意より確率変数$X$について以下が成り立つ.
+  
+  $\ell$の方程式: 
+  \begin{align}
+    X = r\cos\Theta, \, Y = r\sin\Theta\, 
+    \therefore X\sin\Theta = Y\cos\Theta\label{eq:subsec3:prom2:prex}\\
+  \end{align}
+  辺$\mathrm{AB}$の方程式:
+  \begin{equation*}
+    (y - 1) = \frac{0 - 1}{1 - 0}(x - 0)\, \therefore y = -x + 1\, (0\, \leq \, x \, \leq \, 1)
+  \end{equation*}
+  よって点$\mathrm{Q}$が$\mathrm{AB}$上にあるので
+  \begin{equation}
+    Y = -X + 1\, (0\, \leq\,  X\, \leq \, 1)\label{eq:subsec3:prom2:tyokkou}\\
+  \end{equation}
+  式\eqref{eq:subsec3:prom2:prex}, \eqref{eq:subsec3:prom2:tyokkou}より$0\, \leq\, X\, \leq\, 1$において
+  \begin{align}
+    X\sin\Theta &= (-X + 1)\cos\Theta\nonumber\\
+    \therefore \cos\Theta &= X(\sin\Theta + \cos\Theta)\label{eq:subsec3:prom2:inix}
+  \end{align}
+  ここで$\sin\Theta + \cos\Theta = \sqrt{2}\sin\left(\Theta + \frac{\pi}{4}\right)$であるため,
+  $0\, \leq\, \Theta\, \leq \, \frac{\pi}{2}$における範囲は以下のようになる.
+  \begin{align}
+    \sqrt{2}\times\frac{1}{\sqrt{2}} \leq\, &\sqrt{2}\sin\left(\Theta + \frac{\pi}{4}\right) \, \leq\, \sqrt{2}\nonumber\\
+    \Longleftrightarrow 
+    1 \leq\, &\sin\Theta + \cos\Theta \, \leq\, \sqrt{2}\label{eq:subsec3:prom2:hanni}
+  \end{align}
+  よって,式\eqref{eq:subsec3:prom2:inix}, \eqref{eq:subsec3:prom2:hanni}より,$X$は以下のように表せる.
+  \begin{equation}
+    X = \frac{\cos\Theta}{\sin\Theta + \cos\Theta} = \frac{\cos\Theta}{\sqrt{2}\sin\left(\Theta + \frac{\pi}{4}\right)}\label{eq:subsec3:prom2:x}
+  \end{equation}
+  ここで$0\, \leq\, \Theta\, \leq\, \frac{\pi}{2}$において,
+  $X$を$\Theta$の関数$F(\Theta)$として考えると以下が成り立つ.
+  \begin{align*}
+    \diff{F}{\Theta}(\Theta) 
+    &= \frac{-\cos\left\{\Theta - \left(\Theta + \frac{\pi}{4}\right)\right\}}{\sqrt{2}\sin^{2}\left(\Theta + \frac{\pi}{4}\right)}\\
+    &= -\frac{1}{2\sin^{2}\left(\Theta + \frac{\pi}{4}\right)} < 0
+  \end{align*}
+  よって,$0\, \leq\, \Theta\, \leq\, \frac{\pi}{2}$において,$X = F(\Theta)$は単調減少することが分かる.
+  従って,$0\, \leq\, \Theta\, \leq\, \frac{\pi}{2}$において,ある$\Theta$に対応する$X$の値はただ一つしか存在
+  しないので,$X$も$0\, \leq\, X\, \leq\, 1$において一様分布に従う.よって,この区間における確率密度関数$f_{X_{01}}(X)$は以下のようになる.
+  \begin{align*}
+    f_{X_{01}}(X) = 
+    \begin{cases}
+      c_{X} & 0\, \leq\, X\, \leq\, 1\\
+      0 & X < 0, \, X > 1    
+    \end{cases}
+  \end{align*}
+  よって,確率密度関数の性質より
+  \begin{align*}
+    \dint[X]{-\infty}{\infty}{f_{X_{01}}(X)} &= 1\\
+    \dint[X]{0}{1}{f_{X_{01}}(X)} &= 1\\
+    \dint[X]{0}{1}{c_{X}} &= 1\\
+    c_{X} = 1
+  \end{align*}
+  従って,点$\mathrm{Q}$が辺$\mathrm{AB}$上にある条件の下での$X$の期待値$E_{X}$は以下のようになる.
+  \begin{align*}
+    E_{X} &= \dint[X]{-\infty}{\infty}{Xf_{X_{01}}(X)}\\
+          &= \dint[X]{0}{1}{X}\\
+          &= \frac{1}{2}
+  \end{align*}
+  よって,題意は示された.\\[1cm]
+  (中田解)\\
+  三角形ABCが直線$y=x$に関して対称であることから一様分布に従う確率変数のもとでは期待値は$y=x$上に存在する. ここで, 点Qが辺AB上にあるという条件下においては辺ABと$y=x$の交点が期待値であることがいえる. ここで交点を求めると$\displaystyle \left(\frac{1}{2},\frac{1}{2}\right)$であるから求める$X$の期待値は1/2である. よって, 題意は示された.
+\item 以降$\arctan x$の定義域は$-\frac{\pi}{2} < x < \frac{\pi}{2}$であるとする.
+  
+  点$\mathrm{Q}$が辺$\mathrm{BC}$上にあるので,確率変数$X$に関して以下が成り立つ.
     
-    $\ell$の方程式: 
-    \begin{align}
-        X = r\cos\Theta, \, Y = r\sin\Theta\, 
-        \therefore X\sin\Theta = Y\cos\Theta\label{eq:subsec3:prom2:prex}\\
-    \end{align}
-    辺$\mathrm{AB}$の方程式:
-    \begin{equation*}
-        (y - 1) = \frac{0 - 1}{1 - 0}(x - 0)\, \therefore y = -x + 1\, (0\, \leq \, x \, \leq \, 1)
-    \end{equation*}
-    よって点$\mathrm{Q}$が$\mathrm{AB}$上にあるので
-    \begin{equation}
-        Y = -X + 1\, (0\, \leq\,  X\, \leq \, 1)\label{eq:subsec3:prom2:tyokkou}\\
-    \end{equation}
-    式\eqref{eq:subsec3:prom2:prex}, \eqref{eq:subsec3:prom2:tyokkou}より$0\, \leq\, X\, \leq\, 1$において
-    \begin{align}
-        X\sin\Theta &= (-X + 1)\cos\Theta\nonumber\\
-        \therefore \cos\Theta &= X(\sin\Theta + \cos\Theta)\label{eq:subsec3:prom2:inix}
-    \end{align}
-    ここで$\sin\Theta + \cos\Theta = \sqrt{2}\sin\left(\Theta + \frac{\pi}{4}\right)$であるため、
-    $0\, \leq\, \Theta\, \leq \, \frac{\pi}{2}$における範囲は以下のようになる。
-    \begin{align}
-        \sqrt{2}\times\frac{1}{\sqrt{2}} \leq\, &\sqrt{2}\sin\left(\Theta + \frac{\pi}{4}\right) \, \leq\, \sqrt{2}\nonumber\\
-        \Longleftrightarrow 
-        1 \leq\, &\sin\Theta + \cos\Theta \, \leq\, \sqrt{2}\label{eq:subsec3:prom2:hanni}
-    \end{align}
-    よって、式\eqref{eq:subsec3:prom2:inix}, \eqref{eq:subsec3:prom2:hanni}より、$X$は以下のように表せる。
-    \begin{equation}
-        X = \frac{\cos\Theta}{\sin\Theta + \cos\Theta} = \frac{\cos\Theta}{\sqrt{2}\sin\left(\Theta + \frac{\pi}{4}\right)}\label{eq:subsec3:prom2:x}
-    \end{equation}
-    ここで$0\, \leq\, \Theta\, \leq\, \frac{\pi}{2}$において、
-    $X$を$\Theta$の関数$F(\Theta)$として考えると以下が成り立つ。
-    \begin{align*}
-        \diff{F}{\Theta}(\Theta) 
-        &= \frac{-\cos\left\{\Theta - \left(\Theta + \frac{\pi}{4}\right)\right\}}{\sqrt{2}\sin^{2}\left(\Theta + \frac{\pi}{4}\right)}\\
-        &= -\frac{1}{2\sin^{2}\left(\Theta + \frac{\pi}{4}\right)} < 0
-    \end{align*}
-    よって、$0\, \leq\, \Theta\, \leq\, \frac{\pi}{2}$において、$X = F(\Theta)$は単調減少することが分かる。
-    従って、$0\, \leq\, \Theta\, \leq\, \frac{\pi}{2}$において、ある$\Theta$に対応する$X$の値はただ一つしか存在
-    しないので、$X$も$0\, \leq\, X\, \leq\, 1$において一様分布に従う。よって、この区間における確率密度関数$f_{X_{01}}(X)$は以下のようになる。
-    \begin{align*}
-        f_{X_{01}}(X) = 
-        \begin{cases}
-            c_{X} & 0\, \leq\, X\, \leq\, 1\\
-            0 & X < 0, \, X > 1    
-        \end{cases}
-    \end{align*}
-    よって、確率密度関数の性質より
-    \begin{align*}
-        \dint[X]{-\infty}{\infty}{f_{X_{01}}(X)} &= 1\\
-        \dint[X]{0}{1}{f_{X_{01}}(X)} &= 1\\
-        \dint[X]{0}{1}{c_{X}} &= 1\\
-        c_{X} = 1
-    \end{align*}
-    従って、点$\mathrm{Q}$が辺$\mathrm{AB}$上にある条件の下での$X$の期待値$E_{X}$は以下のようになる。
-    \begin{align*}
-        E_{X} &= \dint[X]{-\infty}{\infty}{Xf_{X_{01}}(X)}\\
-        &= \dint[X]{0}{1}{X}\\
-        &= \frac{1}{2}
-    \end{align*}
-    よって、題意は示された。
-    \item 以降$\arctan x$の定義域は$-\frac{\pi}{2} < x < \frac{\pi}{2}$であるとする。
-    
-    点$\mathrm{Q}$が辺$\mathrm{BC}$上にあるので、確率変数$X$に関して以下が成り立つ。
-    
-    辺$\mathrm{BC}$の方程式:
-    \begin{equation*}
-        (y - 1) = \frac{1 + 1}{0 + 1}(x - 0)\, \therefore y = 2x + 1
-    \end{equation*}
-    よって点$\mathrm{Q}$が$\mathrm{BC}$上にあるので$-1\, \leq\, X\, \leq\, 0$において
-    \begin{equation}
-        Y = 2X + 1\label{eq:subsec3:prom3:tyokkou}
-    \end{equation}
-    点$\mathrm{Q}$は半直線$\ell$上の点でもあるので、式\eqref{eq:subsec3:prom2:prex}, \eqref{eq:subsec3:prom3:tyokkou}より$-1\, \leq\, X\, \leq\, 0$において
-    \begin{align}
-        X\sin\Theta &= \left(2X + 1\right)\cos\Theta\nonumber\\
-        &\therefore
-        \begin{cases}
-            \Theta = \frac{\pi}{2} & X = 0\\
-            \sin\Theta = \frac{2X + 1}{X}\cos\Theta & -1\, \leq\, X < 0
-        \end{cases}\label{eq:subsec3:prom3:theta1}
-    \end{align}
-    よって、$X \neq 0$の時$\Theta \neq \frac{\pi}{2}$であるので$\cos\Theta \neq 0$
-    であり、式\eqref{eq:subsec3:prom3:theta1}より$\Theta$について点$\mathrm{Q}$が辺$\mathrm{BC}$に
-    存在する場合、$\frac{\pi}{2} \, \leq\, \Theta\, \leq\, \frac{5\pi}{4}$より以下が成り立つ。
-    \begin{align}
-        &\begin{cases}
-            \Theta = \frac{\pi}{2} & X = 0\\
-            \tan\Theta = \frac{2X + 1}{X} & -1\, \leq\, X < 0\\
-        \end{cases}\nonumber\\
-        \Longleftrightarrow&
-        \begin{cases}
-            \Theta = \frac{\pi}{2} & X = 0\\
-            \Theta = \pi + \arctan\left(\frac{2X + 1}{X}\right) & -1\, \leq\, X < 0\\
-        \end{cases}\label{eq:subsec3:prom3:theta2}
-    \end{align}
-    $\Theta$は区間$[0, 2\pi)$において一様分布に従うので確率密度関数$g(\Theta)$は式
-    \eqref{eq:subsec3:prom1:f}であるため、以下が成り立つ。
-    \begin{equation*}
-        g(\Theta) = \frac{1}{2\pi}
-    \end{equation*}
-    $\frac{\pi}{2} < \Theta \leq \frac{5\pi}{4}$において、つまり$ -1\, \leq\, X < 0$の時、
-    式\eqref{eq:subsec3:prom3:theta2}より確率密度関数$f(x)$は変数変換の公式を用いて以下のようになる
-    \begin{align}
-        \Theta = h(X) &= \pi + \arctan\left(\frac{2X + 1}{X}\right) \nonumber\\
-        \therefore \diff{h}{x}(x) &= \frac{1}{1 + \left(\frac{2x + 1}{x}\right)^2}\frac{2x - (2x + 1)}{x^2}\nonumber\\
-        &= \frac{-x^2}{\left\{\left(2x + 1\right)^2 + x^2\right\}x^2}\nonumber\\
-        &= \frac{-1}{\left(2x + 1\right)^2 + x^2}\nonumber\\
-        \Longleftrightarrow 
-        f(x) &= \frac{1}{2\pi}\frac{-1}{\left(2x + 1\right)^2 + x^2}\label{eq:subsec3:prom3:fx:nez}
-    \end{align}
-    $\Theta = \frac{\pi}{2}$において、つまり$X = 0$の時、
-    式\eqref{eq:subsec3:prom3:theta2}より確率密度関数$f(x)$は変数変換の公式を用いて以下のようになる
-    \begin{align}
-        \Theta = h(0) &= \frac{\pi}{2}\nonumber\\
-        \diff{h}{x} &= 0\nonumber\\
-        \Longleftrightarrow f(0) &= 0\label{eq:subsec3:prom3:fx:ez}
-    \end{align}
-    よって、式\eqref{eq:subsec3:prom3:fx:nez},\eqref{eq:subsec3:prom3:fx:ez}より、求める確率密度関数$f(x)$は以下のようになる。
-    \begin{equation*}
-        f(x) = 
-        \begin{cases}
-            0 & x = 0\\
-            \frac{-1}{2\pi\left\{\left(2x + 1\right)^2 + x^2\right\}} & -1\, \leq\, x < 0
-        \end{cases}
-    \end{equation*}
-    \item 設問\eqref{subsec3:prom3}より辺$\mathrm{BC}$上に点$\mathrm{Q}$
-    が存在する時の$X$の期待値$\alpha$は以下のようになる。
-    \begin{align*}
-        \alpha &= \dint{-\infty}{\infty}{xf(x)}\\
-        &= \lim_{t \to -0}\dint{-1}{t}{xf(x)}\\
-        &= \lim_{t \to -0}\dint{-1}{t}{\frac{-x}{2\pi\left\{\left(2x + 1\right)^2 + x^2\right\}}}\\
-        &= \lim_{t \to -0}\frac{-1}{20\pi}\dint{-1}{t}{\frac{10x + 4 - 4}{\left(2x + 1\right)^2 + x^2}}\\
-        &= \lim_{t \to -0}\frac{-1}{20\pi}\left\{\left[\log\left\{\left(2x + 1\right)^2 + x^2\right\}\right]_{-1}^{t} - \dint{-1}{t}{\frac{4}{\left(2x + 1\right)^2 + x^2}}\right\}\\
-        &= \lim_{t \to -0}\left(\frac{-1}{20\pi}\left[\log\left\{\left(2t + 1\right)^2 + t^2\right\} - \log 2\right] + \frac{1}{5\pi}\dint{-1}{t}{\frac{1}{\frac{1}{5}\left\{\left(5x + 2\right)^2 + 1\right\}}}\right)\\
-        &= \frac{\log 2}{20\pi} + \lim_{t \to -0}\frac{1}{\pi}\dint{-1}{t}{\frac{1}{\left(5x + 2\right)^2 + 1}}
-    \end{align*}
-    ここで$5x + 2 = \tan u$と置換し, $\beta, \gamma$を$\tan\beta = -3, \tan\gamma = 5t + 2$を満たすとものとしておくと以下のようになる。
-    \begin{align*}
-        \alpha &= \frac{\log 2}{20\pi} + \lim_{t \to -0}\frac{1}{\pi}\dint[u]{\beta}{\gamma}{\frac{1}{\tan^{2}u+ 1}\frac{1}{5\cos^{2}u}}\\
-        &= \frac{\log 2}{20\pi} + \lim_{t \to -0}\frac{1}{5\pi}(\gamma - \beta)\\
-        &= \frac{\log 2}{20\pi} + \lim_{t \to -0}\frac{1}{5\pi}\bigl\{(\pi + \arctan(5t + 2)) - (\pi + \arctan(-3))\bigr\}\\
-        &= \frac{\log 2}{20\pi} + \frac{1}{5\pi}(\arctan 2 + \arctan 3)
-    \end{align*}
-    よって、期待値$\alpha$について以下のようになる。
-    \begin{equation}
-        \alpha = \frac{\log 2}{20\pi} + \frac{1}{5\pi}(\arctan 2 + \arctan 3)\label{eq:subsec3:prom4:ans}
-    \end{equation}
-    \item まず、点$\mathrm{Q}$が辺$\mathrm{AC}$上にある時の$X$の期待値$\delta$を求める。
-    
-    設問\eqref{subsec3:prom4}, \eqref{subsec3:prom3}と同様にして確率密度関数を求めてから期待値を求める。
-
-    この時、確率変数$X$について以下のことが成り立つ。
-    
-    辺$\mathrm{AC}$の方程式:
-    \begin{equation*}
-        (y - 0) = \frac{0 + 1}{1 + 1}(x - 1)\, \therefore y = \frac{1}{2}(x - 1)
-    \end{equation*}
-    よって点$\mathrm{Q}$が$\mathrm{AC}$上にあるので$-1\, \leq\,  X\, \leq \, 1$において
-    \begin{equation}
-        Y = \frac{1}{2}(X - 1)\label{eq:subsec3:prom4:tyokkou}
-    \end{equation}
-    点$\mathrm{Q}$は半直線$\ell$上の点でもあるので、式\eqref{eq:subsec3:prom2:prex}, 
-    \eqref{eq:subsec3:prom4:tyokkou}より$-1\, \leq\,  X\, \leq \, 1$において
-    \begin{align}
-        X\sin\Theta &= \frac{1}{2}\left(X - 1\right)\cos\Theta\nonumber\\
-        &\therefore
-        \begin{cases}
-            \Theta = \frac{3\pi}{2} & X = 0\\
-            \sin\Theta = \frac{X - 1}{2X}\cos\Theta & -1\, \leq\, X < 0,\, 0 < X\, \leq\, 1
+  辺$\mathrm{BC}$の方程式:
+  \begin{equation*}
+    (y - 1) = \frac{1 + 1}{0 + 1}(x - 0)\, \therefore y = 2x + 1
+  \end{equation*}
+  よって点$\mathrm{Q}$が$\mathrm{BC}$上にあるので$-1\, \leq\, X\, \leq\, 0$において
+  \begin{equation}
+    Y = 2X + 1\label{eq:subsec3:prom3:tyokkou}
+  \end{equation}
+  点$\mathrm{Q}$は半直線$\ell$上の点でもあるので,式\eqref{eq:subsec3:prom2:prex}, \eqref{eq:subsec3:prom3:tyokkou}より$-1\, \leq\, X\, \leq\, 0$において
+  \begin{align}
+    X\sin\Theta &= \left(2X + 1\right)\cos\Theta\nonumber\\
+                &\therefore
+                  \begin{cases}
+                    \Theta = \frac{\pi}{2} & X = 0\\
+                    \sin\Theta = \frac{2X + 1}{X}\cos\Theta & -1\, \leq\, X < 0
+                  \end{cases}\label{eq:subsec3:prom3:theta1}
+  \end{align}
+  よって,$X \neq 0$の時$\Theta \neq \frac{\pi}{2}$であるので$\cos\Theta \neq 0$
+  であり,式\eqref{eq:subsec3:prom3:theta1}より$\Theta$について点$\mathrm{Q}$が辺$\mathrm{BC}$に
+  存在する場合,$\frac{\pi}{2} \, \leq\, \Theta\, \leq\, \frac{5\pi}{4}$より以下が成り立つ.
+  \begin{align}
+    &\begin{cases}
+      \Theta = \frac{\pi}{2} & X = 0\\
+      \tan\Theta = \frac{2X + 1}{X} & -1\, \leq\, X < 0\\
+    \end{cases}\nonumber\\
+    \Longleftrightarrow&
+                         \begin{cases}
+                           \Theta = \frac{\pi}{2} & X = 0\\
+                           \Theta = \pi + \arctan\left(\frac{2X + 1}{X}\right) & -1\, \leq\, X < 0\\
+                         \end{cases}\label{eq:subsec3:prom3:theta2}
+  \end{align}
+  $\Theta$は区間$[0, 2\pi)$において一様分布に従うので確率密度関数$g(\Theta)$は式
+  \eqref{eq:subsec3:prom1:f}であるため,以下が成り立つ.
+  \begin{equation*}
+    g(\Theta) = \frac{\frac{1}{2\pi}}{\frac{3}{8}} = \frac{4}{3\pi}
+  \end{equation*}
+  $\frac{\pi}{2} < \Theta \leq \frac{5\pi}{4}$において,つまり$ -1\, \leq\, X < 0$の時,
+  式\eqref{eq:subsec3:prom3:theta2}より確率密度関数$f(x)$は変数変換の公式を用いて以下のようになる
+  \begin{align}
+    \Theta = h(X) &= \pi + \arctan\left(\frac{2X + 1}{X}\right) \nonumber\\
+    \therefore \diff{h}{x}(x) &= \frac{1}{1 + \left(\frac{2x + 1}{x}\right)^2}\frac{2x - (2x + 1)}{x^2}\nonumber\\
+                  &= \frac{-x^2}{\left\{\left(2x + 1\right)^2 + x^2\right\}x^2}\nonumber\\
+                  &= \frac{-1}{\left(2x + 1\right)^2 + x^2}\nonumber\\
+    \Longleftrightarrow 
+    f(x) &= \frac{4}{3\pi}\frac{1}{\left(2x + 1\right)^2 + x^2}\label{eq:subsec3:prom3:fx:nez}
+  \end{align}
+  よって,式\eqref{eq:subsec3:prom3:fx:nez}より, $x=0$の時も連続であるため,求める確率密度関数$f(x)$は以下のようになる.
+  \begin{equation*}
+    f(x) = \frac{4}{3\pi(5x^2 + 4x + 1)}
+  \end{equation*}
+\item 設問\eqref{subsec3:prom3}より辺$\mathrm{BC}$上に点$\mathrm{Q}$
+  が存在する時の$X$の期待値$\alpha$は以下のようになる.
+  \begin{align*}
+    \alpha &= \dint{-1}{0}{xf(x)}\\
+          &= \dint{-1}{0}{\frac{4}{3\pi}\frac{x}{5x^2 + 4x + 1}}\\
+          &= \frac{4}{3\pi}\dint{-1}{0}{\frac{1}{10}\left(\frac{10x + 4}{5x^2 + 4x + 1} - \frac{4}{5x^2 + 4x + 1}\right)}\\
+          &= \frac{2}{15\pi}\left[\log |(2x + 1)^2 + x^2|\right]_{-1}^{0} - \frac{8}{15\pi}\dint{-1}{0}{\frac{1}{5(x^2 + \frac{4x}{5}) + 1}}\\
+          &= -\frac{2}{15\pi}\log 2 - \frac{8}{15\pi}\dint{-1}{0}{\frac{1}{5(x + \frac{2}{5})^2 - 5\cdot \frac{4}{25} + 1}}\\
+          &= -\frac{2}{15\pi}\log 2 - \frac{8}{15\pi}\dint{-1}{0}{\frac{1}{5(x + \frac{2}{5})^2 + \frac{1}{5}}}\\
+          &= -\frac{2}{15\pi}\log 2 - \frac{8}{15\pi}\dint{-1}{0}{\frac{5}{25(x + \frac{2}{5})^2 + 1}}\\
+          &= -\frac{2}{15\pi}\log 2 - \frac{8}{3\pi}\left[\frac{1}{5}\arctan \left\{5\cdot \left(x + \frac{2}{5}\right)\right\}\right]_{-1}^{0}\\
+          &= -\frac{2}{15\pi}\log 2 - \frac{8}{15\pi}(\arctan 2 + \arctan 3)\\
+          &= -\frac{2}{15\pi}\log 2 - \frac{8}{15\pi}(\arctan \frac{2}{})\\
+          &= -\frac{2}{15\pi}\log 2 - \frac{8}{15\pi}\left(\frac{3\pi}{4}\right)\\
+          &= -\frac{2}{15\pi}\log 2 - \frac{2}{5}
+  \end{align*}
+  よって,期待値$\alpha$について以下のようになる.
+  \begin{equation}
+    \alpha = -\frac{2}{15\pi}\log 2 - \frac{2}{5}\label{eq:subsec3:prom4:ans}
+  \end{equation}
+\item まず,点$\mathrm{Q}$が辺$\mathrm{AC}$上にある時の$X$の期待値$\delta$を求める.
+  
+  設問\eqref{subsec3:prom4}, \eqref{subsec3:prom3}と同様にして確率密度関数を求めてから期待値を求める.
+  
+  この時,確率変数$X$について以下のことが成り立つ.
+  
+  辺$\mathrm{AC}$の方程式:
+  \begin{equation*}
+    (y - 0) = \frac{0 + 1}{1 + 1}(x - 1)\, \therefore y = \frac{1}{2}(x - 1)
+  \end{equation*}
+  よって点$\mathrm{Q}$が$\mathrm{AC}$上にあるので$-1\, \leq\,  X\, \leq \, 1$において
+  \begin{equation}
+    Y = \frac{1}{2}(X - 1)\label{eq:subsec3:prom4:tyokkou}
+  \end{equation}
+  点$\mathrm{Q}$は半直線$\ell$上の点でもあるので,式\eqref{eq:subsec3:prom2:prex}, 
+  \eqref{eq:subsec3:prom4:tyokkou}より$-1\, \leq\,  X\, \leq \, 1$において
+  \begin{align}
+    X\sin\Theta &= \frac{1}{2}\left(X - 1\right)\cos\Theta\nonumber\\
+                &\therefore
+                  \begin{cases}
+                    \Theta = \frac{3\pi}{2} & X = 0\\
+                    \sin\Theta = \frac{X - 1}{2X}\cos\Theta & -1\, \leq\, X < 0,\, 0 < X\, \leq\, 1
         \end{cases}\label{eq:subsec3:prom4:theta1}
-    \end{align}
-    よって、$X \neq 0$の時$\Theta \neq \frac{3\pi}{2}$であるので$\cos\Theta \neq 0$であり、
-    式\eqref{eq:subsec3:prom4:theta1}より$\Theta$について点$\mathrm{Q}$が辺$\mathrm{AC}$
-    に存在する場合、つまり、$-1\, \leq\, X\, \leq\, 1$において以下が成り立つ。
-    \begin{align}
-        &\begin{cases}
-            \Theta = \frac{3\pi}{2} & X = 0\\
-            \tan\Theta = \frac{X - 1}{2X} & -1\, \leq\, X < 0,\, 0 < X\, \leq\, 1\\
-        \end{cases}\nonumber\\
-        \Longleftrightarrow&
-        \begin{cases}
-            \Theta = \frac{3\pi}{2} & X = 0\\
-            \Theta = \pi + \arctan\left(\frac{X - 1}{2X}\right) & 0 < X \, \leq\, 1\\
-            \Theta = 2\pi + \arctan\left(\frac{X - 1}{2X}\right) & -1\, \leq\, X < 0\\
-        \end{cases}\label{eq:subsec3:prom4:theta2}
-    \end{align}
-    ここで$\Theta$は区間$[0, 2\pi)$において一様分布に従うので確率密度関数$g(\Theta)$は式
-    \eqref{eq:subsec3:prom1:f}であるため、以下が成り立つ。
-    \begin{align*}
-        g(\Theta) &= \frac{1}{2\pi}
-    \end{align*}
-    よって、$\frac{5\pi}{4}\, \leq\, \Theta < \frac{3\pi}{2}$において、つまり $0 < X\, \leq\, 1$の時、
-    式\eqref{eq:subsec3:prom4:theta2}より、確率密度関数$f(x)$は変数変換の公式を用いて以下のようになる。
-    \begin{align}
-        \Theta = h(X) &= \pi + \arctan\left(\frac{X - 1}{2X}\right) \nonumber\\
-        \therefore \diff{h}{x}(x) &= \frac{1}{1 + \left(\frac{x - 1}{2x}\right)^2}\frac{x - (x - 1)}{2x^2}\nonumber\\
-        &= \frac{4x^2}{\left\{\left(x - 1\right)^2 + 4x^2\right\}2x^2}\nonumber\\
-        &= \frac{2}{\left(x - 1\right)^2 + 4x^2}\nonumber\\
-        \Longleftrightarrow f(x) &= \frac{1}{2\pi}\frac{2}{\left(x - 1\right)^2 + 4x^2}\label{eq:subsec3:prom5:fx:gz}
-    \end{align}
-    $\frac{3\pi}{2} < \Theta < 2\pi$において、つまり$-1\, \leq\, X < 0$の時、
-    式\eqref{eq:subsec3:prom4:theta2}より、確率密度関数$f(x)$は変数変換の公式を用いて以下のようになる。
-    \begin{equation*}
-        \Theta = h(X) = 2\pi + \arctan\left(\frac{X - 1}{2X}\right)
-    \end{equation*}
-    $0 < X\, \leq\, 1$の時と同様にして
-    \begin{align}
-        \diff{h}{x}(x) &= \frac{2}{\left(x - 1\right)^2 + 4x^2}\nonumber\\
-        \Longleftrightarrow f(x) &= \frac{1}{2\pi}\frac{2}{\left(x - 1\right)^2 + 4x^2}\label{eq:subsec3:prom5:fx:lz}
-    \end{align}
-    $\Theta = \frac{3\pi}{2}$において、つまり$X = 0$の時、
-    式\eqref{eq:subsec3:prom4:theta2}より、確率密度関数$f(x)$は変数変換の公式を用いて以下のようになる。
-    \begin{align}
-        h(0) = \Theta &= \frac{3\pi}{2}\nonumber\\
-        \diff{h}{x} &= 0\nonumber\\
-        \Longleftrightarrow f(0) &= 0\label{eq:subsec3:prom5:fx:nez}
-    \end{align}
-    よって、式\eqref{eq:subsec3:prom5:fx:gz}, \eqref{eq:subsec3:prom5:fx:lz}, \eqref{eq:subsec3:prom5:fx:nez}から確率密度関数は以下のようになる。
-    \begin{equation*}
-        f(x) = 
-        \begin{cases}
-            0 & x = 0\\
-            \frac{1}{\pi\left\{\left(x - 1\right)^2 + 4x^2\right\}} & -1\, \leq\, x < 0,\, 0 < x\, \leq\, 1 
-        \end{cases}
-    \end{equation*}
-    従って期待値は以下のようになる。
-    \begin{align*}
-        \delta &= \dint{-\infty}{\infty}{xf(x)}\\
-        &= \lim_{t \to -0}\dint{-1}{t}{xf(x)} + \lim_{t \to +0}\dint{t}{1}{xf(x)}\\
-        &= \lim_{t \to -0}\dint{-1}{t}{\frac{x}{\pi\left\{(x - 1)^2 + 4x^2\right\}}}
-         + \lim_{t \to +0}\dint{t}{1}{\frac{x}{\pi\left\{(x - 1)^2 + 4x^2\right\}}}\\
-        &= \lim_{t \to -0}\frac{1}{10\pi}\dint{-1}{t}{\frac{10x - 2 + 2}{(x - 1)^2 + 4x^2}} 
-         + \lim_{t \to +0}\frac{1}{10\pi}\dint{t}{1}{\frac{10x - 2 + 2}{(x - 1)^2 + 4x^2}}\\
-        &= \lim_{t \to -0}\frac{1}{10\pi}\left\{\left[\log\left\{(x - 1)^2 + 4x^2\right\}\right]_{-1}^{t} + \dint{-1}{t}{\frac{2}{(x - 1)^2 + 4x^2}}\right\}\\
-        &\quad + \lim_{t \to +0}\frac{1}{10\pi}\left\{\left[\log\left\{(x - 1)^2 + 4x^2\right\}\right]_{t}^{1} + \dint{t}{1}{\frac{2}{(x - 1)^2 + 4x^2}}\right\}\\
-        &= \lim_{t \to -0}\left(\frac{1}{10\pi}\left[\log\left\{(t - 1)^2 + 4t^2\right\} - 3\log 2\right] + \frac{1}{5\pi}\dint{-1}{t}{\frac{1}{\frac{1}{5}\left\{(5x - 1)^2 + 4\right\}}}\right)\\
-        &\quad + \lim_{t \to +0}\left(\frac{1}{10\pi}\left[2\log 2 - \log\left\{(t - 1)^2 + 4t^2\right\}\right] + \frac{1}{5\pi}\dint{t}{1}{\frac{1}{\frac{1}{5}\left\{(5x - 1)^2 + 4\right\}}}\right)\\
-        &= \frac{-3\log 2}{10\pi} + \frac{2\log 2}{10\pi} + \lim_{t \to -0}\frac{1}{\pi}\dint{-1}{t}{\frac{1}{(5x - 1)^2 + 4}} + \lim_{t \to +0}\frac{1}{\pi}\dint{t}{1}{\frac{1}{(5x - 1)^2 + 4}}\\
-        &= \frac{-\log 2}{10\pi} + \lim_{t \to -0}\frac{1}{\pi}\dint{-1}{t}{\frac{1}{(5x - 1)^2 + 4}} + \lim_{t \to +0}\frac{1}{\pi}\dint{t}{1}{\frac{1}{(5x - 1)^2 + 4}}
-    \end{align*}
-    ここで$5x - 1 = 2\tan u$と置換し, $\beta,\, \gamma_1(< \frac{3\pi}{2}),\, \gamma_2(> \frac{3\pi}{2}),\, \eta$を$\tan\beta = -3, \tan\gamma_1 = \tan\gamma_2 = \frac{5t - 1}{2}, \tan\eta = 2$を満たすとものとしておくと以下のようになる。
-    \begin{align*}
-        \delta 
-        &= \frac{-\log 2}{10\pi} + \lim_{t \to -0}\frac{1}{\pi}\dint[u]{\beta}{\gamma_1}{\frac{1}{4\tan^{2}u + 4}\frac{2}{5\cos^{2}u}}
-         + \lim_{t \to +0}\frac{1}{\pi}\dint[u]{\gamma_2}{\eta}{\frac{1}{4\tan^{2}u + 4}\frac{2}{5\cos^{2}u}}\\
-        &= \frac{-\log 2}{10\pi} + \lim_{t \to -0}\frac{1}{\pi}\dint[u]{\beta}{\gamma_1}{\frac{1}{10}} 
-         + \lim_{t \to +0}\frac{1}{\pi}\dint[u]{\gamma_2}{\eta}{\frac{1}{10}}\\
-        &= \frac{-\log 2}{10\pi} + \lim_{t \to -0}\frac{1}{10\pi}(\gamma_1 - \beta) + \lim_{t \to -0}\frac{1}{\pi}(\eta - \gamma_2)\\
-        &= \frac{-\log 2}{10\pi} + \frac{1}{10\pi}\left\{\left(\pi + \arctan\left(\frac{-1}{2}\right)\right) - (\pi + \arctan(-3))
-        + (2\pi + \arctan 2) - \left(2\pi + \arctan\left(\frac{-1}{2}\right)\right)\right\}\\
-        &= \frac{-\log 2}{10\pi} + \frac{1}{10\pi}(\arctan 2 + \arctan 3)
-    \end{align*}
-    よって、期待値$\delta$について以下のようになる。
-    \begin{equation}
-        \delta = \frac{-\log 2}{10\pi} + \frac{1}{10\pi}(\arctan 2 + \arctan 3)\label{eq:subsec3:prom5:delta}
-    \end{equation}
-    よって、設問\eqref{subsec3:prom2},式\eqref{eq:subsec3:prom4:ans}, \eqref{eq:subsec3:prom5:delta}
-    より点$\mathrm{Q}$が辺$\mathrm{AB}$にある状態、辺$\mathrm{AC}$にある状態、辺$\mathrm{BC}$にある状態での$X$の期待値を
-    それぞれの状態における離散的な確率変数として考えるとそれぞれの出現確率が$\frac{1}{4}, \frac{3}{8}, \frac{3}{8}$であるので
-    $X$の期待値$\mu$は以下のようになる。
-    \begin{align*}
-        \mu &= \frac{1}{4}E_{X} + \frac{3}{8}\alpha + \frac{3}{8}\delta\\
+  \end{align}
+  よって,$X \neq 0$の時$\Theta \neq \frac{3\pi}{2}$であるので$\cos\Theta \neq 0$であり,
+  式\eqref{eq:subsec3:prom4:theta1}より$\Theta$について点$\mathrm{Q}$が辺$\mathrm{AC}$
+  に存在する場合,つまり,$-1\, \leq\, X\, \leq\, 1$において以下が成り立つ.
+  \begin{align}
+    &\begin{cases}
+      \Theta = \frac{3\pi}{2} & X = 0\\
+      \tan\Theta = \frac{X - 1}{2X} & -1\, \leq\, X < 0,\, 0 < X\, \leq\, 1\\
+    \end{cases}\nonumber\\
+    \Longleftrightarrow&
+                         \begin{cases}
+                           \Theta = \frac{3\pi}{2} & X = 0\\
+                           \Theta = \pi + \arctan\left(\frac{X - 1}{2X}\right) & 0 < X \, \leq\, 1\\
+                           \Theta = 2\pi + \arctan\left(\frac{X - 1}{2X}\right) & -1\, \leq\, X < 0\\
+                         \end{cases}\label{eq:subsec3:prom4:theta2}
+  \end{align}
+  ここで$\Theta$は区間$[0, 2\pi)$において一様分布に従うので確率密度関数$g(\Theta)$は式
+  \eqref{eq:subsec3:prom1:f}であるため,以下が成り立つ.
+  \begin{align*}
+    g(\Theta) &= \frac{\frac{1}{2\pi}}{\frac{3}{8}}\\
+              &= \frac{4}{3\pi}
+  \end{align*}
+  よって,$\frac{5\pi}{4}\, \leq\, \Theta < \frac{3\pi}{2}$において,つまり $0 < X\, \leq\, 1$の時,
+  式\eqref{eq:subsec3:prom4:theta2}より,確率密度関数$f(x)$は変数変換の公式を用いて以下のようになる.
+  \begin{align}
+    \Theta = h(X) &= \pi + \arctan\left(\frac{X - 1}{2X}\right) \nonumber\\
+    \therefore \diff{h}{x}(x) &= \frac{1}{1 + \left(\frac{x - 1}{2x}\right)^2}\frac{x - (x - 1)}{2x^2}\nonumber\\
+                  &= \frac{4x^2}{\left\{\left(x - 1\right)^2 + 4x^2\right\}2x^2}\nonumber\\
+                  &= \frac{2}{\left(x - 1\right)^2 + 4x^2}\nonumber\\
+    \Longleftrightarrow f(x) &= \frac{4}{3\pi}\frac{2}{\left(x - 1\right)^2 + 4x^2}\label{eq:subsec3:prom5:fx:gz}
+  \end{align}
+  $\frac{3\pi}{2} < \Theta < 2\pi$において,つまり$-1\, \leq\, X < 0$の時,
+  式\eqref{eq:subsec3:prom4:theta2}より,確率密度関数$f(x)$は変数変換の公式を用いて以下のようになる.
+  \begin{equation*}
+    \Theta = h(X) = 2\pi + \arctan\left(\frac{X - 1}{2X}\right)
+  \end{equation*}
+  $0 < X\, \leq\, 1$の時と同様にして
+  \begin{align}
+    \diff{h}{x}(x) &= \frac{2}{\left(x - 1\right)^2 + 4x^2}\nonumber\\
+    \Longleftrightarrow f(x) &= \frac{4}{3\pi}\frac{2}{\left(x - 1\right)^2 + 4x^2}\label{eq:subsec3:prom5:fx:lz}
+  \end{align}
+  よって,式\eqref{eq:subsec3:prom5:fx:gz}, \eqref{eq:subsec3:prom5:fx:lz}から確率密度関数$f(x)$は$x=0$の時も連続である。よって以下のようになる.
+  \begin{equation*}
+    f(x) = \frac{8}{3\pi(5x^2 - 2x + 1)}
+  \end{equation*}
+  従って期待値$\delta$は以下のようになる.
+  \begin{align*}
+    \delta &= \dint{-1}{1}{xf(x)}\\
+          &= \dint{-1}{1}{\frac{8x}{3\pi(5x^2 - 2x + 1)}}\\
+          &= \frac{8}{3\pi}\dint{-1}{1}{\frac{x}{(5x^2 - 2x + 1)}}\\
+          &= \frac{8}{3\pi}\dint{-1}{1}{\frac{1}{10}\left[\frac{10x - 2}{(5x^2 - 2x + 1)} + \frac{2}{(5x^2 - 2x + 1)}\right]}\\
+          &= \frac{4}{15\pi}\dint{-1}{1}{\left[\frac{10x - 2}{(5x^2 - 2x + 1)} + \frac{2}{(5x^2 - 2x + 1)}\right]}\\
+          &= \frac{4}{15\pi}\left[\log |(x - 1)^2 + 4x^2|\right]_{-1}^{1} + \frac{8}{15\pi}\dint{-1}{1}{\frac{1}{5(x^2 - \frac{2x}{5}) + 1}}\\
+          &= -\frac{4}{15\pi}\log 2 + \frac{8}{15\pi}\dint{-1}{1}{\frac{1}{5(x - \frac{1}{5})^2 - 5\cdot \frac{1}{25} + 1}}\\
+          &= -\frac{4}{15\pi}\log 2 + \frac{8}{15\pi}\dint{-1}{1}{\frac{1}{5(x - \frac{1}{5})^2 + \frac{4}{5}}}\\
+          &= -\frac{4}{15\pi}\log 2 + \frac{8}{15\pi}\dint{-1}{1}{\frac{1}{\frac{4}{5}\left\{\frac{25}{4}(x - \frac{1}{5})^2 + 1\right\}}}\\
+          &= -\frac{4}{15\pi}\log 2 + \frac{2}{3\pi}\left[\frac{2}{5}\arctan \left\{\frac{5}{2}\cdot \left(x - \frac{1}{5}\right)\right\}\right]_{-1}^{1}\\
+          &= -\frac{4}{15\pi}\log 2 + \frac{4}{15\pi}(\arctan 2 + \arctan 3)\\
+          &= -\frac{4}{15\pi}\log 2 + \frac{4}{15\pi}\left(\frac{3\pi}{4}\right)\\
+          &= -\frac{4}{15\pi}\log 2 + \frac{1}{5}
+  \end{align*}
+  よって,期待値$\delta$について以下のようになる.
+  \begin{equation}
+    \delta = -\frac{4}{15\pi}\log 2 + \frac{1}{5}\label{eq:subsec3:prom5:delta}
+  \end{equation}
+  よって,設問\eqref{subsec3:prom2},式\eqref{eq:subsec3:prom4:ans}, \eqref{eq:subsec3:prom5:delta}
+  より点$\mathrm{Q}$が辺$\mathrm{AB}$にある状態,辺$\mathrm{AC}$にある状態,辺$\mathrm{BC}$にある状態での$X$の期待値を
+  それぞれの状態における離散的な確率変数として考えるとそれぞれの出現確率が$\frac{1}{4}, \frac{3}{8}, \frac{3}{8}$であるので
+  $X$の期待値$\mu$は以下のようになる.
+  \begin{align*}
+    \mu &= \frac{1}{4}E_{X} + \frac{3}{8}\alpha + \frac{3}{8}\delta\\
         &= \frac{1}{4}\cdot\frac{1}{2} 
-        + \frac{3}{8}\left\{\frac{\log 2}{20\pi} + \frac{1}{5\pi}(\arctan 2 + \arctan 3)\right\}
-        + \frac{3}{8}\left\{\frac{-\log 2}{10\pi} + \frac{1}{10\pi}(\arctan 2 + \arctan 3)\right\}\\
-        &= \frac{1}{8}\left\{1 - \frac{3\log 2}{20\pi} + \frac{9}{10\pi}(\arctan 2 + \arctan 3)\right\}
-    \end{align*}
+          + \frac{3}{8}\left\{-\frac{2}{15\pi}\log 2-\frac{2}{5}\right\}
+          + \frac{3}{8}\left\{-\frac{4}{15\pi}\log 2 + \frac{1}{5}\right\}\\
+        &= \frac{1}{20}\left(1 - \frac{3\log 2}{\pi}\right)
+  \end{align*}
 \end{enumerate}
