@@ -16,8 +16,8 @@
         \end{equation*}
         が成立することを示せ。なお、$P(X|Y)$は事象$Y$が起こった条件のもとで事象$X$が起こる確率である。\label{subsec:prom3:subprom2}
     \item 問題の解答を始めてから解答を終えるまでの時間を解答所要時間と呼ぶことにする。ある問題に対して
-        $n$人の学生の解答所要時間が全て同じパラメータ$\lambda_0$の指数分布に従うものとする。$n$人が同時
-        に解答を始めた時最も早く解答を終える学生の解答所要時間はそれぞれ独立であるとする。\label{subsec:prom3:subprom3}
+        $n$人の学生の解答所要時間が全て同じパラメータ$\lambda_0$の指数分布に従うものとする。$n$人が同時に解答を始めた時、
+        最も早く解答を終える学生の解答所要時間の確率分布関数と平均値を示せ。ただし、各学生の解答所要時間はそれぞれ独立であるとする。\label{subsec:prom3:subprom3}
     \item 学生A, Bの解答所要時間がパラメータ$\lambda_A, \lambda_B$の指数分布にそれぞれ従うものとする。
         この二人が同時に解答を開始した時に、学生Aのほうが学生Bより先に解答を終える確率を求めよ。\label{subsec:prom3:subprom4}
     \item 優秀な学生である秀夫君と、他10名の学生に問題を同時に解かせる。各学生の解答所要時間は指数分布に従うものとし、また
@@ -26,3 +26,74 @@
 \end{enumerate}
 \newpage
 \subsection{解答}
+\begin{enumerate}[(1)]
+    \item 平均値$E[T]$はこの確率変数の期待値$E[T]$を求めることと同義であるため、以下のようになる。
+        \begin{align*}
+            E[T] 
+            &= \dint[t]{-\infty}{\infty}{tf(t)}\\
+            &= \dint[t]{0}{\infty}{\lambda te^{-\lambda t}}\\
+            &= \lambda\left[t\frac{e^{-\lambda t}}{-\lambda}\right]_{0}^{\infty} + \dint[t]{0}{\infty}{e^{-\lambda t}}
+            \left(= \left[\frac{e^{-\lambda t}}{-\lambda}\right]_{0}^{\infty}\right)\\
+            &= \frac{1}{\lambda}\\
+        \end{align*}
+        また確率分布関数は以下のようになる。
+        \begin{align*}
+            F(t) 
+            &= \dint{0}{t}{f(x)}\\
+            &= \lambda\left[\frac{e^{-\lambda x}}{-\lambda}\right]_{0}^{t}\\
+            &= 1 - e^{-\lambda t}
+        \end{align*}
+    \item \eqref{subsec:prom3:subprom1}より題意の式について以下が成り立つ。
+        \begin{align*}
+            (左辺) 
+            &= \frac{P(T > s + t \cap T > s)}{P(T > s)} \left(= \frac{P(T > s + t)}{P(T > s)}\right)\\
+            &= \frac{1 - F(s + t)}{1 - F(s)}
+            = \frac{e^{\displaystyle -\lambda(s + t)}}{e^{\displaystyle -\lambda s}}\\
+            &= e^{-\lambda t}\\
+            &= 1 - F(t) = P(T > t)\\
+            &= (右辺)
+        \end{align*}
+        従って題意は示された。
+    \item 最も早く解答を終える学生が$t$秒までに解答を終える確率は学生全員が$t$秒の時点で解答を終えてない事象の余事象が
+    求める確率であるので、確率分布関数は以下のようになる。
+        \begin{align*}
+            P(T' \leq t) &= 1 - (P(T > t))^{n}\\
+            \therefore P(T \leq t) &= 1 - e^{- \lambda n t}
+        \end{align*}
+        従って確率密度関数$f(t)$、平均値$E[T']$は以下のようになる。
+        \begin{align*}
+            f(t) &= \diff{P(T \leq t)}{t}\\
+            &= \lambda n e^{- \lambda n t}\\
+            \therefore E[T'] &= \dint[t]{0}{\infty}{tf(t)}\\
+            &= n E[T] = \frac{n}{\lambda}\\
+        \end{align*}
+    \item 題意の確率$P$は学生$A$が$t$秒で解答を終えた時、学生$B$は$t$秒より後に解答を終える確率を積分したものであるため以下のようになる。
+        \begin{align*}
+            P &= \dint[t]{0}{\infty}{\lambda_Ae^{-\lambda_A t}e^{-\lambda_B t}}\\
+            &= \lambda_A \dint[t]{0}{\infty}{e^{-(\lambda_A + \lambda_B)t}}\\
+            &= \frac{\lambda_A}{\lambda_A + \lambda_B} \bigl[-e^{-(\lambda_A + \lambda_B)t}\bigr]_{0}^{\infty} 
+            = \frac{\lambda_A}{\lambda_A + \lambda_B} 
+        \end{align*}
+    \item 秀夫君のパラメータを$\lambda_s$、他の学生のパラメータを$\lambda_1$とおくと秀夫君の平均値は
+    他の学生の平均値の$\frac{1}{10}$倍より以下が成り立つ。
+        \begin{align*}
+            \frac{1}{\lambda_s} &= \frac{1}{10\lambda_1}\\
+            \therefore \lambda_s &= 10\lambda_1
+        \end{align*}
+        従って、秀夫君が一番目に解答を終える確率$P_1$は以下のようになる。
+        \begin{align*}
+            P_1 &= \dint[t]{0}{\infty}{10\lambda_1 e^{-10\lambda_1 t}\left(e^{-\lambda_1 t}\right)^{10}}\\
+            &= 10\lambda_1 \dint[t]{0}{\infty}{e^{-20\lambda_1 t}}\\
+            &= \frac{1}{2}
+        \end{align*}
+        次に４番目に解答を終える確率$P_4$は以下のようになる。
+        \begin{align*}
+            P_4 &= \dint[t]{0}{\infty}{\left(1 - e^{-\lambda_1 t}\right)^{3}10\lambda_1 e^{-\lambda_1 t}\left(e^{-\lambda_1 t}\right)^{7}}\\
+            &= 10\lambda_1 \dint[t]{0}{\infty}{\left(1 - e^{-3\lambda_1 t} + 3e^{-2\lambda_1 t} - 3e^{-\lambda_1 t}\right)e^{-8\lambda_1 t}}\\
+            &= 10\lambda_1 \dint[t]{0}{\infty}{e^{-8\lambda_1 t} - e^{-11\lambda_1 t} + 3e^{-10\lambda_1 t} - 3e^{-9\lambda_1 t}}\\
+            &= 10\left(\frac{1}{8} - \frac{1}{11} + \frac{3}{10} - \frac{3}{9}\right)\\
+            &= 10\left(\frac{17}{40} - \frac{14}{33}\right)\\
+            &= \frac{17\cdot 33 - 140 \cdot 4}{132}\\
+            &= \frac{1}{132}
+        \end{align*}
+\end{enumerate}

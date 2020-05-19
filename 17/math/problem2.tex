@@ -58,21 +58,129 @@
             (*) \Longleftrightarrow
             \pdiff{\{\xi (x)\tau (t)\}}{t} & = \pdiff[2]{\{\xi (x)\tau (t)\}}{x}\\
             \Longleftrightarrow
-            \xi (x)\diff{\tau}{t} & = \tau (t)\diff[2]{\xi}{x}\\
-            \Longleftrightarrow&
-            \begin{cases}
-                0 = \tau (t)\diff[2]{\xi}{x} & \diff{\tau}{t} = 0\\
-            \end{cases}
+            \xi (x)\diff{\tau (t)}{t} & = \tau (t)\diff[2]{\xi (x)}{x}
         \end{align*}
-    \item ここで、初期条件より$u(x, 0) = \xi (x) \tau(0) = x - x^{2}$より、$\xi (x) = x - x^{2}, \tau (0) = 1$と置ける。
-        これは境界条件$u(0, t) = u(1, t) = 0$も満たす。よって、以下のようになる。
+        ここで、$\xi (x)\tau(t) \neq 0$より$\xi (x) \neq 0, \tau (t) \neq 0$よって、以下のようになる。
         \begin{align*}
-            \xi(x) = x(1 - x), \; \diff[2]{\xi}{x} = -2\\
-            \Longrightarrow
-            (*) \Longleftrightarrow
-            x(1 - x)\diff{\tau}{t} & = -2\tau (t)\\
-            \therefore
-            \diff{\tau}{t} = 0
+            \frac{\diff[2]{\xi (x)}{x}}{\xi (x)} &= \frac{\diff{\tau (t)}{t}}{\tau (t)}\\
+            \therefore &
+            \begin{cases}
+                \frac{\diff[2]{\xi (x)}{x}}{\xi (x)} = C\\
+                \frac{\diff{\tau (t)}{t}}{\tau (t)} = C\\
+            \end{cases}\\
+            \Longleftrightarrow &
+            \begin{cases}
+                C\xi (x) = \diff[2]{\xi (x)}{x}\\
+                C\tau (t) = \diff{\tau (t)}{t}\\
+            \end{cases}\\
         \end{align*}
-    \item 
+    \item $(2)$よりそれぞれ解くと以下のようになる。\\
+    $\tau (t)$に関する常微分方程式を解く。$\tau (t) \neq 0$より以下が成り立つ。
+        \begin{align*}
+            C &= \frac{1}{\tau (t)}\diff{\tau (t)}{t}
+        \end{align*}
+        よって両辺$t$で積分して、
+        \begin{align*}
+            \dint[t]{}{}{C} &= \dint[t]{}{}{\frac{1}{\tau (t)}\diff{\tau (t)}{t}}\\
+            \dint[t]{}{}{C} &= \dint[\tau]{}{}{\frac{1}{\tau}} \qquad(分かりやすくするため(t)を省略)\\
+            Ct + C_3 &= \log |\tau (t)|\\
+            |\tau (t)| &= e^{Ct + C_3}\\
+            \tau (t) &= e^{Ct + C_3}
+        \end{align*}
+        よって、一般解は以下のようになる。
+        \begin{equation*}
+            \tau (t) = e^{Ct + C_3}
+        \end{equation*}
+        ここで常微分方程式から$t\to \infty$の時、$\tau (t)$は発散しないが、$C > 0$とすると、
+        この一般解の式から$\tau (t)$は発散するので矛盾してしまう。よって、$C < 0$となるので、正の実数$k$を用いて、$C = -k^2$とおく。\\
+    次に$\xi (x) = C_1 e^{\lambda x}$とおくと、$(2)$の常微分方程式と、$C = -k^2$より
+        \begin{align*}
+            -k^2 C_1 e^{\lambda x} &= \lambda^2 C_1 e^{\lambda x}\\
+            -k^2 &= \lambda^2 \\
+            \therefore \lambda &= \pm \imag k
+        \end{align*}
+    よって、斉次の微分方程式より独立な2つの解の和も解となるので、$\xi(x)$の一般解は以下のようになる。
+        \begin{align*}
+            \xi (x) &= C_1 e^{\imag kx} + C_2 e^{-\imag kx}\\
+            \xi (x) &= (C_1 + C_2)\cos (kx) + \imag(C_1 - C_2)\sin (kx)
+        \end{align*}
+        よって、$C_1 + C_2 = A \in \mathbb{R}, \imag(C_1 - C_2) = B\in\mathbb{R}$とおくと以下のようになる。
+        \begin{align*}
+            \xi (x) &= A\cos (kx) + B\sin (kx)
+        \end{align*}
+        次に境界条件を満たす偏微分方程式$(*)$の解の一つに題意の式$u_n(x, t)$が存在することを示す。\\
+        $(2)$より$u(x, t) = \xi (x)\tau (t) = e^{-k^2 t + C_3}(A\cos (kx) + B\sin (kx))$となる。\\
+        よって、この時初期条件より
+        \begin{align*}
+            \tau (0) &= 1\\
+            e^{C_3} &= 1\\
+            \therefore C_3 &= 0\\
+            \therefore \tau (t) &= e^{-k^2t}
+        \end{align*}
+        境界条件より、
+        \begin{align*}
+            &\begin{cases}
+                \xi(0) = 0\\
+                \xi(1) = 0\\
+            \end{cases}\\
+            &\begin{cases}
+                A\cos (0) + B\sin (0) = 0\\
+                A\cos (k) + B\sin (k) = 0\\
+            \end{cases}\\
+            &\begin{cases}
+                A = 0\\
+                B\sin (k) = 0\\
+            \end{cases}\\
+        \end{align*}
+        よって、$\xi (x) \neq 0$より$B \neq 0$より、
+        \begin{align*}
+            \sin (k) &= 0\\
+            \therefore k = n\pi
+        \end{align*}
+        \begin{equation*}
+            \xi (x) = B\sin (n\pi x)
+        \end{equation*}
+        となる。よって、この時、$(2)$より、$u(x, t) = \xi (x)\tau (t)$は偏微分方程式$(*)$を満たすので、以下の式はこの偏微分方程式の解の一つである。
+        \begin{equation*}
+            u(x, t) = Be^{-n^2\pi^2t}\sin(n\pi x)
+        \end{equation*}
+        よって、この式の$B = 1, n\pi = \beta, -n^2\pi^2 = \alpha$とおくと、
+        \begin{align*}
+            e^{\alpha t}\sin(\beta x) = u_n(x, t)
+        \end{align*}
+        となるので、題意は示された。また、$\alpha = -n^2\pi^2, \beta = n\pi$となる。
+    \item 題意のように偏微分方程式$(*)$は線形であるため、その解は$u_n(x, t)$の線形結合で表される。よって、$(3)$より以下のようになる。
+    \begin{align*}
+        初期条件から、u(x, 0) &= x - x^2 = \sum_{n = 1}^{\infty}c_n\sin(n\pi x)\\
+        \dint{0}{1}{(x - x^2)\sin(m\pi x)} &= \dint{0}{1}{\left(\sum_{n = 1}^{\infty}c_n\sin(n\pi x)\right)\sin (m\pi x)}
+    \end{align*}
+    よって、それぞれ計算する。
+    \begin{align*}
+        m = 0の時、
+        (左辺) = 0&\\
+        m \neq 0の時、\qquad
+        \dint{0}{1}{x\sin(m\pi x)} &= \left[x\frac{-\cos(m\pi x)}{m\pi}\right]_{0}^{1} + \frac{1}{m\pi}\dint{0}{1}{\cos(m\pi x)}\\
+        &= \frac{(-1)^{m + 1}}{m\pi} + \frac{1}{m^2\pi^2}\bigl[\sin (m\pi x)\bigr]_{0}^{1} = \frac{(-1)^{m + 1}}{m\pi}\\
+        \dint{0}{1}{x\cos(m\pi x)} &= \left[x\frac{\sin(m\pi x)}{m\pi}\right]_{0}^{1} - \frac{1}{m\pi}\dint{0}{1}{\sin(m\pi x)}\\
+        &= -\frac{1}{m^2\pi^2}\bigl[-\cos (m\pi x)\bigr]_{0}^{1} = \frac{(-1)^{m} - 1}{m^2\pi^2}\\
+        \dint{0}{1}{x^2\sin(m\pi x)} &= \left[x^2\frac{-\cos(m\pi x)}{m\pi}\right]_{0}^{1} + \frac{2}{m\pi}\dint{0}{1}{x\cos(m\pi x)}\\
+        &= \frac{(-1)^{m + 1}}{m\pi} + \frac{2}{m\pi}\frac{(-1)^{m} - 1}{m^2\pi^2}\\
+        (左辺) &= \dint{0}{1}{x\sin(m\pi x)} - \dint{0}{1}{x^2\sin(m\pi x)}\\
+        &= \frac{(-1)^{m + 1}}{m\pi} - \left(\frac{(-1)^{m + 1}}{m\pi} + \frac{2}{m\pi}\frac{(-1)^{m} - 1}{m^2\pi^2}\right)\\
+        &= \frac{2 - 2(-1)^{m}}{m^3\pi^3}
+    \end{align*}
+    $(1)$より右辺に関しては以下のようになる。
+    \begin{align*}
+        (右辺) &= \sum_{n = 1}^{\infty}c_n \dint{0}{1}{\sin(n\pi x)\sin(m\pi x)}\\
+        &= \frac{1}{2}c_m
+    \end{align*}
+    従って、以下が成り立つ。
+    \begin{align*}
+        \frac{2 - 2(-1)^{m}}{m^3\pi^3} &= \frac{1}{2}c_m\\
+        c_m &= \frac{4\left\{1 - (-1)^{m}\right\}}{m^3\pi^3}\\
+    \end{align*}
+    従って求める解答は以下のようになる。
+    \begin{equation*}
+        c_n = \frac{4\left\{1 - (-1)^{n}\right\}}{n^3\pi^3}
+    \end{equation*}
 \end{enumerate}

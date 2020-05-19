@@ -118,10 +118,10 @@
 			& = -(\lambda - 1 + \alpha)\left\{ 2\alpha^{2} - (\lambda - 1)^2 - 2\alpha^2 - 3\alpha(\lambda - 1))\right\}                               \\
 			& = (\lambda - 1 + \alpha)(\lambda - 1)(\lambda - 1 + 3\alpha)
 		\end{align*}
-		よって、$\lambda = \alpha - 1, 1, 1 - 3\alpha$より、$\lambda_1 = - 1 + \alpha, \lambda_2 = 1, \lambda_3 = 1 - 3\alpha$\\
+		よって、$\lambda = 1 - \alpha, 1, 1 - 3\alpha$より、$\lambda_1 = 1 - \alpha, \lambda_2 = 1, \lambda_3 = 1 - 3\alpha$\\
 		従って固有空間$W(\lambda; A) = \{\mathbold{v} | \left(\lambda I - A\right)\mathbold{v} = \mathbold{0}\}$は以下のようになる。
 		\begin{align*}
-			W(\alpha - 1; A)  
+			W(1 - \alpha; A)  
 			% & = \left\{\mathbold{v} \left\lvert \spalignmat{
 			% {\alpha} {-\alpha} {-\alpha};
 			% {-\alpha} {0} {0};
@@ -200,7 +200,7 @@
 			{1}
 			}
 		\end{align*}
-		よって、$\lambda_1 = -1 + \alpha, \lambda_2 = 1, \lambda_3 = 1 - 3\alpha, 
+		よって、$\lambda_1 = 1 - \alpha, \lambda_2 = 1, \lambda_3 = 1 - 3\alpha, 
 		\mathbold{v}_1 = s\spalignmat[c]{
 			   {0};
 			   {1};
@@ -230,13 +230,6 @@
 			{\cfrac{\mathbold{v}_3{}^{\top}}{\abs{\mathbold{v}_3}}}
 			}$となる。よって、以下が成り立つ。
 		\begin{align*}
-			% AP 
-			% & = P\spalignmat[c]{
-			% {\lambda_1} {0} {0};
-			% {0} {\lambda_2} {0};
-			% {0} {0} {\lambda_3}
-			% }\\
-			% \Leftrightarrow
 			A  & = P\spalignmat[c]{
 			{\lambda_1} {0} {0};
 			{0} {\lambda_2} {0};
@@ -296,22 +289,22 @@
 			% 		\, + 1\cdot\lambda_2\cfrac{\mathbold{v}_2}{\abs{\mathbold{v}_2}}
 			% 		\, + 1\cdot\lambda_3\cfrac{\mathbold{v}_3}{\abs{\mathbold{v}_3}}
 			% \right)\\
-			& = \spalignmat[c]{
-				{
-					\cfrac{\lambda_2}{\sqrt{3}}\cfrac{\mathbold{v}_2}{\abs{\mathbold{v}_2}}
-					\, - \cfrac{2\lambda_3}{\sqrt{6}}\cfrac{\mathbold{v}_3}{\abs{\mathbold{v}_3}}
-				}
-				{
-					\cfrac{\lambda_1}{\sqrt{2}}\cfrac{\mathbold{v}_1}{\abs{\mathbold{v}_1}} 
-					\,+ \cfrac{\lambda_2}{\sqrt{3}}\cfrac{\mathbold{v}_2}{\abs{\mathbold{v}_2}}
-					\,+ \cfrac{\lambda_3}{\sqrt{6}}\cfrac{\mathbold{v}_3}{\abs{\mathbold{v}_3}}
-				}
-				{
-					-\cfrac{\lambda_1}{\sqrt{2}}\cfrac{\mathbold{v}_1}{\abs{\mathbold{v}_1}} 
-					\, + \cfrac{\lambda_2}{\sqrt{3}}\cfrac{\mathbold{v}_2}{\abs{\mathbold{v}_2}}
-					\, + \cfrac{\lambda_3}{\sqrt{6}}\cfrac{\mathbold{v}_3}{\abs{\mathbold{v}_3}}
-				}
-			}
+			% & = \spalignmat[c]{
+			% 	{
+			% 		\cfrac{\lambda_2}{\sqrt{3}}\cfrac{\mathbold{v}_2}{\abs{\mathbold{v}_2}}
+			% 		\, - \cfrac{2\lambda_3}{\sqrt{6}}\cfrac{\mathbold{v}_3}{\abs{\mathbold{v}_3}}
+			% 	}
+			% 	{
+			% 		\cfrac{\lambda_1}{\sqrt{2}}\cfrac{\mathbold{v}_1}{\abs{\mathbold{v}_1}} 
+			% 		\,+ \cfrac{\lambda_2}{\sqrt{3}}\cfrac{\mathbold{v}_2}{\abs{\mathbold{v}_2}}
+			% 		\,+ \cfrac{\lambda_3}{\sqrt{6}}\cfrac{\mathbold{v}_3}{\abs{\mathbold{v}_3}}
+			% 	}
+			% 	{
+			% 		-\cfrac{\lambda_1}{\sqrt{2}}\cfrac{\mathbold{v}_1}{\abs{\mathbold{v}_1}} 
+			% 		\, + \cfrac{\lambda_2}{\sqrt{3}}\cfrac{\mathbold{v}_2}{\abs{\mathbold{v}_2}}
+			% 		\, + \cfrac{\lambda_3}{\sqrt{6}}\cfrac{\mathbold{v}_3}{\abs{\mathbold{v}_3}}
+			% 	}
+			% }
 		\end{align*}
 	\item 題意より、以下が成り立つ。
 		\begin{align}
@@ -443,8 +436,8 @@
 			}\\
 			&= \frac{1}{6}\spalignmat[c]{
 				{2x_0\left\{1 + 2(1 - 3\alpha)^{n}\right\} + 2y_0\left\{1 - (1 - 3\alpha)^{n}\right\} + 2z_0\left\{1 - (1 - 3\alpha)^{n}\right\}};
-				{2x_0\left\{1 - (1 - 3\alpha)^{n}\right\} + y_0\left\{3(-1 + \alpha)^{n} + 2 + (1 - 3\alpha)^{n}\right\} + z_0\left\{- 3(-1 + \alpha)^{n} + 2 + (1 - 3\alpha)^{n}\right\}};
-				{2x_0\left\{1 - (1 - 3\alpha)^{n}\right\} + y_0\left\{-3(-1 + \alpha)^{n} + 2 + (1 - 3\alpha)^{n}\right\} + z_0\left\{3(-1 + \alpha)^{n} + 2 + (1 - 3\alpha)^{n}\right\}}
+				{2x_0\left\{1 - (1 - 3\alpha)^{n}\right\} + y_0\left\{3(1 - \alpha)^{n} + 2 + (1 - 3\alpha)^{n}\right\} + z_0\left\{- 3(1 - \alpha)^{n} + 2 + (1 - 3\alpha)^{n}\right\}};
+				{2x_0\left\{1 - (1 - 3\alpha)^{n}\right\} + y_0\left\{-3(1 - \alpha)^{n} + 2 + (1 - 3\alpha)^{n}\right\} + z_0\left\{3(1 - \alpha)^{n} + 2 + (1 - 3\alpha)^{n}\right\}}
 			}
 		\end{align*}
 		\item (4)より、題意は以下のようになる。
@@ -456,11 +449,11 @@
 				}\\
 				&= \lim_{n \to \infty} \frac{1}{6}\spalignmat[c]{
 					{2x_0\left\{1 + 2(1 - 3\alpha)^{n}\right\} + 2y_0\left\{1 - (1 - 3\alpha)^{n}\right\} + 2z_0\left\{1 - (1 - 3\alpha)^{n}\right\}};
-					{2x_0\left\{1 - (1 - 3\alpha)^{n}\right\} + y_0\left\{3(-1 + \alpha)^{n} + 2 + (1 - 3\alpha)^{n}\right\} + z_0\left\{- 3(-1 + \alpha)^{n} + 2 + (1 - 3\alpha)^{n}\right\}};
-					{2x_0\left\{1 - (1 - 3\alpha)^{n}\right\} + y_0\left\{-3(-1 + \alpha)^{n} + 2 + (1 - 3\alpha)^{n}\right\} + z_0\left\{3(-1 + \alpha)^{n} + 2 + (1 - 3\alpha)^{n}\right\}}
+					{2x_0\left\{1 - (1 - 3\alpha)^{n}\right\} + y_0\left\{3(1 - \alpha)^{n} + 2 + (1 - 3\alpha)^{n}\right\} + z_0\left\{- 3(1 - \alpha)^{n} + 2 + (1 - 3\alpha)^{n}\right\}};
+					{2x_0\left\{1 - (1 - 3\alpha)^{n}\right\} + y_0\left\{-3(1 - \alpha)^{n} + 2 + (1 - 3\alpha)^{n}\right\} + z_0\left\{3(1 - \alpha)^{n} + 2 + (1 - 3\alpha)^{n}\right\}}
 				}
 			\end{align*}
-			ここで、題意より$0 < \alpha < \frac{1}{3}$より、$-1 < -1 + \alpha < -\frac{2}{3}$, $0 < 1 - 3\alpha < 1$である。
+			ここで、題意より$0 < \alpha < \frac{1}{3}$より、$\frac{2}{3} < 1 - \alpha < 1$, $0 < 1 - 3\alpha < 1$である。
 			よって、
 			\begin{align*}
 				\lim_{n \to \infty} \spalignmat[c]{
@@ -479,5 +472,75 @@
 				}
 			\end{align*}
 			となる。
-		\item 
+	\item まず$\mathbold{w}_n = (x_n\;y_n\; z_n)^{\top}, \Lambda = \spalignmat[c]{
+		{\lambda_1} {0} {0};
+		{0} {\lambda_2} {0};
+		{0} {0} {\lambda_3}
+		}$とおくと$(3)$と題意より以下が成り立つ。
+		\begin{align*}
+			f(x_0, y_0, z_0) &= \frac{\mathbold{w}_n{}^{\top} A \mathbold{w}_n}{\mathbold{w}_n{}^{\top}\mathbold{w}_n}\\
+			&= \frac{\mathbold{w}_n{}^{\top} P \Lambda P^{-1} \mathbold{w}_n}{\mathbold{w}_n{}^{\top}\mathbold{w}_n}\\
+			&= \frac{\left(P^{-1}\mathbold{w}_n\right)^{\top} \Lambda P^{-1} \mathbold{w}_n}{\mathbold{w}_n{}^{\top}\mathbold{w}_n}
+		\end{align*}
+		よって、ここで$\mathbold{w}_n' = P^{-1}\mathbold{w}_n = (x_n'\;y_n'\; z_n')^{\top}$とおくと以下が成り立つ。
+		\begin{align*}
+			f(x_0, y_0, z_0) &= \frac{\mathbold{w}_n'^{\top} \Lambda \mathbold{w}_n'}{\left(P\mathbold{w}_n'\right)^{\top}P\mathbold{w}_n'}\\
+			&= \frac{\mathbold{w}_n'^{\top} \Lambda \mathbold{w}_n'}{\mathbold{w}_n'{}^{\top}\mathbold{w}_n'}\\
+			&= \frac{\lambda_1 x_n'^2 + \lambda_2 y_n'^2 + \lambda_3 z_n'^2}{x_n'^2 + y_n'^2 + z_n'^2}\\
+			&= \frac{x_n'^2 + y_n'^2 + z_n'^2 - \alpha(x_n'^2 + 3z_n'^2)}{x_n'^2 + y_n'^2 + z_n'^2}\\
+			&= 1 - \alpha\frac{x_n'^2 + 3z_n'^2}{x_n'^2 + y_n'^2 + z_n'^2}\\
+		\end{align*}
+		よって、$g(x_0, y_0, z_0) = \frac{x_n'^2 + 3z_n'^2}{x_n'^2 + y_n'^2 + z_n'^2}$とおくと、$f(x_0, y_0, z_0)$は
+		$g(x_0, y_0, z_0)$が最大の時、最小となり、$g(x_0, y_0, z_0)$が最小の時、最大となる。よって、$g(x_0, y_0, z_0)$の最大、最小を考える。
+		\begin{align*}
+			g(x_0, y_0, z_0) \leq 0
+		\end{align*}
+		が成り立ち、等号成立条件は$x_n'^2 = z_n'^2 = 0$つまり$x_n' = z_n' = 0$の時である。\\
+		よって、この値を満たす$\mathbold{w}_0$が存在することを以下に示す。まず以下が成り立つ。
+		\begin{align*}
+			\mathbold{w}_{n + 1}' &= P^{-1}\mathbold{w}_{n + 1}\\
+			&= P^{-1}A\mathbold{w}_n = P^{-1}P\Lambda P^{-1}\mathbold{w}_n\\
+			&= \Lambda \mathbold{w}_n'\\
+			\therefore \mathbold{w}_n' &= \Lambda^n \mathbold{w}_0' = \Lambda^{n} P^{-1}\mathbold{w}_0\\
+			\spalignmat{
+				{x_n'};
+				{y_n'};
+				{z_n'}
+			} &= 
+			\spalignmat{
+				{\lambda_1^n\left(\frac{y_0}{\sqrt{2}} - \frac{z_0}{\sqrt{2}}\right)};
+				{\lambda_2^n\left(\frac{x_0}{\sqrt{3}} + \frac{y_0}{\sqrt{3}} + \frac{z_0}{\sqrt{3}}\right)};
+				{\lambda_3^n\left(-\frac{2x_0}{\sqrt{6}} + \frac{y_0}{\sqrt{6}} + \frac{z_0}{\sqrt{6}}\right)}
+			}\\
+			\therefore x_n' = 0より、\qquad y_0 &= z_0\\
+			z_n' = 0より、\qquad y_0 + z_0 &= 2x_0\\
+			\therefore x_0 = y_0 &= z_0 = a \qquad (a \in \mathbb{R},\; a\neq 0)
+		\end{align*}
+		よって、$x_0 = y_0 = z_0 = a$の時、$g(x_0, y_0, z_0)$は最小値$0$を取るので、$f(x_0, y_0, z_0)$は最大値$1 - \alpha$を取る。\\
+		次に$g(x_0, y_0, z_0)$の最大値について考える。\\
+		$y_n'^2 \leq 0$より以下が成り立つ。
+		\begin{align*}
+			g(x_0, y_0, z_0) &\leq \frac{x_n'^2 + 3z_n'^2}{x_n'^2 + z_n'^2} = 1 + \frac{2z_n'^2}{x_n'^2 + z_n'^2}\\
+			&= 1 + \frac{2}{\displaystyle \frac{x_n'^2}{z_n'^2} + 1}
+		\end{align*}
+		よって、この不等号の等号成立条件は以下のようになる。
+		\begin{align*}
+			まず、y_n' = 0より、x_0 + y_0 + z_0 &= 0かつ\\
+			\frac{x_n'^2}{z_n'^2} \leq 0の時、\frac{x_n'^2}{z_n'^2} &= 0の時、等号が成り立つ。\\
+			よって、x_n' = 0よりy_0 =& z_0\\
+			よって、b \in \mathbb{R}, b\neq 0を満たすbを用いて、
+			&\begin{cases}
+				x_0 = -2b\\
+				y_0 = z_0 = b\\
+			\end{cases}となる。
+		\end{align*}
+		よって、$x_0 = -2b, y_0 = z_0 = b$の時、$g(x_0, y_0, z_0)$は最大値$3$をとる。
+		よって、$f(x_0, y_0, z_0)$は最小値$1 - 3\alpha$を取る。
+		従って求める解答は以下のようになる。
+		\begin{equation*}
+			\begin{cases}
+				最大値 & 1 - \alpha\\
+				最小値 & 1 - 3\alpha\\
+			\end{cases}
+		\end{equation*}
 \end{enumerate}
