@@ -88,12 +88,14 @@
         \end{align*}
         次に４番目に解答を終える確率$P_4$は以下のようになる。
         \begin{align*}
-            P_4 &= \dint[t]{0}{\infty}{\left(1 - e^{-\lambda_1 t}\right)^{3}10\lambda_1 e^{-\lambda_1 t}\left(e^{-\lambda_1 t}\right)^{7}}\\
-            &= 10\lambda_1 \dint[t]{0}{\infty}{\left(1 - e^{-3\lambda_1 t} + 3e^{-2\lambda_1 t} - 3e^{-\lambda_1 t}\right)e^{-8\lambda_1 t}}\\
-            &= 10\lambda_1 \dint[t]{0}{\infty}{e^{-8\lambda_1 t} - e^{-11\lambda_1 t} + 3e^{-10\lambda_1 t} - 3e^{-9\lambda_1 t}}\\
-            &= 10\left(\frac{1}{8} - \frac{1}{11} + \frac{3}{10} - \frac{3}{9}\right)\\
-            &= 10\left(\frac{17}{40} - \frac{14}{33}\right)\\
-            &= \frac{17\cdot 33 - 140 \cdot 4}{132}\\
-            &= \frac{1}{132}
+            P_4 &= \dint[t]{0}{\infty}{\left(1 - e^{-\lambda_1 t}\right)^{3}10\lambda_1 e^{-10\lambda_1 t}\left(e^{-\lambda_1 t}\right)^{7}}\\
+            &= 10\lambda_1 \dint[t]{0}{\infty}{\left(1 - e^{-3\lambda_1 t} + 3e^{-2\lambda_1 t} - 3e^{-\lambda_1 t}\right)e^{-17\lambda_1 t}}\\
+            &= 10\lambda_1 \dint[t]{0}{\infty}{e^{-17\lambda_1 t} - e^{-20\lambda_1 t} + 3e^{-19\lambda_1 t} - 3e^{-18\lambda_1 t}}\\
+            &= 10\left(\frac{1}{17} - \frac{1}{20} + \frac{3}{19} - \frac{3}{18}\right)\\
+            &= 10\left(\frac{60 - 19}{20\cdot 19} + \frac{18 - 51}{18\cdot 17}\right)\\
+            &= \frac{41}{38} - \frac{55}{51}\\
+            &= \frac{41\cdot 51 - 55\cdot 38}{38 \cdot 51}\\
+            &= \frac{2091 - 2090}{1938}\\
+            &= \frac{1}{1938}\\
         \end{align*}
 \end{enumerate}
