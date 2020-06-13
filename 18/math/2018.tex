@@ -63,7 +63,7 @@
 
 \renewcommand{\refname}{}%参考文献の文字を非表示にする
 \title{\Huge 東大2018年度数学解答例\\[10mm]}
-\author{{\LARGE 文殊の知恵}\\[1mm]\LARGE 高橋那弥}
+\author{{\LARGE 文殊の知恵}\\[1mm]\LARGE 中田昌輝\\(加筆：高橋那弥)}
 \date{}
 
 \begin{document}
@@ -146,7 +146,29 @@
 	      \begin{eqnarray*}
 		      \bm{Ac}=\bm{b}
 	      \end{eqnarray*}
-	      となるので, $\bm{c}$は連立方程式の解$\bm{x}$となる. ゆえに題意は示された.
+		  となるので, $\bm{c}$は連立方程式の解$\bm{x}$となる. ゆえに題意は示された.\\[1cm]
+		  (高橋解)\\
+		  ${\rm rank}\overline{\bm{A}}={\rm rank}\bm{A}$のとき,行列$\bm{A}$の階段行列を$\bm{A'}$,行列$\overline{\bm{A}}$の階段行列を$\overline{\bm{A'}}$と置き,
+		  ${\rm rank}\overline{\bm{A}}={\rm rank}\bm{A} = r(\leq n)$と置く.
+		  この時,行列$\bm{A'}$の第$(i, j)$成分を$a_{ij}{}^{'}$,行列$\overline{\bm{A'}}$の第$(n + 1, j)$成分を$b_{j}{}^{'}$, この成分を縦に並べたベクトルを$\bm{b'}$とおく.
+		  また,$j$行において$\alpha_j = \underset{i\, \in\, \{i |j\, \leq\, i\, \leq\, n\, \wedge\, a_{ij}{}^{'} \neq 0\}}{\min }i$とおく.
+		  この時,以下が成り立つ.
+		  \begin{eqnarray*}
+			a_{ij}{}^{'} = b_{j}{}^{'} = 0 \; (r\, <\, j\, \leq\, m)\\
+			1\,\leq\,\alpha_{1}\,<\,\cdots\,<\,\alpha_{j - 1}\, <\, \alpha_{j}\,<\,\cdots\,<\,\alpha_{r}\,\leq\,n\\
+			a_{ij}{}^{'} = 0 \; (1\, \leq\, i\, <\, \alpha_j\, \wedge\, 1\, \leq\, j\, \leq\, r)\\
+			\therefore \sum_{i = \alpha_j}^{n}c_{i}a_{ij}{}^{'} = b_{j}{}^{'} \; (1\, \leq\, j\, \leq\, r)となるc_{i}が存在する.
+		  \end{eqnarray*}
+		  従って,$c_{i}$をを1から順に$n$まで縦に並べた$\bm{c}=\begin{pmatrix}c_{1}\\c_{2}\\\vdots\\c_{n}\end{pmatrix}$をつくると
+			\begin{eqnarray}
+				\bm{A'c} = \bm{b'}
+			\end{eqnarray}
+			であり,
+		  \begin{eqnarray*}
+			  \bm{Ax} = \bm{b}\\
+			  \Longleftrightarrow \bm{A'x} = \bm{b'}
+		  \end{eqnarray*}
+		  であるので,$\bm{c}$は元の連立方程式の解$\bm{x}$である.よって題意は示された.
 	\item 以下のように変形することができる.
 	      \begin{eqnarray*}
 		      \|\bm{b}-\bm{Ax}\|^{2}&=&(\bm{b}-\bm{Ax})^{T}(\bm{b}-\bm{Ax})\\
@@ -166,7 +188,35 @@
 		      &&(\bm{A}^{T}\bm{A})^{-1}\bm{A}^{T}\bm{A}\bm{x}=(\bm{A}^{T}\bm{A})^{-1}\bm{A}^{T}\bm{b}\\
 		      \Longleftrightarrow\ && \bm{x}=(\bm{A}^{T}\bm{A})^{-1}\bm{A}^{T}\bm{b}
 	      \end{eqnarray*}
-	      となる.
+		  となる.
+	\item (高橋解)
+		連立一次方程式を制約式とするラグランジュの未定乗数法よりラグランジュ関数を$L(\bm{x}, \bm{\lambda})$,ラグランジュ乗数$\bm{\lambda}\in\mathbb{R}^{m\times 1}$とおく
+		\begin{eqnarray*}
+			L(\bm{x}, \bm{\lambda}) = \bm{x}^{\top}\bm{x} - \bm{\lambda}^{\top}(\bm{Ax} - \bm{b})
+		\end{eqnarray*}
+		ここで,$\|\bm{x}\|^{2} = \bm{x}^{\top}\bm{x}\, \geq\, 0$より,上記の式が極値を取る時,$\|\bm{x}\|^{2}$は最小となる.
+		よって,偏微分すると以下のようになる.
+		\begin{eqnarray*}
+			\pdiff{L(\bm{x}, \bm{\lambda})}{\bm{x}} &=& 2\bm{x} - \bm{A}^{\top}\bm{\lambda} = \bm{0}\\
+			\pdiff{L(\bm{x}, \bm{\lambda})}{\bm{\lambda}} &=& -\bm{Ax} + \bm{b} = \bm{0}\\
+			\bm{x} = \frac{1}{2}\bm{A}^{\top}\bm{\lambda}を代入して\\
+			\frac{1}{2}\bm{A}\bm{A}^{\top}\bm{\lambda} = \bm{b}\;
+			&\therefore&
+			\bm{\lambda} = 2(\bm{AA^{\top}})^{-1}\bm{b}\\
+			&\therefore&
+			\bm{x} = \bm{A}^{\top}(\bm{AA^{\top}})^{-1}\bm{b}
+		\end{eqnarray*}
+	\item 
+	\item (3), (4)の$\bm{x}$が$\bm{x} = \bm{Pb}$と表せるとすると(5)の条件を満たす必要がある.また,(5)より
+	(5)の条件を満たすものは一つだけ存在するため,条件を満たすならば(3), (4)は同じ行列で表せる.
+	(3)より,$\bm{P_3} = (\bm{A}^{\top}\bm{A})^{-1}\bm{A}^{\top}$と置くと,(5)の条件より,
+	\begin{eqnarray*}
+		\bm{AP_{3}A} = \bm{A}(\bm{A}^{\top}\bm{A})^{-1}\bm{A}^{\top}\bm{A} = \bm{A}\\
+		\bm{P_{3}AP_{3}} = (\bm{A}^{\top}\bm{A})^{-1}\bm{A}^{\top}\bm{A}(\bm{A}^{\top}\bm{A})^{-1}\bm{A}^{\top} = (\bm{A}^{\top}\bm{A})^{-1}\bm{A}^{\top} = \bm{P_3}\\
+		(\bm{AP_{3}})^{\top} = (\bm{A}(\bm{A}^{\top}\bm{A})^{-1}\bm{A}^{\top})^{\top} = \bm{A}(\bm{A}^{\top}\bm{A})^{-1}\bm{A}^{\top} = \bm{A}\bm{P_3}
+		\quad \because (\bm{A}^{-1})^{\top} = (\bm{A}^{\top})^{-1}\\
+		(\bm{P_{3}A})^{\top} = ((\bm{A}^{\top}\bm{A})^{-1}\bm{A}^{\top}\bm{A})^{\top} = (\bm{A}^{\top}\bm{A})^{-1}\bm{A}^{\top}\bm{A} = \bm{P_3}\bm{A}
+	\end{eqnarray*}
 \end{enumerate}
 \newpage
 \section{}%第2問
@@ -249,7 +299,21 @@
 		      &=& px^{p-1}-px^{p-1}\\
 		      &=&0
 	      \end{eqnarray*}
-	      これより関数$g_{n}'(x)$は区間$[0,1]$において増減がなく, $n\to \infty$において$g_{n}(0)=g_{n}(1)=0$であるから, 任意の$x\in[0,1]$に対しても$n\to \infty$において$g_{n}(x)=0$となる. よって, 題意は示された.
+		  これより関数$g_{n}'(x)$は区間$[0,1]$において増減がなく, $n\to \infty$において$g_{n}(0)=g_{n}(1)=0$であるから, 任意の$x\in[0,1]$に対しても$n\to \infty$において$g_{n}(x)=0$となる. よって, 題意は示された.\\[1cm]
+		  (高橋解1)
+		  \begin{eqnarray*}
+			q^{-1} < 1より\\
+			\lim_{n\to \infty}a_{n} = \lim_{n\to \infty}p(1 - q^{1 - n}) = p\\
+			\therefore \lim_{n\to \infty}g_{n}(x) = \lim_{n\to \infty}x^{a_n} - x^{p} = 0
+		  \end{eqnarray*}
+		  (高橋解2)
+		  \begin{eqnarray*}
+			0\, \leq\, x\, \leq\, 1において(2)より\\
+			0\, \leq\, g_n(x)\, \leq\, g_n(x_n) = \left(\frac{a_n}{p}\right)^{\frac{a_n}{p - a_n}} - \left(\frac{a_n}{p}\right)^{\frac{p}{p - a_n}}\\
+			\lim_{n\to \infty}g_n(x_n) = \lim_{n\to \infty}\left(\frac{a_n}{p}\right)^{\frac{a_n}{p - a_n}} - \left(\frac{a_n}{p}\right)^{\frac{p}{p - a_n}} = 1 - 1 = 0\\
+			よって、挟み撃ちの定理より
+			\lim_{n\to \infty}g_{n}(x) = \lim_{n\to \infty}x^{a_n} - x^{p} = 0
+		  \end{eqnarray*}
 	\item $q$の大きさについて
 	      \begin{eqnarray*}
 		      \frac{1}{p}+\frac{1}{q}=1&\Longrightarrow& \frac{1}{q}<1\\
@@ -268,7 +332,68 @@
 	      \begin{eqnarray*}
 		      \lim_{n\to \infty}\frac{d_{n+1}}{d_{n}}&=&\lim_{n\to \infty}\left(\frac{1}{1-\frac{1}{q^{n}}}\right)^{q^{n}}\cdot \left(\frac{1}{1-\frac{1}{q^{n}}}\right)\\
 		      &=& \frac{1}{\rm e}
-	      \end{eqnarray*}
+		  \end{eqnarray*}
+		  (高橋解)
+		  \begin{eqnarray*}
+			  \frac{d_{n + 1}}{d_{n}}&=&\frac{\displaystyle \left(\frac{p(c_{n})^{1/q}}{a_{n+1}}\right)^{q^{n+1}}}{(c_{n})^{q^{n}}}\\
+			  &=&\frac{\displaystyle \left(\frac{p(c_{n})^{1/q}}{p(1 - q^{-n})}\right)^{q^{n+1}}}{(c_{n})^{q^{n}}}\\
+			  &=&\frac{\displaystyle \left(\frac{(c_{n})^{1/q}}{(1 - q^{-n})}\right)^{q^{n+1}}}{(c_{n})^{q^{n}}}\\
+			  &=&\frac{\left((c_{n})^{1/q}\right)^{q^{n+1}}}{(c_{n})^{q^{n}}(1 - q^{-n})^{q^{n + 1}}}\\
+			  &=&\frac{(c_{n})^{q^{n}}}{(c_{n})^{q^{n}}(1 - q^{-n})^{q^{n + 1}}}\\
+			  &=&\frac{1}{(1 - q^{-n})^{q^{n + 1}}}\\
+			  &=&\left(1 - \frac{1}{q^{n}}\right)^{-q^{n + 1}}
+		  \end{eqnarray*}
+		  従って,
+		  \begin{eqnarray*}
+			  \lim_{n\to \infty} \frac{d_{n + 1}}{d_{n}} &=& \lim_{n\to \infty}\left(1 - \frac{1}{q^{n}}\right)^{-q^{n + 1}}\\
+			  &=& \lim_{n\to \infty}\left\{\left(1 - \frac{1}{q^{n}}\right)^{q^{n}}\right\}^{-q}\\
+			  &=& e^{q}
+			\end{eqnarray*}
+	\item $(4)$より,$\,b_n = {\displaystyle  \frac{d_n + 1}{d_n}} = {\displaystyle \left(1 - \frac{1}{q^{n}}\right)^{-q^{n + 1}}}$と置くと,以下が成り立つ.
+	\begin{eqnarray*}
+		\frac{b_{n + 1}}{b_n} &=& \frac{{\displaystyle \left(1 - \frac{1}{q^{n + 1}}\right)^{-q^{n + 2}}}}{{\displaystyle \left(1 - \frac{1}{q^{n}}\right)^{-q^{n + 1}}}}\\
+		&=& \frac{{\displaystyle \left(1 - \frac{1}{q^{n}}\right)^{q^{n + 1}}}}{{\displaystyle \left(1 - \frac{1}{q^{n + 1}}\right)^{q^{n + 2}}}}\\
+	\end{eqnarray*}
+	ここで,
+	\begin{eqnarray*}
+		\frac{1}{q} < 1より,\left(\frac{1}{q}\right)^{n} < 1, \;\left(\frac{1}{q}\right)^{n + 1} < \left(\frac{1}{q}\right)^{n}\\
+		\therefore 1 - \left(\frac{1}{q}\right)^{n} < 1, \; 1 - \left(\frac{1}{q}\right)^{n} < 1 - \left(\frac{1}{q}\right)^{n + 1}\\
+		\lim_{n \to \infty}(1 - 1/n)^{n} = \lim_{n \to -\infty}(1 + 1/n)^{-n} = \frac{1}{e}\\
+		f(x) = (1 - 1/x)^x\\
+		\log f(x) = x\log(1 - 1/x) \\
+		\frac{f'(x)}{f(x)} = \log(1 - 1/x) + x\frac{1}{x^2}\frac{x}{x - 1} = \log(1 - 1/x) + \frac{1}{x - 1}\\
+		g(x) =  \log(1 - 1/x) + \frac{1}{x - 1}\\
+		g'(x) = \frac{1}{x(x - 1)} - (x - 1)^{-2} = \frac{x - 1 - x}{x(x - 1)^2} = \frac{-1}{x(x - 1)^2}\\
+		g(x) > g(2) = -\log 2 + 1 > 0
+	\end{eqnarray*}
+	\begin{eqnarray*}
+		f(x) = (1 - 1/x)^{-qx}\\
+		\log f(x) = -qx\log (1 - 1/x)\\
+		\frac{f'(x)}{f(x)} = -q\log(1 - 1/x) - qx\frac{1}{x^2}\frac{x}{x - 1} = -q\left(\log (1 - 1/x) + \frac{1}{x - 1}\right)\\
+		g(x) > 0より単調減少
+	\end{eqnarray*}
+	\begin{eqnarray*}
+		% c_{n + 1} = \frac{p(c_n)^{1/q}}{p(1 - q^{-n})}	= \frac{c_n{}^{1/q}}{1 - q^{-n}}
+		% \frac{d_{n + 1}}{d_n} < e^{q}\\
+		% d_{n + 1} < d_n e^{q}\\
+		% \therefore d_{n + 1} < d_2 e^{(n - 1)q}\\
+		% c_{n + 1}^{q^{n + 1}} < \left(\frac{c^{1/q}}{1 - q^{-n}}\right)^{q} e^{nq}\\
+		% c_{n + 1} < c^{\frac{1}{q^{n}}} e^{\frac{n}{q^{n}}}\\
+		\frac{d_{n + 1}}{d_n} < 1\, \Leftrightarrow \, d_{n + 1} < d_n\\
+		d_{n + 1} < d_2\\
+		(c_{n + 1})^{q^{n + 1}} < \left(\frac{c^{1/q}}{1 - q^{-2}}\right)^{q^{2}}\\
+		c_{n + 1} < \left(\frac{c^{1/q}}{1 - q^{-2}}\right)^{\displaystyle \frac{q^2}{q^{n + 1}}}
+	\end{eqnarray*}
+	\begin{eqnarray*}
+		c_{n + 1} > c_{n}{}^{1/q}\\
+		\therefore c_{n + 1} > c_{1}{}^{(1/q)^{n - 1}} = c^{(1/q)^{n - 1}}\\
+		\therefore c^{(1/q)^{n - 1}} < c_{n + 1} < \left(\frac{c^{1/q}}{1 - q^{-2}}\right)^{\displaystyle \frac{q^2}{q^{n + 1}}}
+	\end{eqnarray*}
+	\item $(2), (3)$より
+	\begin{eqnarray*}
+		\lim_{n \to \infty}a_n = p, \lim_{n \to \infty}c_n = 1より\\
+		\lim_{n \to \infty}f_n(x) = \lim_{n \to \infty}c_nx^{a_n} = x^p
+	\end{eqnarray*}
 \end{enumerate}
 \newpage
 \section{}%第3問
@@ -317,7 +442,122 @@
 		      \end{array}
 		      \right.
 	      \end{eqnarray*}
-	      ここで, $n=0$のとき$z_{0}=1$であるので, $z_{2}$は$1$または$-1$の値をとる. 帰納的に$n=2k$のとき$z_{n}$は1または$-1$の値をとるので, ${\rm Im}(z_{n})=0$となる. 一方で, $n=1$のとき, $z_{1}$は$i$または$-i$である.帰納的に$n=2k+1$のとき$z_{n}$は$i$または$-i$の値をとるので, ${\rm Re}(z_{n})=0$となる. よって, 題意は示された.
+		  ここで, $n=0$のとき$z_{0}=1$であるので, $z_{2}$は$1$または$-1$の値をとる. 帰納的に$n=2k$のとき$z_{n}$は1または$-1$の値をとるので, ${\rm Im}(z_{n})=0$となる. 一方で, $n=1$のとき, $z_{1}$は$i$または$-i$である.帰納的に$n=2k+1$のとき$z_{n}$は$i$または$-i$の値をとるので, ${\rm Re}(z_{n})=0$となる. よって, 題意は示された.
+	\item $(1)$より,$n + 1$回目に$1$となるのは$n$回目に$i$で$n + 1$回目に白いカードを引く時と$n$回目に$-i$で$n + 1$回目に赤いカードを引くときである.
+		  また,$n + 1$回目に$i$となるのは$n$回目に$-1$で$n + 1$回目に白いカードを引く時と$n$回目に$1$で$n + 1$回目に赤いカードを引くときである.
+		  よって,以下のようになる.
+		  \begin{eqnarray*}
+			  P_{n + 1} = \frac{1}{3}Q_{n} + \frac{2}{3}(1 - Q_{n}) = \frac{2}{3} - \frac{1}{3}Q_{n}\\
+			  Q_{n + 1} = \frac{1}{3}(1 - P_{n}) + \frac{2}{3}P_{n} = \frac{1}{3} + \frac{1}{3}P_{n}\\
+		  \end{eqnarray*}
+		  \item (2)より,
+		  \begin{eqnarray*}
+			P_{n + 2} &=& \frac{5}{9} - \frac{1}{9}P_{n}\\
+			Q_{n + 2} &=& \frac{5}{9} - \frac{1}{9}Q_{n}
+		  \end{eqnarray*}
+		  $n = 2k + 1$の時
+		  \begin{eqnarray*}
+			Q_{2k + 3} &=& \frac{5}{9} - \frac{1}{9}Q_{2k + 1}\\
+			変形して,\qquad
+			Q_{2k + 3} - \frac{1}{2}&=& -\frac{1}{9}\left(Q_{2k + 1} - \frac{1}{2}\right)\\
+			\therefore Q_{2k + 1} - \frac{1}{2} &=& \left(-\frac{1}{9}\right)^{k}\left(Q_{1} - \frac{1}{2}\right)\\
+			\therefore Q_{2k + 1} &=& \left(-\frac{1}{9}\right)^{k}\frac{1}{6} + \frac{1}{2}\\
+		  \end{eqnarray*}
+		  $n = 2k$の時,漸化式は等しいので,同様にして
+		  \begin{eqnarray*}
+			P_{2k} &=& \left(-\frac{1}{9}\right)^{k}\left(P_{0} - \frac{1}{2}\right) + \frac{1}{2}\\
+			&=& \left(-\frac{1}{9}\right)^{k}\left(\frac{1}{2}\right) + \frac{1}{2}
+		  \end{eqnarray*}
+		  よって,
+		  \begin{eqnarray*}
+			  P_{n} 
+			  &=& \begin{cases}
+				\left(-\frac{1}{9}\right)^{\frac{n}{2}}\left(\frac{1}{2}\right) + \frac{1}{2}  
+				= \frac{1}{2}\left\{\left(\frac{i}{3}\right)^{n} + 1\right\} & n = 2k\\
+				0 & n = 2k + 1\\
+			  \end{cases}\\
+			  Q_{n} 
+			  &=& \begin{cases}
+				\left(-\frac{1}{9}\right)^{\frac{n - 1}{2}}\frac{1}{6} + \frac{1}{2}
+				= \left(\frac{i}{3}\right)^{n - 1}\frac{1}{6} + \frac{1}{2} = \frac{1}{2}\left\{\left(\frac{i}{3}\right)^{n - 1}\frac{1}{3} + 1\right\}
+				= \frac{1}{2}\left\{-i\left(\frac{i}{3}\right)^{n} + 1\right\} & n = 2k + 1\\
+				0 & n = 2k\\
+			  \end{cases}\\
+		  \end{eqnarray*}
+		  従って,題意の回答は以下のようになる.
+		  \begin{eqnarray}
+			  \begin{cases} 
+				\begin{cases}
+				  P_n = \frac{1}{2}\left\{\left(\frac{i}{3}\right)^{n} + 1\right\} & n = 2k\\
+				  0 & n = 2k + 1\\
+				\end{cases} & z_n = 1の確率\\
+				\begin{cases}
+				  1 - P_n = 1 - \frac{1}{2}\left\{\left(\frac{i}{3}\right)^{n} + 1\right\} 
+				  = \frac{1}{2}\left\{-\left(\frac{i}{3}\right)^{n} + 1\right\} & n = 2k\\
+				  0 & n = 2k + 1\\
+				\end{cases} & z_n = -1の確率\\
+				\begin{cases}
+				  0 & n = 2k\\
+				  Q_n = \frac{1}{2}\left\{-i\left(\frac{i}{3}\right)^{n} + 1\right\} & n = 2k + 1\\
+				\end{cases} & z_n = iの確率\\
+				\begin{cases}
+				  0 & n = 2k\\
+				  1 - Q_n = 1 - \frac{1}{2}\left\{-i\left(\frac{i}{3}\right)^{n} + 1\right\}
+				  = \frac{1}{2}\left\{i\left(\frac{i}{3}\right)^{n} + 1\right\} & n = 2k + 1\\
+				\end{cases} & z_n = -iの確率\\
+			  \end{cases}　
+		  \end{eqnarray}
+	\item $(3)$より$z_n$の期待値は以下のようになる.
+	\begin{eqnarray*}
+		n = 2kのとき期待値はP_n + (-1)(1 - P_n) = 2P_n - 1 = \left(\frac{i}{3}\right)^{n} + 1 - 1 = \left(\frac{i}{3}\right)^{n}\\
+		n = 2k + 1のとき期待値は iQ_n + (-i)(1 - Q_n) = 2iQ_n - i = \left(\frac{i}{3}\right)^{n} + i - i = \left(\frac{i}{3}\right)^{n}
+	\end{eqnarray*}
+	\item $w_n$についても同様に確率$P_n', Q_n'$をおくと,漸化式は以下のようになる.
+	\begin{eqnarray*}
+		P_{n + 1}' &=& \frac{2}{3}Q_{n}' + \frac{1}{3}(1 - Q_{n}')\\
+		 &=& \frac{1}{3} + \frac{1}{3}Q_{n}'\\
+		Q_{n + 1}' &=& \frac{2}{3}(1 - P_{n}') + \frac{1}{3}P_{n}'\\
+		 &=& \frac{2}{3} - \frac{1}{3}P_{n}'\\
+		\therefore P_{n + 2}' &=& \frac{5}{9} - \frac{1}{9}P_{n}'\\
+		Q_{n + 2}' &=& \frac{5}{9} - \frac{1}{9}Q_{n}'
+	\end{eqnarray*}
+	よって,$P_0' = 1, Q_1' = \frac{1}{3}$より
+	\begin{eqnarray*}
+		&&P_n' = P_n\\
+		&&Q_n' = \frac{1}{2}(i\frac{i}{3}^{n} + 1) = 1 - Q_n\\
+	\end{eqnarray*}
+	従って,$z_n = w_n$が成り立つ確率は以下のようになる.\\
+	$n = 2k$の時
+	\begin{eqnarray*}
+		P_n P_n' + (1 - P_n)(1 - P_n') &=& 2 - 2P_n + 2P_n^2\\
+		&=& 1 + \frac{1}{2}\left\{\frac{i}{3}^{n} + 1\right\}^{2} - \left\{\frac{i}{3}^{n} + 1\right\}\\
+		&=& \frac{1}{2}\left(\frac{i}{3}^{2n} + 1\right)\\
+	\end{eqnarray*}
+	$n = 2k + 1$の時
+	\begin{eqnarray*}
+	Q_n Q_n' + (1 - Q_n)(1 - Q_n') &=& 2Q_n(1 - Q_n)\\
+	 &=& \frac{2}{2}\left(-i\frac{i}{3}^{n} + 1\right)\frac{1}{2}\left(i\frac{i}{3}^{n} + 1\right)\\
+	 &=& \frac{1}{2}\left(1 + \frac{i}{3}^{2n}\right) \\
+	\end{eqnarray*}
+	よって,$z_n = w_n$となる確率は
+	\begin{equation*}
+		\frac{1}{2}\left(1 + \frac{i}{3}^{2n}\right)
+	\end{equation*}
+	\item $w_n$の期待値は$z_n$の期待値と同様にして,
+	\begin{eqnarray*}
+		n = 2kの時\frac{i}{3}^{n}\\
+		n = 2k + 1の時-\frac{i}{3}^{n}
+	\end{eqnarray*}
+	$z_n + w_n$の期待値は
+	\begin{eqnarray*}
+		n = 2kの時2\frac{i}{3}^{n}\\
+		n = 2k + 1の時0\\
+	\end{eqnarray*}
+	\item $z_nw_n$の期待値は
+	\begin{eqnarray*}
+		n = 2kの時\frac{i}{3}^{2n}\\
+		n = 2k + 1の時-\frac{i}{3}^{2n}
+	\end{eqnarray*}
 \end{enumerate}
 \index{tikz@ティック}
 \end{document}
